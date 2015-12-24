@@ -9,7 +9,13 @@ module.exports = {
   target: 'web',
   cache: true,
   entry: {
-    common: ['react', 'react-dom', 'react-router'],
+    common: [
+      'react',
+      'react-dom',
+      'react-router',
+      'redux',
+      'parse-react'
+    ],
     index: path.join(srcPath, 'index.js')
   },
   resolve: {

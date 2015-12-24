@@ -23,9 +23,11 @@
     "bootstrap": "^3.3.5",
     "history": "^1.17.0",
     "jquery": "^2.1.4",
+    "parse-react": "^0.5.0",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-router": "^1.0.0",
+    "redux": "^3.0.5",
     "stylus": "^0.52.4"
   },
   "devDependencies": {
