@@ -1,18 +1,17 @@
-// Bootstrapping module
 import React from 'react'
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Redirect } from 'react-router';
-import createHistory from 'history/lib/createHashHistory'; // sketchy af
-let history = createHistory({ queryKey: false });
+import createHistory from 'history/lib/createHashHistory';
 
 /* Shell */
 import App from 'components/App';
 
+/* Pages */
 import Main from 'components/Main';
-
 import Test from 'components/Test';
 
-
+/* Routes */
+let history = createHistory({ queryKey: false });
 const INDEX = (
   <Router history={ history }>
     <Route path="/" component={ App }>
