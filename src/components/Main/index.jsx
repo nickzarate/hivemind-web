@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default class Main extends React.Component {
   render() {
@@ -8,4 +8,4 @@ export default class Main extends React.Component {
       </div>
     );
   }
-}
+};

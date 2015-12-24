@@ -8,13 +8,9 @@ let history = createHistory({ queryKey: false });
 /* Shell */
 import App from 'components/App';
 
-/* 'Pages' */
 import Main from 'components/Main';
-// import Event from 'components/Event';
 
 
-
-// Routes for modals??
 const INDEX = (
   <Router history={ history }>
     <Route path="/" component={ App }>
