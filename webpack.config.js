@@ -24,7 +24,7 @@ module.exports = {
     modulesDirectories: ['node_modules', 'src']
   },
   output: {
-    path: path.join(__dirname, 'cal/dist'),
+    path: path.join(__dirname, 'dist'),
     publicPath: '',
     filename: '[name].js',
     library: ['Example', '[name]'],
