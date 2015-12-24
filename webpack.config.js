@@ -55,7 +55,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
     new HtmlWebpackPlugin({
       inject: true,
-      template: 'cal/templates/index.html'
+      template: 'src/index.html'
     }),
     new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
@@ -71,7 +71,7 @@ module.exports = {
   debug: true,
   devtool: 'source-map',
   devServer: {
-    contentBase: './cal/dist',
+    contentBase: './dist',
     historyApiFallback: true
   }
 };
