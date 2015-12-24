@@ -10,11 +10,14 @@ import App from 'components/App';
 
 import Main from 'components/Main';
 
+import Test from 'components/Test';
+
 
 const INDEX = (
   <Router history={ history }>
     <Route path="/" component={ App }>
       <IndexRoute component={ Main } />
+      <Route path="Test" component={ Test } />
     </Route>
   </Router>
 );
