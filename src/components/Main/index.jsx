@@ -1,4 +1,6 @@
 import React from 'react';
+import Parse from 'parse';
+import ParseReact from 'parse-react';
 
 export default class Main extends React.Component {
   render() {

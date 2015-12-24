@@ -18,9 +18,10 @@ export default class App extends React.Component {
   }
 
   render() {
+    let routeHandler = React.cloneElement(this.props.children, { myProp: "my prop!" });
     return (
       <div>
-        { React.cloneElement(this.props.children, { myProp: "my prop!" }) }
+        { routeHandler }
       </div>
     );
   }
