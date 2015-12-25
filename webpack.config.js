@@ -14,6 +14,7 @@ module.exports = {
       'react-dom',
       'react-router',
       'redux',
+      'redux-react',
       'parse-react'
     ],
     index: path.join(srcPath, 'index.js')
