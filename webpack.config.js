@@ -14,7 +14,7 @@ module.exports = {
       'react-dom',
       'react-router',
       'redux',
-      'redux-react',
+      'react-redux',
       'parse-react'
     ],
     index: path.join(srcPath, 'index.js')
@@ -36,6 +36,10 @@ module.exports = {
       // required for react jsx
       { test: /\.js$/, exclude: /(node_modules)/, loader: "babel-loader" },
       { test: /\.jsx$/, exclude: /(node_modules)/, loader: "babel-loader" },
+
+      // eslint-loader
+      { test: /\.js$/, exclude: /(node_modules)/, loader: "eslint-loader" },
+      { test: /\.jsx$/, exclude: /(node_modules)/, loader: "eslint-loader" },
 
       // Stylus loader
       { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
