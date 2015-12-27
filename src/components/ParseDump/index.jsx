@@ -17,10 +17,10 @@ export default class ParseDump extends React.Component {
     query.equalTo('observationID', observationID)
     query.first({
       success(response) {
-        // handle response
+        return response
       },
       error(error) {
-        // handle error
+        return error
       }
     })
   }
@@ -31,7 +31,7 @@ export default class ParseDump extends React.Component {
 
     return (
       <div>
-        <p>Parse DUMPpp</p>
+        <p>{ 'Parse DUMPpp' }</p>
       </div>
     )
   }

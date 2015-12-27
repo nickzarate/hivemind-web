@@ -6,19 +6,20 @@ module.exports = {
       2,
       2
     ],
-    "quotes": [
-      2,
-      "single"
-    ],
+    "jsx-quotes": 1,
     "linebreak-style": [
       2,
       "unix"
     ],
+    "quotes": [
+      1,
+      "single"
+    ],
     "semi": [
-      2,
+      1,
       "never"
     ],
-    "no-unused-vars": 1,
+    "react/display-name": 1,
     "react/forbid-prop-types": 1,
     "react/jsx-boolean-value": 1,
     "react/jsx-closing-bracket-location": 1,
@@ -38,9 +39,11 @@ module.exports = {
     ],
     "react/jsx-no-bind": 1,
     "react/jsx-no-duplicate-props": 1,
+    "react/jsx-no-literals": 1,
     "react/jsx-no-undef": 1,
     "react/jsx-pascal-case": 1,
-    "react/jsx-quotes": 1,
+    "react/jsx-sort-prop-types": 1,
+    "react/jsx-sort-props": 1,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
     "react/no-danger": 1,

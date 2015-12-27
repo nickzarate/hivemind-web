@@ -34,12 +34,10 @@ module.exports = {
   module: {
     loaders: [
       // required for react jsx
-      { test: /\.js$/, exclude: /(node_modules)/, loader: "babel-loader" },
-      { test: /\.jsx$/, exclude: /(node_modules)/, loader: "babel-loader" },
+      { test: /\.(js|jsx)$/, exclude: /(node_modules)/, loader: "babel-loader" },
 
       // eslint-loader
-      { test: /\.js$/, exclude: /(node_modules)/, loader: "eslint-loader" },
-      { test: /\.jsx$/, exclude: /(node_modules)/, loader: "eslint-loader" },
+      { test: /\.(js|jsx)$/, exclude: /(node_modules)/, loader: "eslint-loader" },
 
       // Stylus loader
       { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
@@ -47,10 +45,9 @@ module.exports = {
       // required to write "require('./style.css')"
       { test: /\.css$/, exclude: /\.useable\.css$/, loader: "style-loader!css-loader" },
 
-
       // required for bootstrap icons.
-      // the url-loader uses DataUrls. 
-      // the file-loader emits files. 
+      //    the url-loader uses DataUrls.
+      //    the file-loader emits files.
       { test: /\.(woff|woff2)$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf$/, loader: "file-loader?prefix=font/" },
       { test: /\.eot$/, loader: "file-loader?prefix=font/" },
