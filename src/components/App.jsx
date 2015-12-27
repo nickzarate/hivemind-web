@@ -1,28 +1,28 @@
-import React from 'react';
+import React from 'react'
 
 export default class App extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       showModal: false,
       modalData: {}
-    };
+    }
   }
 
   closeModal() {
-    this.setState({ showModal: false });
+    this.setState({ showModal: false })
   }
   openModal(data) {
-    this.setState({ modalData: data, showModal: true });
+    this.setState({ modalData: data, showModal: true })
   }
 
   render() {
-    let routeHandler = React.cloneElement(this.props.children, { myProp: "my prop!" });
+    let routeHandler = React.cloneElement(this.props.children, { myProp: 'my prop!' })
     return (
       <div>
         { routeHandler }
       </div>
-    );
+    )
   }
 }

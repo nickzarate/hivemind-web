@@ -1,13 +1,13 @@
 
 export function hammer() {
-  return 'hammer';
-};
+  return 'hammer'
+}
 
 export function screwdriver() {
-  return 'screwdriver';
-};
+  return 'screwdriver'
+}
 
 export function scissors() {
-  return 'scissors';
-};
+  return 'scissors'
+}
 
