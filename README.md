@@ -10,6 +10,6 @@ https://github.com/ParsePlatform/ParseReact
 eslint-react rules
 https://github.com/yannickcr/eslint-plugin-react/tree/master/docs/rules
 
-sublime text 3, package control, babel & stylus snippets, sublimelinter & sublimelinter-eslint.
+sublime text 3, package control, babel & stylus snippets, sublimelinter & sublimelinter-eslint, editorconfig.
 https://packagecontrol.io/installation
 
