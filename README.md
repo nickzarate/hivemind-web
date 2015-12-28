@@ -13,3 +13,11 @@ https://github.com/yannickcr/eslint-plugin-react/tree/master/docs/rules
 sublime text 3, package control, babel & stylus snippets, sublimelinter & sublimelinter-eslint, editorconfig.
 https://packagecontrol.io/installation
 
+general eslint rules:
+http://eslint.org/docs/rules/
+
+eslint-react rules:
+https://github.com/yannickcr/eslint-plugin-react/tree/master/lib/rules
+
+
+
