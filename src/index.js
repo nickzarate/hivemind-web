@@ -14,9 +14,9 @@ import Login from 'components/Login'
 let history = createHistory({ queryKey: false })
 const INDEX = (
   <Router history={ history }>
-    <Route path="/" component={ App }>
+    <Route  component={ App } path="/" >
       <IndexRoute component={ Main } />
-      <Route path="Login" component={ Login } />
+      <Route component={ Login } path="Login" />
     </Route>
   </Router>
 )

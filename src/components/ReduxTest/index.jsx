@@ -4,20 +4,22 @@ import { Provider, connect } from 'react-redux'
 
 // React component
 class Counter extends React.Component {
+  displayName: 'Counter'
+
   render () {
     const { value, onIncreaseClick } = this.props
     return (
       <div>
-        <span>{value}</span>
-        <button onClick={onIncreaseClick}>Increase</button>
+        <span>{ value }</span>
+        <button onClick={ onIncreaseClick }>{ 'Increase' }</button>
       </div>
     )
   }
 }
 
 Counter.propTypes = {
-  value: PropTypes.number.isRequired,
-  onIncreaseClick: PropTypes.func.isRequired
+  onIncreaseClick: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired
 }
 
 // Action
@@ -59,6 +61,8 @@ let App = connect(
 
 
 export default class ReduxTest extends React.Component {
+  displayName: 'ReduxTest'
+  
   render() {
     return (
       <Provider store={ store }>

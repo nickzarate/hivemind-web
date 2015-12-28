@@ -2,6 +2,7 @@ import React from 'react'
 import ReduxTest from 'components/ReduxTest'
 
 export default class App extends React.Component {
+  displayName: 'App'
 
   constructor(props) {
     super(props)

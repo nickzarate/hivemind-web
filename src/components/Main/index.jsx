@@ -4,6 +4,8 @@ import React from 'react'
 // import ParseDump from 'components/ParseDump'
 
 export default class Main extends React.Component {
+  displayName: 'Main'
+  
   render() {
     return (
       <div>

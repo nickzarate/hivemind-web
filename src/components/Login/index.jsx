@@ -3,6 +3,8 @@ import React from 'react'
 // import ParseReact from 'parse-react'
 
 export default class Login extends React.Component {
+  displayName: 'Login'
+
   constructor(props) {
     super(props)
     this.state = {
@@ -26,20 +28,20 @@ export default class Login extends React.Component {
   render() {
     return (
       <div>
-        <h1> Login </h1>
+        <h1>{ 'Login' }</h1>
         <input
-          value={ this.state.email }
-          placeholder='EMAIL'
-          type='email'
           onChange={ this.updateEmail.bind(this) }
+          placeholder="EMAIL"
+          type="email"
+          value={ this.state.email }
         />
         <input
-          value={ this.state.password }
-          placeholder='PASSWORD'
-          type='password'
           onChange={ this.updatePassword.bind(this) }
+          placeholder="PASSWORD"
+          type="password"
+          value={ this.state.password }
         />
-        <button> GO </button>
+        <button>{ 'GO' }</button>
         <h1> { this.state.email } </h1>
         <h1> { this.state.password } </h1>
       </div>
