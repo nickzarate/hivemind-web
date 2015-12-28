@@ -1,4 +1,5 @@
 import React from 'react'
+import ReduxTest from 'components/ReduxTest'
 
 export default class App extends React.Component {
 
@@ -21,7 +22,10 @@ export default class App extends React.Component {
     let routeHandler = React.cloneElement(this.props.children, { myProp: 'my prop!' })
     return (
       <div>
-        { routeHandler }
+        <div>
+          { routeHandler }
+        </div>
+        <ReduxTest />
       </div>
     )
   }
