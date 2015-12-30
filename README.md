@@ -21,3 +21,4 @@ https://github.com/yannickcr/eslint-plugin-react/tree/master/lib/rules
 
 
 
+https://github.com/acdlite/flux-standard-action
