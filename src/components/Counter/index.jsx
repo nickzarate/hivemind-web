@@ -16,9 +16,10 @@ class Counter extends Component {
 }
 
 Counter.propTypes = {
-  value: PropTypes.number.isRequired,
   decrement: PropTypes.func.isRequired,
-  increment: PropTypes.func.isRequired
+  increment: PropTypes.func.isRequired,
+  pushPath: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired
 }
 
 export default Counter

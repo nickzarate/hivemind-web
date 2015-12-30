@@ -1,26 +1,36 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { pushPath } from 'redux-simple-router'
 
 import Counter from 'components/Counter'
 import * as CounterActions from 'actions/counter'
 
-
+import { merge } from 'toolbox'
 
 
 class Index extends React.Component {
+
+  pushPath(path) {
+    return () => this.props.actions.pushPath(path)
+  }
+
   render() {
+    const { actions } = this.props
     return (
       <div>
         <h1>{ 'Home' }</h1>
         <Counter
+          decrement={ actions.decrement }
+          increment={ actions.increment }
+          pushPath={ this.pushPath('/login') }
           value={ this.props.value }
-          increment={ this.props.increment }
-          decrement={ this.props.decrement }
         />
+        <button onClick={ this.pushPath('/login') }>{ 'GOD' }</button>
       </div>
     )
   }
+
 }
 
 function mapStateToProps(state) {
@@ -30,7 +40,13 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(CounterActions, dispatch)
+  let actions = merge(
+    CounterActions,
+    { pushPath: pushPath }
+  )
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
 }
 
 export default connect(
