@@ -1,7 +1,8 @@
 import React from 'react'
-import ReduxTest from 'components/ReduxTest'
+//import ReduxTest from 'components/ReduxTest'
+import { Provider, connect } from 'react-redux'
 
-export default class App extends React.Component {
+class App extends React.Component {
   displayName: 'App'
 
   constructor(props) {
@@ -26,8 +27,30 @@ export default class App extends React.Component {
         <div>
           { routeHandler }
         </div>
-        <ReduxTest />
+        <Provider store={ store }>
+          <App2 />
+        </Provider>
       </div>
     )
   }
 }
+
+// Map Redux state to component props
+function mapStateToProps (state) {
+  return {
+    value: state.count
+  }
+}
+
+// Map Redux actions to component props
+function mapDispatchToProps (dispatch) {
+  return {
+    onIncreaseClick: () => dispatch(increase)
+  }
+}
+
+// Connected Component
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Counter)
