@@ -6,31 +6,36 @@ import { pushPath } from 'redux-simple-router'
 import Counter from 'components/Counter'
 import * as CounterActions from 'actions/counter'
 
-import { merge } from 'toolbox'
-
 
 class Index extends React.Component {
+  displayName: 'Index';
 
   pushPath(path) {
-    return () => this.props.actions.pushPath(path)
+    return () => this.props.pushPath(path)
   }
 
+
   render() {
-    const { actions } = this.props
+    const { actions, value } = this.props
     return (
       <div>
         <h1>{ 'Home' }</h1>
         <Counter
           decrement={ actions.decrement }
           increment={ actions.increment }
-          pushPath={ this.pushPath('/login') }
-          value={ this.props.value }
+          value={ value }
         />
-        <button onClick={ this.pushPath('/login') }>{ 'GOD' }</button>
+        <button onClick={ this.pushPath('/login') }>{ 'Login Page' }</button>
       </div>
     )
   }
 
+}
+
+Index.propTypes = {
+  actions: PropTypes.object.isRequired,
+  pushPath: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired
 }
 
 function mapStateToProps(state) {
@@ -40,12 +45,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  let actions = merge(
-    CounterActions,
-    { pushPath: pushPath }
-  )
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(CounterActions, dispatch),
+    pushPath: bindActionCreators(pushPath, dispatch)
   }
 }
 

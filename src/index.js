@@ -36,4 +36,3 @@ render(
   ROUTES,
   document.getElementById('content')
 )
-
