@@ -1,7 +1,7 @@
-import { React, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
+import { pushPath } from 'redux-simple-router'
 import Counter from 'components/Counter'
 import * as CounterActions from 'actions/counter'
 
@@ -9,23 +9,30 @@ import * as CounterActions from 'actions/counter'
 class Index extends React.Component {
   displayName: 'Index'
 
+  push(path) {
+    return () => this.props.push(path)
+  }
+
   render() {
+    //console.log(this)
+    const { actions, value } = this.props
     return (
       <div>
         <h1>{ 'Home' }</h1>
         <Counter
-          decrement={ this.props.decrement }
-          increment={ this.props.increment }
-          value={ this.props.value }
+          decrement={ actions.decrement }
+          increment={ actions.increment }
+          value={ value }
         />
+        <button onClick={ this.push('/login') }>{ 'Login Page' }</button>
       </div>
     )
   }
 }
 
 Index.propTypes = {
-  decrement: PropTypes.func.isRequired,
-  increment: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
+  push: PropTypes.func.push,
   value: PropTypes.number.isRequired
 }
 
@@ -36,7 +43,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(CounterActions, dispatch)
+  return {
+    actions: bindActionCreators(CounterActions, dispatch),
+    push: bindActionCreators(pushPath, dispatch)
+  }
 }
 
 export default connect(
