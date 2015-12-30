@@ -4,12 +4,17 @@ import React, { PropTypes } from 'react'
 class Counter extends React.Component {
   displayName: 'Counter'
 
+  click() {
+    this.props.increase
+    console.log(this.props.increase)
+  }
+
   render () {
     console.log(this)
     return (
       <div>
         <span>{ this.props.value }</span>
-        <button onClick={ this.props.increase }>{ 'Increase' }</button>
+        <button onClick={ this.click.bind(this) }>{ 'Increase' }</button>
       </div>
     )
   }

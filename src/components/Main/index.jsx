@@ -9,6 +9,7 @@ export default class Main extends React.Component {
   
   render() {
     console.log(this)
+    console.log(this.props.actions.increase)
     return (
       <div>
         <h1>{ 'Front Page!!' }</h1>

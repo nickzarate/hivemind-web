@@ -24,8 +24,6 @@ import * as CounterActions from 'actions'
 class App extends React.Component {
   displayName: 'App'
 
-
-
   render() {
     console.log(this)
     let routeHandler = React.cloneElement(this.props.children, {
@@ -43,7 +41,7 @@ class App extends React.Component {
 // Map Redux state to component props
 function mapStateToProps (state) {
   return {
-    value: 3
+    value: 0
   }
 }
 
