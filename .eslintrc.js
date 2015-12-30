@@ -21,7 +21,10 @@ module.exports = {
       1,
       "never"
     ],
-    "react/display-name": 1,
+    "react/display-name": [
+      1,
+      { "acceptTranspilerName": true }
+    ],
     "react/forbid-prop-types": 1,
     "react/jsx-boolean-value": 1,
     "react/jsx-closing-bracket-location": 1,

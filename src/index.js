@@ -3,25 +3,36 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute } from 'react-router'
 import createHistory from 'history/lib/createHashHistory'
 
-/* Shell */
-import App from 'components/App'
+import { Provider } from 'react-redux'
+import { syncReduxAndRouter } from 'redux-simple-router'
+
+import { configureStore } from 'store'
+
+
+/* Shell-Container */
+import App from 'containers/App.jsx'
 
 /* Pages */
-import Main from 'components/Main'
+import Index from 'components/Index'
 import Login from 'components/Login'
 
 /* Routes */
-let history = createHistory({ queryKey: false })
-const INDEX = (
-  <Router history={ history }>
-    <Route  component={ App } path="/" >
-      <IndexRoute component={ Main } />
-      <Route component={ Login } path="Login" />
-    </Route>
-  </Router>
+const history = createHistory({ queryKey: false })
+const store = configureStore()
+syncReduxAndRouter(history, store)
+
+const ROUTES = (
+  <Provider store={ store }>
+    <Router history={ history }>
+      <Route  component={ App } path="/" >
+        <IndexRoute component={ Index } />
+        <Route component={ Login } path="Login" />
+      </Route>
+    </Router>
+  </Provider>
 )
 
 render(
-  INDEX,
+  ROUTES,
   document.getElementById('content')
 )

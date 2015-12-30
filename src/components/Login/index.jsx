@@ -3,7 +3,6 @@ import React from 'react'
 // import ParseReact from 'parse-react'
 
 export default class Login extends React.Component {
-  displayName: 'Login'
 
   constructor(props) {
     super(props)
