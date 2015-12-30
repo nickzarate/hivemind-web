@@ -1,4 +1,3 @@
-
 export function hammer() {
   return 'hammer'
 }
@@ -10,4 +9,3 @@ export function screwdriver() {
 export function scissors() {
   return 'scissors'
 }
-

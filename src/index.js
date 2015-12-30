@@ -3,25 +3,25 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute } from 'react-router'
 import createHistory from 'history/lib/createHashHistory'
 
-/* Shell */
-import App from 'components/App'
+/* Shell-Container */
+import App from 'containers/App'
 
 /* Pages */
-import Main from 'components/Main'
+import Index from 'components/Index'
 import Login from 'components/Login'
 
 /* Routes */
-let history = createHistory({ queryKey: false })
-const INDEX = (
+const history = createHistory({ queryKey: false })
+const ROUTES = (
   <Router history={ history }>
     <Route  component={ App } path="/" >
-      <IndexRoute component={ Main } />
+      <IndexRoute component={ Index } />
       <Route component={ Login } path="Login" />
     </Route>
   </Router>
 )
 
 render(
-  INDEX,
+  ROUTES,
   document.getElementById('content')
 )
