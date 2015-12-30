@@ -3,3 +3,9 @@ export function increase() {
     type: 'increase'
   }
 }
+
+export function decrease() {
+  return {
+    type: 'decrease'
+  }
+}

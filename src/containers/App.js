@@ -1,25 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { Provider, connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as CounterActions from 'actions'
+
+
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     showModal: false,
+  //     modalData: {}
+  //   }
+  // }
+
+  // closeModal() {
+  //   this.setState({ showModal: false })
+  // }
+  // openModal(data) {
+  //   this.setState({ modalData: data, showModal: true })
+  // }
+
+
 
 class App extends React.Component {
   displayName: 'App'
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      showModal: false,
-      modalData: {}
-    }
-  }
 
-  closeModal() {
-    this.setState({ showModal: false })
-  }
-  openModal(data) {
-    this.setState({ modalData: data, showModal: true })
-  }
 
   render() {
     console.log(this)
@@ -29,34 +34,28 @@ class App extends React.Component {
     })
     return (
       <div>
-          { routeHandler }
+        { routeHandler }
       </div>
     )
   }
 }
 
-function select(state) {
+// Map Redux state to component props
+function mapStateToProps (state) {
   return {
-    value: state.count
+    value: 3
   }
 }
 
-// // Map Redux state to component props
-// function mapStateToProps (state) {
-//   return {
-//     value: state.count
-//   }
-// }
-
-// // Map Redux actions to component props
-// function mapDispatchToProps (dispatch) {
-//   return {
-//     actions: bindActionCreators(CounterActions, dispatch)
-//   }
-// }
+// Map Redux actions to component props
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(CounterActions, dispatch)
+  }
+}
 
 // Connected Component
-export default connect(select)(App)
-
-  // mapStateToProps,
-  // mapDispatchToProps
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
