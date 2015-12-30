@@ -8,7 +8,6 @@ import * as CounterActions from 'actions/counter'
 
 
 class Index extends React.Component {
-  displayName: 'Index';
 
   pushPath(path) {
     return () => this.props.pushPath(path)

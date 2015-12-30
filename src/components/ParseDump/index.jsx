@@ -5,7 +5,6 @@ import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 // import { hammer } from 'toolbox'
 
 export default class ParseDump extends React.Component {
-  displayName: 'ParseDump'
 
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)

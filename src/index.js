@@ -6,7 +6,7 @@ import createHistory from 'history/lib/createHashHistory'
 import { Provider } from 'react-redux'
 import { syncReduxAndRouter } from 'redux-simple-router'
 
-import configureStore from 'store/configureStore'
+import { configureStore } from 'store'
 
 
 /* Shell-Container */
