@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import { pushPath } from 'redux-simple-router'
 
 import Counter from 'components/Counter'
-import * as CounterActions from 'actions/counter'
-
+import { counterActions } from 'actions'
 
 class Index extends React.Component {
 
@@ -45,7 +44,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(CounterActions, dispatch),
+    actions: bindActionCreators(counterActions, dispatch),
     pushPath: bindActionCreators(pushPath, dispatch)
   }
 }
