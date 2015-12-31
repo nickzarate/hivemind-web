@@ -11,41 +11,46 @@ export default class Login extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      email: '',
-      password: ''
-    }
   }
 
-  setEmail(email) {
-    return () => this.props.actions.setUserEmail(email)
+  pushPath(path) {
+    return () => this.props.pushPath(path)
   }
 
-  setPassword(password) {
-    return () => this.props.actions.setUserPassword(password)
+  setEmail(event) {
+    return () => this.props.actions.setUserEmail(event.target.value)
+  }
+
+  setPassword(event) {
+    return () => this.props.actions.setUserPassword(event.target.value)
+  }
+
+  login() {
+    console.log('login')
   }
 
   render() {
-    console.log(this)
-    const { user, pushPath, actions } = this.props
+    //console.log(this)
+    const { login } = this.props
     return (
       <div>
         <h1>{ 'Login' }</h1>
         <input
-          onChange={ this.setEmail('k') }
+          onChange={ this.setEmail }
           placeholder="EMAIL"
           type="email"
-          value={ user.email }
+          value={ login.email }
         />
         <input
-          onChange={ this.setPassword('k') }
+          onChange={ this.setPassword }
           placeholder="PASSWORD"
           type="password"
-          value={ user.password }
+          value={ login.password }
         />
-        <button onClick={ this.props.login }>{ 'GO' }</button>
-        <h1> { this.state.email } </h1>
-        <h1> { this.state.password } </h1>
+        <button onClick={ this.login }>{ 'GO' }</button>
+        <h1> { login.email } </h1>
+        <h1> { login.password } </h1>
+        <button onClick={ this.pushPath('/') }>{ 'home' }</button>
       </div>
     )
   }
@@ -54,12 +59,13 @@ export default class Login extends React.Component {
 Login.propTypes = {
   actions: PropTypes.object.isRequired,
   pushPath: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  login: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
-    user: state.user
+    login: state.login
   }
 }
 

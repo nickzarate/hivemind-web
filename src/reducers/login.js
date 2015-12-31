@@ -5,7 +5,7 @@ const initialState = {
   password: ''
 }
 
-export default function user(state = initialState, action) {
+export default function login(state = initialState, action) {
   switch (action.type) {
   case SET_USER_EMAIL:
     return { email: action.email, password: state.password }
