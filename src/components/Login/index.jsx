@@ -16,9 +16,7 @@ export default class Login extends React.Component {
     return () => this.props.pushPath(path)
   }
 
-  setEmail = (event) => {
-    return this.props.actions.setUserEmail(event.target.value)
-  };
+  setEmail = (event) => this.props.actions.setUserEmail(event.target.value);
 
   setPassword = (event) => this.props.actions.setUserPassword(event.target.value);
 
