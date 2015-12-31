@@ -23,16 +23,20 @@ export function reduxify(payload) {
   const { bindActionCreators } = require('redux')
   const { connect } = require('react-redux')
   const { pushPath } = require('redux-simple-router')
+
   let mapStateToProps = (state) => ({
     [payload.reducer]: state[payload.reducer]
   })
+
   let mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(payload.actions, dispatch),
-    pushPath: bindActionCreators(pushPath, dispatch)
+    pushPath: bindActionCreators(pushPath, dispatch) // we want every component to have pushpath
   })
+
   return connect(
     mapStateToProps,
     mapDispatchToProps
   )(payload.component)
+
 }
 

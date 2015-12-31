@@ -8,13 +8,12 @@ import { reduxify } from 'toolbox'
 class Index extends React.Component {
 
   pushPath(path) {
-    return () => this.props.actions.pushPath(path)
+    return () => this.props.pushPath(path)
   }
 
 
   render() {
     const { actions, counter } = this.props
-    console.log(this.props)
     return (
       <div>
         <h1>{ 'Home' }</h1>
