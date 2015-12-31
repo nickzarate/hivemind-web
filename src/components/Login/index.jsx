@@ -1,6 +1,11 @@
-import React from 'react'
 // import Parse from 'parse'
 // import ParseReact from 'parse-react'
+import React, { PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { pushPath } from 'redux-simple-router'
+
+import { loginActions } from 'actions'
 
 export default class Login extends React.Component {
 
@@ -12,38 +17,60 @@ export default class Login extends React.Component {
     }
   }
 
-  updateEmail(event) {
-    this.setState({
-      email: event.target.value
-    })
+  setEmail(email) {
+    return () => this.props.actions.setUserEmail(email)
   }
 
-  updatePassword(event) {
-    this.setState({
-      password: event.target.value
-    })
+  setPassword(password) {
+    return () => this.props.actions.setUserPassword(password)
   }
 
   render() {
+    console.log(this)
+    const { user, pushPath, actions } = this.props
     return (
       <div>
         <h1>{ 'Login' }</h1>
         <input
-          onChange={ this.updateEmail.bind(this) }
+          onChange={ this.setEmail('k') }
           placeholder="EMAIL"
           type="email"
-          value={ this.state.email }
+          value={ user.email }
         />
         <input
-          onChange={ this.updatePassword.bind(this) }
+          onChange={ this.setPassword('k') }
           placeholder="PASSWORD"
           type="password"
-          value={ this.state.password }
+          value={ user.password }
         />
-        <button>{ 'GO' }</button>
+        <button onClick={ this.props.login }>{ 'GO' }</button>
         <h1> { this.state.email } </h1>
         <h1> { this.state.password } </h1>
       </div>
     )
   }
 }
+
+Login.propTypes = {
+  actions: PropTypes.object.isRequired,
+  pushPath: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+}
+
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(loginActions, dispatch),
+    pushPath: bindActionCreators(pushPath, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login)
