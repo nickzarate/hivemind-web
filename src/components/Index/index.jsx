@@ -39,4 +39,3 @@ export default reduxify({
   reducer: 'counter',
   actions: counterActions
 })
-

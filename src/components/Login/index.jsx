@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { pushPath } from 'redux-simple-router'
 import { loginActions } from 'actions'
+import { reduxify } from 'toolbox'
 
 
 export default class Login extends React.Component {
@@ -50,20 +51,8 @@ Login.propTypes = {
   login: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state) {
-  return {
-    login: state.login
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(loginActions, dispatch),
-    pushPath: bindActionCreators(pushPath, dispatch)
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login)
+export default reduxify({
+  component: Login,
+  reducer: 'login',
+  actions: loginActions
+})
