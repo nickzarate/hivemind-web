@@ -14,25 +14,24 @@ export default class Login extends React.Component {
     return () => this.props.pushPath(path)
   }
 
-  setEmail = (event) => this.props.actions.setUserEmail(event.target.value);
+  handleEmail = (event) => this.props.actions.setUserEmail(event.target.value);
 
-  setPassword = (event) => this.props.actions.setUserPassword(event.target.value);
+  handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
 
   handleLogin() {
   }
 
   render() {
-    console.log(this)
     return (
       <div>
         <h1>{ 'Login' }</h1>
         <input
-          onChange={ this.setEmail }
+          onChange={ this.handleEmail }
           placeholder="EMAIL"
           type="email"
         />
         <input
-          onChange={ this.setPassword }
+          onChange={ this.handlePassword }
           placeholder="PASSWORD"
           type="password"
         />
