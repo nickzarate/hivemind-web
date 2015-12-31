@@ -1,9 +1,6 @@
 // import Parse from 'parse'
 // import ParseReact from 'parse-react'
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { pushPath } from 'redux-simple-router'
 import { loginActions } from 'actions'
 import { reduxify } from 'toolbox'
 
@@ -25,6 +22,7 @@ export default class Login extends React.Component {
   }
 
   render() {
+    console.log(this)
     return (
       <div>
         <h1>{ 'Login' }</h1>
