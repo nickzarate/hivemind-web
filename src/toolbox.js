@@ -1,3 +1,4 @@
+
 export function hammer() {
   return 'hammer'
 }
@@ -16,3 +17,22 @@ export function merge(...args) {
     Object.assign(obj, arg)
   return obj
 }
+
+export function reduxify(payload) {
+  /*eslint-env node*/
+  const { bindActionCreators } = require('redux')
+  const { connect } = require('react-redux')
+  const { pushPath } = require('redux-simple-router')
+  let mapStateToProps = (state) => ({
+    [payload.reducer]: state[payload.reducer]
+  })
+  let mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(payload.actions, dispatch),
+    pushPath: bindActionCreators(pushPath, dispatch)
+  })
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(payload.component)
+}
+
