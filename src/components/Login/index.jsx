@@ -4,11 +4,10 @@ import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { pushPath } from 'redux-simple-router'
-
 import { loginActions } from 'actions'
 
-export default class Login extends React.Component {
 
+export default class Login extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -17,21 +16,16 @@ export default class Login extends React.Component {
     return () => this.props.pushPath(path)
   }
 
-  setEmail(event) {
-    return () => this.props.actions.setUserEmail(event.target.value)
-  }
+  setEmail = (event) => {
+    return this.props.actions.setUserEmail(event.target.value)
+  };
 
-  setPassword(event) {
-    return () => this.props.actions.setUserPassword(event.target.value)
-  }
+  setPassword = (event) => this.props.actions.setUserPassword(event.target.value);
 
-  login() {
-    console.log('login')
+  handleLogin() {
   }
 
   render() {
-    //console.log(this)
-    const { login } = this.props
     return (
       <div>
         <h1>{ 'Login' }</h1>
@@ -39,17 +33,13 @@ export default class Login extends React.Component {
           onChange={ this.setEmail }
           placeholder="EMAIL"
           type="email"
-          value={ login.email }
         />
         <input
           onChange={ this.setPassword }
           placeholder="PASSWORD"
           type="password"
-          value={ login.password }
         />
-        <button onClick={ this.login }>{ 'GO' }</button>
-        <h1> { login.email } </h1>
-        <h1> { login.password } </h1>
+        <button onClick={ this.handleLogin }>{ 'GO' }</button>
         <button onClick={ this.pushPath('/') }>{ 'home' }</button>
       </div>
     )
@@ -63,7 +53,6 @@ Login.propTypes = {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     login: state.login
   }
