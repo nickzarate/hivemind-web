@@ -1,9 +1,10 @@
-// import Parse from 'parse'
-// import ParseReact from 'parse-react'
+import Parse from 'parse'
 import React, { PropTypes } from 'react'
 import { loginActions } from 'actions'
 import { reduxify } from 'toolbox'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
+Parse.initialize(APP_ID, JAVASCRIPT_KEY)
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -18,8 +19,17 @@ export default class Login extends React.Component {
 
   handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
 
-  handleLogin() {
-  }
+  handleLogin = () => {
+    Parse.User.logIn(this.props.login.email, this.props.login.password, {
+      success: function(user) {
+        console.log(user)
+      },
+      error: function(error) {
+        console.log('Error: ' + error.code + ' ' + error.message)
+      }
+    })
+    console.log('after login')
+  };
 
   render() {
     return (
