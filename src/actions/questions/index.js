@@ -1,3 +1,3 @@
-import * as educationQuestionActions from './educationQuestion'
+import * as edQuestionActions from './edQuestion'
 
-export { educationQuestionActions }
+export { edQuestionActions }
