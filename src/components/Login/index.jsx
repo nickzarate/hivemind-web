@@ -47,6 +47,7 @@ export default class Login extends React.Component {
         />
         <button onClick={ this.handleLogin }>{ 'GO' }</button>
         <button onClick={ this.pushPath('/') }>{ 'home' }</button>
+        <button onClick={ this.pushPath('/Home') }>{ 'actual home' }</button>
       </div>
     )
   }

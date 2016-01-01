@@ -15,9 +15,13 @@ export default class Home extends React.Component {
   }
 
   render() {
+    const { actions, home } = this.props
     return (
       <div>
         <h1>{ 'home' }</h1>
+        <button onClick={ actions.incrementQuestions }>{ 'increase number of questions in the round!' }</button>
+        <button onClick={ actions.decrementQuestions }>{ 'decrease number of questions in the round!' }</button>
+        <h1>{ home.numQuestions }</h1>
         <button onClick={ this.pushPath('/Question') }>{ 'start round' }</button>
       </div>
     )
