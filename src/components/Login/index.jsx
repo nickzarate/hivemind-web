@@ -28,7 +28,6 @@ export default class Login extends React.Component {
         console.log('Error: ' + error.code + ' ' + error.message)
       }
     })
-    console.log('after login')
   };
 
   render() {
