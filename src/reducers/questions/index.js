@@ -1,3 +1,4 @@
+import question from './question'
 import edQuestion from './edQuestion'
 
-export { edQuestion }
+export { question, edQuestion }

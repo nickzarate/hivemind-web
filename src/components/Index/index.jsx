@@ -11,7 +11,6 @@ class Index extends React.Component {
     return () => this.props.pushPath(path)
   }
 
-
   render() {
     const { actions, counter } = this.props
     return (
