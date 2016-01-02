@@ -1,7 +1,7 @@
-import { DECREMENT_REMAINING_QUESTIONS } from 'constants'
+import { INCREMENT_CURRENT_QUESTION } from 'constants'
 
-export function decrementRemainingQuestions() {
+export function incrementCurrentQuestion() {
   return {
-    type: DECREMENT_REMAINING_QUESTIONS
+    type: INCREMENT_CURRENT_QUESTION
   }
 }

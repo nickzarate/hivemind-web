@@ -3,6 +3,7 @@ import counter from './counter'
 import login from './login'
 import home from './home'
 import question from './question'
+import round from './round'
 import { routeReducer as routing } from 'redux-simple-router' // REMEMBER
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   question,
   home,
   login,
+  round,
   routing
 })
 
