@@ -3,18 +3,16 @@ import { homeActions } from 'actions'
 import { reduxify } from 'toolbox'
 
 export default class Home extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   pushPath(path) {
-    return () => {
-      //console.log(this.props.home.numQuestions)
-      this.props.pushPath(path)//, this.props.home.numQuestions)
-    }
+    return () => this.props.pushPath(path)
   }
+      //console.log(this.props.home.numQuestions)
+      //this.props.pushPath(path)//, this.props.home.numQuestions)
+  //}
 
   render() {
+    console.log(this)
     const { actions, home } = this.props
     return (
       <div>
@@ -22,7 +20,7 @@ export default class Home extends React.Component {
         <button onClick={ actions.incrementQuestions }>{ 'increase number of questions in the round!' }</button>
         <button onClick={ actions.decrementQuestions }>{ 'decrease number of questions in the round!' }</button>
         <h1>{ home.numQuestions }</h1>
-        <button onClick={ this.pushPath('/Question') }>{ 'start round' }</button>
+        <button onClick={ this.pushPath('/edquestion') }>{ 'start round' }</button>
       </div>
     )
   }

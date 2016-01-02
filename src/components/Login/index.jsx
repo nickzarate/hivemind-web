@@ -4,11 +4,9 @@ import { loginActions } from 'actions'
 import { reduxify } from 'toolbox'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
-Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-
 export default class Login extends React.Component {
-  constructor(props) {
-    super(props)
+  componentWillMount() {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }
 
   pushPath(path) {
