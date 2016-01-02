@@ -1,6 +1,6 @@
 import * as counterActions from './counter'
 import * as loginActions from './login'
 import * as homeActions from './home'
-import { questionActions, edQuestionActions } from './questions'
+import * as questionActions from './question'
 
-export { counterActions, edQuestionActions, homeActions, loginActions, questionActions}
+export { counterActions, homeActions, loginActions, questionActions }
