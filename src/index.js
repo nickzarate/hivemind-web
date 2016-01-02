@@ -13,7 +13,9 @@ import App from 'containers/App.jsx'
 import Index from 'components/Index'
 import Login from 'components/Login'
 import Home from 'components/Home'
+import Round from 'components/Round'
 import EdQuestion from 'components/EdQuestion'
+import NotFound from 'components/NotFound'
 
 /* Routes */
 const history = createHistory({ queryKey: false })
@@ -23,11 +25,14 @@ syncReduxAndRouter(history, store)
 const ROUTES = (
   <Provider store={ store }>
     <Router history={ history }>
-      <Route  component={ App } path="/" >
+      <Route  component={ App } path="/">
         <IndexRoute component={ Index } />
-        <Route component={ Login } path="Login" />
-        <Route component={ Home } path="Home" />
-        <Route component={ EdQuestion } path="EdQuestion" />
+        <Route component={ Login } path="login" />
+        <Route component={ Home } path="home" />
+        <Route component={ Round } path="round">
+          <IndexRoute component={ EdQuestion } path="edquestion" />
+        </Route>
+        <Route component={ NotFound } path="*" />
       </Route>
     </Router>
   </Provider>
