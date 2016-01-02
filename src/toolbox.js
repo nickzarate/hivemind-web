@@ -39,4 +39,3 @@ export function reduxify(payload) {
   )(payload.component)
 
 }
-

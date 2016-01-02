@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { homeActions } from 'actions'
 import { reduxify } from 'toolbox'
 
-export default class Home extends React.Component {
+class Home extends React.Component {
 
   pushPath(path) {
     return () => this.props.pushPath(path)

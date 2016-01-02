@@ -2,12 +2,9 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute } from 'react-router'
 import createHistory from 'history/lib/createHashHistory'
-
 import { Provider } from 'react-redux'
 import { syncReduxAndRouter } from 'redux-simple-router'
-
 import { configureStore } from 'store'
-
 
 /* Shell-Container */
 import App from 'containers/App.jsx'
