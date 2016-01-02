@@ -7,9 +7,6 @@ class Home extends React.Component {
   pushPath(path) {
     return () => this.props.pushPath(path)
   }
-      //console.log(this.props.home.numQuestions)
-      //this.props.pushPath(path)//, this.props.home.numQuestions)
-  //}
 
   render() {
     console.log(this)
