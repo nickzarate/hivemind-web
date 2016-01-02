@@ -25,9 +25,8 @@ export function setQuestion(question) {
     type: SET_QUESTION,
     x1: question.x1,
     x2: question.x2,
-    y: question.y,
     observationID: question.observationID,
-    answers: [0,0,0,0,0,0,0,0,0],
-    answer: 0
+    answerText: ['','','','','','','','',''],
+    correctAnswer: 0
   }
 }
