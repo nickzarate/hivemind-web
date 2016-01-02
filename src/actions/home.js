@@ -1,15 +1,13 @@
-import { INCREMENT_QUESTIONS, DECREMENT_QUESTIONS } from 'constants'
+import { INCREMENT_QUESTIONS_PER_ROUND, DECREMENT_QUESTIONS_PER_ROUND } from 'constants'
 
-export function incrementQuestions() {
+export function incrementQuestionsPerRound() {
   return {
-    type: INCREMENT_QUESTIONS,
-    amount: 1
+    type: INCREMENT_QUESTIONS_PER_ROUND
   }
 }
 
-export function decrementQuestions() {
+export function decrementQuestionsPerRound() {
   return {
-    type: DECREMENT_QUESTIONS,
-    amount: 1
+    type: DECREMENT_QUESTIONS_PER_ROUND
   }
 }
