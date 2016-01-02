@@ -31,9 +31,3 @@ Question.propTypes = {
   pushPath: PropTypes.func.isRequired,
   question: PropTypes.object.isRequired
 }
-
-export default reduxify({
-  component: Question,
-  reducer: 'question',
-  actions: questionActions
-})

@@ -13,7 +13,7 @@ import App from 'containers/App.jsx'
 import Index from 'components/Index'
 import Login from 'components/Login'
 import Home from 'components/Home'
-import edQuestion from 'components/Questions'
+import EdQuestion from 'components/EdQuestion'
 
 /* Routes */
 const history = createHistory({ queryKey: false })
@@ -27,7 +27,7 @@ const ROUTES = (
         <IndexRoute component={ Index } />
         <Route component={ Login } path="Login" />
         <Route component={ Home } path="Home" />
-        <Route component={ edQuestion } path="edQuestion" />
+        <Route component={ EdQuestion } path="EdQuestion" />
       </Route>
     </Router>
   </Provider>
