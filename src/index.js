@@ -30,7 +30,7 @@ const ROUTES = (
         <Route component={ Login } path="login" />
         <Route component={ Home } path="home" />
         <Route component={ Round } path="round">
-          <IndexRoute component={ EdQuestion } path="edquestion" />
+          <Route component={ EdQuestion } path="edquestion" />
         </Route>
         <Route component={ NotFound } path="*" />
       </Route>
