@@ -26,11 +26,11 @@ class Home extends React.Component {
 Home.propTypes = {
   actions: PropTypes.object.isRequired,
   pushPath: PropTypes.func.isRequired,
-  home: PropTypes.object.isRequired
+  round: PropTypes.object.isRequired
 }
 
 export default reduxify({
   component: Home,
-  reducer: 'home',
+  reducer: 'round',
   actions: homeActions
 })
