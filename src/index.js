@@ -31,8 +31,9 @@ const ROUTES = (
         <Route component={ Login } path="login" />
         <Route component={ Home } path="home" />
         <Route component={ Round } path="round">
-          <Route component={ EdQuestion } path="edquestion" />
+          <IndexRoute component={ EdQuestion } />
         </Route>
+        <Route component={ Stats } path="stats" />
         <Route component={ NotFound } path="*" />
       </Route>
     </Router>
