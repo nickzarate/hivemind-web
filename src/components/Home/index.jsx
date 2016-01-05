@@ -10,14 +10,14 @@ class Home extends React.Component {
 
   render() {
     console.log(this)
-    const { actions, home } = this.props
+    const { actions, round } = this.props
     return (
       <div>
         <h1>{ 'home' }</h1>
-        <button onClick={ actions.incrementQuestions }>{ 'increase number of questions in the round!' }</button>
-        <button onClick={ actions.decrementQuestions }>{ 'decrease number of questions in the round!' }</button>
-        <h1>{ home.numQuestions }</h1>
-        <button onClick={ this.pushPath('/edquestion') }>{ 'start round' }</button>
+        <button onClick={ actions.incrementNumQuestions }>{ 'increase number of questions in the round!' }</button>
+        <button onClick={ actions.decrementNumQuestions }>{ 'decrease number of questions in the round!' }</button>
+        <h1>{ round.numQuestions }</h1>
+        <button onClick={ this.pushPath('/round') }>{ 'start education round' }</button>
       </div>
     )
   }
