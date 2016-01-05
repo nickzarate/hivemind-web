@@ -1,4 +1,4 @@
-import { WITHDRAW, DEPOSIT, SET_QUESTION, ESTIMATE } from 'constants'
+import { WITHDRAW, DEPOSIT, SET_QUESTION, ESTIMATE, RESET_BANK } from 'constants'
 
 export function withdraw() {
   return {
@@ -26,7 +26,13 @@ export function setQuestion(question) {
     x1: question.x1,
     x2: question.x2,
     observationID: question.observationID,
-    answerText: ['','','','','','','','',''],
-    correctAnswer: 0
+    answerText: question.answerText,
+    correctAnswer: question.correctAnswer
+  }
+}
+
+export function resetBank() {
+  return {
+    type: RESET_BANK
   }
 }

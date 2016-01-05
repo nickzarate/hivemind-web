@@ -15,6 +15,7 @@ import Login from 'components/Login'
 import Home from 'components/Home'
 import Round from 'components/Round'
 import EdQuestion from 'components/EdQuestion'
+import Stats from 'components/Stats'
 import NotFound from 'components/NotFound'
 
 /* Routes */
