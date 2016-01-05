@@ -10,7 +10,7 @@ const initialState = {
     observationID: 0,
     answerText: ['','','','','','','','',''],
     correctAnswer: 0
-  },
+  }
 }
 
 export default function question(state = initialState, action) {

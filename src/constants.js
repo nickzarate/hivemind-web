@@ -13,7 +13,8 @@ export const SET_USER_EMAIL = 'SET_USER_EMAIL'
 export const SET_USER_PASSWORD = 'SET_USER_PASSWORD'
 export const WITHDRAW = 'WITHDRAW'
 export const RESET_BANK = 'RESET_BANK'
+export const LOGIN = 'LOGIN'
 
 export const QUESTIONS_PER_ROUND = 10
 export const STARTING_CUBES = 11
-export const DEFAULT_QUESTION_TYPE = '/round/'
+export const DEFAULT_QUESTION_TYPE = '/edquestion'

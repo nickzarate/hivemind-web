@@ -18,17 +18,20 @@ class Login extends React.Component {
   handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
 
   handleLogin = () => {
-    Parse.User.logIn(this.props.login.email, this.props.login.password, {
-      success: function(user) {
-        console.log(user)
-      },
-      error: function(error) {
-        console.log('Error: ' + error.code + ' ' + error.message)
-      }
-    })
+    this.props.actions.asyncLogin(Parse, this.props.login.email, this.props.login.password)
+    console.log("logged in!...?")
+    // Parse.User.logIn(this.props.login.email, this.props.login.password, {
+    //   success: function(user) {
+    //     console.log(user)
+    //   },
+    //   error: function(error) {
+    //     console.log('Error: ' + error.code + ' ' + error.message)
+    //   }
+    // })
   };
 
   render() {
+    console.log(this)
     return (
       <div>
         <h1>{ 'Login' }</h1>
