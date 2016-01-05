@@ -1,16 +1,16 @@
-import { DEPOSIT, WITHDRAW, SET_QUESTION, STARTING_CUBES, ESTIMATE } from 'constants'
+import { DEPOSIT, WITHDRAW, SET_QUESTION, STARTING_CUBES, ESTIMATE, RESET_BANK } from 'constants'
 
 const initialState = {
   bank: STARTING_CUBES,
   answers: [0,0,0,0,0,0,0,0,0],
   estimate: 0,
-  question: {
+  questionInfo: {
     x1: 0,
     x2: 0,
     observationID: 0,
     answerText: ['','','','','','','','',''],
     correctAnswer: 0
-  }
+  },
 }
 
 export default function question(state = initialState, action) {
@@ -20,19 +20,20 @@ export default function question(state = initialState, action) {
       bank: state.bank - 1,
       answers: state.answers,
       estimate: state.estimate,
-      question: state.question
+      questionInfo: state.questionInfo
     }
   case DEPOSIT:
-    var answers = state.answers
+    // Use slice so as not to unintentionally alter state
+    let answers = state.answers.slice(0)
     answers[action.index] += 1
     return {
       bank: state.bank,
       answers: answers,
       estimate: state.estimate,
-      question: state.question
+      questionInfo: state.questionInfo
     }
   case SET_QUESTION:
-    var myQuestion = {
+    let myQuestion = {
       x1: action.x1,
       x2: action.x2,
       observationID: action.observationID,
@@ -43,15 +44,17 @@ export default function question(state = initialState, action) {
       bank: state.bank,
       answers: state.answers,
       estimate: state.estimate,
-      question: myQuestion
+      questionInfo: myQuestion
     }
   case ESTIMATE:
     return {
       bank: state.bank,
       answers: state.answers,
       estimate: action.estimate,
-      question: state.question
+      questionInfo: state.questionInfo
     }
+  case RESET_BANK:
+    return initialState
   default:
     return state
   }
