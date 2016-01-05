@@ -36,3 +36,24 @@ export function resetBank() {
     type: RESET_BANK
   }
 }
+
+export function handleDeposit(index) {
+  return (dispatch, getState) => {
+    const { question } = getState()
+    if (question.bank) {
+      dispatch(withdraw())
+      dispatch(deposit(index))
+    }
+  }
+}
+
+export function handleEstimate(event) {
+  return (dispatch) => {
+    let estimateNum = Number(event.target.value)
+    //TODO: More robust error checking?
+    if (isNaN(estimateNum)) {
+      return
+    }
+    dispatch(estimate(estimateNum))
+  }
+}
