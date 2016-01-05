@@ -14,21 +14,8 @@ class Login extends React.Component {
   }
 
   handleEmail = (event) => this.props.actions.setUserEmail(event.target.value);
-
   handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
-
-  handleLogin = () => {
-    this.props.actions.asyncLogin(Parse, this.props.login.email, this.props.login.password)
-    console.log("logged in!...?")
-    // Parse.User.logIn(this.props.login.email, this.props.login.password, {
-    //   success: function(user) {
-    //     console.log(user)
-    //   },
-    //   error: function(error) {
-    //     console.log('Error: ' + error.code + ' ' + error.message)
-    //   }
-    // })
-  };
+  handleLogin = () => this.props.actions.asyncLogin(Parse, this.props.login.email, this.props.login.password);
 
   render() {
     console.log(this)
@@ -46,8 +33,8 @@ class Login extends React.Component {
           type="password"
         />
         <button onClick={ this.handleLogin }>{ 'GO' }</button>
-        <button onClick={ this.pushPath('/') }>{ 'home' }</button>
-        <button onClick={ this.pushPath('/Home') }>{ 'actual home' }</button>
+        <button onClick={ this.pushPath('/') }>{ 'index' }</button>
+        <button onClick={ this.pushPath('/Home') }>{ 'home' }</button>
       </div>
     )
   }
