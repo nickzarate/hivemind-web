@@ -14,7 +14,7 @@ import Index from 'components/Index'
 import Login from 'components/Login'
 import Home from 'components/Home'
 import Round from 'components/Round'
-import EdQuestion from 'components/EdQuestion'
+import EducationQuestion from 'components/EducationQuestion'
 import Stats from 'components/Stats'
 import NotFound from 'components/NotFound'
 
@@ -31,7 +31,7 @@ const ROUTES = (
         <Route component={ Login } path="login" />
         <Route component={ Home } path="home" />
         <Route component={ Round } path="round">
-          <IndexRoute component={ EdQuestion } />
+          <IndexRoute component={ EducationQuestion } />
         </Route>
         <Route component={ Stats } path="stats" />
         <Route component={ NotFound } path="*" />

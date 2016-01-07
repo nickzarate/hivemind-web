@@ -5,7 +5,7 @@ import { questionActions } from 'actions'
 import { reduxify, rand } from 'toolbox'
 import Question from 'components/Question'
 
-export class EdQuestion extends Question {
+export class EducationQuestion extends Question {
   constructor(props) {
     super(props)
   }
@@ -15,25 +15,34 @@ export class EdQuestion extends Question {
     this.pullQuestion()
   }
 
-
   handleSubmit(answers, estimate) {
     return () => {
-      const { question } = this.props
+      const { actions, question } = this.props
       //TODO: Store answer to current round
 
-      // //STORE INFORMATION AS A PARSE ANSWER
-      // var points = answers[question.questionInfo.correctAnswer] * 50
-      // var currentUser = Parse.User.current()
-      // currentUser.increment('honey', points)
-      // currentUser.save()
+      // // AWARD USER POINTS FOR CORRECT ANSWERS
+      //var currentUser = Parse.User.current()
       // var that = this
 
-      // //Set the education question to an answer
+
+      // actions.asyncAwardPoints()
+      // actions.asyncSaveAnswerToRound(Parse, EducationAnswer, EducationRound)
+
+      // let myNewString = questionType + 'Answer'
+      // var myNewString = Parse.Object.extend(myNewString)
+
+      // var EducationAnswer = Parse.Object.extend('EducationAnswer')
+
+      // string = 'Education'
+      // [myNewString]
+
+
+      // // Set the education question to an answer
       // var EducationAnswer = Parse.Object.extend('EducationAnswer')
       // var educationAnswer = new EducationAnswer()
       // educationAnswer.set('educationQuestion', this.props.questionPointer)
 
-      // //Set the answers and the estimate
+      // // Set the answers and the estimate
       // educationAnswer.set('answers', question.answers)
       // educationAnswer.set('pointEstimate', question.estimate)
 
@@ -93,7 +102,8 @@ export class EdQuestion extends Question {
         x2: response.get('yearsEducation'),
         observationID: observationID,
         answerText: response.get('answers'),
-        correctAnswer: response.get('answer')
+        correctAnswer: response.get('answer'),
+        id: response.id
       }
       this.props.actions.setQuestion(question)
     }.bind(this)
@@ -107,6 +117,7 @@ export class EdQuestion extends Question {
         loadQuestion(response)
       },
       error(error) {
+        //TODO: Display an error saying a question could not be retrieved
         console.log('Error: ' + error.code + ' ' + error.message)
       }
     })
@@ -114,15 +125,15 @@ export class EdQuestion extends Question {
 
   render() {
     console.log(this)
-    const { question } = this.props
+    const { actions, question } = this.props
     return (
       <div>
         <p>{ 'Hello!' }</p>
-        <p>{ 'Bank: ' }{ this.props.question.bank }</p>
+        <p>{ 'Bank: ' }{ question.bank }</p>
         <p>{ 'years of experience: ' }{ question.questionInfo.x1 }</p>
         <p>{ 'years of education: ' }{ question.questionInfo.x2 }</p>
         <input
-          onChange={ this.handleEstimate }
+          onChange={ actions.handleEstimate }
           placeholder="ESTIMATE"
           ref="estimateInput"
         />
@@ -142,14 +153,14 @@ export class EdQuestion extends Question {
   }
 }
 
-EdQuestion.propTypes = {
+EducationQuestion.propTypes = {
   actions: PropTypes.object.isRequired,
   pushPath: PropTypes.func.isRequired,
   question: PropTypes.object.isRequired
 }
 
 export default reduxify({
-  component: EdQuestion,
+  component: EducationQuestion,
   reducer: 'question',
   actions: questionActions
 })

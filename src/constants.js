@@ -17,4 +17,6 @@ export const LOGIN = 'LOGIN'
 
 export const QUESTIONS_PER_ROUND = 10
 export const STARTING_CUBES = 11
-export const DEFAULT_QUESTION_TYPE = '/edquestion'
+export const DEFAULT_QUESTION_CLASS = 'EducationQuestion'
+export const DEFAULT_ANSWER_CLASS = 'EducationAnswer'
+export const DEFAULT_ROUND_CLASS = 'EducationRound'
