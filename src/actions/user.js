@@ -14,18 +14,23 @@ export function setUserPassword(password) {
   }
 }
 
-export function login(user) {
+export function login(currentUser) {
   return {
     type: LOGIN,
-    user: user
+    currentUser: currentUser
   }
 }
 
-export function asyncLogin(Parse, email, password) {
-  return dispatch => {
+export function asyncLogin(Parse) {
+  return (dispatch, getState) => {
+    const { user } = getState()
+    console.log('Parse:')
+    console.log(Parse)
+    console.log(user)
     setTimeout(() => {
-      Parse.User.logIn(email, password, {
+      Parse.User.logIn(user.email, user.password, {
         success: function(user) {
+          console.log(user)
           dispatch(login(user))
         },
         error: function(error) {

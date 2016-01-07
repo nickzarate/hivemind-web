@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import counter from './counter'
-import login from './login'
+import user from './user'
 import home from './home'
 import question from './question'
 import round from './round'
@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   counter,
   question,
   home,
-  login,
+  user,
   round,
   routing
 })
