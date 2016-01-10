@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { userActions } from 'actions'
 import { reduxify } from 'toolbox'
-import { LoginComp } from 'components/Login'
+import LoginComp from 'components/Login'
 
 class Login extends React.Component {
   render() {

@@ -2,7 +2,7 @@ import Parse from 'parse'
 import React, { PropTypes } from 'react'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
-class LoginComp extends React.Component {
+export default class LoginComp extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }

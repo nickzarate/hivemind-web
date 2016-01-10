@@ -6,12 +6,11 @@ import { Provider } from 'react-redux'
 import { syncReduxAndRouter } from 'redux-simple-router'
 import { configureStore } from 'store'
 
-/* Shell-Container */
-import App from 'containers/App.jsx'
+/* Containers */
+import { App, Login } from 'containers'
 
-/* Pages */
+/* Components */
 import Index from 'components/Index'
-import Login from 'components/Login'
 import Home from 'components/Home'
 import Round from 'components/Round'
 import EducationQuestion from 'components/EducationQuestion'
