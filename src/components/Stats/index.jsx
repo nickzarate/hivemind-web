@@ -12,6 +12,7 @@ class Stats extends React.Component {
     return (
       <div>
         <p>{ 'Stats page!!' }</p>
+        <button onClick={ this.pushPath('/home') }>{ 'Go Home' }</button>
       </div>
     )
   }
