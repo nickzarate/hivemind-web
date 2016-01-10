@@ -1,10 +1,8 @@
 import Parse from 'parse'
 import React, { PropTypes } from 'react'
-import { userActions } from 'actions'
-import { reduxify } from 'toolbox'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
-class Login extends React.Component {
+class LoginComp extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }
@@ -40,14 +38,8 @@ class Login extends React.Component {
   }
 }
 
-Login.propTypes = {
+LoginComp.propTypes = {
   actions: PropTypes.object.isRequired,
   pushPath: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired
 }
-
-export default reduxify({
-  component: Login,
-  reducer: 'user',
-  actions: userActions
-})
