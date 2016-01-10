@@ -1,4 +1,5 @@
-import { WITHDRAW, DEPOSIT, SET_QUESTION, ESTIMATE, RESET_BANK } from 'constants'
+import { WITHDRAW, DEPOSIT, SET_ABSTRACT_QUESTION, SET_CURRENT_QUESTION, ESTIMATE, RESET_BANK } from 'constants'
+import { rand } from 'toolbox'
 
 export function withdraw() {
   return {
@@ -20,14 +21,21 @@ export function estimate(estimate) {
   }
 }
 
-export function setQuestion(question) {
+export function setAbstractQuestion(question) {
   return {
-    type: SET_QUESTION,
+    type: SET_ABSTRACT_QUESTION,
     x1: question.x1,
     x2: question.x2,
     observationID: question.observationID,
     answerText: question.answerText,
     correctAnswer: question.correctAnswer
+  }
+}
+
+export function setCurrentQuestion(question) {
+  return {
+    type: SET_CURRENT_QUESTION,
+    currentQuestion: question
   }
 }
 
@@ -37,6 +45,9 @@ export function resetBank() {
   }
 }
 
+/*
+ *  If any cubes left, distribute one to the specified index
+ */
 export function handleDeposit(index) {
   return (dispatch, getState) => {
     const { question } = getState()
@@ -47,6 +58,9 @@ export function handleDeposit(index) {
   }
 }
 
+/*
+ *  Set the estimate state if the new value is a valid estimate
+ */
 export function handleEstimate(event) {
   return (dispatch) => {
     let estimateNum = Number(event.target.value)
