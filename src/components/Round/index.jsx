@@ -35,7 +35,8 @@ export default class Round extends React.Component {
     const childProps = {
       onSubmit: this.handleSubmit,
       questionType: this.props.round.questionType,
-      pushPath: this.pushPath()
+      pushPath: this.pushPath(),
+      isSubmitting: this.props.round.isSubmitting
     }
     const RouteHandler = React.cloneElement(this.props.children, childProps)
     return (
@@ -56,5 +57,5 @@ Round.propTypes = {
 export default reduxify({
   component: Round,
   reducer: 'round',
-  actions: roundActions
+  actions: merge(answerActions, roundActions)
 })
