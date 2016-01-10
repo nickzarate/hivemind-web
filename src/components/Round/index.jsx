@@ -15,13 +15,11 @@ export default class Round extends React.Component {
     this.props.actions.asyncCreateRound(Parse)
   }
 
+  handleSubmit() {
+    const { actions } = this.props
+    actions.asyncHandleSubmit(Parse, this.props.pushPath)
+    actions.asyncAwardPoints()
     actions.incrementCurrentQuestion()
-    if (round.numQuestions < round.currentQuestion) {
-      //TODO: Call Python server to analyze the data collected.
-      console.log(round.answersVector)
-      console.log(round.estimateVector)
-      pushPath('/stats')
-    }
   }
 
   pushPath(path) {
