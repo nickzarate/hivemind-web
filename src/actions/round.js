@@ -1,15 +1,16 @@
-import { INCREMENT_CURRENT_QUESTION, ADD_ESTIMATE, ADD_ANSWERS } from 'constants'
+import { SET_QUESTION_TYPE, SET_ROUND } from 'constants'
 
-export function incrementCurrentQuestion() {
+export function setQuestionType(questionType) {
   return {
-    type: INCREMENT_CURRENT_QUESTION
+    type: SET_QUESTION_TYPE,
+    questionType: questionType
   }
 }
 
-export function addEstimate(estimate) {
+export function setRound(savedRound) {
   return {
-    type: ADD_ESTIMATE,
-    estimate: estimate
+    type: SET_ROUND,
+    currentRound: savedRound
   }
 }
 
