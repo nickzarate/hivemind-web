@@ -7,11 +7,10 @@ import { syncReduxAndRouter } from 'redux-simple-router'
 import { configureStore } from 'store'
 
 /* Containers */
-import { App, Login } from 'containers'
+import { App, Login, Home } from 'containers'
 
 /* Components */
 import Index from 'components/Index'
-import Home from 'components/Home'
 import Round from 'components/Round'
 import EducationQuestion from 'components/EducationQuestion'
 import Stats from 'components/Stats'

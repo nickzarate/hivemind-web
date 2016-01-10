@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react'
-import { homeActions } from 'actions'
-import { reduxify } from 'toolbox'
 
-class Home extends React.Component {
-
+export default class HomeComp extends React.Component {
   pushPath(path) {
     return () => this.props.pushPath(path)
   }
@@ -23,14 +20,8 @@ class Home extends React.Component {
   }
 }
 
-Home.propTypes = {
+HomeComp.propTypes = {
   actions: PropTypes.object.isRequired,
   pushPath: PropTypes.func.isRequired,
   round: PropTypes.object.isRequired
 }
-
-export default reduxify({
-  component: Home,
-  reducer: 'round',
-  actions: homeActions
-})
