@@ -9,7 +9,6 @@ export default class Question extends React.Component {
   }
 
   render() {
-    //console.log(this)
     return (
       <div>
         <p>{ 'Hello!' }</p>
