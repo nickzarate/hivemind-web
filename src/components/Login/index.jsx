@@ -15,7 +15,7 @@ class Login extends React.Component {
 
   handleEmail = (event) => this.props.actions.setUserEmail(event.target.value);
   handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
-  handleLogin = () => this.props.actions.asyncLogin(Parse, this.props.login.email, this.props.login.password);
+  handleLogin = () => this.props.actions.asyncLogin(Parse, this.pushPath('/home'));
 
   render() {
     console.log(this)
