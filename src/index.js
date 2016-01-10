@@ -15,6 +15,8 @@ import App from 'containers/App.jsx'
 /* Pages */
 import Index from 'components/Index'
 import Login from 'components/Login'
+import Home from 'components/Home'
+import Question from 'components/Question'
 
 /* Routes */
 const history = createHistory({ queryKey: false })
@@ -27,6 +29,8 @@ const ROUTES = (
       <Route  component={ App } path="/" >
         <IndexRoute component={ Index } />
         <Route component={ Login } path="Login" />
+        <Route component={ Home } path="Home" />
+        <Route component={ Question } path="Question" />
       </Route>
     </Router>
   </Provider>
