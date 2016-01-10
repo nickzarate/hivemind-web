@@ -13,9 +13,28 @@ export function addEstimate(estimate) {
   }
 }
 
-export function addAnswers(answers) {
-  return {
-    type: ADD_ANSWERS,
-    answers: answers
+/*
+ *  Create a new round in Parse and save with:
+ *    answers: [],
+ *    createdBy: currentUser
+ */
+export function asyncCreateRound(Parse) {
+  return (dispatch, getState) => {
+    const { round } = getState()
+
+    //Create new Round
+    let roundClass = round.questionType + 'Round'
+    var Round = Parse.Object.extend(roundClass)
+    var newRound = new Round()
+
+    //Save Round and set currentRound state
+    setTimeout(() => {
+      newRound.save({
+        answers: [],
+        createdBy: Parse.User.current()
+      }).then(function(savedRound) {
+        dispatch(setRound(savedRound))
+      })
+    }, 3000)
   }
 }

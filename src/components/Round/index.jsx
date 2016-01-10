@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
-import { reduxify } from 'toolbox'
-import { roundActions } from 'actions'
+import { reduxify, merge } from 'toolbox'
+import { answerActions, roundActions } from 'actions'
+import Parse from 'parse'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
 export default class Round extends React.Component {
   constructor(props) {
@@ -8,12 +10,10 @@ export default class Round extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit(answers, estimate) {
-    const { actions, round, pushPath } = this.props
-
-    //STORE INFORMATION AS VECTORS
-    actions.addAnswers(answers)
-    actions.addEstimate(estimate)
+  componentWillMount() {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+    this.props.actions.asyncCreateRound(Parse)
+  }
 
     actions.incrementCurrentQuestion()
     if (round.numQuestions < round.currentQuestion) {
