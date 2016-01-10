@@ -71,3 +71,40 @@ export function handleEstimate(event) {
     dispatch(estimate(estimateNum))
   }
 }
+
+/*
+ *  Pull a random question from Parse database and setState accordingly
+ */
+export function pullQuestion(Parse, questionType) {
+  return dispatch => {
+
+    //Create query for random question
+    var observationID = rand(1, 100)
+    console.log(questionType)
+    var Question = Parse.Object.extend(questionType)
+    var query = new Parse.Query(Question)
+    query.equalTo('observationID', observationID)
+
+    //Pull question and set state
+    setTimeout(() => {
+      query.first().then(function(parseQuestion) {
+        var abstractQuestion = null
+        switch(questionType) {
+        case 'EducationQuestion':
+          abstractQuestion = {
+            x1: parseQuestion.get('yearsExperience'),
+            x2: parseQuestion.get('yearsEducation'),
+            observationID: observationID,
+            answerText: parseQuestion.get('answers'),
+            correctAnswer: parseQuestion.get('answer')
+          }
+          break
+        default:
+          abstractQuestion = null
+        }
+        dispatch(setAbstractQuestion(abstractQuestion))
+        dispatch(setCurrentQuestion(parseQuestion))
+      })
+    }, 3000)
+  }
+}

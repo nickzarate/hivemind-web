@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { questionActions } from 'actions'
-import { reduxify, rand } from 'toolbox'
+import { reduxify } from 'toolbox'
 import Question from 'components/Question'
 
 export class EducationQuestion extends Question {
@@ -12,115 +12,19 @@ export class EducationQuestion extends Question {
 
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    this.pullQuestion()
+    this.props.actions.pullQuestion(Parse, 'EducationQuestion')
   }
 
   handleSubmit(answers, estimate) {
     return () => {
-      const { actions, question } = this.props
-      //TODO: Store answer to current round
-
-      // // AWARD USER POINTS FOR CORRECT ANSWERS
-      //var currentUser = Parse.User.current()
-      // var that = this
-
-
-      // actions.asyncAwardPoints()
-      // actions.asyncSaveAnswerToRound(Parse, EducationAnswer, EducationRound)
-
-      // let myNewString = questionType + 'Answer'
-      // var myNewString = Parse.Object.extend(myNewString)
-
-      // var EducationAnswer = Parse.Object.extend('EducationAnswer')
-
-      // string = 'Education'
-      // [myNewString]
-
-
-      // // Set the education question to an answer
-      // var EducationAnswer = Parse.Object.extend('EducationAnswer')
-      // var educationAnswer = new EducationAnswer()
-      // educationAnswer.set('educationQuestion', this.props.questionPointer)
-
-      // // Set the answers and the estimate
-      // educationAnswer.set('answers', question.answers)
-      // educationAnswer.set('pointEstimate', question.estimate)
-
-      // educationAnswer.save({
-      //   success: function(educationAnswer) {
-      //     //saveAnswer(educationAnswer)
-      //     if (question.currentRound) {
-      //       var EducationRound = Parse.Object.extend('EducationRound')
-      //       var educationRound = new EducationRound()
-      //       educationRound.set('educationAnswers', [])
-      //     } else {
-      //       educationRound.add('educationAnswers', educationAnswer)
-      //     }
-      //   },
-      //   error: function(error) {
-      //     alert('Error: ' + error.code + ' ' + error.message)
-      //   }
-      // })
-
-      // var saveAnswer = function(educationAnswer) {
-      //   var answerHistory = currentUser.get('answerHistory')
-      //   answerHistory.fetch({
-      //     success: function(answerHistory) {
-      //       if (that.props.newRound) {
-      //         console.log('first question')
-      //         answerHistory.set('latestEducationRound', [])
-      //       } else {
-      //         console.log('not the first question')
-      //       }
-      //       answerHistory.add('latestEducationRound', educationAnswer)
-      //       answerHistory.save({
-      //         success: function() {
-      //           that.props.onAnswered()
-      //         },
-      //         error: function(error) {
-      //           alert('Couldnt save answer history: Error: ' + error.code + ' ' + error.message)
-      //         }
-      //       })
-      //     },
-      //     error: function(error) {
-      //       alert('Couldnt fetch answer history: Error: ' + error.code + ' ' + error.message)
-      //     }
-      //   })
-      // }
-
-      this.refs.estimateInput.value = ''
-      this.props.onSubmit(answers, estimate)
-      this.props.actions.resetBank()
-      this.pullQuestion()
+      const { actions } = this.props
+      this.props.onSubmit(answers, estimate, Parse)
+      if (!this.props.isSubmitting) {
+        this.refs.estimateInput.value = ''
+        actions.resetBank()
+        actions.pullQuestion(Parse, 'EducationQuestion')
+      }
     }
-  }
-
-  pullQuestion() {
-    var loadQuestion = function(response) {
-      var question = {
-        x1: response.get('yearsExperience'),
-        x2: response.get('yearsEducation'),
-        observationID: observationID,
-        answerText: response.get('answers'),
-        correctAnswer: response.get('answer'),
-        id: response.id
-      }
-      this.props.actions.setQuestion(question)
-    }.bind(this)
-
-    var observationID = rand(1, 100)
-    var EducationQuestion = Parse.Object.extend('EducationQuestion')
-    var query = new Parse.Query(EducationQuestion)
-    query.equalTo('observationID', observationID)
-    query.first({
-      success(response) {
-        loadQuestion(response)
-      },
-      error(error) {
-        //TODO: Display an error saying a question could not be retrieved
-        console.log('Error: ' + error.code + ' ' + error.message)
-      }
-    })
   }
 
   render() {
