@@ -13,4 +13,3 @@ export function decrement() {
     amount: 1
   }
 }
-

@@ -18,6 +18,10 @@ export function merge(...args) {
   return obj
 }
 
+export function rand(min, max) {
+  return min + Math.floor(Math.random() * (max - min))
+}
+
 export function reduxify(payload) {
   /*eslint-env node*/
   const { bindActionCreators } = require('redux')
@@ -39,4 +43,3 @@ export function reduxify(payload) {
   )(payload.component)
 
 }
-

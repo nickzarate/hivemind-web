@@ -1,16 +1,12 @@
 import React, { PropTypes } from 'react'
-
 import Counter from 'components/Counter'
 import { counterActions } from 'actions'
-
 import { reduxify } from 'toolbox'
 
 class Index extends React.Component {
-
   pushPath(path) {
     return () => this.props.pushPath(path)
   }
-
 
   render() {
     const { actions, counter } = this.props
@@ -26,7 +22,6 @@ class Index extends React.Component {
       </div>
     )
   }
-
 }
 
 // Index.propTypes = {

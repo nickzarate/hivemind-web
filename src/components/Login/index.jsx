@@ -1,13 +1,12 @@
-// import Parse from 'parse'
-// import ParseReact from 'parse-react'
+import Parse from 'parse'
 import React, { PropTypes } from 'react'
-import { loginActions } from 'actions'
+import { userActions } from 'actions'
 import { reduxify } from 'toolbox'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
-
-export default class Login extends React.Component {
-  constructor(props) {
-    super(props)
+class Login extends React.Component {
+  componentWillMount() {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }
 
   pushPath(path) {
@@ -15,13 +14,11 @@ export default class Login extends React.Component {
   }
 
   handleEmail = (event) => this.props.actions.setUserEmail(event.target.value);
-
   handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
-
-  handleLogin() {
-  }
+  handleLogin = () => this.props.actions.asyncLogin(Parse, this.pushPath('/home'));
 
   render() {
+    console.log(this)
     return (
       <div>
         <h1>{ 'Login' }</h1>
@@ -36,7 +33,8 @@ export default class Login extends React.Component {
           type="password"
         />
         <button onClick={ this.handleLogin }>{ 'GO' }</button>
-        <button onClick={ this.pushPath('/') }>{ 'home' }</button>
+        <button onClick={ this.pushPath('/') }>{ 'index' }</button>
+        <button onClick={ this.pushPath('/Home') }>{ 'home' }</button>
       </div>
     )
   }
@@ -45,11 +43,11 @@ export default class Login extends React.Component {
 Login.propTypes = {
   actions: PropTypes.object.isRequired,
   pushPath: PropTypes.func.isRequired,
-  login: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired
 }
 
 export default reduxify({
   component: Login,
-  reducer: 'login',
-  actions: loginActions
+  reducer: 'user',
+  actions: userActions
 })
