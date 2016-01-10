@@ -10,7 +10,6 @@ import { configureStore } from 'store'
 import { App, Login, Home } from 'containers'
 
 /* Components */
-import Index from 'components/Index'
 import Round from 'components/Round'
 import EducationQuestion from 'components/EducationQuestion'
 import Stats from 'components/Stats'
@@ -25,8 +24,7 @@ const ROUTES = (
   <Provider store={ store }>
     <Router history={ history }>
       <Route  component={ App } path="/">
-        <IndexRoute component={ Index } />
-        <Route component={ Login } path="login" />
+        <IndexRoute component={ Login } />
         <Route component={ Home } path="home" />
         <Route component={ Round } path="round">
           <IndexRoute component={ EducationQuestion } />

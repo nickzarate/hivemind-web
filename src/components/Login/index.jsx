@@ -31,8 +31,7 @@ export default class LoginComp extends React.Component {
           type="password"
         />
         <button onClick={ this.handleLogin }>{ 'GO' }</button>
-        <button onClick={ this.pushPath('/') }>{ 'index' }</button>
-        <button onClick={ this.pushPath('/Home') }>{ 'home' }</button>
+        <button onClick={ this.pushPath('/home') }>{ 'home' }</button>
       </div>
     )
   }
