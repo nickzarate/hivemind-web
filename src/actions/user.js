@@ -29,12 +29,15 @@ export function asyncLogin(Parse, pushPath) {
     const { user } = getState()
     console.log(user)
     setTimeout(() => {
-      Parse.User.logIn(user.email, user.password).then(function(currentUser) {
-        console.log(currentUser)
-        dispatch(login(currentUser))
-        pushPath()
-      }, function(error) {
-        console.log('Error: ' + error.code + ' ' + error.message)
+      Parse.User.logIn(user.email, user.password, {
+        success(currentUser) {
+          console.log(currentUser)
+          dispatch(login(currentUser))
+          pushPath()
+        },
+        error(error) {
+          console.log('Error: ' + error.code + ' ' + error.message)
+        }
       })
     }, 3000)
   }
