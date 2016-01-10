@@ -22,6 +22,16 @@ export function rand(min, max) {
   return min + Math.floor(Math.random() * (max - min))
 }
 
+/**
+ * Reduxifies everything
+ *
+ * maps states to props
+ * maps dispatch to props
+ * connects.
+ *
+ * @param payload object with actions, reducer, and desired component
+ * @return reduxified component
+ */
 export function reduxify(payload) {
   /*eslint-env node*/
   const { bindActionCreators } = require('redux')
