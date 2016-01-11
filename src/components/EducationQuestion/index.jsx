@@ -1,30 +1,11 @@
 import React, { PropTypes } from 'react'
-import Parse from 'parse'
-import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { questionActions } from 'actions'
 import { reduxify } from 'toolbox'
 import Question from 'components/Question'
 
-export class EducationQuestion extends Question {
+class EducationQuestion extends Question {
   constructor(props) {
     super(props)
-  }
-
-  componentWillMount() {
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    this.props.actions.pullQuestion(Parse, 'EducationQuestion')
-  }
-
-  handleSubmit(answers, estimate) {
-    return () => {
-      const { actions } = this.props
-      this.props.onSubmit(answers, estimate, Parse)
-      if (!this.props.isSubmitting) {
-        this.refs.estimateInput.value = ''
-        actions.resetBank()
-        actions.pullQuestion(Parse, 'EducationQuestion')
-      }
-    }
   }
 
   render() {

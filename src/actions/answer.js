@@ -1,4 +1,5 @@
-import { INCREMENT_CURRENT_QUESTION, IS_SUBMITTING, ADD_ANSWER_TO_ROUND, ADD_ESTIMATE, ADD_ANSWERS } from 'constants'
+import { INCREMENT_CURRENT_QUESTION, IS_SUBMITTING, ADD_ANSWER_TO_ROUND,
+  ADD_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
 
 export function isSubmitting(isSubmitting) {
   return {
@@ -34,6 +35,12 @@ export function incrementCurrentQuestion() {
   }
 }
 
+export function resetCurrentQuestion() {
+  return {
+    type: RESET_CURRENT_QUESTION
+  }
+}
+
 /*
  *  Award the user points according to the correctness of their answer
  */
@@ -43,6 +50,7 @@ export function asyncAwardPoints() {
     setTimeout(() => {
       //TODO: Calculate how many points are earned for answering correctly
       let points = question.answers[question.abstractQuestion.correctAnswer] * 50
+      console.log(user)
       let honey = user.currentUser.get('honey')
       honey += points
       user.currentUser.save({ honey: honey })
@@ -82,6 +90,7 @@ export function asyncHandleSubmit(Parse, pushPath) {
       }).then(function() {
         dispatch(incrementCurrentQuestion())
         if (round.currentQuestion === round.numQuestions) {
+          dispatch(resetCurrentQuestion())
           console.log('GO TO STATS PAGE!!!')
           pushPath('/stats')
         }

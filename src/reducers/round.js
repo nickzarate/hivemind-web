@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, INCREMENT_NUM_QUESTIONS, DECREMENT_NUM_QUESTIONS, SET_ROUND, ADD_ANSWER_TO_ROUND,
-  QUESTIONS_PER_ROUND, DEFAULT_QUESTION_TYPE, SET_QUESTION_TYPE, ADD_ESTIMATE, ADD_ANSWERS, IS_SUBMITTING } from 'constants'
+  QUESTIONS_PER_ROUND, DEFAULT_QUESTION_TYPE, SET_QUESTION_TYPE, ADD_ESTIMATE, ADD_ANSWERS, IS_SUBMITTING, RESET_CURRENT_QUESTION } from 'constants'
 
 const initialState = {
   currentQuestion: 1,
@@ -109,6 +109,16 @@ export default function round(state = initialState, action) {
       answersVector: state.answersVector,
       isSubmitting: state.isSubmitting,
       currentRound: currentRound
+    }
+  case RESET_CURRENT_QUESTION:
+    return {
+      currentQuestion: 1,
+      numQuestions: state.numQuestions,
+      questionType: state.questionType,
+      estimateVector: state.estimateVector,
+      answersVector: state.answersVector,
+      isSubmitting: state.isSubmitting,
+      currentRound: state.currentRound
     }
   default:
     return state

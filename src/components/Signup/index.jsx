@@ -2,7 +2,7 @@ import Parse from 'parse'
 import React, { PropTypes } from 'react'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
-export default class LoginComp extends React.Component {
+export default class SignupComp extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }
@@ -13,13 +13,13 @@ export default class LoginComp extends React.Component {
 
   handleEmail = (event) => this.props.actions.setUserEmail(event.target.value);
   handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
-  handleLogin = () => this.props.actions.asyncLogin(Parse, this.pushPath('/home'));
+  handleSignup = () => this.props.actions.asyncSignup(Parse, this.pushPath('/home'));
 
   render() {
     console.log(this)
     return (
       <div>
-        <h1>{ 'Login' }</h1>
+        <h1>{ 'Sign Up' }</h1>
         <input
           onChange={ this.handleEmail }
           placeholder="EMAIL"
@@ -30,15 +30,15 @@ export default class LoginComp extends React.Component {
           placeholder="PASSWORD"
           type="password"
         />
-        <button onClick={ this.handleLogin }>{ 'Log In' }</button>
+        <button onClick={ this.handleSignup }>{ 'Sign Up' }</button>
         <button onClick={ this.pushPath('/home') }>{ 'home' }</button>
-        <button onClick={ this.pushPath('/signup') }>{ 'Dont have an account?' }</button>
+        <button onClick={ this.pushPath('/') }>{ 'Already have an account?' }</button>
       </div>
     )
   }
 }
 
-LoginComp.propTypes = {
+SignupComp.propTypes = {
   actions: PropTypes.object.isRequired,
   pushPath: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired

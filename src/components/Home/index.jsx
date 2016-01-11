@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react'
-import { homeActions } from 'actions'
-import { reduxify } from 'toolbox'
 
-class Home extends React.Component {
-
+export default class HomeComp extends React.Component {
   pushPath(path) {
     return () => this.props.pushPath(path)
   }
@@ -13,7 +10,7 @@ class Home extends React.Component {
     const { actions, round } = this.props
     return (
       <div>
-        <h1>{ 'home' }</h1>
+        <h1>{ 'Home' }</h1>
         <button onClick={ actions.incrementNumQuestions }>{ 'increase number of questions in the round!' }</button>
         <button onClick={ actions.decrementNumQuestions }>{ 'decrease number of questions in the round!' }</button>
         <h1>{ round.numQuestions }</h1>
@@ -23,14 +20,8 @@ class Home extends React.Component {
   }
 }
 
-Home.propTypes = {
+HomeComp.propTypes = {
   actions: PropTypes.object.isRequired,
   pushPath: PropTypes.func.isRequired,
   round: PropTypes.object.isRequired
 }
-
-export default reduxify({
-  component: Home,
-  reducer: 'round',
-  actions: homeActions
-})
