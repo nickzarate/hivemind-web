@@ -22,6 +22,32 @@ export function login(currentUser) {
 }
 
 /*
+ *  Sign up a new user with the given email and go to the home page
+ */
+export function asyncSignup(Parse, pushPath) {
+  return (dispatch, getState) => {
+    const { user } = getState()
+    let newUser = new Parse.User()
+    newUser.set('username', user.email)
+    newUser.set('email', user.email)
+    newUser.set('password', user.password)
+    console.log(user)
+    setTimeout(() => {
+      newUser.signUp(null, {
+        success(currentUser) {
+          console.log(currentUser)
+          dispatch(login(currentUser))
+          pushPath()
+        },
+        error(error) {
+          console.log('Error: ' + error.code + ' ' + error.message)
+        }
+      })
+    }, 3000)
+  }
+}
+
+/*
  *  Login the user and go to the home page
  */
 export function asyncLogin(Parse, pushPath) {
