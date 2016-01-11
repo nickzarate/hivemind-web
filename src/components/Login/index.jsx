@@ -30,8 +30,9 @@ export default class LoginComp extends React.Component {
           placeholder="PASSWORD"
           type="password"
         />
-        <button onClick={ this.handleLogin }>{ 'GO' }</button>
+        <button onClick={ this.handleLogin }>{ 'Log In' }</button>
         <button onClick={ this.pushPath('/home') }>{ 'home' }</button>
+        <button onClick={ this.pushPath('/signup') }>{ 'Dont have an account?' }</button>
       </div>
     )
   }

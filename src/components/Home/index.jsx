@@ -10,7 +10,7 @@ export default class HomeComp extends React.Component {
     const { actions, round } = this.props
     return (
       <div>
-        <h1>{ 'home' }</h1>
+        <h1>{ 'Home' }</h1>
         <button onClick={ actions.incrementNumQuestions }>{ 'increase number of questions in the round!' }</button>
         <button onClick={ actions.decrementNumQuestions }>{ 'decrease number of questions in the round!' }</button>
         <h1>{ round.numQuestions }</h1>
