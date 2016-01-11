@@ -19,7 +19,6 @@ export default class Round extends React.Component {
     const { actions } = this.props
     actions.asyncHandleSubmit(Parse, this.props.pushPath)
     actions.asyncAwardPoints()
-    actions.incrementCurrentQuestion()
   }
 
   pushPath(path) {

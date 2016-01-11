@@ -1,8 +1,9 @@
 import Parse from 'parse'
 import React, { PropTypes } from 'react'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
+import { surveyChars } from 'survey.json'
 
-export default class LoginComp extends React.Component {
+export default class SurveyComp extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }
@@ -19,7 +20,29 @@ export default class LoginComp extends React.Component {
     console.log(this)
     return (
       <div>
-        <h1>{ 'Login' }</h1>
+        <h1>{ 'Survey' }</h1>
+        <select name="Age">
+          <option>{ 'Age' }</option>
+          <option>{ '1' }</option>
+          <option>{ '2' }</option>
+          <option>{ '3' }</option>
+          <option>{ '4' }</option>
+          <option>{ '5' }</option>
+          <option>{ '6' }</option>
+        </select>
+        <select name="Sex">
+          <option>{ 'Sex' }</option>
+          <option>{ 'M' }</option>
+          <option>{ 'F' }</option>
+        </select>
+        <select name="Race">
+          <option>{ 'Race' }</option>
+          <option>{ 'White' }</option>
+          <option>{ 'Hispanic/Latino' }</option>
+          <option>{ 'Asian' }</option>
+          <option>{ 'Mixed' }</option>
+          <option>{ 'Other' }</option>
+        </select>
         <input
           onChange={ this.handleEmail }
           placeholder="EMAIL"
@@ -38,7 +61,7 @@ export default class LoginComp extends React.Component {
   }
 }
 
-LoginComp.propTypes = {
+SurveyComp.propTypes = {
   actions: PropTypes.object.isRequired,
   pushPath: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired

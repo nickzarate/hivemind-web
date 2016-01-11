@@ -6,16 +6,12 @@ import { Provider } from 'react-redux'
 import { syncReduxAndRouter } from 'redux-simple-router'
 import { configureStore } from 'store'
 
-/* Shell-Container */
-import App from 'containers/App.jsx'
+/* Containers */
+import { App, Login, Home, Stats, Signup, Survey } from 'containers'
 
-/* Pages */
-import Index from 'components/Index'
-import Login from 'components/Login'
-import Home from 'components/Home'
+/* Components */
 import Round from 'components/Round'
 import EducationQuestion from 'components/EducationQuestion'
-import Stats from 'components/Stats'
 import NotFound from 'components/NotFound'
 
 /* Routes */
@@ -27,8 +23,9 @@ const ROUTES = (
   <Provider store={ store }>
     <Router history={ history }>
       <Route  component={ App } path="/">
-        <IndexRoute component={ Index } />
-        <Route component={ Login } path="login" />
+        <IndexRoute component={ Login } />
+        <Route component={ Signup } path="signup" />
+        <Route component={ Survey } path="survey" />
         <Route component={ Home } path="home" />
         <Route component={ Round } path="round">
           <IndexRoute component={ EducationQuestion } />
