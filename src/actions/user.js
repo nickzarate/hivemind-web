@@ -38,18 +38,16 @@ export function asyncSignup(Parse, pushPath) {
     newUser.set('email', user.email)
     newUser.set('password', user.password)
     console.log(user)
-    setTimeout(() => {
-      newUser.signUp(null, {
-        success(currentUser) {
-          console.log(currentUser)
-          dispatch(login(currentUser))
-          pushPath()
-        },
-        error(error) {
-          console.log('Error: ' + error.code + ' ' + error.message)
-        }
-      })
-    }, 3000)
+    newUser.signUp(null, {
+      success(currentUser) {
+        console.log(currentUser)
+        dispatch(login(currentUser))
+        pushPath()
+      },
+      error(error) {
+        console.log('Error: ' + error.code + ' ' + error.message)
+      }
+    })
   }
 }
 
@@ -60,17 +58,15 @@ export function asyncLogin(Parse, pushPath) {
   return (dispatch, getState) => {
     const { user } = getState()
     console.log(user)
-    setTimeout(() => {
-      Parse.User.logIn(user.email, user.password, {
-        success(currentUser) {
-          console.log(currentUser)
-          dispatch(login(currentUser))
-          pushPath()
-        },
-        error(error) {
-          console.log('Error: ' + error.code + ' ' + error.message)
-        }
-      })
-    }, 3000)
+    Parse.User.logIn(user.email, user.password, {
+      success(currentUser) {
+        console.log(currentUser)
+        dispatch(login(currentUser))
+        pushPath()
+      },
+      error(error) {
+        console.log('Error: ' + error.code + ' ' + error.message)
+      }
+    })
   }
 }

@@ -82,10 +82,8 @@ export function pullQuestion(Parse) {
     query.equalTo('observationId', observationId)
 
     //Pull question and set state
-    setTimeout(() => {
-      query.first().then(function(parseQuestion) {
-        dispatch(setCurrentQuestion(parseQuestion))
-      })
-    }, 3000)
+    query.first().then(function(parseQuestion) {
+      dispatch(setCurrentQuestion(parseQuestion))
+    })
   }
 }

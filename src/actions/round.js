@@ -31,13 +31,11 @@ export function asyncCreateRound(Parse) {
     let newRound = new Round()
 
     //Save Round and set currentRound state
-    setTimeout(() => {
-      newRound.save({
-        answers: [],
-        createdBy: Parse.User.current()
-      }).then(function(savedRound) {
-        dispatch(setRound(savedRound))
-      })
-    }, 3000)
+    newRound.save({
+      answers: [],
+      createdBy: Parse.User.current()
+    }).then(function(savedRound) {
+      dispatch(setRound(savedRound))
+    })
   }
 }
