@@ -57,7 +57,13 @@ Make a pull request, tag someone in a comment or poke someone on slack for revie
 
 
 # Dependencies
-The HiveMind client is written primarily in *React.js*.
+Npm manages the packages.
+
+The client is built with webpack.
+
+The code uses ECMAScript 2015 (ES6) syntax which is compiled with babel.
+
+The client is written primarily in *React.js*.
 
 The (pseudo) FLUX Architecture is managed with *Redux*.
 
