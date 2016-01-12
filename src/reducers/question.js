@@ -7,7 +7,7 @@ const initialState = {
   abstractQuestion: {
     x1: 0,
     x2: 0,
-    observationID: 0,
+    observationId: 0,
     answerText: ['','','','','','','','',''],
     correctAnswer: 0
   },
@@ -39,7 +39,7 @@ export default function question(state = initialState, action) {
     let myQuestion = {
       x1: action.x1,
       x2: action.x2,
-      observationID: action.observationID,
+      observationId: action.observationId,
       answerText: action.answerText,
       correctAnswer: action.correctAnswer,
       currentQuestion: state.currentQuestion

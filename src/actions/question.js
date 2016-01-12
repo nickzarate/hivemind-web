@@ -26,7 +26,7 @@ export function setAbstractQuestion(question) {
     type: SET_ABSTRACT_QUESTION,
     x1: question.x1,
     x2: question.x2,
-    observationID: question.observationID,
+    observationId: question.observationId,
     answerText: question.answerText,
     correctAnswer: question.correctAnswer
   }
