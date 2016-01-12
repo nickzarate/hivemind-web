@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { roundActions } from 'actions'
 import { reduxify } from 'toolbox'
 import StatsComp from 'components/Stats'
@@ -13,12 +13,6 @@ class Stats extends React.Component {
       />
     )
   }
-}
-
-Stats.propTypes = {
-  actions: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  round: PropTypes.object.isRequired
 }
 
 export default reduxify({

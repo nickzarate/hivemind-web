@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 export default class StatsComp extends React.Component {
   pushPath(path) {
@@ -14,10 +14,4 @@ export default class StatsComp extends React.Component {
       </div>
     )
   }
-}
-
-StatsComp.propTypes = {
-  actions: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  round: PropTypes.object.isRequired
 }

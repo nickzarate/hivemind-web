@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { reduxify, merge } from 'toolbox'
 import { answerActions, roundActions } from 'actions'
 import Parse from 'parse'
@@ -42,13 +42,6 @@ export default class Round extends React.Component {
       </div>
     )
   }
-}
-
-Round.propTypes = {
-  actions: PropTypes.object.isRequired,
-  children: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  round: PropTypes.object.isRequired
 }
 
 export default reduxify({

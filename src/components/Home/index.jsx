@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 export default class HomeComp extends React.Component {
   pushPath(path) {
@@ -18,10 +18,4 @@ export default class HomeComp extends React.Component {
       </div>
     )
   }
-}
-
-HomeComp.propTypes = {
-  actions: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  round: PropTypes.object.isRequired
 }

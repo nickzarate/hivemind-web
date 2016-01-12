@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { userActions } from 'actions'
 import { reduxify } from 'toolbox'
 import SurveyComp from 'components/Survey'
@@ -13,12 +13,6 @@ class Survey extends React.Component {
       />
     )
   }
-}
-
-Survey.propTypes = {
-  actions: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
 }
 
 export default reduxify({
