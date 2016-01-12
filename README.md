@@ -7,11 +7,14 @@ HiveMind application on the web
 
 Install node.js with which npm will come prepackaged: https://nodejs.org/en/
 
-Install npm packages
+Install npm packages.
 ```
 $ npm install
 ```
-
+Run the app.
+```
+$ npm run watch
+```
 
 
 
