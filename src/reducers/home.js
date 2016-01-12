@@ -7,9 +7,9 @@ const initialState = {
 export default function home(state = initialState, action) {
   switch (action.type) {
   case INCREMENT_NUM_QUESTIONS:
-    return { numQuestions: state.numQuestions + action.amount }
+    return { numQuestions: state.numQuestions + 1 }
   case DECREMENT_NUM_QUESTIONS:
-    return { numQuestions: state.numQuestions - action.amount }
+    return { numQuestions: state.numQuestions - 1 }
   default:
     return state
   }

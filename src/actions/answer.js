@@ -1,31 +1,30 @@
-import { INCREMENT_CURRENT_QUESTION, IS_SUBMITTING, ADD_ANSWER_TO_ROUND,
+import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND,
   ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
-
-export function isSubmitting(isSubmitting) {
-  return {
-    type: IS_SUBMITTING,
-    isSubmitting: isSubmitting
-  }
-}
 
 export function addAnswerToRound(savedAnswer) {
   return {
     type: ADD_ANSWER_TO_ROUND,
-    answer: savedAnswer
+    payload: {
+      answer: savedAnswer
+    }
   }
 }
 
 export function addPointEstimate(pointEstimate) {
   return {
     type: ADD_POINT_ESTIMATE,
-    pointEstimate: pointEstimate
+    payload: {
+      pointEstimate: pointEstimate
+    }
   }
 }
 
 export function addAnswers(answers) {
   return {
     type: ADD_ANSWERS,
-    answers: answers
+    payload: {
+      answers: answers
+    }
   }
 }
 

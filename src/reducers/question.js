@@ -20,7 +20,7 @@ export default function question(state = initialState, action) {
   case DEPOSIT:
     // Use slice so as not to unintentionally alter state
     let bins = state.bins.slice(0)
-    bins[action.index] += 1
+    bins[action.payload.index] += 1
     return {
       bank: state.bank,
       bins: bins,
@@ -32,13 +32,13 @@ export default function question(state = initialState, action) {
       bank: state.bank,
       bins: state.bins,
       pointEstimate: state.pointEstimate,
-      currentQuestion: action.currentQuestion
+      currentQuestion: action.payload.currentQuestion
     }
   case ESTIMATE:
     return {
       bank: state.bank,
       bins: state.bins,
-      pointEstimate: action.pointEstimate,
+      pointEstimate: action.payload.pointEstimate,
       currentQuestion: state.currentQuestion
     }
   case RESET_BANK:

@@ -1,24 +1,29 @@
 import { SET_USER_EMAIL, SET_USER_PASSWORD, LOGIN } from 'constants'
-import { handleError } from './error'
 
 export function setUserEmail(email) {
   return {
     type: SET_USER_EMAIL,
-    email: email
+    payload: {
+      email: email
+    }
   }
 }
 
 export function setUserPassword(password) {
   return {
     type: SET_USER_PASSWORD,
-    password: password
+    payload: {
+      password: password
+    }
   }
 }
 
 export function login(currentUser) {
   return {
     type: LOGIN,
-    currentUser: currentUser
+    payload: {
+      currentUser: currentUser
+    }
   }
 }
 
@@ -41,7 +46,7 @@ export function asyncSignup(Parse, pushPath) {
           pushPath()
         },
         error(error) {
-          dispatch(handleError(error))
+          console.log('Error: ' + error.code + ' ' + error.message)
         }
       })
     }, 3000)

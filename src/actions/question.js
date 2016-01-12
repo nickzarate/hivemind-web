@@ -10,21 +10,27 @@ export function withdraw() {
 export function deposit(index) {
   return {
     type: DEPOSIT,
-    index: index
+    payload: {
+      index: index
+    }
   }
 }
 
 export function estimate(pointEstimate) {
   return {
     type: ESTIMATE,
-    pointEstimate: pointEstimate
+    payload: {
+      pointEstimate: pointEstimate
+    }
   }
 }
 
 export function setCurrentQuestion(question) {
   return {
     type: SET_CURRENT_QUESTION,
-    currentQuestion: question
+    payload: {
+      currentQuestion: question
+    }
   }
 }
 
