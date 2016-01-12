@@ -14,10 +14,10 @@ export function deposit(index) {
   }
 }
 
-export function estimate(estimate) {
+export function estimate(pointEstimate) {
   return {
     type: ESTIMATE,
-    estimate: estimate
+    pointEstimate: pointEstimate
   }
 }
 
@@ -59,16 +59,16 @@ export function handleDeposit(index) {
 }
 
 /*
- *  Set the estimate state if the new value is a valid estimate
+ *  Set the pointEstimate state if the new value is a valid estimate
  */
 export function handleEstimate(event) {
   return (dispatch) => {
-    let estimateNum = Number(event.target.value)
+    let pointEstimate = Number(event.target.value)
     //TODO: More robust error checking?
-    if (isNaN(estimateNum)) {
+    if (isNaN(pointEstimate)) {
       return
     }
-    dispatch(estimate(estimateNum))
+    dispatch(estimate(pointEstimate))
   }
 }
 

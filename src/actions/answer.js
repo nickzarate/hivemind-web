@@ -15,10 +15,10 @@ export function addAnswerToRound(savedAnswer) {
   }
 }
 
-export function addEstimate(estimate) {
+export function addPointEstimate(pointEstimate) {
   return {
-    type: ADD_ESTIMATE,
-    estimate: estimate
+    type: ADD_POINT_ESTIMATE,
+    pointEstimate: pointEstimate
   }
 }
 
@@ -69,7 +69,7 @@ export function asyncHandleSubmit(Parse, pushPath) {
 
     //Save answers in vectors and 
     dispatch(addAnswers(question.answers))
-    dispatch(addEstimate(question.estimate))
+    dispatch(addPointEstimate(question.pointEstimate))
 
     //Create new answer to save to a round
     let Answer = Parse.Object.extend('Answer')
@@ -79,7 +79,7 @@ export function asyncHandleSubmit(Parse, pushPath) {
       newAnswer.save({
         question: question.currentQuestion,
         answers: question.answers,
-        estimate: question.estimate
+        pointEstimate: question.pointEstimate
       }).then(function(savedAnswer) {
         console.log('answer saved successfully')
         console.log(savedAnswer)

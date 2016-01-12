@@ -3,7 +3,7 @@ import { DEPOSIT, WITHDRAW, SET_ABSTRACT_QUESTION, SET_CURRENT_QUESTION, STARTIN
 const initialState = {
   bank: STARTING_CUBES,
   answers: [0,0,0,0,0,0,0,0,0],
-  estimate: 0,
+  pointEstimate: 0,
   abstractQuestion: {
     x1: 0,
     x2: 0,
@@ -20,7 +20,7 @@ export default function question(state = initialState, action) {
     return {
       bank: state.bank - 1,
       answers: state.answers,
-      estimate: state.estimate,
+      pointEstimate: state.pointEstimate,
       abstractQuestion: state.abstractQuestion,
       currentQuestion: state.currentQuestion
     }
@@ -31,7 +31,7 @@ export default function question(state = initialState, action) {
     return {
       bank: state.bank,
       answers: answers,
-      estimate: state.estimate,
+      pointEstimate: state.pointEstimate,
       abstractQuestion: state.abstractQuestion,
       currentQuestion: state.currentQuestion
     }
@@ -47,7 +47,7 @@ export default function question(state = initialState, action) {
     return {
       bank: state.bank,
       answers: state.answers,
-      estimate: state.estimate,
+      pointEstimate: state.pointEstimate,
       abstractQuestion: myQuestion,
       currentQuestion: state.currentQuestion
     }
@@ -55,7 +55,7 @@ export default function question(state = initialState, action) {
     return {
       bank: state.bank,
       answers: state.answers,
-      estimate: state.estimate,
+      pointEstimate: state.pointEstimate,
       abstractQuestion: state.abstractQuestion,
       currentQuestion: action.currentQuestion
     }
@@ -63,7 +63,7 @@ export default function question(state = initialState, action) {
     return {
       bank: state.bank,
       answers: state.answers,
-      estimate: action.estimate,
+      pointEstimate: action.pointEstimate,
       abstractQuestion: state.abstractQuestion,
       currentQuestion: state.currentQuestion
     }

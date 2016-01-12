@@ -74,7 +74,7 @@ export default class QuestionComp extends React.Component {
           ref="estimateInput"
         />
         { this.renderBins() }
-        <button onClick={ this.handleSubmit(question.answers, question.estimate) }>{ 'Submit Question' }</button>
+        <button onClick={ this.handleSubmit(question.answers, question.pointEstimate) }>{ 'Submit Question' }</button>
       </div>
     )
   }
