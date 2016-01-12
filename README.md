@@ -1,6 +1,3 @@
-# hivemind-web
-HiveMind application on the web
-
 
 # Envrionment Setup
 
@@ -14,6 +11,46 @@ Run the app.
 ```
 $ npm run watch
 ```
+
+# Development
+Make a new branch, prefixed with your initials and a slash.
+```
+$ git checkout -b js/my-new-feature
+```
+
+Make your changes. `commit` frequently. `git add`'s `-p` option is encouraged (interactive add). Commit messages should be in the imperative present tense.
+```
+$ git add -p
+...
+$ git add ./stuff/morestuff/my-untracked-file
+...
+$ git commit -m "Implement my new WORKING sub-feature-1"
+...
+$ git commit -m "Implement my new WORKING sub-feature-2"
+...
+$ git commit -m "Implement my new WORKING sub-feature-3"
+```
+
+Test. jk, we don't have testing yet.
+
+```
+$ gulp test
+```
+
+Fix your mistakes. Test again.
+```
+$ gulp test
+```
+
+When finished, push to a NEW branch on github.
+```
+$ git push -u origin js/my-new-feature
+```
+
+Make a pull request, tag someone in a comment or poke someone on slack for review. Merge and delete branch when done.
+
+
+
 
 # Dependencies
 The HiveMind client is written primarily in *React.js*.
