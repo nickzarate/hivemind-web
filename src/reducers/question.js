@@ -1,8 +1,9 @@
 import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, STARTING_CUBES, ESTIMATE, RESET_BANK } from 'constants'
+import { defaultQuestionConfig } from 'assets'
 
 const initialState = {
   bank: STARTING_CUBES,
-  bins: [0,0,0,0,0,0,0,0,0],
+  bins: Array(defaultQuestionConfig.NUM_BINS).fill(0),
   pointEstimate: 0,
   currentQuestion: null
 }
