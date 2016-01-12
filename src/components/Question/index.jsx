@@ -59,7 +59,6 @@ export default class QuestionComp extends React.Component {
   }
 
   render() {
-    console.log(this)
     const { question, actions } = this.props
     return (
       <div>
