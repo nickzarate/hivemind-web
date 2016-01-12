@@ -1,6 +1,22 @@
 # hivemind-web
 HiveMind application on the web
 
+
+
+# Envrionment Setup
+
+Install node.js with which npm will come prepackaged: https://nodejs.org/en/
+
+Install npm packages
+```
+$ npm install
+```
+
+
+
+
+
+
 React-Router Docs
 https://github.com/rackt/react-router/tree/master/docs
 
