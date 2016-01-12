@@ -89,5 +89,5 @@ https://packagecontrol.io/installation
 eslint-react rules:
 https://github.com/yannickcr/eslint-plugin-react/tree/master/lib/rules
 
-# FLUX action standard:
+FLUX action standard:
 https://github.com/acdlite/flux-standard-action
