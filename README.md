@@ -67,7 +67,7 @@ Routing is managed with *react-router* (along with redux-simple-router).
 
 An (unused) eslint configuration is in place for general code styling and hygeine.
 
-Sublime Text 3 is recommended with package control installed and babel snippets.
+Sublime Text is recommended with package control installed and babel snippets.
 
 
 
