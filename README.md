@@ -15,7 +15,7 @@ $ npm run watch
 # Development
 Make a new branch. Name your branch the name of your new intended feature, prefixed with your initials and a slash.
 ```
-$ git checkout -b js/my-new-feature
+$ git checkout -b nz/my-new-feature
 ```
 
 Make your changes. `commit` frequently. `git add`'s `-p` option is encouraged (interactive add). Commit messages should be in the imperative present tense.
