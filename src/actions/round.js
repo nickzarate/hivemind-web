@@ -3,14 +3,18 @@ import { SET_QUESTION_TYPE, SET_ROUND } from 'constants'
 export function setQuestionType(questionType) {
   return {
     type: SET_QUESTION_TYPE,
-    questionType: questionType
+    payload: {
+      questionType: questionType
+    }
   }
 }
 
 export function setRound(savedRound) {
   return {
     type: SET_ROUND,
-    currentRound: savedRound
+    payload: {
+      currentRound: savedRound
+    }
   }
 }
 
@@ -20,21 +24,18 @@ export function setRound(savedRound) {
  *    createdBy: currentUser
  */
 export function asyncCreateRound(Parse) {
-  return (dispatch, getState) => {
-    const { round } = getState()
+  return (dispatch) => {
 
     //Create new Round
     let Round = Parse.Object.extend('Round')
     let newRound = new Round()
 
     //Save Round and set currentRound state
-    setTimeout(() => {
-      newRound.save({
-        answers: [],
-        createdBy: Parse.User.current()
-      }).then(function(savedRound) {
-        dispatch(setRound(savedRound))
-      })
-    }, 3000)
+    newRound.save({
+      answers: [],
+      createdBy: Parse.User.current()
+    }).then(function(savedRound) {
+      dispatch(setRound(savedRound))
+    })
   }
 }

@@ -1,3 +1,6 @@
-[
-
-]
+{
+  "AGE_OPTIONS": ["18","19","20","30","40","40+"],
+  "EDUCATION_OPTIONS": ["K-12","Bachelors","Masters","PhD"],
+  "EXPERIENCE_OPTIONS": [],
+  "RACE_OPTIONS": []
+}

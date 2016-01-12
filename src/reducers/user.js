@@ -10,21 +10,21 @@ export default function user(state = initialState, action) {
   switch (action.type) {
   case SET_USER_EMAIL:
     return {
-      email: action.email,
+      email: action.payload.email,
       password: state.password,
       currentUser: state.currentUser
     }
   case SET_USER_PASSWORD:
     return {
       email: state.email,
-      password: action.password,
+      password: action.payload.password,
       currentUser: state.currentUser
     }
   case LOGIN:
     return {
       email: state.email,
       password: state.password,
-      currentUser: action.currentUser
+      currentUser: action.payload.currentUser
     }
   default:
     return state

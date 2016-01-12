@@ -10,21 +10,27 @@ export function withdraw() {
 export function deposit(index) {
   return {
     type: DEPOSIT,
-    index: index
+    payload: {
+      index: index
+    }
   }
 }
 
 export function estimate(pointEstimate) {
   return {
     type: ESTIMATE,
-    pointEstimate: pointEstimate
+    payload: {
+      pointEstimate: pointEstimate
+    }
   }
 }
 
 export function setCurrentQuestion(question) {
   return {
     type: SET_CURRENT_QUESTION,
-    currentQuestion: question
+    payload: {
+      currentQuestion: question
+    }
   }
 }
 
@@ -67,7 +73,9 @@ export function handleEstimate(event) {
 export function pullQuestion(Parse) {
   return (dispatch, getState) => {
     const { round } = getState()
-
+    // if (round.questionInfo.currentQuestion === round.questionInfo.numQuestions) {
+    //   return
+    // }
     //Create query for random question
     let observationId = rand(1, 10)
     let Question = Parse.Object.extend('Question')
@@ -76,10 +84,8 @@ export function pullQuestion(Parse) {
     query.equalTo('observationId', observationId)
 
     //Pull question and set state
-    setTimeout(() => {
-      query.first().then(function(parseQuestion) {
-        dispatch(setCurrentQuestion(parseQuestion))
-      })
-    }, 3000)
+    query.first().then(function(parseQuestion) {
+      dispatch(setCurrentQuestion(parseQuestion))
+    })
   }
 }

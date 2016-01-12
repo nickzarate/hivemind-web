@@ -1,31 +1,30 @@
-import { INCREMENT_CURRENT_QUESTION, IS_SUBMITTING, ADD_ANSWER_TO_ROUND,
+import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND,
   ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
-
-export function isSubmitting(isSubmitting) {
-  return {
-    type: IS_SUBMITTING,
-    isSubmitting: isSubmitting
-  }
-}
 
 export function addAnswerToRound(savedAnswer) {
   return {
     type: ADD_ANSWER_TO_ROUND,
-    answer: savedAnswer
+    payload: {
+      answer: savedAnswer
+    }
   }
 }
 
 export function addPointEstimate(pointEstimate) {
   return {
     type: ADD_POINT_ESTIMATE,
-    pointEstimate: pointEstimate
+    payload: {
+      pointEstimate: pointEstimate
+    }
   }
 }
 
 export function addAnswers(answers) {
   return {
     type: ADD_ANSWERS,
-    answers: answers
+    payload: {
+      answers: answers
+    }
   }
 }
 
@@ -47,14 +46,11 @@ export function resetCurrentQuestion() {
 export function asyncAwardPoints() {
   return (dispatch, getState) => {
     const { question, user } = getState()
-    setTimeout(() => {
-      //TODO: Calculate how many points are earned for answering correctly
-      let points = question.bins[question.currentQuestion.get('correctAnswerIndex')] * 50
-      console.log(user)
-      let honey = user.currentUser.get('honey')
-      honey += points
-      user.currentUser.save({ honey: honey })
-    }, 3000)
+    //TODO: Calculate how many points are earned for answering correctly
+    let points = question.bins[question.currentQuestion.get('correctAnswerIndex')] * 50
+    let honey = user.currentUser.get('honey')
+    honey += points
+    user.currentUser.save({ honey: honey })
   }
 }
 
@@ -75,25 +71,21 @@ export function asyncHandleSubmit(Parse, pushPath) {
     let Answer = Parse.Object.extend('Answer')
     let newAnswer = new Answer()
 
-    setTimeout(() => {
-      newAnswer.save({
-        question: question.currentQuestion,
-        bins: question.bins,
-        pointEstimate: question.pointEstimate
-      }).then(function(savedAnswer) {
-        console.log('answer saved successfully')
-        console.log(savedAnswer)
-        let answers = round.currentRound.get('answers')
-        answers.push(savedAnswer)
-        return round.currentRound.save({ answers: answers })
-      }).then(function() {
+    newAnswer.save({
+      question: question.currentQuestion,
+      bins: question.bins,
+      pointEstimate: question.pointEstimate
+    }).then(function(savedAnswer) {
+      let answers = round.currentRound.get('answers')
+      answers.push(savedAnswer)
+      return round.currentRound.save({ answers: answers })
+    }).then(function() {
+      if (round.questionInfo.currentQuestion >= round.questionInfo.numQuestions) {
+        dispatch(resetCurrentQuestion())
+        pushPath('/stats')
+      } else {
         dispatch(incrementCurrentQuestion())
-        if (round.questionInfo.currentQuestion === round.questionInfo.numQuestions) {
-          dispatch(resetCurrentQuestion())
-          console.log('GO TO STATS PAGE!!!')
-          pushPath('/stats')
-        }
-      })
-    }, 3000)
+      }
+    })
   }
 }

@@ -1,11 +1,12 @@
 import { INCREMENT_CURRENT_QUESTION, INCREMENT_NUM_QUESTIONS, DECREMENT_NUM_QUESTIONS, SET_ROUND, ADD_ANSWER_TO_ROUND,
-  QUESTIONS_PER_ROUND, DEFAULT_QUESTION_TYPE, SET_QUESTION_TYPE, ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
+  SET_QUESTION_TYPE, ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
+import { defaultQuestionConfig } from 'assets'
 
 const initialState = {
   questionInfo: {
     currentQuestion: 1,
-    numQuestions: QUESTIONS_PER_ROUND,
-    questionType: DEFAULT_QUESTION_TYPE
+    numQuestions: defaultQuestionConfig.NUM_QUESTIONS_PER_ROUND,
+    questionType: defaultQuestionConfig.TYPE
   },
   responseInfo: {
     pointEstimateVector: [],
@@ -51,14 +52,14 @@ export default function round(state = initialState, action) {
       questionInfo: {
         currentQuestion: state.questionInfo.currentQuestion,
         numQuestions: state.questionInfo.numQuestions,
-        questionType: action.questionType
+        questionType: action.payload.questionType
       },
       responseInfo: state.responseInfo,
       currentRound: state.currentRound
     }
   case ADD_POINT_ESTIMATE:
     let pointEstimateVector = state.responseInfo.pointEstimateVector
-    pointEstimateVector.push(action.pointEstimate)
+    pointEstimateVector.push(action.payload.pointEstimate)
     return {
       questionInfo: state.questionInfo,
       responseInfo: {
@@ -69,7 +70,7 @@ export default function round(state = initialState, action) {
     }
   case ADD_ANSWERS:
     let answersVector = state.responseInfo.answersVector
-    answersVector.push(action.answers)
+    answersVector.push(action.payload.answers)
     return {
       questionInfo: state.questionInfo,
       responseInfo: {
@@ -82,11 +83,11 @@ export default function round(state = initialState, action) {
     return {
       questionInfo: state.questionInfo,
       responseInfo: state.responseInfo,
-      currentRound: action.currentRound
+      currentRound: action.payload.currentRound
     }
   case ADD_ANSWER_TO_ROUND:
     let currentRound = state.currentRound
-    currentRound.get('answers').push(action.answer)
+    currentRound.get('answers').push(action.payload.answer)
     return {
       questionInfo: state.questionInfo,
       responseInfo: state.responseInfo,
