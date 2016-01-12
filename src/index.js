@@ -7,11 +7,10 @@ import { syncReduxAndRouter } from 'redux-simple-router'
 import { configureStore } from 'store'
 
 /* Containers */
-import { App, Login, Home, Stats, Signup, Survey } from 'containers'
+import { App, Login, Home, Stats, Signup, Survey, Question } from 'containers'
 
 /* Components */
 import Round from 'components/Round'
-import Question from 'components/Question'
 import NotFound from 'components/NotFound'
 
 /* Routes */

@@ -2,10 +2,8 @@ import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { defaultQuestionConfig } from 'assets'
-import { reduxify } from 'toolbox'
-import { questionActions } from 'actions'
 
-class Question extends React.Component {
+export default class QuestionComp extends React.Component {
 
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
@@ -68,8 +66,6 @@ class Question extends React.Component {
     const { question, actions } = this.props
     return (
       <div>
-        <p>{ 'Hello!' }</p>
-        <p>{ 'Stuff' }</p>
         <p>{ 'Bank: ' }{ question.bank }</p>
         { this.renderCovariates() }
         <input
@@ -83,9 +79,3 @@ class Question extends React.Component {
     )
   }
 }
-
-export default reduxify({
-  component: Question,
-  reducer: 'question',
-  actions: questionActions
-})
