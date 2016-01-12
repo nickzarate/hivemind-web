@@ -68,7 +68,7 @@ export function asyncLogin(Parse, pushPath) {
           pushPath()
         },
         error(error) {
-          dispatch(handleError(error))
+          console.log('Error: ' + error.code + ' ' + error.message)
         }
       })
     }, 3000)
