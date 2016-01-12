@@ -36,7 +36,7 @@ export default class QuestionComp extends React.Component {
         bins.push(
           <li key={ i }>
             <button onClick={ this.handleDeposit(i) }>
-              { this.props.question.currentQuestion.get('answerTexts')[i] }{ ': ' }{ this.props.question.answers[i] }
+              { this.props.question.currentQuestion.get('answerTexts')[i] }{ ': ' }{ this.props.question.bins[i] }
             </button>
           </li>
         )
@@ -74,7 +74,7 @@ export default class QuestionComp extends React.Component {
           ref="estimateInput"
         />
         { this.renderBins() }
-        <button onClick={ this.handleSubmit(question.answers, question.pointEstimate) }>{ 'Submit Question' }</button>
+        <button onClick={ this.handleSubmit(question.bins, question.pointEstimate) }>{ 'Submit Question' }</button>
       </div>
     )
   }

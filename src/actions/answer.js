@@ -49,7 +49,7 @@ export function asyncAwardPoints() {
     const { question, user } = getState()
     setTimeout(() => {
       //TODO: Calculate how many points are earned for answering correctly
-      let points = question.answers[question.currentQuestion.get('correctAnswerIndex')] * 50
+      let points = question.bins[question.currentQuestion.get('correctAnswerIndex')] * 50
       console.log(user)
       let honey = user.currentUser.get('honey')
       honey += points
@@ -68,7 +68,7 @@ export function asyncHandleSubmit(Parse, pushPath) {
     const { question, round } = getState()
 
     //Save answers in vectors and 
-    dispatch(addAnswers(question.answers))
+    dispatch(addAnswers(question.bins))
     dispatch(addPointEstimate(question.pointEstimate))
 
     //Create new answer to save to a round
@@ -78,7 +78,7 @@ export function asyncHandleSubmit(Parse, pushPath) {
     setTimeout(() => {
       newAnswer.save({
         question: question.currentQuestion,
-        answers: question.answers,
+        bins: question.bins,
         pointEstimate: question.pointEstimate
       }).then(function(savedAnswer) {
         console.log('answer saved successfully')

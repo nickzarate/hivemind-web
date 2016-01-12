@@ -2,7 +2,7 @@ import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, STARTING_CUBES, ESTIMATE, RESE
 
 const initialState = {
   bank: STARTING_CUBES,
-  answers: [0,0,0,0,0,0,0,0,0],
+  bins: [0,0,0,0,0,0,0,0,0],
   pointEstimate: 0,
   currentQuestion: null
 }
@@ -12,31 +12,31 @@ export default function question(state = initialState, action) {
   case WITHDRAW:
     return {
       bank: state.bank - 1,
-      answers: state.answers,
+      bins: state.bins,
       pointEstimate: state.pointEstimate,
       currentQuestion: state.currentQuestion
     }
   case DEPOSIT:
     // Use slice so as not to unintentionally alter state
-    let answers = state.answers.slice(0)
-    answers[action.index] += 1
+    let bins = state.bins.slice(0)
+    bins[action.index] += 1
     return {
       bank: state.bank,
-      answers: answers,
+      bins: bins,
       pointEstimate: state.pointEstimate,
       currentQuestion: state.currentQuestion
     }
   case SET_CURRENT_QUESTION:
     return {
       bank: state.bank,
-      answers: state.answers,
+      bins: state.bins,
       pointEstimate: state.pointEstimate,
       currentQuestion: action.currentQuestion
     }
   case ESTIMATE:
     return {
       bank: state.bank,
-      answers: state.answers,
+      bins: state.bins,
       pointEstimate: action.pointEstimate,
       currentQuestion: state.currentQuestion
     }
