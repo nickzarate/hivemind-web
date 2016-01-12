@@ -13,7 +13,7 @@ $ npm run watch
 ```
 
 # Development
-Make a new branch, prefixed with your initials and a slash.
+Make a new branch. Name your branch the name of your new intended feature, prefixed with your initials and a slash.
 ```
 $ git checkout -b js/my-new-feature
 ```
