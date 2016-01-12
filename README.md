@@ -14,7 +14,7 @@ $ npm run watch
 
 This will run the webpack development server.
 
-Open http://localhost:8080.
+Open `http://localhost:8080`.
 
 # Development
 Make a new branch. Name your branch the name of your new intended feature, prefixed with your initials and a slash.
