@@ -1,4 +1,4 @@
-import { WITHDRAW, DEPOSIT, SET_ABSTRACT_QUESTION, SET_CURRENT_QUESTION, ESTIMATE, RESET_BANK } from 'constants'
+import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, ESTIMATE, RESET_BANK } from 'constants'
 import { rand } from 'toolbox'
 
 export function withdraw() {
@@ -18,17 +18,6 @@ export function estimate(pointEstimate) {
   return {
     type: ESTIMATE,
     pointEstimate: pointEstimate
-  }
-}
-
-export function setAbstractQuestion(question) {
-  return {
-    type: SET_ABSTRACT_QUESTION,
-    x1: question.x1,
-    x2: question.x2,
-    observationId: question.observationId,
-    answerText: question.answerText,
-    correctAnswer: question.correctAnswer
   }
 }
 
