@@ -67,14 +67,6 @@ export default function question(state = initialState, action) {
       abstractQuestion: state.abstractQuestion,
       currentQuestion: state.currentQuestion
     }
-  case IS_SUBMITTING:
-    return {
-      bank: state.bank,
-      answers: state.answers,
-      estimate: state.estimate,
-      abstractQuestion: state.abstractQuestion,
-      currentQuestion: state.currentQuestion
-    }
   case RESET_BANK:
     return initialState
   default:
