@@ -1,3 +1,4 @@
+/*eslint-env node*/
 'use strict';
 
 var webpack = require('webpack'),
@@ -70,9 +71,9 @@ module.exports = {
     }),
     new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        "window.jQuery": "jquery"
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery"
     })
   ],
   node: {
