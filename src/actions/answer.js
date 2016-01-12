@@ -49,7 +49,7 @@ export function asyncAwardPoints() {
     const { question, user } = getState()
     setTimeout(() => {
       //TODO: Calculate how many points are earned for answering correctly
-      let points = question.answers[question.abstractQuestion.correctAnswer] * 50
+      let points = question.answers[question.currentQuestion.get('correctAnswerIndex')] * 50
       console.log(user)
       let honey = user.currentUser.get('honey')
       honey += points
@@ -72,9 +72,8 @@ export function asyncHandleSubmit(Parse, pushPath) {
     dispatch(addEstimate(question.estimate))
 
     //Create new answer to save to a round
-    let answerClass = round.questionType + 'Answer'
-    var Answer = Parse.Object.extend(answerClass)
-    var newAnswer = new Answer()
+    let Answer = Parse.Object.extend('Answer')
+    let newAnswer = new Answer()
 
     setTimeout(() => {
       newAnswer.save({

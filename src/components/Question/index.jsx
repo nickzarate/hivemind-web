@@ -1,12 +1,15 @@
 import React, { PropTypes } from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
+import { defaultQuestionConfig } from 'assets'
+import { reduxify } from 'toolbox'
+import { questionActions } from 'actions'
 
-export default class Question extends React.Component {
+class Question extends React.Component {
 
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    this.props.actions.pullQuestion(Parse, this.props.questionType + 'Question')
+    this.props.actions.pullQuestion(Parse)
   }
 
   handleDeposit(index) { return () => this.props.actions.handleDeposit(index) }

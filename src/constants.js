@@ -22,4 +22,4 @@ export const WITHDRAW = 'WITHDRAW'
 
 export const QUESTIONS_PER_ROUND = 3
 export const STARTING_CUBES = 11
-export const DEFAULT_QUESTION_TYPE = 'Education'
+export const DEFAULT_QUESTION_TYPE = 'education'
