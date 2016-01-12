@@ -16,15 +16,15 @@ export default class QuestionComp extends React.Component {
     return () => this.props.pushPath(path)
   }
 
-  handleSubmit(answers, estimate) {
+  handleSubmit(answers, pointEstimate) {
     return () => {
       const { actions } = this.props
-      this.props.onSubmit(answers, estimate, Parse)
-      if (!this.props.isSubmitting) {
-        this.refs.estimateInput.value = ''
-        actions.resetBank()
-        actions.pullQuestion(Parse)
-      }
+      console.log("before this")
+      console.log(this)
+      this.props.onSubmit()
+      this.refs.estimateInput.value = ''
+      actions.resetBank()
+      actions.pullQuestion(Parse)
     }
   }
 

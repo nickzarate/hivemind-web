@@ -31,9 +31,7 @@ export default class Round extends React.Component {
     console.log(this)
     const childProps = {
       onSubmit: this.handleSubmit,
-      questionType: this.props.round.questionType,
-      pushPath: this.pushPath(),
-      isSubmitting: this.props.round.isSubmitting
+      pushPath: this.pushPath()
     }
     const RouteHandler = React.cloneElement(this.props.children, childProps)
     return (

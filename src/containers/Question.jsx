@@ -10,6 +10,7 @@ class Question extends React.Component {
         actions={ this.props.actions }
         question={ this.props.question }
         pushPath={ this.props.pushPath }
+        onSubmit={ this.props.onSubmit }
       />
     )
   }

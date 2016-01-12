@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, IS_SUBMITTING, ADD_ANSWER_TO_ROUND,
-  ADD_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
+  ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
 
 export function isSubmitting(isSubmitting) {
   return {
@@ -88,7 +88,7 @@ export function asyncHandleSubmit(Parse, pushPath) {
         return round.currentRound.save({ answers: answers })
       }).then(function() {
         dispatch(incrementCurrentQuestion())
-        if (round.currentQuestion === round.numQuestions) {
+        if (round.questionInfo.currentQuestion === round.questionInfo.numQuestions) {
           dispatch(resetCurrentQuestion())
           console.log('GO TO STATS PAGE!!!')
           pushPath('/stats')

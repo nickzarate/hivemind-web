@@ -83,7 +83,7 @@ export function pullQuestion(Parse) {
     let observationId = rand(1, 10)
     let Question = Parse.Object.extend('Question')
     let query = new Parse.Query(Question)
-    query.equalTo('type', round.questionType)
+    query.equalTo('type', round.questionInfo.questionType)
     query.equalTo('observationId', observationId)
 
     //Pull question and set state
