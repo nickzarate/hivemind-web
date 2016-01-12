@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, IS_SUBMITTING, ADD_ANSWER_TO_ROUND,
-  ADD_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
+  ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
 
 export function isSubmitting(isSubmitting) {
   return {
@@ -15,10 +15,10 @@ export function addAnswerToRound(savedAnswer) {
   }
 }
 
-export function addEstimate(estimate) {
+export function addPointEstimate(pointEstimate) {
   return {
-    type: ADD_ESTIMATE,
-    estimate: estimate
+    type: ADD_POINT_ESTIMATE,
+    pointEstimate: pointEstimate
   }
 }
 
@@ -49,7 +49,7 @@ export function asyncAwardPoints() {
     const { question, user } = getState()
     setTimeout(() => {
       //TODO: Calculate how many points are earned for answering correctly
-      let points = question.answers[question.abstractQuestion.correctAnswer] * 50
+      let points = question.bins[question.currentQuestion.get('correctAnswerIndex')] * 50
       console.log(user)
       let honey = user.currentUser.get('honey')
       honey += points
@@ -68,19 +68,18 @@ export function asyncHandleSubmit(Parse, pushPath) {
     const { question, round } = getState()
 
     //Save answers in vectors and 
-    dispatch(addAnswers(question.answers))
-    dispatch(addEstimate(question.estimate))
+    dispatch(addAnswers(question.bins))
+    dispatch(addPointEstimate(question.pointEstimate))
 
     //Create new answer to save to a round
-    let answerClass = round.questionType + 'Answer'
-    var Answer = Parse.Object.extend(answerClass)
-    var newAnswer = new Answer()
+    let Answer = Parse.Object.extend('Answer')
+    let newAnswer = new Answer()
 
     setTimeout(() => {
       newAnswer.save({
         question: question.currentQuestion,
-        answers: question.answers,
-        estimate: question.estimate
+        bins: question.bins,
+        pointEstimate: question.pointEstimate
       }).then(function(savedAnswer) {
         console.log('answer saved successfully')
         console.log(savedAnswer)
@@ -89,7 +88,7 @@ export function asyncHandleSubmit(Parse, pushPath) {
         return round.currentRound.save({ answers: answers })
       }).then(function() {
         dispatch(incrementCurrentQuestion())
-        if (round.currentQuestion === round.numQuestions) {
+        if (round.questionInfo.currentQuestion === round.questionInfo.numQuestions) {
           dispatch(resetCurrentQuestion())
           console.log('GO TO STATS PAGE!!!')
           pushPath('/stats')

@@ -7,11 +7,10 @@ import { syncReduxAndRouter } from 'redux-simple-router'
 import { configureStore } from 'store'
 
 /* Containers */
-import { App, Login, Home, Stats, Signup, Survey } from 'containers'
+import { App, Login, Home, Stats, Signup, Survey, Question } from 'containers'
 
 /* Components */
 import Round from 'components/Round'
-import EducationQuestion from 'components/EducationQuestion'
 import NotFound from 'components/NotFound'
 
 /* Routes */
@@ -28,7 +27,7 @@ const ROUTES = (
         <Route component={ Survey } path="survey" />
         <Route component={ Home } path="home" />
         <Route component={ Round } path="round">
-          <IndexRoute component={ EducationQuestion } />
+          <IndexRoute component={ Question } />
         </Route>
         <Route component={ Stats } path="stats" />
         <Route component={ NotFound } path="*" />

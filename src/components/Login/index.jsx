@@ -1,5 +1,5 @@
 import Parse from 'parse'
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
 export default class LoginComp extends React.Component {
@@ -36,10 +36,4 @@ export default class LoginComp extends React.Component {
       </div>
     )
   }
-}
-
-LoginComp.propTypes = {
-  actions: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
 }

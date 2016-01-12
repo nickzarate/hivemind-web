@@ -1,4 +1,5 @@
 import { SET_USER_EMAIL, SET_USER_PASSWORD, LOGIN } from 'constants'
+import { handleError } from './error'
 
 export function setUserEmail(email) {
   return {
@@ -40,7 +41,7 @@ export function asyncSignup(Parse, pushPath) {
           pushPath()
         },
         error(error) {
-          console.log('Error: ' + error.code + ' ' + error.message)
+          dispatch(handleError(error))
         }
       })
     }, 3000)
@@ -62,7 +63,7 @@ export function asyncLogin(Parse, pushPath) {
           pushPath()
         },
         error(error) {
-          console.log('Error: ' + error.code + ' ' + error.message)
+          dispatch(handleError(error))
         }
       })
     }, 3000)

@@ -1,5 +1,5 @@
 import Parse from 'parse'
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { survey } from 'assets'
 
@@ -59,10 +59,4 @@ export default class SurveyComp extends React.Component {
       </div>
     )
   }
-}
-
-SurveyComp.propTypes = {
-  actions: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
 }

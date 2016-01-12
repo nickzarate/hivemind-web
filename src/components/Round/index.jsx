@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { reduxify, merge } from 'toolbox'
 import { answerActions, roundActions } from 'actions'
 import Parse from 'parse'
@@ -31,9 +31,7 @@ export default class Round extends React.Component {
     console.log(this)
     const childProps = {
       onSubmit: this.handleSubmit,
-      questionType: this.props.round.questionType,
-      pushPath: this.pushPath(),
-      isSubmitting: this.props.round.isSubmitting
+      pushPath: this.pushPath()
     }
     const RouteHandler = React.cloneElement(this.props.children, childProps)
     return (
@@ -42,13 +40,6 @@ export default class Round extends React.Component {
       </div>
     )
   }
-}
-
-Round.propTypes = {
-  actions: PropTypes.object.isRequired,
-  children: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  round: PropTypes.object.isRequired
 }
 
 export default reduxify({

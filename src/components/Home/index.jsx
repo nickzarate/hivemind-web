@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 export default class HomeComp extends React.Component {
   pushPath(path) {
@@ -13,15 +13,9 @@ export default class HomeComp extends React.Component {
         <h1>{ 'Home' }</h1>
         <button onClick={ actions.incrementNumQuestions }>{ 'increase number of questions in the round!' }</button>
         <button onClick={ actions.decrementNumQuestions }>{ 'decrease number of questions in the round!' }</button>
-        <h1>{ round.numQuestions }</h1>
+        <h1>{ round.questionInfo.numQuestions }</h1>
         <button onClick={ this.pushPath('/round') }>{ 'start education round' }</button>
       </div>
     )
   }
-}
-
-HomeComp.propTypes = {
-  actions: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  round: PropTypes.object.isRequired
 }

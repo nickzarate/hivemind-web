@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { userActions } from 'actions'
 import { reduxify } from 'toolbox'
 import LoginComp from 'components/Login'
@@ -13,12 +13,6 @@ class Login extends React.Component {
       />
     )
   }
-}
-
-Login.propTypes = {
-  actions: PropTypes.object.isRequired,
-  pushPath: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
 }
 
 export default reduxify({

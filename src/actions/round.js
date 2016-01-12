@@ -24,9 +24,8 @@ export function asyncCreateRound(Parse) {
     const { round } = getState()
 
     //Create new Round
-    let roundClass = round.questionType + 'Round'
-    var Round = Parse.Object.extend(roundClass)
-    var newRound = new Round()
+    let Round = Parse.Object.extend('Round')
+    let newRound = new Round()
 
     //Save Round and set currentRound state
     setTimeout(() => {

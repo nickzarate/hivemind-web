@@ -1,4 +1,4 @@
-import { WITHDRAW, DEPOSIT, SET_ABSTRACT_QUESTION, SET_CURRENT_QUESTION, ESTIMATE, RESET_BANK } from 'constants'
+import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, ESTIMATE, RESET_BANK } from 'constants'
 import { rand } from 'toolbox'
 
 export function withdraw() {
@@ -14,21 +14,10 @@ export function deposit(index) {
   }
 }
 
-export function estimate(estimate) {
+export function estimate(pointEstimate) {
   return {
     type: ESTIMATE,
-    estimate: estimate
-  }
-}
-
-export function setAbstractQuestion(question) {
-  return {
-    type: SET_ABSTRACT_QUESTION,
-    x1: question.x1,
-    x2: question.x2,
-    observationID: question.observationID,
-    answerText: question.answerText,
-    correctAnswer: question.correctAnswer
+    pointEstimate: pointEstimate
   }
 }
 
@@ -59,50 +48,36 @@ export function handleDeposit(index) {
 }
 
 /*
- *  Set the estimate state if the new value is a valid estimate
+ *  Set the pointEstimate state if the new value is a valid estimate
  */
 export function handleEstimate(event) {
   return (dispatch) => {
-    let estimateNum = Number(event.target.value)
+    let pointEstimate = Number(event.target.value)
     //TODO: More robust error checking?
-    if (isNaN(estimateNum)) {
+    if (isNaN(pointEstimate)) {
       return
     }
-    dispatch(estimate(estimateNum))
+    dispatch(estimate(pointEstimate))
   }
 }
 
 /*
  *  Pull a random question from Parse database and setState accordingly
  */
-export function pullQuestion(Parse, questionType) {
-  return dispatch => {
+export function pullQuestion(Parse) {
+  return (dispatch, getState) => {
+    const { round } = getState()
 
     //Create query for random question
-    var observationID = rand(1, 100)
-    console.log(questionType)
-    var Question = Parse.Object.extend(questionType)
-    var query = new Parse.Query(Question)
-    query.equalTo('observationID', observationID)
+    let observationId = rand(1, 10)
+    let Question = Parse.Object.extend('Question')
+    let query = new Parse.Query(Question)
+    query.equalTo('type', round.questionInfo.questionType)
+    query.equalTo('observationId', observationId)
 
     //Pull question and set state
     setTimeout(() => {
       query.first().then(function(parseQuestion) {
-        var abstractQuestion = null
-        switch(questionType) {
-        case 'EducationQuestion':
-          abstractQuestion = {
-            x1: parseQuestion.get('yearsExperience'),
-            x2: parseQuestion.get('yearsEducation'),
-            observationID: observationID,
-            answerText: parseQuestion.get('answers'),
-            correctAnswer: parseQuestion.get('answer')
-          }
-          break
-        default:
-          abstractQuestion = null
-        }
-        dispatch(setAbstractQuestion(abstractQuestion))
         dispatch(setCurrentQuestion(parseQuestion))
       })
     }, 3000)
