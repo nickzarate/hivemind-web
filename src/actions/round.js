@@ -24,8 +24,7 @@ export function setRound(savedRound) {
  *    createdBy: currentUser
  */
 export function asyncCreateRound(Parse) {
-  return (dispatch, getState) => {
-    const { round } = getState()
+  return (dispatch) => {
 
     //Create new Round
     let Round = Parse.Object.extend('Round')

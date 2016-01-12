@@ -16,11 +16,9 @@ export default class QuestionComp extends React.Component {
     return () => this.props.pushPath(path)
   }
 
-  handleSubmit(answers, pointEstimate) {
+  handleSubmit() {
     return () => {
       const { actions } = this.props
-      console.log("before this")
-      console.log(this)
       this.props.onSubmit()
       this.refs.estimateInput.value = ''
       actions.resetBank()
@@ -31,7 +29,6 @@ export default class QuestionComp extends React.Component {
   renderBins() {
     let bins = []
     if (this.props.question.currentQuestion) {
-      console.log(defaultQuestionConfig.NUM_BINS)
       for (let i = 0; i < defaultQuestionConfig.NUM_BINS; i++) {
         bins.push(
           <li key={ i }>
@@ -74,7 +71,7 @@ export default class QuestionComp extends React.Component {
           ref="estimateInput"
         />
         { this.renderBins() }
-        <button onClick={ this.handleSubmit(question.bins, question.pointEstimate) }>{ 'Submit Question' }</button>
+        <button onClick={ this.handleSubmit() }>{ 'Submit Question' }</button>
       </div>
     )
   }
