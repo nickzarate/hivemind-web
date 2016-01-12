@@ -55,7 +55,7 @@ export default function round(state = initialState, action) {
       currentRound: state.currentRound
     }
   case ADD_ESTIMATE:
-    var estimateVector = state.estimateVector
+    let estimateVector = state.estimateVector
     estimateVector.push(action.estimate)
     return {
       currentQuestion: state.currentQuestion,
@@ -67,7 +67,7 @@ export default function round(state = initialState, action) {
       currentRound: state.currentRound
     }
   case ADD_ANSWERS:
-    var answersVector = state.answersVector
+    let answersVector = state.answersVector
     answersVector.push(action.answers)
     return {
       currentQuestion: state.currentQuestion,
@@ -99,7 +99,7 @@ export default function round(state = initialState, action) {
       currentRound: action.currentRound
     }
   case ADD_ANSWER_TO_ROUND:
-    var currentRound = state.currentRound
+    let currentRound = state.currentRound
     currentRound.get('answers').push(action.answer)
     return {
       currentQuestion: state.currentQuestion,
