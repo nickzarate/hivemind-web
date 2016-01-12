@@ -101,3 +101,6 @@ https://github.com/yannickcr/eslint-plugin-react/tree/master/lib/rules
 
 FLUX action standard:
 https://github.com/acdlite/flux-standard-action
+
+Redux-DevTools:
+https://github.com/gaearon/redux-devtools
