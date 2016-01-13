@@ -17,6 +17,11 @@ This will run the webpack development server.
 Open `http://localhost:8080`.
 
 # Development
+Set the environment variable `NODE_ENV` to `development`. This will enable certain developer tools in the app.
+```
+$ export NODE_ENV=development
+```
+
 Make a new branch. Name your branch the name of your new intended feature, prefixed with your initials and a slash.
 ```
 $ git checkout -b nz/my-new-feature
