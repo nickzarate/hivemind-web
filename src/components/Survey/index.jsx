@@ -9,6 +9,7 @@ export default class SurveyComp extends React.Component {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+  
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }
