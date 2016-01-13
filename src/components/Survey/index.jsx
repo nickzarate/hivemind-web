@@ -76,8 +76,7 @@ export default class Survey extends React.Component {
           onChange={ this.props.actions.handleMonthlyEarnings }
           placeholder="Monthly Earnings"
         />
-        <button onClick={ this.handleSubmit }>{ 'Submit' }</button>
-        <button onClick={ this.pushPath('/home') }>{ 'Continue' }</button>
+        <button onClick={ this.handleSubmit }>{ 'Submit and Continue' }</button>
       </div>
     )
   }
