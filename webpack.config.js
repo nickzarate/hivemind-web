@@ -76,8 +76,10 @@ module.exports = {
       "window.jQuery": "jquery"
     }),
     new webpack.DefinePlugin({
-      PRODUCTION: process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production',
-      DEVELOPMENT: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development'
+      'env.PROD': process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production',
+      'env.PRODUCTION': process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production',
+      'env.DEV': process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development',
+      'env.DEVELOPMENT': process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development'
     })
   ],
   node: {
