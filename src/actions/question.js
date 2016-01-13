@@ -60,7 +60,8 @@ export function handleEstimate(event) {
   return (dispatch) => {
     let pointEstimate = Number(event.target.value)
     //TODO: More robust error checking?
-    if (isNaN(pointEstimate)) {
+    //TODO: Dispatch error message if its an invalid number
+    if (!pointEstimate) {
       return
     }
     dispatch(estimate(pointEstimate))

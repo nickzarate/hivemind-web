@@ -34,8 +34,8 @@ export function handleHourlyWages(event) {
   return (dispatch) => {
     let hourlyWages = Number(event.target.value)
     //TODO: More robust error checking?
-    //TODO: Dispatch error message if isNaN
-    if (isNaN(hourlyWages)) {
+    //TODO: Dispatch error message if its an invalid value
+    if (!hourlyWages) {
       return
     }
     dispatch(setHourlyWages(hourlyWages))
@@ -49,8 +49,8 @@ export function handleMonthlyEarnings(event) {
   return (dispatch) => {
     let monthlyEarnings = Number(event.target.value)
     //TODO: More robust error checking?
-    //TODO: Dispatch error message if isNaN
-    if (isNaN(monthlyEarnings)) {
+    //TODO: Dispatch error message if its an invalid value
+    if (!monthlyEarnings) {
       return
     }
     dispatch(setMonthlyEarnings(monthlyEarnings))
