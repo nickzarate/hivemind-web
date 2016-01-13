@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute } from 'react-router'
 import createHistory from 'history/lib/createHashHistory'
 import { Provider } from 'react-redux'
 import { syncReduxAndRouter } from 'redux-simple-router'
-import { configureStore } from 'store'
+import configureStore from 'store/configureStore'
 import App from './App'
 
 /* Containers */
