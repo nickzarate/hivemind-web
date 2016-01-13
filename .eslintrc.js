@@ -13,6 +13,7 @@ module.exports = {
       "unix"
     ],
     "no-console": 1,
+    "no-undef": 0,
     "no-unused-vars": 1,
     "quotes": [
       1,
