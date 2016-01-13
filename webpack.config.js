@@ -79,7 +79,8 @@ module.exports = {
       'env.PROD': process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production',
       'env.PRODUCTION': process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production',
       'env.DEV': process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development',
-      'env.DEVELOPMENT': process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development'
+      'env.DEVELOPMENT': process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development',
+      'env.SOURCE': process.env.NODE_ENV === 'dev' ? 'http://localhost:5000' : 'https://hivemind-analytics.heroku.com'
     })
   ],
   node: {
