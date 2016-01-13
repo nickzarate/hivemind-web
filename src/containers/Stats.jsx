@@ -1,5 +1,5 @@
 import React from 'react'
-import { roundActions } from 'actions'
+import * as roundActions from 'actions/round'
 import { reduxify } from 'toolbox'
 import StatsComp from 'components/Stats'
 

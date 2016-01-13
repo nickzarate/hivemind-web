@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxify } from 'toolbox'
-import { questionActions } from 'actions'
-import QuestionComp from 'components/Question'
+import * as questionActions from 'actions/question'
+import Question from 'components/Question'
 
 class Question extends React.Component {
   render() {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { surveyActions } from 'actions'
+import * as surveyActions from 'actions/survey'
 import { reduxify } from 'toolbox'
 import SurveyComp from 'components/Survey'
 

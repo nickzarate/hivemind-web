@@ -1,9 +1,9 @@
-import Login from './Login.jsx'
-import App from './App.jsx'
-import Home from './Home.jsx'
-import Stats from './Stats.jsx'
-import Signup from './Signup.jsx'
-import Survey from './Survey.jsx'
-import Question from './Question.jsx'
+import Login from './Login'
+import App from './App'
+import Home from './Home'
+import Stats from './Stats'
+import Signup from './Signup'
+import Survey from './Survey'
+import Question from './Question'
 
 export { App, Login, Home, Stats, Signup, Survey, Question }

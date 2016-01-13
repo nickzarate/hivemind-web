@@ -1,6 +1,7 @@
 import React from 'react'
 import { reduxify, merge } from 'toolbox'
-import { answerActions, roundActions } from 'actions'
+import * as answerActions from 'actions/answer'
+import * as roundActions from 'actions/round'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 

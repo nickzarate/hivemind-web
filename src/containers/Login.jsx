@@ -1,5 +1,5 @@
 import React from 'react'
-import { userActions } from 'actions'
+import * as userActions from 'actions/user'
 import { reduxify } from 'toolbox'
 import LoginComp from 'components/Login'
 

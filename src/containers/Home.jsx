@@ -1,5 +1,5 @@
 import React from 'react'
-import { homeActions } from 'actions'
+import * as homeActions from 'actions/home'
 import { reduxify } from 'toolbox'
 import HomeComp from 'components/Home'
 

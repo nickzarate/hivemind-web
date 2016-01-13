@@ -29,7 +29,7 @@ export default class QuestionComp extends React.Component {
   renderBins() {
     let bins = []
     if (this.props.question.currentQuestion) {
-      for (let i = 0; i < defaultQuestionConfig.NUM_BINS; i++) {
+      for (let i = 0; i < default_question_config.NUM_BINS; i++) {
         bins.push(
           <li key={ i }>
             <button onClick={ this.handleDeposit(i) }>
