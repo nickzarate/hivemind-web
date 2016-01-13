@@ -6,7 +6,6 @@ export default class StatsComp extends React.Component {
   }
 
   render() {
-    console.log(this)
     return (
       <div>
         <p>{ 'Stats page!!' }</p>

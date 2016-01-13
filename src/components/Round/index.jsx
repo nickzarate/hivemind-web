@@ -28,7 +28,6 @@ export default class Round extends React.Component {
   }
 
   render() {
-    console.log(this)
     const childProps = {
       onSubmit: this.handleSubmit,
       pushPath: this.pushPath()

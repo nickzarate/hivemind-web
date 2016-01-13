@@ -6,7 +6,6 @@ export default class HomeComp extends React.Component {
   }
 
   render() {
-    console.log(this)
     const { actions, round } = this.props
     return (
       <div>

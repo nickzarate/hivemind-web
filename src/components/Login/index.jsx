@@ -16,7 +16,6 @@ export default class LoginComp extends React.Component {
   handleLogin = () => this.props.actions.asyncLogin(Parse, this.pushPath('/home'));
 
   render() {
-    console.log(this)
     return (
       <div>
         <h1>{ 'Login' }</h1>
