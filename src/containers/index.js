@@ -5,5 +5,6 @@ import Stats from './Stats'
 import Signup from './Signup'
 import Survey from './Survey'
 import Question from './Question'
+import Round from './Round'
 
-export { App, Login, Home, Stats, Signup, Survey, Question }
+export { App, Login, Home, Stats, Signup, Survey, Question, Round }
