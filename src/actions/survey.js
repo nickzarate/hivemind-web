@@ -1,13 +1,4 @@
-import { SUBMIT_SURVEY, SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from 'constants'
-
-export function setUserCharacteristics(surveyResponses) {
-  return {
-    type: SUBMIT_SURVEY,
-    payload: {
-      x1: surveyResponses.x1
-    }
-  }
-}
+import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from 'constants'
 
 export function setHourlyWages(hourlyWages) {
   return {

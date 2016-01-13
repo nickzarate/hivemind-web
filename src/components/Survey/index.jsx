@@ -2,7 +2,7 @@ import Parse from 'parse'
 import React from 'react'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { survey } from 'assets'
-import Selector from './Selector'
+import Selector from 'components/Lib/Selector'
 
 export default class SurveyComp extends React.Component {
   constructor(props) {
