@@ -53,7 +53,7 @@ $ gulp test
 
 When finished, push to a NEW branch on github.
 ```
-$ git push -u origin js/my-new-feature
+$ git push -u origin nz/my-new-feature
 ```
 
 Make a pull request, tag someone in a comment or poke someone on slack for review. Merge and delete branch when done.
