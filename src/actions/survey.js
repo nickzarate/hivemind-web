@@ -1,13 +1,4 @@
-import { SUBMIT_SURVEY, SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from 'constants'
-
-export function setUserCharacteristics(surveyResponses) {
-  return {
-    type: SUBMIT_SURVEY,
-    payload: {
-      x1: surveyResponses.x1
-    }
-  }
-}
+import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from 'constants'
 
 export function setHourlyWages(hourlyWages) {
   return {
@@ -34,7 +25,7 @@ export function handleHourlyWages(event) {
   return (dispatch) => {
     let hourlyWages = Number(event.target.value)
     //TODO: More robust error checking?
-    //TODO: Dispatch error message if its an invalid number
+    //TODO: Dispatch error message if its an invalid value
     if (!hourlyWages) {
       return
     }
@@ -49,7 +40,7 @@ export function handleMonthlyEarnings(event) {
   return (dispatch) => {
     let monthlyEarnings = Number(event.target.value)
     //TODO: More robust error checking?
-    //TODO: Dispatch error message if its an invalid number
+    //TODO: Dispatch error message if its an invalid value
     if (!monthlyEarnings) {
       return
     }
