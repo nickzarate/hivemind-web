@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class HomeComp extends React.Component {
+export default class Home extends React.Component {
   pushPath(path) {
     return () => this.props.pushPath(path)
   }

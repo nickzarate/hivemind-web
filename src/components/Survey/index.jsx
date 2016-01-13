@@ -1,10 +1,10 @@
 import Parse from 'parse'
 import React from 'react'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import { survey } from 'assets'
+import survey from 'assets/survey.json'
 import Selector from 'components/Lib/Selector'
 
-export default class SurveyComp extends React.Component {
+export default class Survey extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)

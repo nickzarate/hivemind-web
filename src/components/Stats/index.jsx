@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class StatsComp extends React.Component {
+export default class Stats extends React.Component {
   pushPath(path) {
     return () => this.props.pushPath(path)
   }

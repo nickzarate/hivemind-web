@@ -3,10 +3,10 @@ import { reduxify } from 'toolbox'
 import * as questionActions from 'actions/question'
 import Question from 'components/Question'
 
-class Question extends React.Component {
+class QuestionContainer extends React.Component {
   render() {
     return (
-      <QuestionComp
+      <Question
         actions={ this.props.actions }
         question={ this.props.question }
         pushPath={ this.props.pushPath }
@@ -17,7 +17,7 @@ class Question extends React.Component {
 }
 
 export default reduxify({
-  component: Question,
+  component: QuestionContainer,
   reducer: 'question',
   actions: questionActions
 })

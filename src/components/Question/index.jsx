@@ -1,9 +1,9 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import { defaultQuestionConfig } from 'assets'
+import default_question_config from 'assets/default_question_config.json'
 
-export default class QuestionComp extends React.Component {
+export default class Question extends React.Component {
 
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
@@ -20,6 +20,7 @@ export default class QuestionComp extends React.Component {
     return () => {
       const { actions } = this.props
       this.props.onSubmit()
+      //TODO: Fix this, deprecated
       this.refs.estimateInput.value = ''
       actions.resetBank()
       actions.pullQuestion(Parse)
