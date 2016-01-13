@@ -4,7 +4,6 @@ import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import default_question_config from 'assets/default_question_config.json'
 
 export default class Question extends React.Component {
-
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     this.props.actions.pullQuestion(Parse)
