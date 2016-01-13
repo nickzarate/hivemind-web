@@ -1,6 +1,41 @@
 {
-  "AGE_OPTIONS": ["18","19","20","30","40","40+"],
-  "EDUCATION_OPTIONS": ["K-12","Bachelors","Masters","PhD"],
-  "EXPERIENCE_OPTIONS": [],
-  "RACE_OPTIONS": []
+  "AGE_OPTIONS": [
+    "Age",
+    "18",
+    "19",
+    "20",
+    "30",
+    "40",
+    "40+"
+  ],
+  "SEX_OPTIONS": [
+    "Sex",
+    "M",
+    "F"
+  ],
+  "EDUCATION_OPTIONS": [
+    "Education",
+    "K-12",
+    "Bachelors",
+    "Masters",
+    "PhD"
+  ],
+  "EXPERIENCE_OPTIONS": [
+    "Experience",
+    "5 years",
+    "10 years",
+    "15 years"
+  ],
+  "RACE_OPTIONS": [
+    "Race",
+    "White",
+    "Hispanic",
+    "Etc"
+  ],
+  "OCCUPATION_OPTIONS": [
+    "Occupation",
+    "Occupation 1",
+    "Occupation 2",
+    "Occupation 3"
+  ]
 }
