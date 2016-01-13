@@ -16,7 +16,6 @@ export default class SignupComp extends React.Component {
   handleSignup = () => this.props.actions.asyncSignup(Parse, this.pushPath('/survey'));
 
   render() {
-    console.log(this)
     return (
       <div>
         <h1>{ 'Sign Up' }</h1>

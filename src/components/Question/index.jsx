@@ -45,7 +45,6 @@ export default class QuestionComp extends React.Component {
   renderCovariates() {
     let covariates = []
     // for (let q in this.props.question.currentQuestion.get('covariates'))
-    //   console.log('wazzap')
     if (this.props.question.currentQuestion) {
       for (let i = 0; i < this.props.question.currentQuestion.get('covariates').length; i++) {
         covariates.push(

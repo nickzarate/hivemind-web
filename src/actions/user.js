@@ -37,10 +37,8 @@ export function asyncSignup(Parse, pushPath) {
     newUser.set('username', user.email)
     newUser.set('email', user.email)
     newUser.set('password', user.password)
-    console.log(user)
     newUser.signUp(null, {
       success(currentUser) {
-        console.log(currentUser)
         dispatch(login(currentUser))
         pushPath()
       },
@@ -57,10 +55,8 @@ export function asyncSignup(Parse, pushPath) {
 export function asyncLogin(Parse, pushPath) {
   return (dispatch, getState) => {
     const { user } = getState()
-    console.log(user)
     Parse.User.logIn(user.email, user.password, {
       success(currentUser) {
-        console.log(currentUser)
         dispatch(login(currentUser))
         pushPath()
       },
