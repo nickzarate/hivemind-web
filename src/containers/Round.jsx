@@ -6,7 +6,6 @@ import Round from 'components/Round'
 
 class RoundContainer extends React.Component {
   render() {
-    console.log(this)
     return(
       <Round
         actions={ this.props.actions }

@@ -34,7 +34,6 @@ export default class Survey extends React.Component {
   }
 
   render() {
-    console.log(this)
     return (
       <div>
         <h1>{ 'Survey' }</h1>
