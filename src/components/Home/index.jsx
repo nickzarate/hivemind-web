@@ -14,6 +14,7 @@ export default class Home extends React.Component {
         <button onClick={ actions.decrementNumQuestions }>{ 'decrease number of questions in the round!' }</button>
         <h1>{ round.questionInfo.numQuestions }</h1>
         <button onClick={ this.pushPath('/round') }>{ 'start education round' }</button>
+        <button onClick={ this.pushPath('/stats') }>{ 'Check out latest round!' }</button>
       </div>
     )
   }
