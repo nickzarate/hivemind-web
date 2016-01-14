@@ -1,9 +1,9 @@
 import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, ESTIMATE, RESET_BANK } from 'constants'
-import { defaultQuestionConfig } from 'assets'
+import default_question_config from 'assets/default_question_config.json'
 
 const initialState = {
-  bank: defaultQuestionConfig.NUM_CUBES,
-  bins: Array(defaultQuestionConfig.NUM_BINS).fill(0),
+  bank: default_question_config.NUM_CUBES,
+  bins: Array(default_question_config.NUM_BINS).fill(0),
   pointEstimate: 0,
   currentQuestion: null
 }

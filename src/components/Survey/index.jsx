@@ -1,10 +1,10 @@
 import Parse from 'parse'
 import React from 'react'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import { survey } from 'assets'
+import survey from 'assets/survey.json'
 import Selector from 'components/Lib/Selector'
 
-export default class SurveyComp extends React.Component {
+export default class Survey extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -34,7 +34,6 @@ export default class SurveyComp extends React.Component {
   }
 
   render() {
-    console.log(this)
     return (
       <div>
         <h1>{ 'Survey' }</h1>
@@ -76,8 +75,7 @@ export default class SurveyComp extends React.Component {
           onChange={ this.props.actions.handleMonthlyEarnings }
           placeholder="Monthly Earnings"
         />
-        <button onClick={ this.handleSubmit }>{ 'Submit' }</button>
-        <button onClick={ this.pushPath('/home') }>{ 'Continue' }</button>
+        <button onClick={ this.handleSubmit }>{ 'Submit and Continue' }</button>
       </div>
     )
   }

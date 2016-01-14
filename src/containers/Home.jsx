@@ -1,12 +1,12 @@
 import React from 'react'
-import { homeActions } from 'actions'
+import * as homeActions from 'actions/home'
 import { reduxify } from 'toolbox'
-import HomeComp from 'components/Home'
+import Home from 'components/Home'
 
-class Home extends React.Component {
+class HomeContainer extends React.Component {
   render() {
     return (
-      <HomeComp
+      <Home
         actions={ this.props.actions }
         pushPath={ this.props.pushPath }
         round={ this.props.round }
@@ -16,7 +16,7 @@ class Home extends React.Component {
 }
 
 export default reduxify({
-  component: Home,
+  component: HomeContainer,
   reducer: 'round',
   actions: homeActions
 })

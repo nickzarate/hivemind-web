@@ -1,12 +1,12 @@
 import React from 'react'
-import { surveyActions } from 'actions'
+import * as surveyActions from 'actions/survey'
 import { reduxify } from 'toolbox'
-import SurveyComp from 'components/Survey'
+import Survey from 'components/Survey'
 
-class Survey extends React.Component {
+class SurveyContainer extends React.Component {
   render() {
     return (
-      <SurveyComp
+      <Survey
         actions={ this.props.actions }
         pushPath={ this.props.pushPath }
         survey={ this.props.survey }
@@ -16,7 +16,7 @@ class Survey extends React.Component {
 }
 
 export default reduxify({
-  component: Survey,
+  component: SurveyContainer,
   reducer: 'survey',
   actions: surveyActions
 })

@@ -1,6 +1,4 @@
 import React from 'react'
-import { reduxify, merge } from 'toolbox'
-import { answerActions, roundActions } from 'actions'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
@@ -40,9 +38,3 @@ export default class Round extends React.Component {
     )
   }
 }
-
-export default reduxify({
-  component: Round,
-  reducer: 'round',
-  actions: merge(answerActions, roundActions)
-})

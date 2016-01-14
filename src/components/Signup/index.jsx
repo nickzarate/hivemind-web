@@ -2,7 +2,7 @@ import Parse from 'parse'
 import React from 'react'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
-export default class SignupComp extends React.Component {
+export default class Signup extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }

@@ -1,10 +1,9 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import { defaultQuestionConfig } from 'assets'
+import default_question_config from 'assets/default_question_config.json'
 
-export default class QuestionComp extends React.Component {
-
+export default class Question extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     this.props.actions.pullQuestion(Parse)
@@ -20,6 +19,7 @@ export default class QuestionComp extends React.Component {
     return () => {
       const { actions } = this.props
       this.props.onSubmit()
+      //TODO: Fix this, deprecated
       this.refs.estimateInput.value = ''
       actions.resetBank()
       actions.pullQuestion(Parse)
@@ -29,7 +29,7 @@ export default class QuestionComp extends React.Component {
   renderBins() {
     let bins = []
     if (this.props.question.currentQuestion) {
-      for (let i = 0; i < defaultQuestionConfig.NUM_BINS; i++) {
+      for (let i = 0; i < default_question_config.NUM_BINS; i++) {
         bins.push(
           <li key={ i }>
             <button onClick={ this.handleDeposit(i) }>
@@ -46,10 +46,10 @@ export default class QuestionComp extends React.Component {
     let covariates = []
     // for (let q in this.props.question.currentQuestion.get('covariates'))
     if (this.props.question.currentQuestion) {
-      for (let i = 0; i < this.props.question.currentQuestion.get('covariates').length; i++) {
+      for (let i in this.props.question.currentQuestion.get('covariates')) {
         covariates.push(
           <li key={ i }>
-            <p>{ 'x' }{ ': ' }{ this.props.question.currentQuestion.get('covariates')[i] }</p>
+            <p>{ this.props.question.currentQuestion.get('covariateNames')[i] }{ ': ' }{ this.props.question.currentQuestion.get('covariates')[i] }</p>
           </li>
         )
       }

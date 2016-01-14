@@ -7,13 +7,11 @@ import configureStore from 'store/configureStore'
 import App from './App'
 
 /* Containers */
-import { Login, Home, Stats, Signup, Survey, Question } from 'containers'
+import { Login, Home, Stats, Signup, Survey, Question, Round } from 'containers'
 const DevTools = env.DEV && require('containers/DevTools')
 
 /* Components */
-import Round from 'components/Round'
 import NotFound from 'components/NotFound'
-
 
 /* Routes */
 const history = createHistory({ queryKey: false })

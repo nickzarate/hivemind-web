@@ -1,12 +1,12 @@
 import { INCREMENT_CURRENT_QUESTION, INCREMENT_NUM_QUESTIONS, DECREMENT_NUM_QUESTIONS, SET_ROUND, ADD_ANSWER_TO_ROUND,
   SET_QUESTION_TYPE, ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
-import { defaultQuestionConfig } from 'assets'
+import default_question_config from 'assets/default_question_config.json'
 
 const initialState = {
   questionInfo: {
     currentQuestion: 1,
-    numQuestions: defaultQuestionConfig.NUM_QUESTIONS_PER_ROUND,
-    questionType: defaultQuestionConfig.TYPE
+    numQuestions: default_question_config.NUM_QUESTIONS_PER_ROUND,
+    questionType: default_question_config.TYPE
   },
   responseInfo: {
     pointEstimateVector: [],

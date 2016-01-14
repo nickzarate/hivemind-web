@@ -1,12 +1,12 @@
 import React from 'react'
-import { userActions } from 'actions'
+import * as userActions from 'actions/user'
 import { reduxify } from 'toolbox'
-import LoginComp from 'components/Login'
+import Login from 'components/Login'
 
-class Login extends React.Component {
+class LoginContainer extends React.Component {
   render() {
     return (
-      <LoginComp
+      <Login
         actions={ this.props.actions }
         pushPath={ this.props.pushPath }
         user={ this.props.user }
@@ -16,7 +16,7 @@ class Login extends React.Component {
 }
 
 export default reduxify({
-  component: Login,
+  component: LoginContainer,
   reducer: 'user',
   actions: userActions
 })
