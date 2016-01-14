@@ -3,9 +3,9 @@ import React from 'react'
 export default class Selector extends React.Component {
   renderOptions() {
     let options = []
-    for (let i in this.props.options) {
+    for (let opt of this.props.options) {
       options.push(
-        <option key={ i }>{ this.props.options[i] }</option>
+        <option key={ opt }>{ opt }</option>
       )
     }
     return options
