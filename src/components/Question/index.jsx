@@ -46,7 +46,7 @@ export default class Question extends React.Component {
     let covariates = []
     // for (let q in this.props.question.currentQuestion.get('covariates'))
     if (this.props.question.currentQuestion) {
-      for (let i = 0; i < this.props.question.currentQuestion.get('covariates').length; i++) {
+      for (let i in this.props.question.currentQuestion.get('covariates')) {
         covariates.push(
           <li key={ i }>
             <p>{ this.props.question.currentQuestion.get('covariateNames')[i] }{ ': ' }{ this.props.question.currentQuestion.get('covariates')[i] }</p>
