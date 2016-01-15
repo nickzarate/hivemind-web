@@ -76,6 +76,15 @@ export function getData() {
   }
 }
 
+//TODO: Build an array of x/y pairs, and create lineData
+//TODO: Make server call to analyze data (round.responseInfo.answersVector &&
+//    : round.responseInfo.estimateVector) and retrieve phi
+//TODO: Dispatch setLineData with newly created lineData variable
+//TODO: Change value of z to reflect the user characteristic for the covariate that is not being graphed.
+//TODO: Change value '10' in 'i * 10' to be a variable that represents the desired range of the data.
+//TODO: Change value '10' in 'i < 10' to be a variable that represents the number of points displayed.
+//TODO: Change hardcoded name to the users custom name?
+
 //TODO: Give description
 export function updateChart(chart, covariateIndex, covariateValue) {
   return (dispatch, getState) => {
@@ -107,67 +116,29 @@ export function updateChart(chart, covariateIndex, covariateValue) {
 
 //TODO: Give description
 function func(x, args, phi, covariateIndex) {
+  console.log('FUNC PARAMETERS')
+  console.log(x)
+  console.log(args)
+  console.log(phi)
+  console.log(covariateIndex)
 
   //TODO: Give description
   let numCovariates = args.length + 1
   let y = phi[0]
   let betas = phi.slice(1)
-  let length = args.length
+  let newArgs = args.slice(0)
 
   //TODO: Give description
-  for (i = 0; i < length; i++) {
-    args.push(Math.pow(args[i], 2))
+  for (let i = 0; i < args.length; i++) {
+    newArgs.push(Math.pow(args[i], 2))
   }
-  args.splice(covariateIndex, 0, x)
-  args.splice(covariateIndex + numCovariates, 0, Math.pow(x, 2))
+  newArgs.splice(covariateIndex, 0, x)
+  newArgs.splice(covariateIndex + numCovariates, 0, Math.pow(x, 2))
 
   //TODO: Give description
-  for (i in betas) {
+  for (let j in betas) {
     //TODO: pass in covariateIndex (name something else)
-    y += betas[i] * args[i]
+    y += betas[j] * newArgs[j]
   }
   return y
-}
-
-    //TODO: Build an array of x/y pairs, and create lineData
-      //TODO: Make server call to analyze data (round.responseInfo.answersVector &&
-      //    : round.responseInfo.estimateVector) and retrieve phi
-    //TODO: Dispatch setLineData with newly created lineData variable
-    //TODO: Change value of z to reflect the user characteristic for the covariate that is not being graphed.
-    //TODO: Change value '10' in 'i * 10' to be a variable that represents the desired range of the data.
-    //TODO: Change value '10' in 'i < 10' to be a variable that represents the number of points displayed.
-    //TODO: Change hardcoded name to the users custom name?
-export function analyzeData(covariateIndex, alternativeCovariate, chart = null) {
-  return (dispatch, getState) => {
-    const { round, stats } = getState()
-    //temp --delete when we make server calls
-    let phi = [1, 2, 3, 4, 5]
-    
-    if (chart) {
-
-      return
-    }
-
-
-    let data = []
-    let lineData = []
-    let values = []
-    let args = stats.covariateData[covariateIndex]
-    args.push(10)
-    for (let i = 0; i < 10; i++) {
-      let y = func(i, args, phi, covariate)
-      let value = {
-        x: i,
-        y: y
-      }
-      values.push(value)
-    }
-    let series = {
-      name: 'You',
-      values: values
-    }
-    lineData.push(series)
-    data.push(lineData)
-    dispatch(setLineData(data))
-  }
-}
+}  
