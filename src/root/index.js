@@ -7,7 +7,7 @@ import configureStore from 'store/configureStore'
 import App from './App'
 
 /* Containers */
-import { Login, Home, Stats, Signup, Survey, Question, Round } from 'containers'
+import { Login, Home, Stats, Signup, Survey, Question, Round, TestApi } from 'containers'
 const DevTools = env.DEV && require('containers/DevTools')
 
 /* Components */
@@ -31,6 +31,7 @@ export default (
             <IndexRoute component={ Question } />
           </Route>
           <Route component={ Stats } path="stats" />
+          <Route component={ TestApi } path="testapi" />
           <Route component={ NotFound } path="*" />
         </Route>
       </Router>
