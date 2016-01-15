@@ -1,5 +1,5 @@
 import React from 'react'
-import * as roundActions from 'actions/round'
+import * as statsActions from 'actions/stats'
 import { reduxify } from 'toolbox'
 import Stats from 'components/Stats'
 
@@ -9,7 +9,7 @@ class StatsContainer extends React.Component {
       <Stats
         actions={ this.props.actions }
         pushPath={ this.props.pushPath }
-        round={ this.props.round }
+        stats={ this.props.stats }
       />
     )
   }
@@ -17,6 +17,6 @@ class StatsContainer extends React.Component {
 
 export default reduxify({
   component: StatsContainer,
-  reducer: 'round',
-  actions: roundActions
+  reducer: 'stats',
+  actions: statsActions
 })
