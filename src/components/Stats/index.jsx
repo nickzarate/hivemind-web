@@ -12,6 +12,7 @@ export default class Stats extends React.Component {
     actions.getPhi()
     actions.getCovariateData()
     actions.getData()
+    //actions.testApi()
     //this.props.actions.analyzeData(0)
   }
 

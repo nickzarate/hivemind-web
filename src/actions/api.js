@@ -13,7 +13,7 @@ export function handleEchoRequest() {
   return (dispatch) => {
     $.get(env.SOURCE + '/api/v1/echo', function(response) {
       console.log(response)
-      dispatch(echo(response))
+      //dispatch(echo(response))
     })
   }
 }

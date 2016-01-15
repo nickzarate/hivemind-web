@@ -27,6 +27,15 @@ export function setPhi(phi) {
   }
 }
 
+// export function testApi() {
+//   return (dispatch) => {
+//     $.get(env.SOURCE + '/api/v1/echo', function(response) {
+//       console.log(response)
+//       //dispatch(echo(response))
+//     })
+//   }
+// }
+
 export function updateCovariateData(covariate, covariateIndex, covariateValue) {
   return (dispatch, getState) => {
     const { stats } = getState()

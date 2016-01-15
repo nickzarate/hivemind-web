@@ -6,7 +6,7 @@ const initialState = {
   phi: []
 }
 
-export default function survey(state = initialState, action) {
+export default function stats(state = initialState, action) {
   switch (action.type) {
   case SET_DATA:
     return {
@@ -15,6 +15,8 @@ export default function survey(state = initialState, action) {
       phi: state.phi
     }
   case SET_COVARIATE_DATA:
+    console.log('covariate data set to:')
+    console.log(action.payload.covariateData)
     return {
       data: state.data,
       covariateData: action.payload.covariateData,
