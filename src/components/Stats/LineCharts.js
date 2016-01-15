@@ -5,9 +5,6 @@ import 'rc-slider/assets/index.css'
 import Slider from 'rc-slider'
  
 export default class LineCharts extends React.Component {
-  onSliderChange() {
-    console.log('hello')
-  }
 
   renderSliders(chartIndex) {
     let sliders = []
@@ -15,7 +12,8 @@ export default class LineCharts extends React.Component {
       sliders.push(
         <li key={ i }>
           <Slider
-            ref={ (ref) => this.slider = ref }
+            key={ i }
+            title="SomeTitle"
             onAfterChange={ this.props.onSliderChange(chartIndex, i) }
           />
         </li>
@@ -30,13 +28,13 @@ export default class LineCharts extends React.Component {
       charts.push(
         <li key={ i }>
           <LineChart
-            //legend={ true }
+            legend={ true }
             data={ this.props.data[i] }
             width={ 500 }
             height={ 300 }
             title="Line Chart"
           />
-          <ul ref={ (ref) => this.sliders = ref }>
+          <ul>
             { this.renderSliders(i) }
           </ul>
         </li>
@@ -46,9 +44,9 @@ export default class LineCharts extends React.Component {
   }
 
   render() {
-    console.log(this)
+    //console.log(this)
     return (
-      <ul ref={ (ref) => this.lineCharts = ref }>
+      <ul>
         { this.renderCharts() }
       </ul>
     )

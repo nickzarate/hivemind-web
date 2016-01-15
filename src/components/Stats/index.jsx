@@ -20,17 +20,17 @@ export default class Stats extends React.Component {
   }
 
   handleSliderChange(chartIndex, sliderIndex) {
-    return () => {
-      console.log(this.charts)
-      console.log(this.charts.sliders)
+    return (value) => {
       console.log('value is:')
-      console.log(this.charts.sliders.children[0])
-      //console.log(this.sliders.children)
-      //this.props.actions.updateCovariateData(chartIndex, sliderIndex, value)
+      console.log(value)
+      console.log(chartIndex)
+      console.log(sliderIndex)
+      this.props.actions.updateCovariateData(chartIndex, sliderIndex, value)
     }
   }
 
   render() {
+    console.log(this.props.stats.covariateData)
     return (
       <div>
         <p>{ 'Stats page!!' }</p>
@@ -38,7 +38,6 @@ export default class Stats extends React.Component {
           numCharts={ this.props.stats.covariateData.length }
           data={ this.props.stats.data }
           onSliderChange={ this.handleSliderChange }
-          ref={ (ref) => this.charts = ref }
         />
         <p>{ 'k' }</p>
         <button onClick={ this.pushPath('/home') }>{ 'Go Home' }</button>
