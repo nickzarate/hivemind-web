@@ -40,7 +40,7 @@ export function updateCovariateData(covariate, covariateIndex, covariateValue) {
 export function getPhi() {
   return (dispatch, getState) => {
     //TODO: Call our Python server to get phi
-    let phi = [1,2,3,4,5]
+    let phi = [1,1,1,0.5,0]
     dispatch(setPhi(phi))
   }
 }
@@ -84,9 +84,13 @@ export function updateChart(chart, covariateIndex, covariateValue) {
     let chartData = []
     let values = []
     for (let i = 0; i < 10; i++) {
-      let y = func(i * 10, stats.covariateData[chart], stats.phi, chart)
+      console.log('x:')
+      console.log(i)
+      let y = func(i, stats.covariateData[chart], stats.phi, chart)
+      console.log('y:')
+      console.log(y)
       let value = {
-        x: i * 10,
+        x: i,
         y: y
       }
       values.push(value)
@@ -151,9 +155,9 @@ export function analyzeData(covariateIndex, alternativeCovariate, chart = null) 
     let args = stats.covariateData[covariateIndex]
     args.push(10)
     for (let i = 0; i < 10; i++) {
-      let y = func(i * 10, args, phi, covariate)
+      let y = func(i, args, phi, covariate)
       let value = {
-        x: i * 10,
+        x: i,
         y: y
       }
       values.push(value)

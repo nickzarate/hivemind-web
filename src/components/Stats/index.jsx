@@ -6,6 +6,7 @@ export default class Stats extends React.Component {
     super(props)
     this.handleSliderChange = this.handleSliderChange.bind(this)
   }
+  
   componentWillMount() {
     const { actions } = this.props
     actions.getPhi()
