@@ -13,51 +13,53 @@ const initialState = {
     pointEstimateVector: [],
     answersVector: []
   },
+  covariates: [],
   currentRound: null
 }
 
 export default function round(state = initialState, action) {
   switch (action.type) {
   case INCREMENT_CURRENT_QUESTION:
-    return {
-      questionInfo: {
-        currentQuestion: state.questionInfo.currentQuestion + 1,
-        numQuestions: state.questionInfo.numQuestions,
-        questionType: state.questionInfo.questionType
-      },
-      responseInfo: state.responseInfo,
-      currentRound: state.currentRound
-    }
+    console.log(state.questionInfo.currentQuestion)
+    return merge(
+      state,
+      {
+        questionInfo: merge(
+          state.questionInfo,
+          { currentQuestion: state.questionInfo.currentQuestion + 1 }
+        )
+      }
+    )
   case INCREMENT_NUM_QUESTIONS:
-    return {
-      questionInfo: {
-        currentQuestion: state.questionInfo.currentQuestion,
-        numQuestions: state.questionInfo.numQuestions + 1,
-        questionType: state.questionInfo.questionType
-      },
-      responseInfo: state.responseInfo,
-      currentRound: state.currentRound
-    }
+    return merge(
+      state,
+      {
+        questionInfo: merge(
+          state.questionInfo,
+          { numQuestions: state.questionInfo.numQuestions + 1 }
+        )
+      }
+    )
   case DECREMENT_NUM_QUESTIONS:
-    return {
-      questionInfo: {
-        currentQuestion: state.questionInfo.currentQuestion,
-        numQuestions: state.questionInfo.numQuestions - 1,
-        questionType: state.questionInfo.questionType
-      },
-      responseInfo: state.responseInfo,
-      currentRound: state.currentRound
-    }
+    return merge(
+      state,
+      {
+        questionInfo: merge(
+          state.questionInfo,
+          { numQuestions: state.questionInfo.numQuestions - 1 }
+        )
+      }
+    )
   case SET_QUESTION_TYPE:
-    return {
-      questionInfo: {
-        currentQuestion: state.questionInfo.currentQuestion,
-        numQuestions: state.questionInfo.numQuestions,
-        questionType: action.payload.questionType
-      },
-      responseInfo: state.responseInfo,
-      currentRound: state.currentRound
-    }
+    return merge(
+      state,
+      {
+        questionInfo: merge(
+          state.questionInfo,
+          { questionType: action.payload.questionType }
+        )
+      }
+    )
   case ADD_POINT_ESTIMATE:
     let pointEstimateVector = state.responseInfo.pointEstimateVector
     pointEstimateVector.push(action.payload.pointEstimate)
