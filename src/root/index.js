@@ -8,7 +8,7 @@ import App from './App'
 
 /* Containers */
 import { Login, Home, Stats, Signup, Survey, Question, Round, TestApi } from 'containers'
-const DevTools = env.DEV && require('containers/DevTools')
+//const DevTools = env.DEV && require('containers/DevTools')
 
 /* Components */
 import NotFound from 'components/NotFound'
@@ -35,7 +35,7 @@ export default (
           <Route component={ NotFound } path="*" />
         </Route>
       </Router>
-      <DevTools />
     </div>
   </Provider>
 )
+// <DevTools />
