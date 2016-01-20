@@ -74,9 +74,7 @@ export function handleEstimate(event) {
 export function pullQuestion(Parse) {
   return (dispatch, getState) => {
     const { round } = getState()
-    // if (round.questionInfo.currentQuestion === round.questionInfo.numQuestions) {
-    //   return
-    // }
+
     //Create query for random question
     let observationId = rand(1, 10)
     let Question = Parse.Object.extend('Question')

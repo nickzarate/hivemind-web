@@ -80,7 +80,7 @@ module.exports = {
       'env.PRODUCTION': process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production',
       'env.DEV': process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development',
       'env.DEVELOPMENT': process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development',
-      'env.SOURCE': process.env.NODE_ENV === 'dev' ? 'http://localhost:5000' : 'https://hivemind-analytics.heroku.com'
+      'env.SOURCE': process.env.NODE_ENV === 'dev' ? JSON.stringify('http://localhost:5000') : JSON.stringify('https://hivemind-analytics.herokuapp.com')
     })
   ],
   node: {
