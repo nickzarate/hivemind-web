@@ -1,4 +1,5 @@
 import { SET_USER_EMAIL, SET_USER_PASSWORD, LOGIN } from 'constants'
+import { merge } from 'toolbox'
 
 const initialState = {
   email: '',
@@ -9,23 +10,20 @@ const initialState = {
 export default function user(state = initialState, action) {
   switch (action.type) {
   case SET_USER_EMAIL:
-    return {
-      email: action.payload.email,
-      password: state.password,
-      currentUser: state.currentUser
-    }
+    return merge(
+      state,
+      { email: action.payload.email }
+    )
   case SET_USER_PASSWORD:
-    return {
-      email: state.email,
-      password: action.payload.password,
-      currentUser: state.currentUser
-    }
+    return merge(
+      state,
+      { password: action.payload.password }
+    )
   case LOGIN:
-    return {
-      email: state.email,
-      password: state.password,
-      currentUser: action.payload.currentUser
-    }
+    return merge(
+      state,
+      { currentUser: action.payload.currentUser }
+    )
   default:
     return state
   }
