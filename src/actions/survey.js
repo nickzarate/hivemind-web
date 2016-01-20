@@ -48,6 +48,10 @@ export function handleMonthlyEarnings(event) {
   }
 }
 
+/*
+ *  Submit the one time only pre-survey
+ *  TODO: Make everything abstract
+ */
 export function asyncSubmitSurvey(Parse, survey) {
   return dispatch => {
     let surveyResponses = {
