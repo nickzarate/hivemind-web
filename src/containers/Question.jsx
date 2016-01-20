@@ -7,7 +7,7 @@ class QuestionContainer extends React.Component {
   render() {
     return (
       <Question
-        actions={ this.props.actions }
+        actions={ this.props.questionActions }
         question={ this.props.question }
         pushPath={ this.props.pushPath }
         onSubmit={ this.props.onSubmit }
@@ -18,6 +18,6 @@ class QuestionContainer extends React.Component {
 
 export default reduxify({
   component: QuestionContainer,
-  reducer: 'question',
-  actions: questionActions
+  state: 'question',
+  actions: { questionActions }
 })

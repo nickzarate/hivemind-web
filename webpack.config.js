@@ -5,6 +5,8 @@ var webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   path = require('path'),
   srcPath = path.join(__dirname, 'src');
+var inDevMode = process.env.NODE_ENV === "dev" || process.env.NODE_ENV === "development";
+
 
 module.exports = {
   target: 'web',
@@ -76,6 +78,9 @@ module.exports = {
       "window.jQuery": "jquery"
     }),
     new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify(inDevMode ? "development" : "production")
+      },
       'env.PROD': process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production',
       'env.PRODUCTION': process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production',
       'env.DEV': process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development',

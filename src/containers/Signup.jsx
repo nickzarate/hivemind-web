@@ -7,7 +7,7 @@ class SignupContainer extends React.Component {
   render() {
     return (
       <Signup
-        actions={ this.props.actions }
+        actions={ this.props.userActions }
         pushPath={ this.props.pushPath }
         user={ this.props.user }
       />
@@ -17,6 +17,6 @@ class SignupContainer extends React.Component {
 
 export default reduxify({
   component: SignupContainer,
-  reducer: 'user',
-  actions: userActions
+  state: 'user',
+  actions: { userActions }
 })

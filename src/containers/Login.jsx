@@ -7,7 +7,7 @@ class LoginContainer extends React.Component {
   render() {
     return (
       <Login
-        actions={ this.props.actions }
+        actions={ this.props.userActions }
         pushPath={ this.props.pushPath }
         user={ this.props.user }
       />
@@ -17,6 +17,6 @@ class LoginContainer extends React.Component {
 
 export default reduxify({
   component: LoginContainer,
-  reducer: 'user',
-  actions: userActions
+  state: 'user',
+  actions: { userActions }
 })
