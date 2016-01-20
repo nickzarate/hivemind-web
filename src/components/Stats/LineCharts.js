@@ -44,7 +44,6 @@ export default class LineCharts extends React.Component {
   }
 
   render() {
-    //console.log(this)
     return (
       <ul>
         { this.renderCharts() }

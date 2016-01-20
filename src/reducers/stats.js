@@ -15,14 +15,14 @@ export default function stats(state = initialState, action) {
       phi: state.phi
     }
   case SET_COVARIATE_DATA:
-    console.log('covariate data set to:')
-    console.log(action.payload.covariateData)
     return {
       data: state.data,
       covariateData: action.payload.covariateData,
       phi: state.phi
     }
   case SET_PHI:
+    console.log('setting phi to...')
+    console.log(action.payload.phi)
     return {
       data: state.data,
       covariateData: state.covariateData,
