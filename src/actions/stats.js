@@ -27,58 +27,74 @@ export function setPhi(phi) {
   }
 }
 
-// export function testApi() {
-//   return (dispatch) => {
-//     $.get(env.SOURCE + '/api/v1/echo', function(response) {
-//       console.log(response)
-//       //dispatch(echo(response))
-//     })
-//   }
-// }
-
-export function updateCovariateData(covariate, covariateIndex, covariateValue) {
+/*
+ *  Update the covariate data at the specified index with the specified value
+ */
+export function updateCovariateData(chartIndex, covariateIndex, covariateValue) {
   return (dispatch, getState) => {
     const { stats } = getState()
     let covariateData = stats.covariateData.slice(0)
-    covariateData[covariate][covariateIndex] = covariateValue
+    covariateData[chartIndex][covariateIndex] = covariateValue
     dispatch(setCovariateData(covariateData))
-    dispatch(updateChart(covariate, covariateIndex, covariateValue))
+    dispatch(updateChart(chartIndex))
   }
 }
 
-export function getPhi() {
+/*
+ *  Call Python server and get Phi given the info in the current state.
+ */
+export function asyncGetPhi() {
   return (dispatch, getState) => {
-    //TODO: Call our Python server to get phi
-    let phi = [1,1,1,0.5,0]
-    dispatch(setPhi(phi))
+    const { round } = getState()
+
+    // Get covariates and predictions from the latest round to analyze and get phi
+    let predictions = []
+    let covariates = []
+    if (round.currentRound) {
+      predictions = round.responseInfo.pointEstimateVector.slice(0)
+      covariates = round.covariates.slice(0)
+    } else { return }
+
+    $.ajax({
+      url: env.SOURCE + '/api/v1/get_phi',
+      method: 'POST',
+      data: JSON.stringify({
+        covariates: covariates,
+        p: predictions
+      }),
+      dataType: 'json',
+      contentType: 'application/json; charset=utf-8',
+      success: (response) => dispatch(setPhi(response.phi))
+    })
   }
 }
 
+/*
+ *  Get initial covariate data
+ *  TODO: Call Parse and get initial user data about covariates
+ */
 export function getCovariateData() {
   return (dispatch, getState) => {
-    //TODO: Call Parse and get initial user data about covariates
     let covariateData = [[0],[0]]
     dispatch(setCovariateData(covariateData))
   }
 }
 
+/*
+ *  Plot some initial data
+ */
 export function getData() {
   return (dispatch, getState) => {
     //TODO: TEMP
     let data = []
     for (let i = 0; i < 2; i++) {
       let lineData = []
-      for (let j = 0; j < 1; j++) {
-        let values = [{
-          x: 0,
-          y: 0
-        }]
-        let series = {
-          name: 'You',
-          values: values
-        }
-        lineData.push(series)
+      let values = [{x: 0, y: 0}]
+      let series = {
+        name: 'You',
+        values: values
       }
+      lineData.push(series)
       data.push(lineData)
     }
     dispatch(setData(data))
@@ -93,20 +109,34 @@ export function getData() {
 //TODO: Change value '10' in 'i * 10' to be a variable that represents the desired range of the data.
 //TODO: Change value '10' in 'i < 10' to be a variable that represents the number of points displayed.
 //TODO: Change hardcoded name to the users custom name?
-
-//TODO: Give description
-export function updateChart(chart, covariateIndex, covariateValue) {
+//TODO: Make the f(x) inside updateChart be abstract or easy to change for different use cases?
+/*
+ *  Update the chart of the given index based on the current value of Phi
+ *  Plot several points of the given equation y = alpha + beta1 * x + beta2 * c2 ... + beta * x^2 + ... + betaN * cn
+ */
+export function updateChart(chartIndex) {
   return (dispatch, getState) => {
     const { stats } = getState()
     let data = stats.data.slice(0)
     let chartData = []
     let values = []
-    for (let i = 0; i < 10; i++) {
-      console.log('x:')
-      console.log(i)
-      let y = func(i, stats.covariateData[chart], stats.phi, chart)
-      console.log('y:')
-      console.log(y)
+
+    //Create array of betas and array of covariate values to multiply together
+    let betas = stats.phi.slice(1)
+    let covariateValues = stats.covariateData[chartIndex].slice(0)
+    for (let i = 0; i < stats.covariateData[chartIndex].length; i++) {
+      covariateValues.push(Math.pow(stats.covariateData[chartIndex][i], 2))
+    }
+    let alpha = stats.phi[0]
+
+    for (let i = 0; i < 20; i++) {
+      let tempCovariateValues = covariateValues.slice(0)
+      let y = alpha
+      tempCovariateValues.splice(chartIndex, 0, i)
+      tempCovariateValues.splice(chartIndex + stats.covariateData[chartIndex].length + 1, 0, Math.pow(i, 2))
+      for (let j in betas) {
+        y += betas[j] * tempCovariateValues[j]
+      }
       let value = {
         x: i,
         y: y
@@ -118,36 +148,7 @@ export function updateChart(chart, covariateIndex, covariateValue) {
       values: values
     }
     chartData.push(series)
-    data[chart] = chartData
+    data[chartIndex] = chartData
     dispatch(setData(data))
   }
 }
-
-//TODO: Give description
-function func(x, args, phi, covariateIndex) {
-  console.log('FUNC PARAMETERS')
-  console.log(x)
-  console.log(args)
-  console.log(phi)
-  console.log(covariateIndex)
-
-  //TODO: Give description
-  let numCovariates = args.length + 1
-  let y = phi[0]
-  let betas = phi.slice(1)
-  let newArgs = args.slice(0)
-
-  //TODO: Give description
-  for (let i = 0; i < args.length; i++) {
-    newArgs.push(Math.pow(args[i], 2))
-  }
-  newArgs.splice(covariateIndex, 0, x)
-  newArgs.splice(covariateIndex + numCovariates, 0, Math.pow(x, 2))
-
-  //TODO: Give description
-  for (let j in betas) {
-    //TODO: pass in covariateIndex (name something else)
-    y += betas[j] * newArgs[j]
-  }
-  return y
-}  
