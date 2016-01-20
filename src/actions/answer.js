@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND,
-  ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
+  ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES } from 'constants'
 
 export function addAnswerToRound(savedAnswer) {
   return {
@@ -24,6 +24,15 @@ export function addAnswers(answers) {
     type: ADD_ANSWERS,
     payload: {
       answers: answers
+    }
+  }
+}
+
+export function addCovariates(covariates) {
+  return {
+    type: ADD_COVARIATES,
+    payload: {
+      covariates: covariates
     }
   }
 }
@@ -66,6 +75,7 @@ export function asyncHandleSubmit(Parse, pushPath) {
     //Save answers in vectors and 
     dispatch(addAnswers(question.bins))
     dispatch(addPointEstimate(question.pointEstimate))
+    dispatch(addCovariates(question.currentQuestion.get('covariates')))
 
     //Create new answer to save to a round
     let Answer = Parse.Object.extend('Answer')

@@ -1,6 +1,7 @@
 import { INCREMENT_CURRENT_QUESTION, INCREMENT_NUM_QUESTIONS, DECREMENT_NUM_QUESTIONS, SET_ROUND, ADD_ANSWER_TO_ROUND,
-  SET_QUESTION_TYPE, ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION } from 'constants'
+  SET_QUESTION_TYPE, ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES } from 'constants'
 import default_question_config from 'assets/default_question_config.json'
+import { merge } from 'toolbox'
 
 const initialState = {
   questionInfo: {
@@ -66,6 +67,7 @@ export default function round(state = initialState, action) {
         pointEstimateVector: pointEstimateVector,
         answersVector: state.responseInfo.answersVector
       },
+      covariates: state.covariates,
       currentRound: state.currentRound
     }
   case ADD_ANSWERS:
@@ -77,12 +79,14 @@ export default function round(state = initialState, action) {
         pointEstimateVector: state.responseInfo.pointEstimateVector,
         answersVector: answersVector
       },
+      covariates: state.covariates,
       currentRound: state.currentRound
     }
   case SET_ROUND:
     return {
       questionInfo: state.questionInfo,
       responseInfo: state.responseInfo,
+      covariates: state.covariates,
       currentRound: action.payload.currentRound
     }
   case ADD_ANSWER_TO_ROUND:
@@ -91,6 +95,7 @@ export default function round(state = initialState, action) {
     return {
       questionInfo: state.questionInfo,
       responseInfo: state.responseInfo,
+      covariates: state.covariates,
       currentRound: currentRound
     }
   case RESET_CURRENT_QUESTION:
@@ -101,6 +106,16 @@ export default function round(state = initialState, action) {
         questionType: state.questionInfo.questionType
       },
       responseInfo: state.responseInfo,
+      covariates: state.covariates,
+      currentRound: state.currentRound
+    }
+  case ADD_COVARIATES:
+    let covariates = state.covariates.slice(0)
+    covariates.push(action.payload.covariates)
+    return {
+      questionInfo: state.questionInfo,
+      responseInfo: state.responseInfo,
+      covariates: covariates,
       currentRound: state.currentRound
     }
   default:
