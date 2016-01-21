@@ -1,6 +1,6 @@
 import React from 'react'
 import * as homeActions from 'actions/home'
-import { reduxify } from 'toolbox'
+import reduxify from 'toolbox/reduxify'
 import Home from 'components/Home'
 
 class HomeContainer extends React.Component {

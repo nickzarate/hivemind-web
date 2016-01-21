@@ -1,6 +1,6 @@
 import React from 'react'
 import * as userActions from 'actions/user'
-import { reduxify } from 'toolbox'
+import reduxify from 'toolbox/reduxify'
 import Login from 'components/Login'
 
 class LoginContainer extends React.Component {

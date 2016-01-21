@@ -1,6 +1,5 @@
 import React from 'react'
-import { reduxify, merge } from 'toolbox'
-import * as answerActions from 'actions/answer'
+import reduxify from 'toolbox/reduxify'
 import * as roundActions from 'actions/round'
 import Round from 'components/Round'
 

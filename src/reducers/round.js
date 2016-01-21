@@ -1,7 +1,7 @@
 import { INCREMENT_CURRENT_QUESTION, INCREMENT_NUM_QUESTIONS, DECREMENT_NUM_QUESTIONS, SET_ROUND, ADD_ANSWER_TO_ROUND,
   SET_QUESTION_TYPE, ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES } from 'constants'
 import default_question_config from 'assets/default_question_config.json'
-import { merge } from 'toolbox'
+import { fromJS } from 'immutable'
 
 const initialState = {
   questionInfo: {
