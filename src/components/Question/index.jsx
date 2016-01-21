@@ -65,7 +65,7 @@ export default class Question extends React.Component {
         { this.renderCovariates() }
         <input
           onChange={ actions.handleEstimate }
-          placeholder="ESTIMATE"
+          placeholder="POINT ESTIMATE"
           ref="estimateInput"
         />
         { this.renderBins() }

@@ -16,9 +16,9 @@ export function deposit(index) {
   }
 }
 
-export function estimate(pointEstimate) {
+export function setPointEstimate(pointEstimate) {
   return {
-    type: ESTIMATE,
+    type: SET_POINT_ESTIMATE,
     payload: {
       pointEstimate: pointEstimate
     }
@@ -66,7 +66,7 @@ export function handleEstimate(event) {
     if (!pointEstimate) {
       return
     }
-    dispatch(estimate(pointEstimate))
+    dispatch(setPointEstimate(pointEstimate))
   }
 }
 
