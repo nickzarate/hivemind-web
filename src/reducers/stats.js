@@ -1,33 +1,21 @@
 import { SET_COVARIATE_DATA, SET_DATA, SET_PHI } from 'constants'
+import { fromJS } from 'immutable'
 
-const initialState = {
+const initialState = fromJS({
   data: [],
   covariateData: [],
   phi: []
-}
+})
 
 export default function stats(state = initialState, action) {
   switch (action.type) {
   case SET_DATA:
-    return {
-      data: action.payload.data,
-      covariateData: state.covariateData,
-      phi: state.phi
-    }
+    return state.set('data', action.payload.data)
   case SET_COVARIATE_DATA:
-    return {
-      data: state.data,
-      covariateData: action.payload.covariateData,
-      phi: state.phi
-    }
+    return state.set('covariateData', action.payload.covariateData)
   case SET_PHI:
-    console.log('setting phi to...')
     console.log(action.payload.phi)
-    return {
-      data: state.data,
-      covariateData: state.covariateData,
-      phi: action.payload.phi
-    }
+    return state.set('phi', action.payload.phi)
   default:
     return state
   }

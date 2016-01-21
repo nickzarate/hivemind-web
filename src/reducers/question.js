@@ -1,46 +1,24 @@
-import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, ESTIMATE, RESET_BANK } from 'constants'
+import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK } from 'constants'
 import default_question_config from 'assets/default_question_config.json'
+import { fromJS, List } from 'immutable'
 
-const initialState = {
+const initialState = fromJS({
   bank: default_question_config.NUM_CUBES,
-  bins: Array(default_question_config.NUM_BINS).fill(0),
+  bins: List(Array(default_question_config.NUM_BINS).fill(0)),
   pointEstimate: 0,
   currentQuestion: null
-}
+})
 
 export default function question(state = initialState, action) {
   switch (action.type) {
   case WITHDRAW:
-    return {
-      bank: state.bank - 1,
-      bins: state.bins,
-      pointEstimate: state.pointEstimate,
-      currentQuestion: state.currentQuestion
-    }
+    return state.set('bank', state.get('bank') - 1)
   case DEPOSIT:
-    // Use slice so as not to unintentionally alter state
-    let bins = state.bins.slice(0)
-    bins[action.payload.index] += 1
-    return {
-      bank: state.bank,
-      bins: bins,
-      pointEstimate: state.pointEstimate,
-      currentQuestion: state.currentQuestion
-    }
+    return state.update('bins', array => array.update(action.payload.index, value => value + 1))
   case SET_CURRENT_QUESTION:
-    return {
-      bank: state.bank,
-      bins: state.bins,
-      pointEstimate: state.pointEstimate,
-      currentQuestion: action.payload.currentQuestion
-    }
-  case ESTIMATE:
-    return {
-      bank: state.bank,
-      bins: state.bins,
-      pointEstimate: action.payload.pointEstimate,
-      currentQuestion: state.currentQuestion
-    }
+    return state.set('currentQuestion', action.payload.currentQuestion)
+  case SET_POINT_ESTIMATE:
+    return state.set('pointEstimate', action.payload.pointEstimate)
   case RESET_BANK:
     return initialState
   default:

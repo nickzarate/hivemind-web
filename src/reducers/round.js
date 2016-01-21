@@ -3,7 +3,7 @@ import { INCREMENT_CURRENT_QUESTION, INCREMENT_NUM_QUESTIONS, DECREMENT_NUM_QUES
 import default_question_config from 'assets/default_question_config.json'
 import { fromJS } from 'immutable'
 
-const initialState = {
+const initialState = fromJS({
   questionInfo: {
     currentQuestion: 1,
     numQuestions: default_question_config.NUM_QUESTIONS_PER_ROUND,
@@ -15,111 +15,32 @@ const initialState = {
   },
   covariates: [],
   currentRound: null
-}
+})
 
 export default function round(state = initialState, action) {
   switch (action.type) {
   case INCREMENT_CURRENT_QUESTION:
-    console.log(state.questionInfo.currentQuestion)
-    return merge(
-      state,
-      {
-        questionInfo: merge(
-          state.questionInfo,
-          { currentQuestion: state.questionInfo.currentQuestion + 1 }
-        )
-      }
-    )
+    return state.updateIn(['questionInfo', 'currentQuestion'], value => value + 1)
   case INCREMENT_NUM_QUESTIONS:
-    return merge(
-      state,
-      {
-        questionInfo: merge(
-          state.questionInfo,
-          { numQuestions: state.questionInfo.numQuestions + 1 }
-        )
-      }
-    )
+    return state.updateIn(['questionInfo', 'numQuestions'], value => value + 1)
   case DECREMENT_NUM_QUESTIONS:
-    return merge(
-      state,
-      {
-        questionInfo: merge(
-          state.questionInfo,
-          { numQuestions: state.questionInfo.numQuestions - 1 }
-        )
-      }
-    )
+    return state.updateIn(['questionInfo', 'numQuestions'], value => value - 1)
   case SET_QUESTION_TYPE:
-    return merge(
-      state,
-      {
-        questionInfo: merge(
-          state.questionInfo,
-          { questionType: action.payload.questionType }
-        )
-      }
-    )
+    return state.setIn(['questionInfo', 'questionType'], action.payload.questionType)
   case ADD_POINT_ESTIMATE:
-    let pointEstimateVector = state.responseInfo.pointEstimateVector
-    pointEstimateVector.push(action.payload.pointEstimate)
-    return {
-      questionInfo: state.questionInfo,
-      responseInfo: {
-        pointEstimateVector: pointEstimateVector,
-        answersVector: state.responseInfo.answersVector
-      },
-      covariates: state.covariates,
-      currentRound: state.currentRound
-    }
+    return state.updateIn(['responseInfo', 'pointEstimateVector'], list => list.push(action.payload.pointEstimate))
   case ADD_ANSWERS:
-    let answersVector = state.responseInfo.answersVector
-    answersVector.push(action.payload.answers)
-    return {
-      questionInfo: state.questionInfo,
-      responseInfo: {
-        pointEstimateVector: state.responseInfo.pointEstimateVector,
-        answersVector: answersVector
-      },
-      covariates: state.covariates,
-      currentRound: state.currentRound
-    }
+    return state.updateIn(['responseInfo', 'answersVector'], list => list.push(action.payload.answers))
   case SET_ROUND:
-    return {
-      questionInfo: state.questionInfo,
-      responseInfo: state.responseInfo,
-      covariates: state.covariates,
-      currentRound: action.payload.currentRound
-    }
+    return state.set('currentRound', action.payload.currentRound)
   case ADD_ANSWER_TO_ROUND:
     let currentRound = state.currentRound
     currentRound.get('answers').push(action.payload.answer)
-    return {
-      questionInfo: state.questionInfo,
-      responseInfo: state.responseInfo,
-      covariates: state.covariates,
-      currentRound: currentRound
-    }
+    return state.set('currentRound', currentRound)
   case RESET_CURRENT_QUESTION:
-    return {
-      questionInfo: {
-        currentQuestion: 1,
-        numQuestions: state.questionInfo.numQuestions,
-        questionType: state.questionInfo.questionType
-      },
-      responseInfo: state.responseInfo,
-      covariates: state.covariates,
-      currentRound: state.currentRound
-    }
+    return state.setIn(['questionInfo', 'currentQuestion'], 1)
   case ADD_COVARIATES:
-    let covariates = state.covariates.slice(0)
-    covariates.push(action.payload.covariates)
-    return {
-      questionInfo: state.questionInfo,
-      responseInfo: state.responseInfo,
-      covariates: covariates,
-      currentRound: state.currentRound
-    }
+    return state.update('covariates', list => list.push(action.payload.covariates))
   default:
     return state
   }
