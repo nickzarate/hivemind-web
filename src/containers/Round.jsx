@@ -8,7 +8,7 @@ class RoundContainer extends React.Component {
   render() {
     return(
       <Round
-        actions={ merge(this.props.answerActions, this.props.roundActions) }
+        actions={ this.props.roundActions }
         pushPath={ this.props.pushPath }
         round={ this.props.round }
         children={ this.props.children }
@@ -20,5 +20,5 @@ class RoundContainer extends React.Component {
 export default reduxify({
   component: RoundContainer,
   state: 'round',
-  actions: { answerActions, roundActions }
+  actions: { roundActions }
 })
