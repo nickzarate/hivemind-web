@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxify } from 'toolbox'
+import reduxify from 'toolbox/reduxify'
 import * as questionActions from 'actions/question'
 import Question from 'components/Question'
 

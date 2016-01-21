@@ -32,7 +32,9 @@ export function login(currentUser) {
  */
 export function asyncSignup(Parse, pushPath) {
   return (dispatch, getState) => {
-    const { user } = getState()
+    let { user } = getState()
+    user = user.toJS()
+
     let newUser = new Parse.User()
     newUser.set('username', user.email)
     newUser.set('email', user.email)
@@ -54,7 +56,9 @@ export function asyncSignup(Parse, pushPath) {
  */
 export function asyncLogin(Parse, pushPath) {
   return (dispatch, getState) => {
-    const { user } = getState()
+    let { user } = getState()
+    user = user.toJS()
+
     Parse.User.logIn(user.email, user.password, {
       success(currentUser) {
         dispatch(login(currentUser))

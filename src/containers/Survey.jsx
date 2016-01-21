@@ -1,6 +1,6 @@
 import React from 'react'
 import * as surveyActions from 'actions/survey'
-import { reduxify } from 'toolbox'
+import reduxify from 'toolbox/reduxify'
 import Survey from 'components/Survey'
 
 class SurveyContainer extends React.Component {
