@@ -7,7 +7,7 @@ class StatsContainer extends React.Component {
   render() {
     return (
       <Stats
-        actions={ this.props.actions }
+        actions={ this.props.statsActions }
         pushPath={ this.props.pushPath }
         stats={ this.props.stats }
       />
@@ -17,6 +17,6 @@ class StatsContainer extends React.Component {
 
 export default reduxify({
   component: StatsContainer,
-  reducer: 'stats',
-  actions: statsActions
+  state: 'stats',
+  actions: { statsActions }
 })

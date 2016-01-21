@@ -7,7 +7,7 @@ class SurveyContainer extends React.Component {
   render() {
     return (
       <Survey
-        actions={ this.props.actions }
+        actions={ this.props.surveyActions }
         pushPath={ this.props.pushPath }
         survey={ this.props.survey }
       />
@@ -17,6 +17,6 @@ class SurveyContainer extends React.Component {
 
 export default reduxify({
   component: SurveyContainer,
-  reducer: 'survey',
-  actions: surveyActions
+  state: 'survey',
+  actions: { surveyActions }
 })

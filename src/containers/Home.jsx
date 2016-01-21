@@ -7,7 +7,7 @@ class HomeContainer extends React.Component {
   render() {
     return (
       <Home
-        actions={ this.props.actions }
+        actions={ this.props.homeActions }
         pushPath={ this.props.pushPath }
         round={ this.props.round }
       />
@@ -17,6 +17,6 @@ class HomeContainer extends React.Component {
 
 export default reduxify({
   component: HomeContainer,
-  reducer: 'round',
-  actions: homeActions
+  state: 'round',
+  actions: { homeActions }
 })

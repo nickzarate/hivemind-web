@@ -20,4 +20,4 @@ const DevTools = createDevTools(
   </DockMonitor>
 )
 
-module.exports = DevTools
+export default DevTools
