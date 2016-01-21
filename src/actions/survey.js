@@ -53,7 +53,7 @@ export function handleMonthlyEarnings(event) {
  *  TODO: Make everything abstract
  */
 export function asyncSubmitSurvey(Parse, survey) {
-  return dispatch => {
+  return (dispatch) => {
     let surveyResponses = {
       age: survey.age,
       sex: survey.sex,
