@@ -1,5 +1,5 @@
 
-# Envrionment Setup
+# Environment Setup
 
 Install node.js with which npm will come prepackaged: https://nodejs.org/en/
 
