@@ -14,7 +14,7 @@ export default function question(state = initialState, action) {
   case WITHDRAW:
     return state.set('bank', state.get('bank') - 1)
   case DEPOSIT:
-    return state.update('bins', array => array.update(action.payload.index, value => value + 1))
+    return state.update('bins', list => list.update(action.payload.index, value => value + 1))
   case SET_CURRENT_QUESTION:
     return state.set('currentQuestion', action.payload.currentQuestion)
   case SET_POINT_ESTIMATE:

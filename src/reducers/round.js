@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, INCREMENT_NUM_QUESTIONS, DECREMENT_NUM_QUESTIONS, SET_ROUND, ADD_ANSWER_TO_ROUND,
-  SET_QUESTION_TYPE, ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES } from 'constants'
+  SET_CATEGORY, ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES, SET_NUM_CATEGORIES } from 'constants'
 import default_question_config from 'assets/default_question_config.json'
 import { fromJS } from 'immutable'
 
@@ -14,7 +14,8 @@ const initialState = fromJS({
     answersVector: []
   },
   covariates: [],
-  currentRound: null
+  currentRound: null,
+  numCategories: 0
 })
 
 export default function round(state = initialState, action) {
@@ -41,6 +42,8 @@ export default function round(state = initialState, action) {
     return state.setIn(['questionInfo', 'currentQuestion'], 1)
   case ADD_COVARIATES:
     return state.update('covariates', list => list.push(action.payload.covariates))
+  case SET_NUM_CATEGORIES:
+    return state.set('numCategories', action.payload.numCategories)
   default:
     return state
   }

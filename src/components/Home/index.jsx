@@ -1,6 +1,13 @@
 import React from 'react'
+import Parse from 'parse'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
 export default class Home extends React.Component {
+  componentWillMount() {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+    this.props.actions.getNumCategories(Parse)
+  }
+
   pushPath(path) {
     return () => this.props.pushPath(path)
   }
