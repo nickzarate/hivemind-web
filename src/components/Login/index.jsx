@@ -19,19 +19,20 @@ export default class Login extends React.Component {
     return (
       <div>
         <h1>{ 'Login' }</h1>
-        <input
-          onChange={ this.handleEmail }
-          placeholder="EMAIL"
-          type="email"
-        />
-        <input
-          onChange={ this.handlePassword }
-          placeholder="PASSWORD"
-          type="password"
-        />
-        <button onClick={ this.handleLogin }>{ 'Log In' }</button>
-        <button onClick={ this.push('/home') }>{ 'home' }</button>
-        <button onClick={ this.push('/signup') }>{ 'Dont have an account?' }</button>
+        <form onSubmit={ this.handleLogin }>
+          <input
+            onChange={ this.handleEmail }
+            placeholder="Email"
+            type="email"
+          />
+          <input
+            onChange={ this.handlePassword }
+            placeholder="Password"
+            type="password" />
+          <button onClick={ this.handleLogin }>{ 'Log In' }</button>
+        </form>
+        <button onClick={ this.push('/home') }>{ 'Home' }</button>
+        <button onClick={ this.push('/signup') }>{ 'Sign Up' }</button>
       </div>
     )
   }
