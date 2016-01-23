@@ -22,12 +22,12 @@ export default class Signup extends React.Component {
         <form onSubmit={ this.handleSignup }>
           <input
             onChange={ this.handleEmail }
-            placeholder="EMAIL"
+            placeholder="Email"
             type="email"
           />
           <input
             onChange={ this.handlePassword }
-            placeholder="PASSWORD"
+            placeholder="Password"
             type="password"
           />
           <button onClick={ this.handleSignup }>{ 'Sign Up' }</button>
