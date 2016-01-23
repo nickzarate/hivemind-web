@@ -3,11 +3,26 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/grid";
 
+$dark-blue: #76B5F0;
+$dark-yellow: #DDB14A;
+$light-blue: #A8E2FF;
+$light-yellow: #F6E78F;
+
 #content {
-  margin: 20px;
+  padding: 20px;
+  background-color: $light-blue;
+  min-height: 100vh;
 }
 
 button {
   @extend .btn;
   @extend .btn-default;
+}
+
+input {
+  @extend .form-control;
+}
+
+form {
+  @extend .form-inline;
 }
