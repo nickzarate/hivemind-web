@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/nickzarate/hivemind-web#readme",
   "dependencies": {
+    "chartist": "^0.9.5",
     "history": "^1.17.0",
     "immutable": "^3.7.6",
     "jquery": "^2.1.4",

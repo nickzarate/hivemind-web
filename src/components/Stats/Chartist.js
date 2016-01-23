@@ -1,5 +1,6 @@
 import React from 'react'
 import ChartistGraph from 'react-chartist'
+import 'chartist/dist/chartist.min.css'
 
 export default class Graph extends React.Component {
   render() {
@@ -23,7 +24,7 @@ export default class Graph extends React.Component {
 
     return (
       <div>
-        <ChartistGraph data={data} type={type} />
+        <ChartistGraph data={ data } type={ type } />
       </div>
     )
   }
