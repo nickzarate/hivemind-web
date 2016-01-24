@@ -58,6 +58,23 @@ export function resetCurrentQuestion() {
   }
 }
 
+export function setNumQuestions(numQuestions) {
+  return {
+    type: SET_NUM_QUESTIONS,
+    payload: {
+      numQuestions: numQuestions
+    }
+  }
+}
+
+export function getNumQuestions() {
+  return (dispatch, getState) => {
+    let { round } = getState()
+    round = round.toJS()
+    dispatch(setNumQuestions(round.questionInfo.currentCategory.get('numQuestions')))
+  }
+}
+
 /*
  *  Create a new round in Parse and save with:
  *    answers: [],
