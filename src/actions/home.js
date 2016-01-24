@@ -1,4 +1,4 @@
-import { INCREMENT_NUM_QUESTIONS, DECREMENT_NUM_QUESTIONS, SET_NUM_CATEGORIES } from 'constants'
+import { INCREMENT_NUM_QUESTIONS, DECREMENT_NUM_QUESTIONS, SET_CATEGORIES, SET_CURRENT_CATEGORY } from 'constants'
 
 export function incrementNumQuestions() {
   return {
@@ -12,11 +12,20 @@ export function decrementNumQuestions() {
   }
 }
 
-export function setNumCategories(numCategories) {
+export function setCurrentCategory(currentCategory) {
   return {
-    type: SET_NUM_CATEGORIES,
+    type: SET_CURRENT_CATEGORY,
     payload: {
-      numCategories: numCategories
+      currentCategory: currentCategory
+    }
+  }
+}
+
+export function setCategories(categories) {
+  return {
+    type: SET_CATEGORIES,
+    payload: {
+      categories: categories
     }
   }
 }
@@ -24,12 +33,11 @@ export function setNumCategories(numCategories) {
 /*
  *  Make a query to Parse to check how many categories are currently up
  */
-export function getNumCategories(Parse) {
+export function getCategories(Parse) {
   return (dispatch) => {
     var query = new Parse.Query('Categories')
-    query.find(function (categories) {
-      console.log(categories.length)
-      dispatch(setNumCategories(categories.length))
+    query.find(function(categories) {
+      dispatch(setCategories(categories))
     })
   }
 }

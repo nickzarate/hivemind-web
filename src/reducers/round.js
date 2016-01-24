@@ -6,8 +6,8 @@ import { fromJS } from 'immutable'
 const initialState = fromJS({
   questionInfo: {
     currentQuestion: 1,
-    numQuestions: default_question_config.NUM_QUESTIONS_PER_ROUND,
-    questionType: default_question_config.TYPE
+    numQuestions: 1,
+    currentCategory: null
   },
   responseInfo: {
     pointEstimateVector: [],
@@ -15,7 +15,7 @@ const initialState = fromJS({
   },
   covariates: [],
   currentRound: null,
-  numCategories: 0
+  categories: null
 })
 
 export default function round(state = initialState, action) {
@@ -26,8 +26,8 @@ export default function round(state = initialState, action) {
     return state.updateIn(['questionInfo', 'numQuestions'], value => value + 1)
   case DECREMENT_NUM_QUESTIONS:
     return state.updateIn(['questionInfo', 'numQuestions'], value => value - 1)
-  case SET_QUESTION_TYPE:
-    return state.setIn(['questionInfo', 'questionType'], action.payload.questionType)
+  case SET_CURRENT_CATEGORY:
+    return state.setIn(['questionInfo', 'currentCategory'], action.payload.currentCategory)
   case ADD_POINT_ESTIMATE:
     return state.updateIn(['responseInfo', 'pointEstimateVector'], list => list.push(action.payload.pointEstimate))
   case ADD_ANSWERS:
@@ -42,8 +42,10 @@ export default function round(state = initialState, action) {
     return state.setIn(['questionInfo', 'currentQuestion'], 1)
   case ADD_COVARIATES:
     return state.update('covariates', list => list.push(action.payload.covariates))
-  case SET_NUM_CATEGORIES:
-    return state.set('numCategories', action.payload.numCategories)
+  case SET_CATEGORIES:
+    return state.set('categories', action.payload.categories)
+  case SET_NUM_QUESTIONS:
+    return state.setIn(['questionInfo', 'numQuestions'], action.payload.numQuestions)
   default:
     return state
   }
