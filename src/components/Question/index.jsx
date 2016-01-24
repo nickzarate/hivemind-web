@@ -1,12 +1,13 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import default_question_config from 'assets/default_question_config.json'
 
 export default class Question extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    this.props.actions.pullQuestion(Parse)
+    const { actions } = this.props
+    actions.reset()
+    actions.pullQuestion(Parse)
   }
 
   handleDeposit(index) { return () => this.props.actions.handleDeposit(index) }
@@ -17,7 +18,6 @@ export default class Question extends React.Component {
 
   handleSubmit() {
     return () => {
-      const { actions } = this.props
       this.props.onSubmit()
       //TODO: Fix this, deprecated
       this.refs.estimateInput.value = ''

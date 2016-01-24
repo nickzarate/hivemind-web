@@ -105,12 +105,13 @@ export function pullQuestion(Parse) {
     round = round.toJS()
 
     //Create query for random question
-    let observationId = rand(1, 10)
-    let Question = Parse.Object.extend('Question')
+    let observationId = rand(1, 3010)
+    let Question = Parse.Object.extend('Questions')
     let query = new Parse.Query(Question)
-    query.equalTo('type', round.questionInfo.questionType)
+    console.log(round.questionInfo.currentCategory)
+    query.equalTo('type', round.questionInfo.currentCategory.get('name'))
     query.equalTo('observationId', observationId)
-
+    console.log(query)
     //Pull question and set state
     query.first().then(function(parseQuestion) {
       dispatch(setCurrentQuestion(parseQuestion))
