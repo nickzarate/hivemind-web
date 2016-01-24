@@ -1,4 +1,4 @@
-import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK, RESET_BINS, SET_BANK } from 'constants'
+import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK, SET_BINS, SET_BANK } from 'constants'
 import { fromJS, List } from 'immutable'
 
 const initialState = fromJS({

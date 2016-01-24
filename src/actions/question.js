@@ -1,4 +1,4 @@
-import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK, RESET_BINS, SET_BANK } from 'constants'
+import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, SET_BINS, SET_BANK } from 'constants'
 import { rand } from 'toolbox/misc'
 
 export function withdraw() {
@@ -21,6 +21,26 @@ export function setPointEstimate(pointEstimate) {
     type: SET_POINT_ESTIMATE,
     payload: {
       pointEstimate: pointEstimate
+    }
+  }
+}
+
+export function resetBins(binLength) {
+  let bins = []
+  for (let i = 0; i < binLength; i++) { bins.push(0) }
+  return {
+    type: RESET_BINS,
+    payload: {
+      bins: bins
+    }
+  }
+}
+
+export function setBank(bank) {
+  return {
+    type: SET_BANK,
+    payload: {
+      bank: bank
     }
   }
 }
