@@ -108,7 +108,7 @@ export function asyncHandleSubmit(Parse, pushPath) {
     question = question.toJS()
     round = round.toJS()
 
-    //Save answers in vectors and
+    //Save answers and covariates in vectors
     dispatch(addAnswers(question.bins))
     dispatch(addPointEstimate(question.pointEstimate))
     dispatch(addCovariates(question.currentQuestion.get('covariates')))
