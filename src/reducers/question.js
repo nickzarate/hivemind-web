@@ -1,5 +1,4 @@
-import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK } from 'constants'
-import default_question_config from 'assets/default_question_config.json'
+import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK, RESET_BINS, SET_BANK } from 'constants'
 import { fromJS, List } from 'immutable'
 
 const initialState = fromJS({

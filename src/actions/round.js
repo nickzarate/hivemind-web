@@ -1,14 +1,5 @@
-import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_QUESTION_TYPE, SET_ROUND,
-  ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES } from 'constants'
-
-export function setQuestionType(questionType) {
-  return {
-    type: SET_QUESTION_TYPE,
-    payload: {
-      questionType: questionType
-    }
-  }
-}
+import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND, ADD_POINT_ESTIMATE,
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES, SET_NUM_QUESTIONS } from 'constants'
 
 export function setRound(savedRound) {
   return {

@@ -1,4 +1,4 @@
-import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK } from 'constants'
+import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK, RESET_BINS, SET_BANK } from 'constants'
 import { rand } from 'toolbox/misc'
 
 export function withdraw() {
