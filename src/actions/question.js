@@ -25,11 +25,9 @@ export function setPointEstimate(pointEstimate) {
   }
 }
 
-export function resetBins(binLength) {
-  let bins = []
-  for (let i = 0; i < binLength; i++) { bins.push(0) }
+export function setBins(bins) {
   return {
-    type: RESET_BINS,
+    type: SET_BINS,
     payload: {
       bins: bins
     }
@@ -54,9 +52,17 @@ export function setCurrentQuestion(question) {
   }
 }
 
-export function resetBank() {
-  return {
-    type: RESET_BANK
+export function reset() {
+  return (dispatch, getState) => {
+    let { round } = getState()
+    round = round.toJS()
+    let bins = []
+    for (let i = 0; i < round.questionInfo.currentCategory.get('binText').length; i++) {
+      bins.push(0)
+    }
+    dispatch(setBins(bins))
+    dispatch(setBank(round.questionInfo.currentCategory.get('tokens')))
+    dispatch(setPointEstimate(0))
   }
 }
 

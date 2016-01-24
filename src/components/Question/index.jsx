@@ -21,8 +21,8 @@ export default class Question extends React.Component {
       this.props.onSubmit()
       //TODO: Fix this, deprecated
       this.refs.estimateInput.value = ''
-      actions.resetBank()
-      actions.pullQuestion(Parse)
+      this.props.actions.reset()
+      this.props.actions.pullQuestion(Parse)
     }
   }
 

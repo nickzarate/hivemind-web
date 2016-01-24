@@ -2,8 +2,8 @@ import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK
 import { fromJS, List } from 'immutable'
 
 const initialState = fromJS({
-  bank: default_question_config.NUM_CUBES,
-  bins: List(Array(default_question_config.NUM_BINS).fill(0)),
+  bank: 0,
+  bins: [],
   pointEstimate: 0,
   currentQuestion: null
 })
@@ -18,8 +18,12 @@ export default function question(state = initialState, action) {
     return state.set('currentQuestion', action.payload.currentQuestion)
   case SET_POINT_ESTIMATE:
     return state.set('pointEstimate', action.payload.pointEstimate)
+  case SET_BINS:
+    return state.set('bins', List(action.payload.bins))
   case RESET_BANK:
     return initialState
+  case SET_BANK:
+    return state.set('bank', action.payload.bank)
   default:
     return state
   }
