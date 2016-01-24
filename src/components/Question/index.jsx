@@ -27,33 +27,30 @@ export default class Question extends React.Component {
   }
 
   renderBins() {
-    let bins = []
-    if (this.props.question.currentQuestion) {
-      for (let i = 0; i < default_question_config.NUM_BINS; i++) {
-        bins.push(
-          <li key={ i }>
-            <button onClick={ this.handleDeposit(i) }>
-              { this.props.question.currentQuestion.get('answerTexts')[i] }{ ': ' }{ this.props.question.bins[i] }
+    const { question, currentCategory } = this.props
+    if (question.currentQuestion) {
+      return currentCategory.get('binText').map(
+        (text, index) => (
+          <li key={ index }>
+            <button onClick={ this.handleDeposit(index) }>
+              { text }{ ': ' }{ question.bins[index] }
             </button>
           </li>
         )
-      }
-      return bins
+      )
     }
   }
 
   renderCovariates() {
-    let covariates = []
-    // for (let q in this.props.question.currentQuestion.get('covariates'))
-    if (this.props.question.currentQuestion) {
-      for (let i in this.props.question.currentQuestion.get('covariates')) {
-        covariates.push(
-          <li key={ i }>
-            <p>{ this.props.question.currentQuestion.get('covariateNames')[i] }{ ': ' }{ this.props.question.currentQuestion.get('covariates')[i] }</p>
+    const { question, currentCategory } = this.props
+    if (question.currentQuestion) {
+      return question.currentQuestion.get('covariateValues').map(
+        (covariate, index) => (
+          <li key={ index }>
+            <p>{ currentCategory.get('covariateNames')[index] }{ ': ' }{ covariate }</p>
           </li>
         )
-      }
-      return covariates
+      )
     }
   }
 
