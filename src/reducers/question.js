@@ -1,9 +1,8 @@
-import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK } from 'constants'
-import default_question_config from 'assets/default_question_config.json'
+import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK, SET_BINS, SET_BANK } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
-  bank: default_question_config.NUM_CUBES,
+  bank: 0,
   bins: Array(default_question_config.NUM_BINS).fill(0),
   pointEstimate: 0,
   currentQuestion: null
@@ -19,6 +18,10 @@ export default function question(state = initialState, action) {
     return update(state, {currentQuestion: {$set: action.payload.currentQuestion}})
   case SET_POINT_ESTIMATE:
     return update(state, {pointEstimate: {$set: action.payload.pointEstimate}})
+  case SET_BINS:
+    return update(state, {bins: {$set: action.payload.bins}})
+  case SET_BANK:
+    return update(state, {bank: {$set: action.payload.bank}})
   case RESET_BANK:
     return initialState
   default:

@@ -1,14 +1,5 @@
-import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_QUESTION_TYPE, SET_ROUND,
-  ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES } from 'constants'
-
-export function setQuestionType(questionType) {
-  return {
-    type: SET_QUESTION_TYPE,
-    payload: {
-      questionType: questionType
-    }
-  }
-}
+import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND, ADD_POINT_ESTIMATE,
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES, SET_NUM_QUESTIONS } from 'constants'
 
 export function setRound(savedRound) {
   return {
@@ -67,6 +58,23 @@ export function resetCurrentQuestion() {
   }
 }
 
+export function setNumQuestions(numQuestions) {
+  return {
+    type: SET_NUM_QUESTIONS,
+    payload: {
+      numQuestions: numQuestions
+    }
+  }
+}
+
+export function getNumQuestions() {
+  return (dispatch, getState) => {
+    let { round } = getState()
+    round = round.toJS()
+    dispatch(setNumQuestions(round.questionInfo.currentCategory.get('numQuestions')))
+  }
+}
+
 /*
  *  Create a new round in Parse and save with:
  *    answers: [],
@@ -112,7 +120,7 @@ export function asyncHandleSubmit(Parse, pushPath) {
   return (dispatch, getState) => {
     const { question, round } = getState()
 
-    //Save answers in vectors and
+    //Save answers and covariates in vectors
     dispatch(addAnswers(question.bins))
     dispatch(addPointEstimate(question.pointEstimate))
     dispatch(addCovariates(question.currentQuestion.get('covariates')))

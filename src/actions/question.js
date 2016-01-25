@@ -1,4 +1,4 @@
-import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK } from 'constants'
+import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, SET_BINS, SET_BANK } from 'constants'
 import { rand } from 'toolbox/misc'
 
 export function withdraw() {
@@ -25,6 +25,24 @@ export function setPointEstimate(pointEstimate) {
   }
 }
 
+export function setBins(bins) {
+  return {
+    type: SET_BINS,
+    payload: {
+      bins: bins
+    }
+  }
+}
+
+export function setBank(bank) {
+  return {
+    type: SET_BANK,
+    payload: {
+      bank: bank
+    }
+  }
+}
+
 export function setCurrentQuestion(question) {
   return {
     type: SET_CURRENT_QUESTION,
@@ -34,9 +52,17 @@ export function setCurrentQuestion(question) {
   }
 }
 
-export function resetBank() {
-  return {
-    type: RESET_BANK
+export function reset() {
+  return (dispatch, getState) => {
+    let { round } = getState()
+    round = round.toJS()
+    let bins = []
+    for (let i = 0; i < round.questionInfo.currentCategory.get('binText').length; i++) {
+      bins.push(0)
+    }
+    dispatch(setBins(bins))
+    dispatch(setBank(round.questionInfo.currentCategory.get('tokens')))
+    dispatch(setPointEstimate(0))
   }
 }
 
@@ -77,12 +103,11 @@ export function pullQuestion(Parse) {
     const { round } = getState()
 
     //Create query for random question
-    let observationId = rand(1, 10)
-    let Question = Parse.Object.extend('Question')
+    let observationId = rand(1, 3010)
+    let Question = Parse.Object.extend('Questions')
     let query = new Parse.Query(Question)
-    query.equalTo('type', round.questionInfo.questionType)
+    query.equalTo('type', round.questionInfo.currentCategory.get('name'))
     query.equalTo('observationId', observationId)
-
     //Pull question and set state
     query.first().then(function(question) {
       dispatch(setCurrentQuestion(question))
