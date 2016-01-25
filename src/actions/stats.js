@@ -32,8 +32,7 @@ export function setPhi(phi) {
  */
 export function updateCovariateData(chartIndex, covariateIndex, covariateValue) {
   return (dispatch, getState) => {
-    let { stats } = getState()
-    stats = stats.toJS()
+    const { stats } = getState()
     let covariateData = stats.covariateData.slice(0)
     covariateData[chartIndex][covariateIndex] = covariateValue
     dispatch(setCovariateData(covariateData))
@@ -46,8 +45,7 @@ export function updateCovariateData(chartIndex, covariateIndex, covariateValue) 
  */
 export function asyncGetPhi() {
   return (dispatch, getState) => {
-    let { round } = getState()
-    round = round.toJS()
+    const { round } = getState()
 
     // Get covariates and predictions from the latest round to analyze and get phi
     let predictions = []
@@ -118,8 +116,7 @@ export function getData() {
  */
 export function updateChart(chartIndex) {
   return (dispatch, getState) => {
-    let { stats } = getState()
-    stats = stats.toJS()
+    const { stats } = getState()
 
     let data = stats.data.slice(0)
     let chartData = []

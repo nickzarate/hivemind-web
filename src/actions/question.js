@@ -45,8 +45,7 @@ export function resetBank() {
  */
 export function handleDeposit(index) {
   return (dispatch, getState) => {
-    let { question } = getState()
-    question = question.toJS()
+    const { question } = getState()
 
     if (question.bank) {
       dispatch(withdraw())
@@ -75,8 +74,7 @@ export function handleEstimate(event) {
  */
 export function pullQuestion(Parse) {
   return (dispatch, getState) => {
-    let { round } = getState()
-    round = round.toJS()
+    const { round } = getState()
 
     //Create query for random question
     let observationId = rand(1, 10)
@@ -86,8 +84,8 @@ export function pullQuestion(Parse) {
     query.equalTo('observationId', observationId)
 
     //Pull question and set state
-    query.first().then(function(parseQuestion) {
-      dispatch(setCurrentQuestion(parseQuestion))
+    query.first().then(function(question) {
+      dispatch(setCurrentQuestion(question))
     })
   }
 }

@@ -74,7 +74,6 @@ export function resetCurrentQuestion() {
  */
 export function asyncCreateRound(Parse) {
   return (dispatch) => {
-
     //Create new Round
     let Round = Parse.Object.extend('Round')
     let newRound = new Round()
@@ -94,9 +93,7 @@ export function asyncCreateRound(Parse) {
  */
 export function asyncAwardPoints() {
   return (dispatch, getState) => {
-    let { question, user } = getState()
-    question = question.toJS()
-    user = user.toJS()
+    const { question, user } = getState()
 
     //TODO: Calculate how many points are earned for answering correctly
     let points = question.bins[question.currentQuestion.get('correctAnswerIndex')] * 50
@@ -113,9 +110,7 @@ export function asyncAwardPoints() {
  */
 export function asyncHandleSubmit(Parse, pushPath) {
   return (dispatch, getState) => {
-    let { question, round } = getState()
-    question = question.toJS()
-    round = round.toJS()
+    const { question, round } = getState()
 
     //Save answers in vectors and
     dispatch(addAnswers(question.bins))
