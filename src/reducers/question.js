@@ -3,7 +3,7 @@ import update from 'react-addons-update'
 
 const initialState = {
   bank: 0,
-  bins: Array(default_question_config.NUM_BINS).fill(0),
+  bins: [],
   pointEstimate: 0,
   currentQuestion: null
 }
