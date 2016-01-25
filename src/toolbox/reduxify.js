@@ -19,7 +19,7 @@ export default function reduxify({ state, actions, component }) {
   const push = routeActions.push
 
   // the component will subscribe to Redux store updates
-  var mapStateToProps = (totalState) => ({ [state]: totalState[state].toJS() })
+  var mapStateToProps = (totalState) => ({ [state]: totalState[state] })
 
   // the component will be provided actions
   if (actions)
