@@ -2,13 +2,11 @@ import React from 'react'
 
 export default class Selector extends React.Component {
   renderOptions() {
-    let options = []
-    for (let opt of this.props.options) {
-      options.push(
-        <option key={ opt }>{ opt }</option>
+    return this.props.options.map(
+      (option) => (
+        <option key={ option }>{ option }</option>
       )
-    }
-    return options
+    )
   }
 
   render() {

@@ -14,7 +14,6 @@ export default function stats(state = initialState, action) {
   case SET_COVARIATE_DATA:
     return state.set('covariateData', action.payload.covariateData)
   case SET_PHI:
-    console.log(action.payload.phi)
     return state.set('phi', action.payload.phi)
   default:
     return state
