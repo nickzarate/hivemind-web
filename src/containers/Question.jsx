@@ -11,6 +11,7 @@ class QuestionContainer extends React.Component {
         question={ this.props.question }
         pushPath={ this.props.pushPath }
         onSubmit={ this.props.onSubmit }
+        currentCategory={ this.props.currentCategory }
       />
     )
   }

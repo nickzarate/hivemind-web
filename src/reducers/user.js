@@ -1,20 +1,20 @@
 import { SET_USER_EMAIL, SET_USER_PASSWORD, LOGIN } from 'constants'
-import { fromJS } from 'immutable'
+import update from 'react-addons-update'
 
-const initialState = fromJS({
+const initialState = {
   email: '',
   password: '',
   currentUser: null
-})
+}
 
 export default function user(state = initialState, action) {
   switch (action.type) {
   case SET_USER_EMAIL:
-    return state.set('email', action.payload.email)
+    return update(state, {email: {$set: action.payload.email}})
   case SET_USER_PASSWORD:
-    return state.set('password', action.payload.password)
+    return update(state, {password: {$set: action.payload.password}})
   case LOGIN:
-    return state.set('currentUser', action.payload.currentUser)
+    return update(state, {currentUser: {$set: action.payload.currentUser}})
   default:
     return state
   }
