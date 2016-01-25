@@ -22,15 +22,15 @@ export default function round(state = initialState, action) {
   case INCREMENT_CURRENT_QUESTION:
     return update(state, {questionInfo: {currentQuestion: {$set: state.questionInfo.currentQuestion + 1}}})
   case INCREMENT_NUM_QUESTIONS:
-    return update(state, {questionInfo: {numQuestions: {$set: state.questionInfo.numQuestions + 1}}})//state.updateIn(['questionInfo', 'numQuestions'], value => value + 1)
+    return update(state, {questionInfo: {numQuestions: {$set: state.questionInfo.numQuestions + 1}}})
   case DECREMENT_NUM_QUESTIONS:
-    return update(state, {questionInfo: {numQuestions: {$set: state.questionInfo.numQuestions - 1}}})//state.updateIn(['questionInfo', 'numQuestions'], value => value - 1)
+    return update(state, {questionInfo: {numQuestions: {$set: state.questionInfo.numQuestions - 1}}})
   case SET_QUESTION_TYPE:
-    return update(state, {questionInfo: {questionType: {$set: action.payload.questionType}}})//state.setIn(['questionInfo', 'questionType'], action.payload.questionType)
+    return update(state, {questionInfo: {questionType: {$set: action.payload.questionType}}})
   case ADD_POINT_ESTIMATE:
-    return update(state, {responseInfo: {pointEstimateVector: {$push: [action.payload.pointEstimate]}}})//state.updateIn(['responseInfo', 'pointEstimateVector'], list => list.push(action.payload.pointEstimate))
+    return update(state, {responseInfo: {pointEstimateVector: {$push: [action.payload.pointEstimate]}}})
   case ADD_ANSWERS:
-    return update(state, {responseInfo: {answersVector: {$push: [action.payload.answersVector]}}})//state.updateIn(['responseInfo', 'answersVector'], list => list.push(action.payload.answers))
+    return update(state, {responseInfo: {answersVector: {$push: [action.payload.answersVector]}}})
   case SET_ROUND:
     return update(state, {currentRound: {$set: action.payload.currentRound}})
   case ADD_ANSWER_TO_ROUND:
@@ -38,9 +38,9 @@ export default function round(state = initialState, action) {
     currentRound.get('answers').push(action.payload.answer)
     return update(state, {currentRound: {$set: currentRound}})
   case RESET_CURRENT_QUESTION:
-    return update(state, {questionInfo: {currentQuestion: {$set: 1}}})//state.setIn(['questionInfo', 'currentQuestion'], 1)
+    return update(state, {questionInfo: {currentQuestion: {$set: 1}}})
   case ADD_COVARIATES:
-    return update(state, {covariates: {$push: [action.payload.covariates]}})//state.update('covariates', list => list.push(action.payload.covariates))
+    return update(state, {covariates: {$push: [action.payload.covariates]}})
   default:
     return state
   }

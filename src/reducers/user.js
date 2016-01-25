@@ -10,11 +10,11 @@ const initialState = {
 export default function user(state = initialState, action) {
   switch (action.type) {
   case SET_USER_EMAIL:
-    return update(state, {email: {$set: action.payload.email}})//set('email', action.payload.email)
+    return update(state, {email: {$set: action.payload.email}})
   case SET_USER_PASSWORD:
-    return update(state, {password: {$set: action.payload.password}})//state.set('password', action.payload.password)
+    return update(state, {password: {$set: action.payload.password}})
   case LOGIN:
-    return update(state, {currentUser: {$set: action.payload.currentUser}})//state.set('currentUser', action.payload.currentUser)
+    return update(state, {currentUser: {$set: action.payload.currentUser}})
   default:
     return state
   }
