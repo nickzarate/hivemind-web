@@ -108,10 +108,8 @@ export function pullQuestion(Parse) {
     let observationId = rand(1, 3010)
     let Question = Parse.Object.extend('Questions')
     let query = new Parse.Query(Question)
-    console.log(round.questionInfo.currentCategory)
     query.equalTo('type', round.questionInfo.currentCategory.get('name'))
     query.equalTo('observationId', observationId)
-    console.log(query)
     //Pull question and set state
     query.first().then(function(parseQuestion) {
       dispatch(setCurrentQuestion(parseQuestion))
