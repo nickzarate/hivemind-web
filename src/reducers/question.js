@@ -1,29 +1,29 @@
 import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, RESET_BANK, SET_BINS, SET_BANK } from 'constants'
-import { fromJS, List } from 'immutable'
+import update from 'react-addons-update'
 
-const initialState = fromJS({
+const initialState = {
   bank: 0,
-  bins: [],
+  bins: Array(default_question_config.NUM_BINS).fill(0),
   pointEstimate: 0,
   currentQuestion: null
-})
+}
 
 export default function question(state = initialState, action) {
   switch (action.type) {
   case WITHDRAW:
-    return state.set('bank', state.get('bank') - 1)
+    return update(state, {bank: {$set: state.bank - 1}})
   case DEPOSIT:
-    return state.update('bins', list => list.update(action.payload.index, value => value + 1))
+    return update(state, {bins: {$splice: [[action.payload.index, 1, state.bin[action.payload.index] + 1]]}})
   case SET_CURRENT_QUESTION:
-    return state.set('currentQuestion', action.payload.currentQuestion)
+    return update(state, {currentQuestion: {$set: action.payload.currentQuestion}})
   case SET_POINT_ESTIMATE:
-    return state.set('pointEstimate', action.payload.pointEstimate)
+    return update(state, {pointEstimate: {$set: action.payload.pointEstimate}})
   case SET_BINS:
-    return state.set('bins', List(action.payload.bins))
+    return update(state, {bins: {$set: action.payload.bins}})
+  case SET_BANK:
+    return update(state, {bank: {$set: action.payload.bank}})
   case RESET_BANK:
     return initialState
-  case SET_BANK:
-    return state.set('bank', action.payload.bank)
   default:
     return state
   }
