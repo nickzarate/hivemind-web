@@ -69,8 +69,7 @@ export function setNumQuestions(numQuestions) {
 
 export function getNumQuestions() {
   return (dispatch, getState) => {
-    let { round } = getState()
-    round = round.toJS()
+    const { round } = getState()
     dispatch(setNumQuestions(round.questionInfo.currentCategory.get('numQuestions')))
   }
 }

@@ -54,8 +54,7 @@ export function setCurrentQuestion(question) {
 
 export function reset() {
   return (dispatch, getState) => {
-    let { round } = getState()
-    round = round.toJS()
+    const { round } = getState()
     let bins = []
     for (let i = 0; i < round.questionInfo.currentCategory.get('binText').length; i++) {
       bins.push(0)
