@@ -70,7 +70,7 @@ export function setNumQuestions(numQuestions) {
 export function getNumQuestions() {
   return (dispatch, getState) => {
     const { round } = getState()
-    dispatch(setNumQuestions(round.questionInfo.currentCategory.get('numQuestions')))
+    dispatch(setNumQuestions(round.questionInfo.currentCategory.get('questionsPerRound')))
   }
 }
 

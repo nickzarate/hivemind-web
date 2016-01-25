@@ -71,7 +71,7 @@ export function reset() {
 export function handleDeposit(index) {
   return (dispatch, getState) => {
     const { question } = getState()
-
+    console.log(question)
     if (question.bank) {
       dispatch(withdraw())
       dispatch(deposit(index))

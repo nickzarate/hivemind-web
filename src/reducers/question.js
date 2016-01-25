@@ -13,7 +13,7 @@ export default function question(state = initialState, action) {
   case WITHDRAW:
     return update(state, {bank: {$set: state.bank - 1}})
   case DEPOSIT:
-    return update(state, {bins: {$splice: [[action.payload.index, 1, state.bin[action.payload.index] + 1]]}})
+    return update(state, {bins: {$splice: [[action.payload.index, 1, state.bins[action.payload.index] + 1]]}})
   case SET_CURRENT_QUESTION:
     return update(state, {currentQuestion: {$set: action.payload.currentQuestion}})
   case SET_POINT_ESTIMATE:
