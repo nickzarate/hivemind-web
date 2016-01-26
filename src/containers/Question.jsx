@@ -1,15 +1,14 @@
 import React from 'react'
-import reduxify from 'toolbox/reduxify'
-import * as questionActions from 'actions/question'
+import subscribe from 'selectors/questionSelector'
 import Question from 'components/Question'
 
 class QuestionContainer extends React.Component {
   render() {
     return (
       <Question
-        actions={ this.props.questionActions }
+        actions={ this.props.actions }
         question={ this.props.question }
-        pushPath={ this.props.pushPath }
+        push={ this.props.push }
         onSubmit={ this.props.onSubmit }
         currentCategory={ this.props.currentCategory }
       />
@@ -17,8 +16,4 @@ class QuestionContainer extends React.Component {
   }
 }
 
-export default reduxify({
-  component: QuestionContainer,
-  state: 'question',
-  actions: { questionActions }
-})
+export default subscribe(QuestionContainer)
