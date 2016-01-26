@@ -17,6 +17,6 @@ class SignupContainer extends React.Component {
 
 export default reduxify({
   component: SignupContainer,
-  state: 'user',
-  actions: { userActions }
+  reducer: 'user',
+  actions: userActions
 })

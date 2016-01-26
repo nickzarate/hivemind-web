@@ -17,6 +17,6 @@ class LoginContainer extends React.Component {
 
 export default reduxify({
   component: LoginContainer,
-  state: 'user',
-  actions: { userActions }
+  reducer: 'user',
+  actions: userActions
 })

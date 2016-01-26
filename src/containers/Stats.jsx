@@ -17,6 +17,6 @@ class StatsContainer extends React.Component {
 
 export default reduxify({
   component: StatsContainer,
-  state: 'stats',
-  actions: { statsActions }
+  reducer: 'stats',
+  actions: statsActions
 })
