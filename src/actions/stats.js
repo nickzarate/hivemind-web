@@ -27,6 +27,25 @@ export function setPhi(phi) {
   }
 }
 
+export function setSeries(index, data) {
+  return {
+    type: SET_SERIES,
+    payload: {
+      index: index,
+      data: data
+    }
+  }
+}
+
+export function setSeries(index, series) {
+  return (dispatch, getState) => {
+    const { stats } = getState()
+    let data = Object.assign({}, stats.data[index])
+    data.series = series
+    dispatch(setSeries(index, data))
+  }
+}
+
 /*
  *  Update the covariate data at the specified index with the specified value
  */
@@ -81,23 +100,43 @@ export function getCovariateData() {
 }
 
 /*
- *  Plot some initial data
+ *  Depending on the covariateRange of the category under inspection,
+ *  get the X-axis points that will ultimately be plotted.
  */
 export function getData() {
   return (dispatch, getState) => {
+    const { round } = getState()
+    let labels = round.questionInfo.currentCategory.get('covariateRanges')
     //TODO: TEMP
-    let data = []
-    for (let i = 0; i < 2; i++) {
-      let lineData = []
-      let values = [{x: 0, y: 0}]
-      let series = {
-        name: 'You',
-        values: values
+    for (let label in labels) {
+      let range = label[1] - label[0]
+      let divisor
+      while (divisor >= range) {
+        divisor--
       }
-      lineData.push(series)
-      data.push(lineData)
+      let step = range / divisor
+      step = Math.floor(step)
+      let values = []
+      let value = label[0]
+      for (let j = 0; j < divisor; j++) {
+        value += step
+        values.push(value)
+      }
+      for (let val in values) {
+        label.splice(-1, 0, val)
+      }
     }
-    dispatch(setData(data))
+    let allData = []
+
+    for (let k = 0; k < labels.length; k++) {
+      let data = {
+        labels: labels[k],
+        series: []
+      }
+      allData.push(data)
+    }
+    console.log(allData)
+    dispatch(setData(allData))
   }
 }
 
@@ -129,7 +168,7 @@ export function updateChart(chartIndex) {
       covariateValues.push(Math.pow(stats.covariateData[chartIndex][i], 2))
     }
     let alpha = stats.phi[0]
-
+    let single = []
     for (let i = 0; i < 20; i++) {
       let tempCovariateValues = covariateValues.slice(0)
       let y = alpha
@@ -138,18 +177,14 @@ export function updateChart(chartIndex) {
       for (let j in betas) {
         y += betas[j] * tempCovariateValues[j]
       }
-      let value = {
-        x: i,
-        y: y
-      }
+      single.push(y)
       values.push(value)
     }
-    let series = {
-      name: 'You',
-      values: values
-    }
-    chartData.push(series)
-    data[chartIndex] = chartData
-    dispatch(setData(data))
+    let series = []
+    series.push(single)
+    dispatch(setSeries(chartIndex, series))
+    // chartData.push(series)
+    // data[chartIndex] = chartData
+    // dispatch(setData(data))
   }
 }
