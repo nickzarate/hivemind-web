@@ -1,6 +1,5 @@
 import React from 'react'
-//import LineCharts from './LineCharts'
-import Graph from './Chartist'
+import LineCharts from './LineCharts'
 
 export default class Stats extends React.Component {
   constructor(props) {
@@ -29,16 +28,15 @@ export default class Stats extends React.Component {
     return (
       <div>
         <p>{ 'Stats page!!' }</p>
-        <Graph />
+        <LineCharts
+          numCharts={ this.props.stats.covariateData.length }
+          data={ this.props.stats.data }
+          type={ 'Line' }
+          onSliderChange={ this.handleSliderChange }
+          covariateRanges={ this.props.currentCategory.get('covariateRanges') }
+        />
         <button onClick={ this.pushPath('/home') }>{ 'Go Home' }</button>
       </div>
     )
   }
 }
-
-// <LineCharts
-//           numCharts={ this.props.stats.covariateData.length }
-//           data={ this.props.stats.data }
-//           onSliderChange={ this.handleSliderChange }
-//         />
-//         
