@@ -15,6 +15,8 @@ export default function stats(state = initialState, action) {
     return update(state, {covariateData: {$set: action.payload.covariateData}})
   case SET_PHI:
     return update(state, {phi: {$set: action.payload.phi}})
+  case SET_SERIES:
+    return update(state, {data: {$splice: [[action.payload.index, 1, action.payload.data]]}})
   default:
     return state
   }
