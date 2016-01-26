@@ -1,4 +1,4 @@
-import { SET_PHI, SET_DATA, SET_COVARIATE_DATA } from 'constants'
+import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES } from 'constants'
 
 export function setData(data) {
   return {
