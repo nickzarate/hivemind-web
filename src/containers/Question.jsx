@@ -19,6 +19,6 @@ class QuestionContainer extends React.Component {
 
 export default reduxify({
   component: QuestionContainer,
-  reducer: 'question',
+  selector: 'question',
   actions: questionActions
 })

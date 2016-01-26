@@ -18,6 +18,6 @@ class RoundContainer extends React.Component {
 
 export default reduxify({
   component: RoundContainer,
-  reducer: 'round',
+  selector: 'round',
   actions: roundActions
 })

@@ -12,11 +12,11 @@ import { routeActions } from 'redux-simple-router'
  * @param component - The component to be connected.
  * @return the connected component
  */
-export default function reduxify({ reducer, actions, component }) {
+export default function reduxify({ selector, actions, component }) {
   const push = routeActions.push
 
   // the component will subscribe to Redux store updates
-  let mapStateToProps = (state) => ({ [reducer]: state[reducer] })
+  let mapStateToProps = (state) => ({ [selector]: state[selector] })
 
   // the component will be provided actions
   let mapDispatchToProps = (dispatch) => {
