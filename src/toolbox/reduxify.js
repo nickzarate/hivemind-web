@@ -1,9 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { routeActions } from 'redux-simple-router'
-import apply from './apply'
-import merge from './merge'
-
 
 /**
  * Reduxifies a component.
@@ -15,18 +12,19 @@ import merge from './merge'
  * @param component - The component to be connected.
  * @return the connected component
  */
-export default function reduxify({ state, actions, component }) {
+export default function reduxify({ reducer, actions, component }) {
   const push = routeActions.push
 
   // the component will subscribe to Redux store updates
-  var mapStateToProps = (totalState) => ({ [state]: totalState[state] })
+  let mapStateToProps = (state) => ({ [reducer]: state[reducer] })
 
   // the component will be provided actions
-  if (actions)
-    var mapDispatchToProps = (dispatch) => apply(
-      merge(actions, { pushPath: push }),
-      (action) => bindActionCreators(action, dispatch)
-    )
+  let mapDispatchToProps = (dispatch) => {
+    return {
+      actions: bindActionCreators(actions, dispatch),
+      push: bindActionCreators(push, dispatch)
+    }
+  }
 
   return connect(
     mapStateToProps,
