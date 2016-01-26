@@ -7,13 +7,13 @@ export default class Signup extends React.Component {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }
 
-  pushPath(path) {
-    return () => this.props.pushPath(path)
+  push(path) {
+    return () => this.props.push(path)
   }
 
   handleEmail = (event) => this.props.actions.setUserEmail(event.target.value);
   handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
-  handleSignup = () => this.props.actions.asyncSignup(Parse, this.pushPath('/survey'));
+  handleSignup = () => this.props.actions.asyncSignup(Parse, this.push('/survey'));
 
   render() {
     return (
@@ -30,8 +30,8 @@ export default class Signup extends React.Component {
           type="password"
         />
         <button onClick={ this.handleSignup }>{ 'Sign Up' }</button>
-        <button onClick={ this.pushPath('/home') }>{ 'home' }</button>
-        <button onClick={ this.pushPath('/') }>{ 'Already have an account?' }</button>
+        <button onClick={ this.push('/home') }>{ 'home' }</button>
+        <button onClick={ this.push('/') }>{ 'Already have an account?' }</button>
       </div>
     )
   }

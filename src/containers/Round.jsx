@@ -7,8 +7,8 @@ class RoundContainer extends React.Component {
   render() {
     return(
       <Round
-        actions={ this.props.roundActions }
-        pushPath={ this.props.pushPath }
+        actions={ this.props.actions }
+        push={ this.props.push }
         round={ this.props.round }
         children={ this.props.children }
       />

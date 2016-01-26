@@ -7,9 +7,9 @@ class QuestionContainer extends React.Component {
   render() {
     return (
       <Question
-        actions={ this.props.questionActions }
+        actions={ this.props.actions }
         question={ this.props.question }
-        pushPath={ this.props.pushPath }
+        push={ this.props.push }
         onSubmit={ this.props.onSubmit }
         currentCategory={ this.props.currentCategory }
       />

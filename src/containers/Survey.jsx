@@ -7,8 +7,8 @@ class SurveyContainer extends React.Component {
   render() {
     return (
       <Survey
-        actions={ this.props.surveyActions }
-        pushPath={ this.props.pushPath }
+        actions={ this.props.actions }
+        push={ this.props.push }
         survey={ this.props.survey }
       />
     )

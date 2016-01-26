@@ -7,8 +7,8 @@ class LoginContainer extends React.Component {
   render() {
     return (
       <Login
-        actions={ this.props.userActions }
-        pushPath={ this.props.pushPath }
+        actions={ this.props.actions }
+        push={ this.props.push }
         user={ this.props.user }
       />
     )

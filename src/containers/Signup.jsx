@@ -7,8 +7,8 @@ class SignupContainer extends React.Component {
   render() {
     return (
       <Signup
-        actions={ this.props.userActions }
-        pushPath={ this.props.pushPath }
+        actions={ this.props.actions }
+        push={ this.props.push }
         user={ this.props.user }
       />
     )

@@ -7,8 +7,8 @@ class HomeContainer extends React.Component {
   render() {
     return (
       <Home
-        actions={ this.props.homeActions }
-        pushPath={ this.props.pushPath }
+        actions={ this.props.actions }
+        push={ this.props.push }
         round={ this.props.round }
       />
     )

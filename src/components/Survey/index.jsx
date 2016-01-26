@@ -14,8 +14,8 @@ export default class Survey extends React.Component {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }
 
-  pushPath(path) {
-    return () => this.props.pushPath(path)
+  push(path) {
+    return () => this.props.push(path)
   }
 
   handleSubmit() {
@@ -30,7 +30,7 @@ export default class Survey extends React.Component {
       monthlyEarnings: this.props.survey.monthlyEarnings
     }
     this.props.actions.asyncSubmitSurvey(Parse, surveyResponses)
-    this.props.pushPath('/home')
+    this.props.push('/home')
   }
 
   render() {

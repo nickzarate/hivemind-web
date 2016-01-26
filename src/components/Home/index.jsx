@@ -8,14 +8,14 @@ export default class Home extends React.Component {
     this.props.actions.getCategories(Parse)
   }
 
-  pushPath(path) {
-    return () => this.props.pushPath(path)
+  push(path) {
+    return () => this.props.push(path)
   }
 
   chooseCategory(category) {
     return () => {
       this.props.actions.setCurrentCategory(category)
-      this.props.pushPath('/round')
+      this.props.push('/round')
     }
   }
 
@@ -38,7 +38,7 @@ export default class Home extends React.Component {
       <div>
         <h1>{ 'Home' }</h1>
         <ul>{ this.renderCategories() }</ul>
-        <button onClick={ this.pushPath('/stats') }>{ 'Check out latest round!' }</button>
+        <button onClick={ this.push('/stats') }>{ 'Check out latest round!' }</button>
       </div>
     )
   }
