@@ -3,17 +3,17 @@ import reduxify from 'toolbox/reduxify'
 import * as questionActions from 'actions/question'
 
 export default function subscribe(component) {
-  const selector = (state) => state.question
+  const questionSelector = (state) => state.question
 
-  const questionSelector = createSelector(
-    selector,
+  const selector = createSelector(
+    questionSelector,
     (question) => ({
       question: question
     })
   )
 
   return reduxify({
-    selector: questionSelector,
+    selector: selector,
     actions: questionActions,
     component: component
   })

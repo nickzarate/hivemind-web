@@ -3,17 +3,17 @@ import reduxify from 'toolbox/reduxify'
 import * as userActions from 'actions/user'
 
 export default function subscribe(component) {
-  const selector = (state) => state.user
+  const userSelector = (state) => state.user
 
-  const loginSelector = createSelector(
-    selector,
+  const selector = createSelector(
+    userSelector,
     (user) => ({
       user: user
     })
   )
 
   return reduxify({
-    selector: loginSelector,
+    selector: selector,
     actions: userActions,
     component: component
   })

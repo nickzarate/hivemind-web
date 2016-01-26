@@ -3,17 +3,17 @@ import reduxify from 'toolbox/reduxify'
 import * as roundActions from 'actions/round'
 
 export default function subscribe(component) {
-  const selector = (state) => state.round
+  const roundSelector = (state) => state.round
 
-  const roundSelector = createSelector(
-    selector,
+  const selector = createSelector(
+    roundSelector,
     (round) => ({
       round: round
     })
   )
 
   return reduxify({
-    selector: roundSelector,
+    selector: selector,
     actions: roundActions,
     component: component
   })

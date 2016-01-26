@@ -3,17 +3,17 @@ import reduxify from 'toolbox/reduxify'
 import * as surveyActions from 'actions/survey'
 
 export default function subscribe(component) {
-  const selector = (state) => state.survey
+  const surveySelector = (state) => state.survey
 
-  const surveySelector = createSelector(
-    selector,
+  const selector = createSelector(
+    surveySelector,
     (survey) => ({
       survey: survey
     })
   )
 
   return reduxify({
-    selector: surveySelector,
+    selector: selector,
     actions: surveyActions,
     component: component
   })
