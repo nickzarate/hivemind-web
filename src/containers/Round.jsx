@@ -1,6 +1,5 @@
 import React from 'react'
-import reduxify from 'toolbox/reduxify'
-import * as roundActions from 'actions/round'
+import subscribe from 'selectors/roundSelector'
 import Round from 'components/Round'
 
 class RoundContainer extends React.Component {
@@ -16,8 +15,4 @@ class RoundContainer extends React.Component {
   }
 }
 
-export default reduxify({
-  component: RoundContainer,
-  selector: 'round',
-  actions: roundActions
-})
+export default subscribe(RoundContainer)

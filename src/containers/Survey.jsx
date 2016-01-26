@@ -1,6 +1,5 @@
 import React from 'react'
-import * as surveyActions from 'actions/survey'
-import reduxify from 'toolbox/reduxify'
+import subscribe from 'selectors/surveySelector'
 import Survey from 'components/Survey'
 
 class SurveyContainer extends React.Component {
@@ -15,8 +14,4 @@ class SurveyContainer extends React.Component {
   }
 }
 
-export default reduxify({
-  component: SurveyContainer,
-  selector: 'survey',
-  actions: surveyActions
-})
+export default subscribe(SurveyContainer)

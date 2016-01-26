@@ -1,6 +1,5 @@
 import React from 'react'
-import reduxify from 'toolbox/reduxify'
-import * as questionActions from 'actions/question'
+import subscribe from 'selectors/questionSelector'
 import Question from 'components/Question'
 
 class QuestionContainer extends React.Component {
@@ -17,8 +16,4 @@ class QuestionContainer extends React.Component {
   }
 }
 
-export default reduxify({
-  component: QuestionContainer,
-  selector: 'question',
-  actions: questionActions
-})
+export default subscribe(QuestionContainer)

@@ -1,6 +1,5 @@
 import React from 'react'
-import * as userActions from 'actions/user'
-import reduxify from 'toolbox/reduxify'
+import subscribe from 'selectors/signupSelector'
 import Signup from 'components/Signup'
 
 class SignupContainer extends React.Component {
@@ -15,8 +14,4 @@ class SignupContainer extends React.Component {
   }
 }
 
-export default reduxify({
-  component: SignupContainer,
-  selector: 'user',
-  actions: userActions
-})
+export default subscribe(SignupContainer)

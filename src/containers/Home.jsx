@@ -1,7 +1,6 @@
 import React from 'react'
-import * as homeActions from 'actions/home'
-import reduxify from 'toolbox/reduxify'
 import Home from 'components/Home'
+import subscribe from 'selectors/homeSelector'
 
 class HomeContainer extends React.Component {
   render() {
@@ -15,8 +14,4 @@ class HomeContainer extends React.Component {
   }
 }
 
-export default reduxify({
-  component: HomeContainer,
-  selector: 'round',
-  actions: homeActions
-})
+export default subscribe(HomeContainer)
