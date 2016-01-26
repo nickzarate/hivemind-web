@@ -15,9 +15,6 @@ import { routeActions } from 'redux-simple-router'
 export default function reduxify({ selector, actions, component }) {
   const push = routeActions.push
 
-  // the component will subscribe to Redux store updates
-  let mapStateToProps = (state) => ({ [selector]: state[selector] })
-
   // the component will be provided actions
   let mapDispatchToProps = (dispatch) => {
     return {
@@ -27,7 +24,7 @@ export default function reduxify({ selector, actions, component }) {
   }
 
   return connect(
-    mapStateToProps,
+    selector,
     mapDispatchToProps
   )(component)
 }
