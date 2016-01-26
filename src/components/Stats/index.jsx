@@ -14,8 +14,8 @@ export default class Stats extends React.Component {
     actions.getData()
   }
 
-  pushPath(path) {
-    return () => this.props.pushPath(path)
+  push(path) {
+    return () => this.props.push(path)
   }
 
   handleSliderChange(chartIndex, sliderIndex) {
@@ -35,7 +35,7 @@ export default class Stats extends React.Component {
           onSliderChange={ this.handleSliderChange }
           covariateRanges={ this.props.currentCategory.get('covariateRanges') }
         />
-        <button onClick={ this.pushPath('/home') }>{ 'Go Home' }</button>
+        <button onClick={ this.push('/home') }>{ 'Go Home' }</button>
       </div>
     )
   }

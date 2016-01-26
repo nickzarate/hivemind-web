@@ -115,7 +115,7 @@ export function asyncAwardPoints() {
  *  Save the current round with the new answer
  *  Submit the round if round is complete
  */
-export function asyncHandleSubmit(Parse, pushPath) {
+export function asyncHandleSubmit(Parse, push) {
   return (dispatch, getState) => {
     const { question, round } = getState()
 
@@ -139,7 +139,7 @@ export function asyncHandleSubmit(Parse, pushPath) {
     }).then(function() {
       if (round.questionInfo.currentQuestion >= round.questionInfo.numQuestions) {
         dispatch(resetCurrentQuestion())
-        pushPath('/stats')
+        push('/stats')
       } else {
         dispatch(incrementCurrentQuestion())
       }

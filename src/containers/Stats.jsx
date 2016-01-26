@@ -1,22 +1,17 @@
 import React from 'react'
-import * as statsActions from 'actions/stats'
-import reduxify from 'toolbox/reduxify'
+import subscribe from 'selectors/statsSelector'
 import Stats from 'components/Stats'
 
 class StatsContainer extends React.Component {
   render() {
     return (
       <Stats
-        actions={ this.props.statsActions }
-        pushPath={ this.props.pushPath }
+        actions={ this.props.actions }
+        push={ this.props.push }
         stats={ this.props.stats }
       />
     )
   }
 }
 
-export default reduxify({
-  component: StatsContainer,
-  state: 'stats',
-  actions: { statsActions }
-})
+export default subscribe(StatsContainer)

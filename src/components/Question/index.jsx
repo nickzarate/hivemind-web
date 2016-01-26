@@ -12,8 +12,8 @@ export default class Question extends React.Component {
 
   handleDeposit(index) { return () => this.props.actions.handleDeposit(index) }
 
-  pushPath(path) {
-    return () => this.props.pushPath(path)
+  push(path) {
+    return () => this.props.push(path)
   }
 
   handleSubmit() {

@@ -1,22 +1,17 @@
 import React from 'react'
-import * as userActions from 'actions/user'
-import reduxify from 'toolbox/reduxify'
+import subscribe from 'selectors/loginSelector'
 import Login from 'components/Login'
 
 class LoginContainer extends React.Component {
   render() {
     return (
       <Login
-        actions={ this.props.userActions }
-        pushPath={ this.props.pushPath }
+        actions={ this.props.actions }
+        push={ this.props.push }
         user={ this.props.user }
       />
     )
   }
 }
 
-export default reduxify({
-  component: LoginContainer,
-  state: 'user',
-  actions: { userActions }
-})
+export default subscribe(LoginContainer)
