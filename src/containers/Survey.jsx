@@ -1,6 +1,8 @@
 import React from 'react'
-import subscribe from 'selectors/surveySelector'
+import surveySelector from 'selectors/survey'
+import * as surveyActions from 'actions/survey'
 import Survey from 'components/Survey'
+import reduxify from 'toolbox/reduxify'
 
 class SurveyContainer extends React.Component {
   render() {
@@ -14,4 +16,8 @@ class SurveyContainer extends React.Component {
   }
 }
 
-export default subscribe(SurveyContainer)
+export default reduxify({
+  selector: surveySelector,
+  actions: surveyActions,
+  component: SurveyContainer
+})
