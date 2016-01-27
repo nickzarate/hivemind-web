@@ -108,9 +108,9 @@ export function getData() {
     const { round } = getState()
     let labels = round.questionInfo.currentCategory.get('covariateRanges')
     //TODO: TEMP
-    for (let label in labels) {
+    for (let label of labels) {
       let range = label[1] - label[0]
-      let divisor
+      let divisor = 10
       while (divisor >= range) {
         divisor--
       }
@@ -122,7 +122,7 @@ export function getData() {
         value += step
         values.push(value)
       }
-      for (let val in values) {
+      for (let val of values) {
         label.splice(-1, 0, val)
       }
     }
@@ -135,7 +135,6 @@ export function getData() {
       }
       allData.push(data)
     }
-    console.log(allData)
     dispatch(setData(allData))
   }
 }
@@ -160,14 +159,17 @@ export function updateChart(chartIndex) {
     let data = stats.data.slice(0)
     let chartData = []
     let values = []
+    let phi = [1,1.25,1.4,1.7,.8]
 
     //Create array of betas and array of covariate values to multiply together
-    let betas = stats.phi.slice(1)
+    //let betas = stats.phi.slice(1)
+    let betas = phi.slice(1)
     let covariateValues = stats.covariateData[chartIndex].slice(0)
     for (let i = 0; i < stats.covariateData[chartIndex].length; i++) {
       covariateValues.push(Math.pow(stats.covariateData[chartIndex][i], 2))
     }
-    let alpha = stats.phi[0]
+    //let alpha = stats.phi[0]
+    let alpha = phi[0]
     let single = []
     for (let i = 0; i < 20; i++) {
       let tempCovariateValues = covariateValues.slice(0)
@@ -178,11 +180,15 @@ export function updateChart(chartIndex) {
         y += betas[j] * tempCovariateValues[j]
       }
       single.push(y)
-      values.push(value)
+      console.log('y, single')
+      console.log(y)
+      console.log(single)
     }
     let series = []
     series.push(single)
-    dispatch(setSeries(chartIndex, series))
+    console.log('series')
+    console.log(series)
+    dispatch(updateSeries(chartIndex, series))
     // chartData.push(series)
     // data[chartIndex] = chartData
     // dispatch(setData(data))
