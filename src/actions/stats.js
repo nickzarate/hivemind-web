@@ -1,4 +1,4 @@
-import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES } from 'constants'
+import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES } from 'constants'
 
 export function setData(data) {
   return {
@@ -37,7 +37,16 @@ export function setSeries(index, data) {
   }
 }
 
-export function setSeries(index, series) {
+export function setOutcomes(outcomes) {
+  return {
+    type: SET_OUTCOMES,
+    payload: {
+      outcomes: outcomes
+    }
+  }
+}
+
+export function updateSeries(index, series) {
   return (dispatch, getState) => {
     const { stats } = getState()
     let data = Object.assign({}, stats.data[index])
