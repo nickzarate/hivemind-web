@@ -24,11 +24,9 @@ export default class Graph extends React.Component {
   renderCharts() {
     let charts = []
     for (let i = 0; i < this.props.numCharts; i++) {
-      console.log(this.props.covariateRanges[i][0])
-      console.log(this.props.covariateRanges[i][1])      
       let options = {
-        high: this.props.covariateRanges[i][1],
-        low: this.props.covariateRanges[i][0],
+        high: 20,
+        low: 0,
         showArea: false,
         showPoint: true
       }

@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND, ADD_POINT_ESTIMATE,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES, SET_NUM_QUESTIONS } from 'constants'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES, SET_NUM_QUESTIONS, ADD_OUTCOMES } from 'constants'
 
 export function setRound(savedRound) {
   return {
@@ -42,6 +42,15 @@ export function addCovariates(covariates) {
     type: ADD_COVARIATES,
     payload: {
       covariates: covariates
+    }
+  }
+}
+
+export function addOutcomes(outcomes) {
+  return {
+    type: ADD_OUTCOMES,
+    payload: {
+      outcomes: outcomes
     }
   }
 }
@@ -122,7 +131,8 @@ export function asyncHandleSubmit(Parse, push) {
     //Save answers and covariates in vectors
     dispatch(addAnswers(question.bins))
     dispatch(addPointEstimate(question.pointEstimate))
-    dispatch(addCovariates(question.currentQuestion.get('covariates')))
+    dispatch(addCovariates(question.currentQuestion.get('covariateValues')))
+    dispatch(addOutcomes(question.currentQuestion.get('outcomes')))
 
     //Create new answer to save to a round
     let Answer = Parse.Object.extend('Answer')
@@ -137,7 +147,7 @@ export function asyncHandleSubmit(Parse, push) {
       answers.push(savedAnswer)
       return round.currentRound.save({ answers: answers })
     }).then(function() {
-      if (round.questionInfo.currentQuestion >= round.questionInfo.numQuestions) {
+      if (round.questionInfo.currentQuestion >= round.numQuestions) {
         dispatch(resetCurrentQuestion())
         push('/stats')
       } else {

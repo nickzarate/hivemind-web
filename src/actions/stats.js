@@ -189,14 +189,9 @@ export function updateChart(chartIndex) {
         y += betas[j] * tempCovariateValues[j]
       }
       single.push(y)
-      console.log('y, single')
-      console.log(y)
-      console.log(single)
     }
     let series = []
     series.push(single)
-    console.log('series')
-    console.log(series)
     dispatch(updateSeries(chartIndex, series))
     // chartData.push(series)
     // data[chartIndex] = chartData
