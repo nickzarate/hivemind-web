@@ -20,8 +20,8 @@ export default class Home extends React.Component {
   }
 
   renderCategories() {
-    if (this.props.round.categories) {
-      return this.props.round.categories.map(
+    if (this.props.categories) {
+      return this.props.categories.map(
         (category) => (
           <li key={ category.id }>
             <button onClick={ this.chooseCategory(category) }>

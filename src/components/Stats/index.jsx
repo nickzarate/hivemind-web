@@ -33,7 +33,7 @@ export default class Stats extends React.Component {
           data={ this.props.stats.data }
           type={ 'Line' }
           onSliderChange={ this.handleSliderChange }
-          covariateRanges={ this.props.currentCategory.get('covariateRanges') }
+          covariateRanges={ this.props.ranges }
         />
         <button onClick={ this.push('/home') }>{ 'Go Home' }</button>
       </div>

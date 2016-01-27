@@ -7,12 +7,6 @@ import Slider from 'rc-slider'
 export default class Graph extends React.Component {
   renderSliders(chartIndex) {
     let sliders = []
-    let options = {
-      high: this.props.covariateRanges[chartIndex][1],
-      low: this.props.covariateRanges[chartIndex][0],
-      showArea: false,
-      showPoint: true
-    }
     for (let i = 0; i < this.props.numCharts - 1; i++) {
       sliders.push(
         <li key={ i }>
@@ -20,7 +14,6 @@ export default class Graph extends React.Component {
             key={ i }
             title="SomeTitle"
             onAfterChange={ this.props.onSliderChange(chartIndex, i) }
-            options={ options }
           />
         </li>
       )
@@ -31,13 +24,20 @@ export default class Graph extends React.Component {
   renderCharts() {
     let charts = []
     for (let i = 0; i < this.props.numCharts; i++) {
+      console.log(this.props.covariateRanges[i][0])
+      console.log(this.props.covariateRanges[i][1])      
+      let options = {
+        high: this.props.covariateRanges[i][1],
+        low: this.props.covariateRanges[i][0],
+        showArea: false,
+        showPoint: true
+      }
       charts.push(
         <li key={ i }>
           <LineChart
             data={ this.props.data[i] }
-            width={ 500 }
-            height={ 300 }
             type={ this.props.type }
+            options={ options }
           />
           <ul>
             { this.renderSliders(i) }
