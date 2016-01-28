@@ -129,16 +129,16 @@ export function getData() {
         label.splice(-1, 0, label[label.length - 2] + step)
       }
     }
-    let allData = []
+    let data = []
 
     for (let k = 0; k < labels.length; k++) {
-      let data = {
+      let dataSet = {
         labels: labels[k],
         series: []
       }
-      allData.push(data)
+      data.push(dataSet)
     }
-    dispatch(setData(allData))
+    dispatch(setData(data))
   }
 }
 

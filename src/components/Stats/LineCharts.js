@@ -10,14 +10,13 @@ export default class Graph extends React.Component {
     let index = 0
     for (let i = 0; i < this.props.numCharts - 1; i++) {
       if (chartIndex === i) { index += 1 }
-      console.log(this.props.ranges.covariates)
       sliders.push(
         <li key={ i }>
           <Slider
             key={ i }
             title="SomeTitle"
             onChange={ this.props.onSliderChange(chartIndex, i) }
-            max={ this.props.ranges.covariates[index][1] }
+            max={ this.props.ranges.covariates[index][this.props.ranges.covariates[index].length - 1] }
             min={ this.props.ranges.covariates[index][0] }
           />
         </li>
