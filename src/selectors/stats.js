@@ -8,6 +8,9 @@ export default createSelector(
   categorySelector,
   (stats, currentCategory) => ({
     stats,
-    ranges: currentCategory.get('covariateRanges')
+    ranges: {
+      covariates: currentCategory.get('covariateRanges'),
+      outcomes: currentCategory.get('outcomeRanges')
+    }
   })
 )
