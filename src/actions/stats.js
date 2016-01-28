@@ -157,28 +157,22 @@ export function getData() {
  */
 export function updateChart(chartIndex) {
   return (dispatch, getState) => {
-    const { stats } = getState()
-
-    let data = stats.data.slice(0)
-    let chartData = []
-    let values = []
-    let phi = [1,1.25,1.4,1.7,.8]
+    const { stats, round } = getState()
+    let covariateRanges = round.questionInfo.currentCategory.get('covariateRanges')
 
     //Create array of betas and array of covariate values to multiply together
-    //let betas = stats.phi.slice(1)
-    let betas = phi.slice(1)
+    let betas = stats.phi.slice(1)
     let covariateValues = stats.covariateData[chartIndex].slice(0)
     for (let i = 0; i < stats.covariateData[chartIndex].length; i++) {
       covariateValues.push(Math.pow(stats.covariateData[chartIndex][i], 2))
     }
-    //let alpha = stats.phi[0]
-    let alpha = phi[0]
+    let alpha = stats.phi[0]
     let single = []
-    for (let i = 0; i < 20; i++) {
+    for (let item of covariateRanges[chartIndex]) {
       let tempCovariateValues = covariateValues.slice(0)
       let y = alpha
-      tempCovariateValues.splice(chartIndex, 0, i)
-      tempCovariateValues.splice(chartIndex + stats.covariateData[chartIndex].length + 1, 0, Math.pow(i, 2))
+      tempCovariateValues.splice(chartIndex, 0, item)
+      tempCovariateValues.splice(chartIndex + stats.covariateData[chartIndex].length + 1, 0, Math.pow(item, 2))
       for (let j in betas) {
         y += betas[j] * tempCovariateValues[j]
       }
@@ -187,8 +181,5 @@ export function updateChart(chartIndex) {
     let series = []
     series.push(single)
     dispatch(updateSeries(chartIndex, series))
-    // chartData.push(series)
-    // data[chartIndex] = chartData
-    // dispatch(setData(data))
   }
 }
