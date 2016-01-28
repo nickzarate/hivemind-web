@@ -116,7 +116,6 @@ export function getData() {
   return (dispatch, getState) => {
     const { round } = getState()
     let labels = round.questionInfo.currentCategory.get('covariateRanges')
-    //TODO: TEMP
     for (let label of labels) {
       let range = label[1] - label[0]
       let divisor = 10
@@ -124,15 +123,10 @@ export function getData() {
         divisor--
       }
       let step = range / divisor
-      step = Math.floor(step)
-      let values = []
-      let value = label[0]
-      for (let j = 0; j < divisor; j++) {
-        value += step
-        values.push(value)
-      }
-      for (let val of values) {
-        label.splice(-1, 0, val)
+      step = Math.floor(step + 0.5)
+      //Build the label array to have an adequate number of values, each about the same length
+      while (label[label.length - 1] - label[label.length - 2] > step) {
+        label.splice(-1, 0, label[label.length - 2] + step)
       }
     }
     let allData = []
