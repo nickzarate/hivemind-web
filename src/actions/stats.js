@@ -118,11 +118,11 @@ export function getData() {
     let labels = round.questionInfo.currentCategory.get('covariateRanges')
     for (let label of labels) {
       let range = label[1] - label[0]
-      let divisor = 10
-      while (divisor >= range) {
-        divisor--
+      let numXAxisValues = 10
+      while (numXAxisValues >= range) {
+        numXAxisValues--
       }
-      let step = range / divisor
+      let step = range / numXAxisValues
       step = Math.floor(step + 0.5)
       //Build the label array to have an adequate number of values, each about the same length
       while (label[label.length - 1] - label[label.length - 2] > step) {

@@ -9,7 +9,7 @@ export default class Stats extends React.Component {
   
   componentWillMount() {
     const { actions } = this.props
-    //actions.asyncGetPhi()
+    actions.asyncGetPhi()
     actions.getCovariateData()
     actions.getData()
   }
