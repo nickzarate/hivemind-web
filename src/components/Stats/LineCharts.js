@@ -1,30 +1,9 @@
 import React from 'react'
 import LineChart from 'react-chartist'
 import 'chartist/dist/chartist.min.css'
-import 'rc-slider/assets/index.css'
-import Slider from 'rc-slider'
+import Sliders from './Sliders'
 
 export default class Graph extends React.Component {
-  renderSliders(chartIndex) {
-    let sliders = []
-    let index = 0
-    for (let i = 0; i < this.props.numCharts - 1; i++) {
-      if (chartIndex === i) { index += 1 }
-      sliders.push(
-        <li key={ i }>
-          <Slider
-            key={ i }
-            title="SomeTitle"
-            onChange={ this.props.onSliderChange(chartIndex, i) }
-            max={ this.props.ranges.covariates[index][this.props.ranges.covariates[index].length - 1] }
-            min={ this.props.ranges.covariates[index][0] }
-          />
-        </li>
-      )
-      index += 1
-    }
-    return sliders
-  }
 
   renderCharts() {
     let charts = []
@@ -44,9 +23,12 @@ export default class Graph extends React.Component {
             type={ this.props.type }
             options={ options }
           />
-          <ul>
-            { this.renderSliders(i) }
-          </ul>
+          <Sliders
+            numCharts={ this.props.numCharts }
+            chartIndex={ i }
+            covariateRanges={ this.props.ranges.covariates }
+            onSliderChange={ this.props.onSliderChange }
+          />
         </li>
       )
     }
