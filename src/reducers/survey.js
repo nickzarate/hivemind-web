@@ -1,17 +1,17 @@
 import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from 'constants'
-import { fromJS } from 'immutable'
+import update from 'react-addons-update'
 
-const initialState = fromJS({
+const initialState = {
   hourlyWages: '',
   monthlyEarnings: ''
-})
+}
 
 export default function survey(state = initialState, action) {
   switch (action.type) {
   case SET_HOURLY_WAGES:
-    return state.set('hourlyWages', action.payload.hourlyWages)
+    return update(state, {hourlyWages: {$set: action.payload.hourlyWages}})
   case SET_MONTHLY_EARNINGS:
-    return state.set('monthlyEarnings', action.payload.monthlyEarnings)
+    return update(state, {monthlyEarnings: {$set: action.payload.monthlyEarnings}})
   default:
     return state
   }

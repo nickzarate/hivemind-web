@@ -11,24 +11,25 @@ export default class Round extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     this.props.actions.asyncCreateRound(Parse)
+    this.props.actions.getNumQuestions()
   }
 
   handleSubmit() {
-    const { actions } = this.props
-    actions.asyncHandleSubmit(Parse, this.props.pushPath)
-    actions.asyncAwardPoints()
+    this.props.actions.asyncHandleSubmit(Parse, this.props.push)
+    this.props.actions.asyncAwardPoints()
   }
 
-  pushPath(path) {
+  push(path) {
     return () => {
-      this.props.pushPath(path)
+      this.props.push(path)
     }
   }
 
   render() {
     const childProps = {
       onSubmit: this.handleSubmit,
-      pushPath: this.pushPath()
+      push: this.push(),
+      currentCategory: this.props.round.questionInfo.currentCategory
     }
     const RouteHandler = React.cloneElement(this.props.children, childProps)
     return (

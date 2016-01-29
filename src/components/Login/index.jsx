@@ -7,31 +7,32 @@ export default class Login extends React.Component {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }
 
-  pushPath(path) {
-    return () => this.props.pushPath(path)
+  push(path) {
+    return () => this.props.push(path)
   }
 
   handleEmail = (event) => this.props.actions.setUserEmail(event.target.value);
   handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
-  handleLogin = () => this.props.actions.asyncLogin(Parse, this.pushPath('/home'));
+  handleLogin = () => this.props.actions.asyncLogin(Parse, this.push('/home'));
 
   render() {
     return (
       <div>
         <h1>{ 'Login' }</h1>
-        <input
-          onChange={ this.handleEmail }
-          placeholder="EMAIL"
-          type="email"
-        />
-        <input
-          onChange={ this.handlePassword }
-          placeholder="PASSWORD"
-          type="password"
-        />
-        <button onClick={ this.handleLogin }>{ 'Log In' }</button>
-        <button onClick={ this.pushPath('/home') }>{ 'home' }</button>
-        <button onClick={ this.pushPath('/signup') }>{ 'Dont have an account?' }</button>
+        <form onSubmit={ this.handleLogin }>
+          <input
+            onChange={ this.handleEmail }
+            placeholder="Email"
+            type="email"
+          />
+          <input
+            onChange={ this.handlePassword }
+            placeholder="Password"
+            type="password" />
+          <button onClick={ this.handleLogin }>{ 'Log In' }</button>
+        </form>
+        <button onClick={ this.push('/home') }>{ 'Home' }</button>
+        <button onClick={ this.push('/signup') }>{ 'Sign Up' }</button>
       </div>
     )
   }

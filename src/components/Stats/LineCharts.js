@@ -1,42 +1,34 @@
 import React from 'react'
-//let LineChart = require('react-d3/linechart').LineChart
-import { LineChart } from 'react-d3/linechart'
-import 'rc-slider/assets/index.css'
-import Slider from 'rc-slider'
- 
-export default class LineCharts extends React.Component {
+import LineChart from 'react-chartist'
+import 'chartist/dist/chartist.min.css'
+import Sliders from './Sliders'
 
-  renderSliders(chartIndex) {
-    let sliders = []
-    for (let i = 0; i < this.props.numCharts - 1; i++) {
-      sliders.push(
-        <li key={ i }>
-          <Slider
-            key={ i }
-            title="SomeTitle"
-            onAfterChange={ this.props.onSliderChange(chartIndex, i) }
-          />
-        </li>
-      )
-    }
-    return sliders
-  }
+export default class Graph extends React.Component {
 
   renderCharts() {
     let charts = []
     for (let i = 0; i < this.props.numCharts; i++) {
+      let options = {
+        high: this.props.ranges.outcomes[0][1],
+        low: this.props.ranges.outcomes[0][0],
+        showArea: false,
+        showPoint: true,
+        width: '400px',
+        height: '300px'
+      }
       charts.push(
         <li key={ i }>
           <LineChart
-            legend={ true }
             data={ this.props.data[i] }
-            width={ 500 }
-            height={ 300 }
-            title="Line Chart"
+            type={ this.props.type }
+            options={ options }
           />
-          <ul>
-            { this.renderSliders(i) }
-          </ul>
+          <Sliders
+            numCharts={ this.props.numCharts }
+            chartIndex={ i }
+            covariateRanges={ this.props.ranges.covariates }
+            onSliderChange={ this.props.onSliderChange }
+          />
         </li>
       )
     }

@@ -1,20 +1,44 @@
 import React from 'react'
+import Parse from 'parse'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
 export default class Home extends React.Component {
-  pushPath(path) {
-    return () => this.props.pushPath(path)
+  componentWillMount() {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+    this.props.actions.getCategories(Parse)
+  }
+
+  push(path) {
+    return () => this.props.push(path)
+  }
+
+  chooseCategory(category) {
+    return () => {
+      this.props.actions.setCurrentCategory(category)
+      this.props.push('/round')
+    }
+  }
+
+  renderCategories() {
+    if (this.props.categories) {
+      return this.props.categories.map(
+        (category) => (
+          <li key={ category.id }>
+            <button onClick={ this.chooseCategory(category) }>
+              { 'Start new ' }{ category.get('name') }{ ' round' }
+            </button>
+          </li>
+        )
+      )
+    }
   }
 
   render() {
-    const { actions, round } = this.props
     return (
       <div>
         <h1>{ 'Home' }</h1>
-        <button onClick={ actions.incrementNumQuestions }>{ 'increase number of questions in the round!' }</button>
-        <button onClick={ actions.decrementNumQuestions }>{ 'decrease number of questions in the round!' }</button>
-        <h1>{ round.questionInfo.numQuestions }</h1>
-        <button onClick={ this.pushPath('/round') }>{ 'start education round' }</button>
-        <button onClick={ this.pushPath('/stats') }>{ 'Check out latest round!' }</button>
+        <ul>{ this.renderCategories() }</ul>
+        <button onClick={ this.push('/stats') }>{ 'Check out latest round!' }</button>
       </div>
     )
   }

@@ -1,14 +1,15 @@
 import React from 'react'
-import reduxify from 'toolbox/reduxify'
+import roundSelector from 'selectors/round'
 import * as roundActions from 'actions/round'
 import Round from 'components/Round'
+import reduxify from 'toolbox/reduxify'
 
 class RoundContainer extends React.Component {
   render() {
     return(
       <Round
-        actions={ this.props.roundActions }
-        pushPath={ this.props.pushPath }
+        actions={ this.props.actions }
+        push={ this.props.push }
         round={ this.props.round }
         children={ this.props.children }
       />
@@ -17,7 +18,7 @@ class RoundContainer extends React.Component {
 }
 
 export default reduxify({
-  component: RoundContainer,
-  state: 'round',
-  actions: { roundActions }
+  selector: roundSelector,
+  actions: roundActions,
+  component: RoundContainer
 })

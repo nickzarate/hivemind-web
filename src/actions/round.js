@@ -1,14 +1,5 @@
-import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_QUESTION_TYPE, SET_ROUND,
-  ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES } from 'constants'
-
-export function setQuestionType(questionType) {
-  return {
-    type: SET_QUESTION_TYPE,
-    payload: {
-      questionType: questionType
-    }
-  }
-}
+import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND, ADD_POINT_ESTIMATE,
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES, SET_NUM_QUESTIONS, ADD_OUTCOMES } from 'constants'
 
 export function setRound(savedRound) {
   return {
@@ -55,6 +46,15 @@ export function addCovariates(covariates) {
   }
 }
 
+export function addOutcomes(outcomes) {
+  return {
+    type: ADD_OUTCOMES,
+    payload: {
+      outcomes: outcomes
+    }
+  }
+}
+
 export function incrementCurrentQuestion() {
   return {
     type: INCREMENT_CURRENT_QUESTION
@@ -67,6 +67,22 @@ export function resetCurrentQuestion() {
   }
 }
 
+export function setNumQuestions(numQuestions) {
+  return {
+    type: SET_NUM_QUESTIONS,
+    payload: {
+      numQuestions: numQuestions
+    }
+  }
+}
+
+export function getNumQuestions() {
+  return (dispatch, getState) => {
+    const { round } = getState()
+    dispatch(setNumQuestions(round.questionInfo.currentCategory.get('questionsPerRound')))
+  }
+}
+
 /*
  *  Create a new round in Parse and save with:
  *    answers: [],
@@ -74,7 +90,6 @@ export function resetCurrentQuestion() {
  */
 export function asyncCreateRound(Parse) {
   return (dispatch) => {
-
     //Create new Round
     let Round = Parse.Object.extend('Round')
     let newRound = new Round()
@@ -94,9 +109,7 @@ export function asyncCreateRound(Parse) {
  */
 export function asyncAwardPoints() {
   return (dispatch, getState) => {
-    let { question, user } = getState()
-    question = question.toJS()
-    user = user.toJS()
+    const { question, user } = getState()
 
     //TODO: Calculate how many points are earned for answering correctly
     let points = question.bins[question.currentQuestion.get('correctAnswerIndex')] * 50
@@ -111,16 +124,15 @@ export function asyncAwardPoints() {
  *  Save the current round with the new answer
  *  Submit the round if round is complete
  */
-export function asyncHandleSubmit(Parse, pushPath) {
+export function asyncHandleSubmit(Parse, push) {
   return (dispatch, getState) => {
-    let { question, round } = getState()
-    question = question.toJS()
-    round = round.toJS()
+    const { question, round } = getState()
 
-    //Save answers in vectors and
+    //Save answers and covariates in vectors
     dispatch(addAnswers(question.bins))
     dispatch(addPointEstimate(question.pointEstimate))
-    dispatch(addCovariates(question.currentQuestion.get('covariates')))
+    dispatch(addCovariates(question.currentQuestion.get('covariateValues')))
+    dispatch(addOutcomes(question.currentQuestion.get('outcomes')))
 
     //Create new answer to save to a round
     let Answer = Parse.Object.extend('Answer')
@@ -135,9 +147,9 @@ export function asyncHandleSubmit(Parse, pushPath) {
       answers.push(savedAnswer)
       return round.currentRound.save({ answers: answers })
     }).then(function() {
-      if (round.questionInfo.currentQuestion >= round.questionInfo.numQuestions) {
+      if (round.questionInfo.currentQuestion >= round.numQuestions) {
         dispatch(resetCurrentQuestion())
-        pushPath('/stats')
+        push('/stats')
       } else {
         dispatch(incrementCurrentQuestion())
       }

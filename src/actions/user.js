@@ -30,10 +30,9 @@ export function login(currentUser) {
 /*
  *  Sign up a new user with the given email and go to the home page
  */
-export function asyncSignup(Parse, pushPath) {
+export function asyncSignup(Parse, push) {
   return (dispatch, getState) => {
-    let { user } = getState()
-    user = user.toJS()
+    const { user } = getState()
 
     let newUser = new Parse.User()
     newUser.set('username', user.email)
@@ -42,7 +41,7 @@ export function asyncSignup(Parse, pushPath) {
     newUser.signUp(null, {
       success(currentUser) {
         dispatch(login(currentUser))
-        pushPath()
+        push()
       },
       error(error) {
         console.log('Error: ' + error.code + ' ' + error.message)
@@ -54,15 +53,14 @@ export function asyncSignup(Parse, pushPath) {
 /*
  *  Login the user and go to the home page
  */
-export function asyncLogin(Parse, pushPath) {
+export function asyncLogin(Parse, push) {
   return (dispatch, getState) => {
-    let { user } = getState()
-    user = user.toJS()
+    const { user } = getState()
 
     Parse.User.logIn(user.email, user.password, {
       success(currentUser) {
         dispatch(login(currentUser))
-        pushPath()
+        push()
       },
       error(error) {
         console.log('Error: ' + error.code + ' ' + error.message)
