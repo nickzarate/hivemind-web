@@ -1,6 +1,8 @@
 import React from 'react'
-import subscribe from 'selectors/loginSelector'
+import loginSelector from 'selectors/login'
+import * as userActions from 'actions/user'
 import Login from 'components/Login'
+import reduxify from 'toolbox/reduxify'
 
 class LoginContainer extends React.Component {
   render() {
@@ -14,4 +16,8 @@ class LoginContainer extends React.Component {
   }
 }
 
-export default subscribe(LoginContainer)
+export default reduxify({
+  selector: loginSelector,
+  actions: userActions,
+  component: LoginContainer
+})

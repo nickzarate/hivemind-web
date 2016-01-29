@@ -21,7 +21,9 @@ module.exports = {
       'redux-simple-router',
       'parse',
       'parse-react',
-      'redux-thunk'
+      'redux-thunk',
+      'react-chartist',
+      'chartist'
     ],
     index: path.join(srcPath, 'index.js')
   },

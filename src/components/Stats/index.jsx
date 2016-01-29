@@ -31,7 +31,9 @@ export default class Stats extends React.Component {
         <LineCharts
           numCharts={ this.props.stats.covariateData.length }
           data={ this.props.stats.data }
+          type={ 'Line' }
           onSliderChange={ this.handleSliderChange }
+          ranges={ this.props.ranges }
         />
         <button onClick={ this.push('/home') }>{ 'Go Home' }</button>
       </div>

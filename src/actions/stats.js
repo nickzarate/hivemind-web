@@ -1,4 +1,4 @@
-import { SET_PHI, SET_DATA, SET_COVARIATE_DATA } from 'constants'
+import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES } from 'constants'
 
 export function setData(data) {
   return {
@@ -24,6 +24,34 @@ export function setPhi(phi) {
     payload: {
       phi: phi
     }
+  }
+}
+
+export function setSeries(index, data) {
+  return {
+    type: SET_SERIES,
+    payload: {
+      index: index,
+      data: data
+    }
+  }
+}
+
+export function setOutcomes(outcomes) {
+  return {
+    type: SET_OUTCOMES,
+    payload: {
+      outcomes: outcomes
+    }
+  }
+}
+
+export function updateSeries(index, series) {
+  return (dispatch, getState) => {
+    const { stats } = getState()
+    let data = Object.assign({}, stats.data[index])
+    data.series = series
+    dispatch(setSeries(index, data))
   }
 }
 
@@ -81,21 +109,34 @@ export function getCovariateData() {
 }
 
 /*
- *  Plot some initial data
+ *  Depending on the covariateRange of the category under inspection,
+ *  get the X-axis points that will ultimately be plotted.
  */
 export function getData() {
   return (dispatch, getState) => {
-    //TODO: TEMP
-    let data = []
-    for (let i = 0; i < 2; i++) {
-      let lineData = []
-      let values = [{x: 0, y: 0}]
-      let series = {
-        name: 'You',
-        values: values
+    const { round } = getState()
+    let labels = round.questionInfo.currentCategory.get('covariateRanges')
+    for (let label of labels) {
+      let range = label[1] - label[0]
+      let numXAxisValues = 10
+      while (numXAxisValues >= range) {
+        numXAxisValues--
       }
-      lineData.push(series)
-      data.push(lineData)
+      let step = range / numXAxisValues
+      step = Math.floor(step + 0.5)
+      //Build the label array to have an adequate number of values, each about the same length
+      while (label[label.length - 1] - label[label.length - 2] > step) {
+        label.splice(-1, 0, label[label.length - 2] + step)
+      }
+    }
+    let data = []
+
+    for (let k = 0; k < labels.length; k++) {
+      let dataSet = {
+        labels: labels[k],
+        series: []
+      }
+      data.push(dataSet)
     }
     dispatch(setData(data))
   }
@@ -116,11 +157,8 @@ export function getData() {
  */
 export function updateChart(chartIndex) {
   return (dispatch, getState) => {
-    const { stats } = getState()
-
-    let data = stats.data.slice(0)
-    let chartData = []
-    let values = []
+    const { stats, round } = getState()
+    let covariateRanges = round.questionInfo.currentCategory.get('covariateRanges')
 
     //Create array of betas and array of covariate values to multiply together
     let betas = stats.phi.slice(1)
@@ -129,27 +167,19 @@ export function updateChart(chartIndex) {
       covariateValues.push(Math.pow(stats.covariateData[chartIndex][i], 2))
     }
     let alpha = stats.phi[0]
-
-    for (let i = 0; i < 20; i++) {
+    let single = []
+    for (let item of covariateRanges[chartIndex]) {
       let tempCovariateValues = covariateValues.slice(0)
       let y = alpha
-      tempCovariateValues.splice(chartIndex, 0, i)
-      tempCovariateValues.splice(chartIndex + stats.covariateData[chartIndex].length + 1, 0, Math.pow(i, 2))
+      tempCovariateValues.splice(chartIndex, 0, item)
+      tempCovariateValues.splice(chartIndex + stats.covariateData[chartIndex].length + 1, 0, Math.pow(item, 2))
       for (let j in betas) {
         y += betas[j] * tempCovariateValues[j]
       }
-      let value = {
-        x: i,
-        y: y
-      }
-      values.push(value)
+      single.push(y)
     }
-    let series = {
-      name: 'You',
-      values: values
-    }
-    chartData.push(series)
-    data[chartIndex] = chartData
-    dispatch(setData(data))
+    let series = []
+    series.push(single)
+    dispatch(updateSeries(chartIndex, series))
   }
 }

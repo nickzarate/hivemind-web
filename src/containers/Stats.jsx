@@ -1,6 +1,8 @@
 import React from 'react'
-import subscribe from 'selectors/statsSelector'
+import statsSelector from 'selectors/stats'
+import * as statsActions from 'actions/stats'
 import Stats from 'components/Stats'
+import reduxify from 'toolbox/reduxify'
 
 class StatsContainer extends React.Component {
   render() {
@@ -9,9 +11,14 @@ class StatsContainer extends React.Component {
         actions={ this.props.actions }
         push={ this.props.push }
         stats={ this.props.stats }
+        ranges={ this.props.ranges }
       />
     )
   }
 }
 
-export default subscribe(StatsContainer)
+export default reduxify({
+  selector: statsSelector,
+  actions: statsActions,
+  component: StatsContainer
+})
