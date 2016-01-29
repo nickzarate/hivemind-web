@@ -34,7 +34,7 @@ export default class Graph extends React.Component {
         low: this.props.ranges.outcomes[0][0],
         showArea: false,
         showPoint: true,
-        width: '300px',
+        width: '400px',
         height: '300px'
       }
       charts.push(
