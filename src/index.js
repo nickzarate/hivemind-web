@@ -19,6 +19,9 @@ import DevTools from 'containers/DevTools'
 /* Components */
 import NotFound from 'components/NotFound'
 
+/* Styles */
+import 'app.scss';
+
 /* Routes */
 const hashHistory = createHistory({ queryKey: false })
 const store = configureStore(hashHistory)

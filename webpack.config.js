@@ -44,9 +44,16 @@ module.exports = {
 
       // eslint-loader
       // { test: /\.(js|jsx)$/, exclude: /(node_modules)/, loader: "eslint-loader" },
+      
+      // Sass loader
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loaders: ['style-loader', 'css', 'sass']
+      },
 
       // Stylus loader
-      { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
+      // { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
 
       // required to write "require('./style.css')"
       { test: /\.css$/, exclude: /\.useable\.css$/, loader: "style-loader!css-loader" },
