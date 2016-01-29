@@ -6,11 +6,13 @@ const categorySelector = (state) => state.round.questionInfo.currentCategory
 export default createSelector(
   statsSelector,
   categorySelector,
-  (stats, currentCategory) => ({
-    stats,
-    ranges: {
-      covariates: currentCategory.get('covariateRanges'),
-      outcomes: currentCategory.get('outcomeRanges')
+  (stats, currentCategory) => {
+    return {
+      stats,
+      ranges: {
+        covariates: currentCategory.get('covariateRanges'),
+        outcomes: currentCategory.get('outcomeRanges')
+      }
     }
-  })
+  }
 )
