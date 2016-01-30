@@ -4,7 +4,7 @@ import question from './question'
 import round from './round'
 import survey from './survey'
 import stats from './stats'
-import { routeReducer as routing } from 'redux-simple-router' // REMEMBER
+import { routeReducer as routing } from 'react-router-redux' // REMEMBER
 
 const rootReducer = combineReducers({
   question,

@@ -1,9 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute } from 'react-router'
 import { Provider } from 'react-redux'
-import createHistory from 'history/lib/createHashHistory'
 import configureStore from 'store/configureStore'
+import { Router, Route, IndexRoute } from 'react-router'
+import createHistory from 'history/lib/createBrowserHistory'
+
 
 /* Containers */
 import App from 'containers/App'
@@ -20,16 +21,15 @@ import DevTools from 'containers/DevTools'
 import NotFound from 'components/NotFound'
 
 /* Styles */
-import 'app.scss';
+import 'app.scss'
 
-/* Routes */
-const hashHistory = createHistory({ queryKey: false })
-const store = configureStore(hashHistory)
+const history = createHistory()
+const store = configureStore(history)
 
 const INDEX = (
   <Provider store={ store }>
     <div>
-      <Router history={ hashHistory }>
+      <Router history={ history }>
         <Route path="/" component={ App } >
           <IndexRoute component={ Login } />
           <Route path="signup" component={ Signup } />
@@ -42,7 +42,7 @@ const INDEX = (
           <Route path="*" component={ NotFound } />
         </Route>
       </Router>
-      { env.DEV ? <DevTools /> : null }
+      { IN_DEV_MODE ? <DevTools /> : null }
     </div>
   </Provider>
 )

@@ -83,6 +83,7 @@ export function asyncGetPhi() {
       covariates = round.covariates.slice(0)
     } else { return }
 
+    // TODO we need a diff name than 'env.source'
     $.ajax({
       url: env.SOURCE + '/api/v1/get_phi',
       method: 'POST',

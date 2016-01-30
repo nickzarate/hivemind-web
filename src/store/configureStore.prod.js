@@ -1,10 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import { syncHistory } from 'redux-simple-router'
+import { syncHistory } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import reducers from 'reducers'
 
-export default function configureStore(hashHistory) {
-  const reduxRouterMiddleware = syncHistory(hashHistory)
+export default function configureStore(history) {
+  const reduxRouterMiddleware = syncHistory(history)
 
   const finalCreateStore = compose(
     // Middleware you want to use in production:
