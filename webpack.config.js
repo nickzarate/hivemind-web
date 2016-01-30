@@ -1,4 +1,3 @@
-/*eslint-env node*/
 'use strict';
 
 var webpack = require('webpack'),
@@ -13,17 +12,23 @@ module.exports = {
   cache: true,
   entry: {
     common: [
+      'chartist',
+      'history',
+      'immutable',
+      'jquery',
+      'rc-slider',
       'react',
+      'react-addons-update',
+      'react-chartist',
       'react-dom',
       'react-router',
-      'redux',
       'react-redux',
-      'redux-simple-router',
-      'parse',
-      'parse-react',
+      'react-router-redux',
+      'redux',
       'redux-thunk',
-      'react-chartist',
-      'chartist'
+      'reselect',
+      'parse',
+      'parse-react'
     ],
     index: path.join(srcPath, 'index.js')
   },
@@ -46,7 +51,7 @@ module.exports = {
 
       // eslint-loader
       { test: /\.(js|jsx)$/, exclude: /(node_modules)/, loader: "eslint-loader" },
-      
+
       // Sass loader
       {
         test: /\.scss$/,
@@ -90,17 +95,10 @@ module.exports = {
       "process.env": {
         NODE_ENV: JSON.stringify(inDevMode ? "development" : "production")
       },
-      'env.PROD': process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production',
-      'env.PRODUCTION': process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production',
-      'env.DEV': process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development',
-      'env.DEVELOPMENT': process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development',
-      'env.SOURCE': process.env.NODE_ENV === 'dev' ? JSON.stringify('http://localhost:5000') : JSON.stringify('https://hivemind-analytics.herokuapp.com')
+      "IN_DEV_MODE": inDevMode,
+      'env.SOURCE': inDevMode ? JSON.stringify('http://localhost:5000') : JSON.stringify('https://hivemind-analytics.herokuapp.com')
     })
   ],
-  node: {
-    net: "empty",
-    tls: "empty"
-  },
   debug: true,
   devtool: 'source-map',
   devServer: {
