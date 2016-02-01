@@ -1,10 +1,10 @@
-'use strict';
+'use strict'
 
 var webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   path = require('path'),
-  srcPath = path.join(__dirname, 'src');
-var inDevMode = process.env.NODE_ENV === "dev" || process.env.NODE_ENV === "development";
+  srcPath = path.join(__dirname, 'src')
+var inDevMode = process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'development'
 
 
 module.exports = {
@@ -25,6 +25,7 @@ module.exports = {
       'react-redux',
       'react-router-redux',
       'redux',
+      'redux-form',
       'redux-thunk',
       'reselect',
       'parse',
@@ -47,10 +48,10 @@ module.exports = {
   module: {
     loaders: [
       // required for react jsx
-      { test: /\.(js|jsx)$/, exclude: /(node_modules)/, loader: "babel-loader" },
+      { test: /\.(js|jsx)$/, exclude: /(node_modules)/, loader: 'babel-loader' },
 
       // eslint-loader
-      { test: /\.(js|jsx)$/, exclude: /(node_modules)/, loader: "eslint-loader" },
+      { test: /\.(js|jsx)$/, exclude: /(node_modules)/, loader: 'eslint-loader' },
 
       // Sass loader
       {
@@ -63,20 +64,20 @@ module.exports = {
       // { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
 
       // required to write "require('./style.css')"
-      { test: /\.css$/, exclude: /\.useable\.css$/, loader: "style-loader!css-loader" },
+      { test: /\.css$/, exclude: /\.useable\.css$/, loader: 'style-loader!css-loader' },
 
       // required for bootstrap icons.
       //    the url-loader uses DataUrls.
       //    the file-loader emits files.
-      { test: /\.(woff|woff2)$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-      { test: /\.ttf$/, loader: "file-loader?prefix=font/" },
-      { test: /\.eot$/, loader: "file-loader?prefix=font/" },
-      { test: /\.svg$/, loader: "file-loader?prefix=font/" },
+      { test: /\.(woff|woff2)$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
+      { test: /\.ttf$/, loader: 'file-loader?prefix=font/' },
+      { test: /\.eot$/, loader: 'file-loader?prefix=font/' },
+      { test: /\.svg$/, loader: 'file-loader?prefix=font/' },
 
       // misc
-      { test: /\.json$/, loader: "json-loader" },
-      { test: /\.png$/, loader: "url-loader?limit=100000" },
-      { test: /\.jpg$/, loader: "file-loader" }
+      { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.png$/, loader: 'url-loader?limit=100000' },
+      { test: /\.jpg$/, loader: 'file-loader' }
     ]
   },
   plugins: [
@@ -87,15 +88,15 @@ module.exports = {
     }),
     new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery"
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
     }),
     new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify(inDevMode ? "development" : "production")
+      'process.env': {
+        NODE_ENV: JSON.stringify(inDevMode ? 'development' : 'production')
       },
-      "IN_DEV_MODE": inDevMode,
+      'IN_DEV_MODE': inDevMode,
       'env.SOURCE': inDevMode ? JSON.stringify('http://localhost:5000') : JSON.stringify('https://hivemind-analytics.herokuapp.com')
     })
   ],
@@ -105,4 +106,4 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true
   }
-};
+}
