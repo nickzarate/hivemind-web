@@ -6,6 +6,7 @@ import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 export default class Signup extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+    if (Parse.User.current()) { push('/home') }
   }
 
   push(path) {
@@ -14,25 +15,13 @@ export default class Signup extends React.Component {
 
   handleEmail = (event) => this.props.actions.setUserEmail(event.target.value);
   handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
-  handleSignup = () => this.props.actions.asyncSignup(Parse, this.push('/survey'));
+  handleSignup = (data) => this.props.actions.asyncSignup(Parse, this.push('/survey'), data);
 
   render() {
     return (
       <div>
         <h1>{ 'Sign Up' }</h1>
-        <form onSubmit={ this.handleSignup }>
-          <input
-            onChange={ this.handleEmail }
-            placeholder="Email"
-            type="email"
-          />
-          <input
-            onChange={ this.handlePassword }
-            placeholder="Password"
-            type="password"
-          />
-          <button onClick={ this.handleSignup }>{ 'Sign Up' }</button>
-        </form>
+        <LoginForm onSubmit={ this.handleSignup } text="Sign Up" />
         <button onClick={ this.push('/home') }>{ 'Home' }</button>
         <button onClick={ this.push('/') }>{ 'Log In' }</button>
       </div>
