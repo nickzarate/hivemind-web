@@ -3,9 +3,19 @@ import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleLogout = this.handleLogout.bind(this)
+  }
+
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     this.props.actions.getCategories(Parse)
+  }
+
+  handleLogout() {
+    Parse.User.logOut()
+    this.props.push('/')
   }
 
   push(path) {
@@ -39,6 +49,7 @@ export default class Home extends React.Component {
         <h1>{ 'Home' }</h1>
         <ul>{ this.renderCategories() }</ul>
         <button onClick={ this.push('/stats') }>{ 'Check out latest round!' }</button>
+        <button onClick={ this.handleLogout }>{ 'Log Out' }</button>
       </div>
     )
   }
