@@ -1,6 +1,6 @@
 import Parse from 'parse'
 import React from 'react'
-import LoginForm from './LoginForm'
+import LoginForm from 'components/Lib/LoginForm'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
 export default class Login extends React.Component {
