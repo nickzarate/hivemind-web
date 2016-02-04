@@ -19,6 +19,7 @@ module.exports = {
       'rc-slider',
       'react',
       'react-addons-update',
+      'react-bootstrap',
       'react-chartist',
       'react-dom',
       'react-router',
