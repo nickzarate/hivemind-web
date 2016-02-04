@@ -1,4 +1,4 @@
-import { SET_USER_EMAIL, SET_USER_PASSWORD, LOGIN } from 'constants'
+import { SET_USER_EMAIL, SET_USER_PASSWORD, LOGIN, SET_ERROR_MESSAGE } from 'constants'
 
 export function setUserEmail(email) {
   return {

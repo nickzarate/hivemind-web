@@ -1,4 +1,4 @@
-import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from 'constants'
+import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS, CLEAR } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {

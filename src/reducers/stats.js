@@ -1,4 +1,4 @@
-import { SET_COVARIATE_DATA, SET_DATA, SET_PHI, SET_SERIES, SET_OUTCOMES } from 'constants'
+import { SET_COVARIATE_DATA, SET_DATA, SET_PHI, SET_SERIES, SET_OUTCOMES, CLEAR } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
