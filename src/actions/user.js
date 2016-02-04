@@ -27,6 +27,15 @@ export function login(currentUser) {
   }
 }
 
+export function setErrorMessage(error) {
+  return {
+    type: SET_ERROR_MESSAGE,
+    payload: {
+      errorMessage: 'Error: ' + error.code + ' ' + error.message
+    }
+  }
+}
+
 /*
  *  Sign up a new user with the given email and go to the home page
  */
@@ -42,7 +51,7 @@ export function asyncSignup(Parse, push, data) {
         push()
       },
       error(error) {
-        console.log('Error: ' + error.code + ' ' + error.message)
+        dispatch(setErrorMessage(error))
       }
     })
   }
@@ -59,7 +68,7 @@ export function asyncLogin(Parse, push, data) {
         push()
       },
       error(error) {
-        console.log('Error: ' + error.code + ' ' + error.message)
+        dispatch(setErrorMessage(error))
       }
     })
   }

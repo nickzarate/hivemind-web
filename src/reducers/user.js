@@ -2,9 +2,10 @@ import { SET_USER_EMAIL, SET_USER_PASSWORD, LOGIN, SET_ERROR_MESSAGE, CLEAR, CLE
 import update from 'react-addons-update'
 
 const initialState = {
+  currentUser: null,
   email: '',
-  password: '',
-  currentUser: null
+  errorMessage: null,
+  password: ''
 }
 
 export default function user(state = initialState, action) {

@@ -26,8 +26,8 @@ export default class Login extends React.Component {
         <h1>{ 'Login' }</h1>
         { renderError(this.props.user.errorMessage) }
         <LoginForm onSubmit={ this.handleLogin } text="Log In" />
-        <button onClick={ this.push('/home') }>{ 'Home' }</button>
-        <button onClick={ this.push('/signup') }>{ 'Sign Up' }</button>
+        <Button onClick={ this.push('/home') }>{ 'Home' }</Button>
+        <Button onClick={ this.push('/signup') }>{ 'Sign Up' }</Button>
       </div>
     )
   }
