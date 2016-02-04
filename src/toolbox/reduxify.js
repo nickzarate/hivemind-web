@@ -1,6 +1,8 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
+import merge from './merge'
+import * as clear from 'actions/clear'
 
 /**
  * Reduxifies a component.
@@ -14,6 +16,7 @@ import { routeActions } from 'react-router-redux'
  */
 export default function reduxify({ selector, actions, component }) {
   const push = routeActions.push
+  actions = merge(actions, clear)
 
   // the component will be provided actions
   let mapDispatchToProps = (dispatch) => {

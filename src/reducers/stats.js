@@ -20,6 +20,8 @@ export default function stats(state = initialState, action) {
     return update(state, {data: {$splice: [[action.payload.index, 1, action.payload.data]]}})
   case SET_OUTCOMES:
     return update(state, {outcomes: {$set: action.payload.outcomes}})
+  case CLEAR:
+    return initialState
   default:
     return state
   }

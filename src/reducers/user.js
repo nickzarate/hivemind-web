@@ -15,6 +15,12 @@ export default function user(state = initialState, action) {
     return update(state, {password: {$set: action.payload.password}})
   case LOGIN:
     return update(state, {currentUser: {$set: action.payload.currentUser}})
+  case SET_ERROR_MESSAGE:
+    return update(state, {errorMessage: {$set: action.payload.errorMessage}})
+  case CLEAR_ERROR:
+    return update(state, {errorMessage: {$set: null}})
+  case CLEAR:
+    return initialState
   default:
     return state
   }

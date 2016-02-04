@@ -45,6 +45,8 @@ export default function round(state = initialState, action) {
     return update(state, {numQuestions: {$set: action.payload.numQuestions}})
   case ADD_OUTCOMES:
     return update(state, {outcomes: {$push: [action.payload.outcomes]}})
+  case CLEAR:
+    return initialState
   default:
     return state
   }

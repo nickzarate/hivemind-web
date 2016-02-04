@@ -6,7 +6,8 @@ import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 export default class Signup extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    if (Parse.User.current()) { push('/home') }
+    if (Parse.User.current()) { this.props.push('/home') }
+    this.props.actions.clearError()
   }
 
   push(path) {
