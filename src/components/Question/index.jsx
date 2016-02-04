@@ -1,6 +1,7 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
+import Covariates from './Covariates'
 
 export default class Question extends React.Component {
   componentWillMount() {
@@ -41,25 +42,15 @@ export default class Question extends React.Component {
     }
   }
 
-  renderCovariates() {
-    const { question, currentCategory } = this.props
-    if (question.currentQuestion) {
-      return question.currentQuestion.get('covariateValues').map(
-        (covariate, index) => (
-          <li key={ index }>
-            <p>{ currentCategory.get('covariateNames')[index] }{ ': ' }{ covariate }</p>
-          </li>
-        )
-      )
-    }
-  }
-
   render() {
-    const { question, actions } = this.props
+    const { question, actions, currentCategory } = this.props
     return (
       <div>
         <p>{ 'Bank: ' }{ question.bank }</p>
-        { this.renderCovariates() }
+        <Covariates
+          question={ question }
+          currentCategory={ currentCategory }
+        />
         <input
           onChange={ actions.handleEstimate }
           placeholder="POINT ESTIMATE"
