@@ -1,5 +1,5 @@
 import React from 'react'
-import signupSelector from 'selectors/signup'
+import userSelector from 'selectors/user'
 import * as userActions from 'actions/user'
 import Signup from 'components/Signup'
 import reduxify from 'toolbox/reduxify'
@@ -17,7 +17,7 @@ class SignupContainer extends React.Component {
 }
 
 export default reduxify({
-  selector: signupSelector,
+  selector: userSelector,
   actions: userActions,
   component: SignupContainer
 })
