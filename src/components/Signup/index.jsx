@@ -21,8 +21,6 @@ export default class Signup extends React.Component {
     return () => this.props.push(path)
   }
 
-  handleEmail = (event) => this.props.actions.setUserEmail(event.target.value);
-  handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
   handleSignup = (data) => this.props.actions.asyncSignup(Parse, this.push('/survey'), data);
 
   render() {

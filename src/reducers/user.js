@@ -1,18 +1,12 @@
-import { SET_USER_EMAIL, SET_USER_PASSWORD, SET_ERROR_MESSAGE, CLEAR, CLEAR_ERROR } from 'constants'
+import { SET_ERROR_MESSAGE, CLEAR, CLEAR_ERROR } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
-  email: '',
-  errorMessage: null,
-  password: ''
+  errorMessage: null
 }
 
 export default function user(state = initialState, action) {
   switch (action.type) {
-  case SET_USER_EMAIL:
-    return update(state, {email: {$set: action.payload.email}})
-  case SET_USER_PASSWORD:
-    return update(state, {password: {$set: action.payload.password}})
   case SET_ERROR_MESSAGE:
     return update(state, {errorMessage: {$set: action.payload.errorMessage}})
   case CLEAR_ERROR:

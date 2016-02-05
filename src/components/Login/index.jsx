@@ -21,8 +21,6 @@ export default class Login extends React.Component {
     return () => this.props.push(path)
   }
 
-  handleEmail = (event) => this.props.actions.setUserEmail(event.target.value);
-  handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
   handleLogin = (data) => this.props.actions.asyncLogin(Parse, this.push('/home'), data);
 
   render() {

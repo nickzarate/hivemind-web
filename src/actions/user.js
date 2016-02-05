@@ -1,22 +1,4 @@
-import { SET_USER_EMAIL, SET_USER_PASSWORD, SET_ERROR_MESSAGE } from 'constants'
-
-export function setUserEmail(email) {
-  return {
-    type: SET_USER_EMAIL,
-    payload: {
-      email: email
-    }
-  }
-}
-
-export function setUserPassword(password) {
-  return {
-    type: SET_USER_PASSWORD,
-    payload: {
-      password: password
-    }
-  }
-}
+import { SET_ERROR_MESSAGE } from 'constants'
 
 export function setErrorMessage(error) {
   return {
