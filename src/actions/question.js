@@ -81,15 +81,14 @@ export function handleDeposit(index) {
 /*
  *  Set the pointEstimate state if the new value is a valid estimate
  */
-export function handleEstimate(event) {
+export function handlePointEstimate(data) {
   return (dispatch) => {
-    let pointEstimate = Number(event.target.value)
     //TODO: More robust error checking?
-    //TODO: Dispatch error message if its an invalid number
-    if (!pointEstimate) {
+    if (!data.outcome) {
+      //TODO: dispatch error message
       return
     }
-    dispatch(setPointEstimate(pointEstimate))
+    dispatch(setPointEstimate(data.outcome))
   }
 }
 

@@ -27,8 +27,6 @@ export default class Question extends React.Component {
   handleSubmit() {
     return () => {
       this.props.onSubmit()
-      //TODO: Fix this, deprecated
-      this.refs.estimateInput.value = ''
       this.props.actions.reset()
       this.props.actions.pullQuestion(Parse)
     }
@@ -42,10 +40,9 @@ export default class Question extends React.Component {
           question={ question }
           currentCategory={ currentCategory }
         />
-        <input
-          onChange={ actions.handleEstimate }
-          placeholder="POINT ESTIMATE"
-          ref="estimateInput"
+        <EstimateForm
+          onSubmit={ actions.handlePointEstimate }
+          outcomeName={ currentCategory.get('outcomeName') }
         />
         <Bins
           question={ question }
