@@ -29,8 +29,23 @@ export default class Question extends React.Component {
   handleSubmit() {
     return () => {
       this.props.onSubmit()
-      this.props.actions.reset()
+      this.props.actions.reset('estimate')
       this.props.actions.pullQuestion(Parse)
+    }
+  }
+
+  renderBins() {
+    if (this.props.question.hasEstimated) {
+      return (
+        <div>
+          <Bins
+            question={ this.props.question }
+            currentCategory={ this.props.currentCategory }
+            onDeposit={ this.handleDeposit }
+          />
+          <button onClick={ this.handleSubmit() }>{ 'Submit Question' }</button>
+        </div>
+      )
     }
   }
 
@@ -46,12 +61,7 @@ export default class Question extends React.Component {
           onSubmit={ actions.handlePointEstimate }
           outcomeName={ currentCategory.get('outcomeName') }
         />
-        <Bins
-          question={ question }
-          currentCategory={ currentCategory }
-          onDeposit={ this.handleDeposit }
-        />
-        <button onClick={ this.handleSubmit() }>{ 'Submit Question' }</button>
+        { this.renderBins() }
       </div>
     )
   }
