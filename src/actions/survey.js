@@ -65,7 +65,7 @@ export function asyncSubmitSurvey(Parse, survey) {
     }
     let user = Parse.User.current()
     user.save({ characteristics: surveyResponses }).then(function() {}, {
-      error(error) {
+      error(user, error) {
         console.log('Error: ' + error.code + ' ' + error.message)
       }
     })

@@ -18,7 +18,9 @@ export default class Question extends React.Component {
     actions.pullQuestion(Parse)
   }
 
-  handleDeposit(index) { return () => this.props.actions.handleDeposit(index) }
+  handleDeposit(index) {
+    return () => this.props.actions.handleDeposit(index)
+  }
 
   push(path) {
     return () => this.props.push(path)

@@ -50,7 +50,7 @@ export function asyncSignup(Parse, push, data) {
         dispatch(login(currentUser))
         push()
       },
-      error(error) {
+      error(user, error) {
         dispatch(setErrorMessage(error))
       }
     })
@@ -67,7 +67,7 @@ export function asyncLogin(Parse, push, data) {
         dispatch(login(currentUser))
         push()
       },
-      error(error) {
+      error(user, error) {
         dispatch(setErrorMessage(error))
       }
     })

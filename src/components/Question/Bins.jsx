@@ -1,25 +1,20 @@
 import React from 'react'
 
 export default class Question extends React.Component {
-  renderBins() {
-    const { question, currentCategory, onDeposit } = this.props
-    if (question.currentQuestion) {
-      return currentCategory.get('binText').map(
-        (text, index) => (
-          <li key={ index }>
-            <button onClick={ onDeposit(index) }>
-              { text }{ ': ' }{ question.bins[index] }
-            </button>
-          </li>
-        )
-      )
-    }
-  }
-
   render() {
+    const { question, currentCategory, onDeposit } = this.props
     return (
       <div>
-        { this.renderBins() }
+        <p>{ 'Bank: ' }{ this.props.question.bank }</p>
+        {
+          currentCategory.get('binText').map((text, index) =>
+            <li key={ index }>
+              <button onClick={ onDeposit(index) }>
+                { text }{ ': ' }{ question.bins[index] }
+              </button>
+            </li>
+          )
+        }
       </div>
     )
   }
