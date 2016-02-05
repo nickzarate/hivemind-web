@@ -7,12 +7,16 @@ export default createSelector(
   statsSelector,
   categorySelector,
   (stats, currentCategory) => {
-    return {
-      stats,
-      ranges: {
+    let ranges = null
+    if (currentCategory) {
+      ranges = {
         covariates: currentCategory.get('covariateRanges'),
         outcomes: currentCategory.get('outcomeRanges')
       }
+    }
+    return {
+      stats,
+      ranges
     }
   }
 )

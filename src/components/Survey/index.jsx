@@ -14,6 +14,10 @@ export default class Survey extends React.Component {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
   }
 
+  componentDidMount() {
+    if (!Parse.User.current()) { this.props.push('/') }
+  }
+
   push(path) {
     return () => this.props.push(path)
   }

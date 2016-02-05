@@ -12,6 +12,10 @@ export default class Home extends React.Component {
 
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+  }
+
+  componentDidMount() {
+    if (!Parse.User.current()) { this.props.push('/') }
     this.props.actions.getCategories(Parse)
   }
 

@@ -1,17 +1,26 @@
 import React from 'react'
+import Parse from 'parse'
 import LineCharts from './LineCharts'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
 export default class Stats extends React.Component {
   constructor(props) {
     super(props)
     this.handleSliderChange = this.handleSliderChange.bind(this)
   }
-  
+
   componentWillMount() {
-    const { actions } = this.props
-    actions.asyncGetPhi()
-    actions.getCovariateData()
-    actions.getData()
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+  }
+
+  componentDidMount() {
+    if (!Parse.User.current() || !this.props.ranges) {
+      this.props.push('/home')
+    } else {
+      this.props.actions.asyncGetPhi()
+      this.props.actions.getCovariateData()
+      this.props.actions.getData()
+    }
   }
 
   push(path) {

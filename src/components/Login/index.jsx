@@ -7,7 +7,13 @@ import renderError from 'toolbox/renderError'
 export default class Login extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+  }
+
+  componentDidMount() {
     if (Parse.User.current()) { this.props.push('/home') }
+  }
+
+  componentWillUnmount() {
     this.props.actions.clearError()
   }
 
