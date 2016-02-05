@@ -29,7 +29,6 @@ export default class Signup extends React.Component {
         <h1>{ 'Sign Up' }</h1>
         { renderError(this.props.user.errorMessage) }
         <LoginForm onSubmit={ this.handleSignup } text="Sign Up" />
-        <button onClick={ this.push('/home') }>{ 'Home' }</button>
         <button onClick={ this.push('/') }>{ 'Log In' }</button>
       </div>
     )
