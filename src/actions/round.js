@@ -107,15 +107,16 @@ export function asyncCreateRound(Parse) {
 /*
  *  Award the user points according to the correctness of their answer
  */
-export function asyncAwardPoints() {
+export function asyncAwardPoints(Parse) {
   return (dispatch, getState) => {
-    const { question, user } = getState()
+    const { question } = getState()
 
     //TODO: Calculate how many points are earned for answering correctly
     let points = question.bins[question.currentQuestion.get('correctAnswerIndex')] * 50
-    let honey = user.currentUser.get('honey')
+    let currentUser = Parse.User.current()
+    let honey = currentUser.get('honey')
     honey += points
-    user.currentUser.save({ honey: honey })
+    currentUser.save({ honey: honey })
   }
 }
 
