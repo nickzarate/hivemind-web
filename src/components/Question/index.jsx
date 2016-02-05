@@ -1,8 +1,9 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import Covariates from './Covariates'
 import Bins from './Bins'
+import Description from './Description'
+import EstimateForm from './EstimateForm'
 
 export default class Question extends React.Component {
   constructor(props) {
@@ -37,8 +38,7 @@ export default class Question extends React.Component {
     const { question, actions, currentCategory } = this.props
     return (
       <div>
-        <p>{ 'Bank: ' }{ question.bank }</p>
-        <Covariates
+        <Description
           question={ question }
           currentCategory={ currentCategory }
         />
