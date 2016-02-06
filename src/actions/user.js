@@ -53,11 +53,9 @@ export function asyncSignup(Parse, push) {
 /*
  *  Login the user and go to the home page
  */
-export function asyncLogin(Parse, push) {
-  return (dispatch, getState) => {
-    const { user } = getState()
-
-    Parse.User.logIn(user.email, user.password, {
+export function asyncLogin(Parse, push, data) {
+  return (dispatch) => {
+    Parse.User.logIn(data.email, data.password, {
       success(currentUser) {
         dispatch(login(currentUser))
         push()

@@ -36,8 +36,13 @@ export function setCategories(categories) {
 export function getCategories(Parse) {
   return (dispatch) => {
     var query = new Parse.Query('Categories')
-    query.find(function(categories) {
-      dispatch(setCategories(categories))
+    query.find({
+      success(categories) {
+        dispatch(setCategories(categories))
+      },
+      error(error) {
+        console.log('Error: ' + error.code + ' ' + error.message)
+      }
     })
   }
 }
