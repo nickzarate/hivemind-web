@@ -1,5 +1,6 @@
 import Parse from 'parse'
 import React from 'react'
+import ReactDOM from 'react-dom'
 import LoginForm from 'components/Lib/LoginForm'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import renderTooltip from 'toolbox/renderTooltip'
@@ -25,19 +26,19 @@ export default class Login extends React.Component {
 
   renderError() {
     let domNode = null
+    if (this.loginForm) { domNode = this.loginForm }
     renderTooltip({
       message: this.props.user.errorMessage,
-      targetDomNode: domNode
+      target: ReactDOM.findDOMNode(domNode)
     })
   }
 
   render() {
-    console.log(this)
     return (
       <div>
         <h1>{ 'Login' }</h1>
         { this.renderError() }
-        <LoginForm onSubmit={ this.handleLogin } text="Log In" />
+        <LoginForm onSubmit={ this.handleLogin } text="Log In" ref={ (ref) => this.loginForm = ref } />
         <button onClick={ this.push('/signup') }>{ 'Sign Up' }</button>
       </div>
     )

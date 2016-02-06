@@ -1,14 +1,17 @@
 import { Overlay, Tooltip } from 'react-bootstrap'
 import React from 'react'
 
-export default function renderTooltip({ message, targetDomNode }) {
+export default function renderTooltip({ message, target }) {
+  console.log(message)
+  console.log(target)
   let show = false
   if (message) { show = true }
+  console.log(show)
   return (
     <Overlay
       placement="top"
       show={ show }
-      target={ targetDomNode }
+      target={ target }
     >
       <Tooltip id={ message }>
         { message }
