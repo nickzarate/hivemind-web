@@ -1,5 +1,5 @@
 import React from 'react'
-import loginSelector from 'selectors/login'
+import userSelector from 'selectors/user'
 import * as userActions from 'actions/user'
 import Login from 'components/Login'
 import reduxify from 'toolbox/reduxify'
@@ -17,7 +17,7 @@ class LoginContainer extends React.Component {
 }
 
 export default reduxify({
-  selector: loginSelector,
+  selector: userSelector,
   actions: userActions,
   component: LoginContainer
 })

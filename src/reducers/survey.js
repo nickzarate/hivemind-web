@@ -1,4 +1,4 @@
-import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from 'constants'
+import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS, CLEAR } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
@@ -12,6 +12,8 @@ export default function survey(state = initialState, action) {
     return update(state, {hourlyWages: {$set: action.payload.hourlyWages}})
   case SET_MONTHLY_EARNINGS:
     return update(state, {monthlyEarnings: {$set: action.payload.monthlyEarnings}})
+  case CLEAR:
+    return initialState
   default:
     return state
   }

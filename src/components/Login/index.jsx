@@ -2,11 +2,14 @@ import Parse from 'parse'
 import React from 'react'
 import LoginForm from 'components/Lib/LoginForm'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
+import { Button } from 'react-bootstrap'
+import renderError from 'toolbox/renderError'
 
 export default class Login extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     if (Parse.User.current()) { this.props.push('/home') }
+    this.props.actions.clearError()
   }
 
   push(path) {
@@ -21,9 +24,10 @@ export default class Login extends React.Component {
     return (
       <div>
         <h1>{ 'Login' }</h1>
+        { renderError(this.props.user.errorMessage) }
         <LoginForm onSubmit={ this.handleLogin } text="Log In" />
-        <button onClick={ this.push('/home') }>{ 'Home' }</button>
-        <button onClick={ this.push('/signup') }>{ 'Sign Up' }</button>
+        <Button onClick={ this.push('/home') }>{ 'Home' }</Button>
+        <Button onClick={ this.push('/signup') }>{ 'Sign Up' }</Button>
       </div>
     )
   }
