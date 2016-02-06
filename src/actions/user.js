@@ -30,14 +30,12 @@ export function login(currentUser) {
 /*
  *  Sign up a new user with the given email and go to the home page
  */
-export function asyncSignup(Parse, push) {
-  return (dispatch, getState) => {
-    const { user } = getState()
-
+export function asyncSignup(Parse, push, data) {
+  return (dispatch) => {
     let newUser = new Parse.User()
-    newUser.set('username', user.email)
-    newUser.set('email', user.email)
-    newUser.set('password', user.password)
+    newUser.set('username', data.email)
+    newUser.set('email', data.email)
+    newUser.set('password', data.password)
     newUser.signUp(null, {
       success(currentUser) {
         dispatch(login(currentUser))

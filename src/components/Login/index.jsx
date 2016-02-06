@@ -1,6 +1,6 @@
 import Parse from 'parse'
 import React from 'react'
-import LoginForm from './LoginForm'
+import LoginForm from 'components/Lib/LoginForm'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
 export default class Login extends React.Component {
@@ -21,7 +21,7 @@ export default class Login extends React.Component {
     return (
       <div>
         <h1>{ 'Login' }</h1>
-        <LoginForm onSubmit={ this.handleLogin } />
+        <LoginForm onSubmit={ this.handleLogin } text="Log In" />
         <button onClick={ this.push('/home') }>{ 'Home' }</button>
         <button onClick={ this.push('/signup') }>{ 'Sign Up' }</button>
       </div>

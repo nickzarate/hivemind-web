@@ -16,7 +16,7 @@ class LoginForm extends React.Component {
           type="password"
           {...password}
         />
-        <button onClick={ handleSubmit }>{ 'Log In' }</button>
+        <button onClick={ handleSubmit }>{ this.props.text }</button>
       </form>
     )
   }
