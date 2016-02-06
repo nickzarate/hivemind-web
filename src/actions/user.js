@@ -5,10 +5,14 @@ import { setErrorMessage } from 'actions/clear'
  */
 export function asyncSignup(Parse, push, data) {
   return (dispatch) => {
+    if (data.password1 !== data.password2) {
+      dispatch(setErrorMessage('Passwords don\'t match, try again!'))
+      return
+    }
     let newUser = new Parse.User()
     newUser.set('username', data.email)
     newUser.set('email', data.email)
-    newUser.set('password', data.password)
+    newUser.set('password', data.password1)
     newUser.signUp(null, {
       success() {
         push()
