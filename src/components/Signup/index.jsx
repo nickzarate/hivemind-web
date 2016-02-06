@@ -14,7 +14,7 @@ export default class Signup extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.actions.clearError()
+    this.props.actions.setErrorMessage(null)
   }
 
   push(path) {

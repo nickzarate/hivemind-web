@@ -1,13 +1,4 @@
-import { SET_ERROR_MESSAGE } from 'constants'
-
-export function setErrorMessage(error) {
-  return {
-    type: SET_ERROR_MESSAGE,
-    payload: {
-      errorMessage: 'Error: ' + error.code + ' ' + error.message
-    }
-  }
-}
+import { setErrorMessage } from 'actions/clear'
 
 /*
  *  Sign up a new user with the given email and go to the home page
@@ -23,7 +14,7 @@ export function asyncSignup(Parse, push, data) {
         push()
       },
       error(user, error) {
-        dispatch(setErrorMessage(error))
+        dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message))
       }
     })
   }
@@ -39,7 +30,7 @@ export function asyncLogin(Parse, push, data) {
         push()
       },
       error(user, error) {
-        dispatch(setErrorMessage(error))
+        dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message))
       }
     })
   }
