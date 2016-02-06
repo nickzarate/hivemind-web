@@ -39,9 +39,6 @@ export function getCategories(Parse) {
     query.find({
       success(categories) {
         dispatch(setCategories(categories))
-      },
-      error(error) {
-        console.log('Error: ' + error.code + ' ' + error.message)
       }
     })
   }

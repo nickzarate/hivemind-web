@@ -1,33 +1,35 @@
 import Parse from 'parse'
 import React from 'react'
-import LoginForm from 'components/Lib/LoginForm'
+import LoginForm from './LoginForm'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import { Button } from 'react-bootstrap'
-import renderError from 'toolbox/renderError'
+import Tooltip from 'components/Lib/Tooltip'
 
 export default class Login extends React.Component {
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+  }
+
+  componentDidMount() {
     if (Parse.User.current()) { this.props.push('/home') }
-    this.props.actions.clearError()
+  }
+
+  componentWillUnmount() {
+    this.props.actions.setErrorMessage(null)
   }
 
   push(path) {
     return () => this.props.push(path)
   }
 
-  handleEmail = (event) => this.props.actions.setUserEmail(event.target.value);
-  handlePassword = (event) => this.props.actions.setUserPassword(event.target.value);
   handleLogin = (data) => this.props.actions.asyncLogin(Parse, this.push('/home'), data);
 
   render() {
     return (
       <div>
         <h1>{ 'Login' }</h1>
-        { renderError(this.props.user.errorMessage) }
-        <LoginForm onSubmit={ this.handleLogin } text="Log In" />
-        <Button onClick={ this.push('/home') }>{ 'Home' }</Button>
-        <Button onClick={ this.push('/signup') }>{ 'Sign Up' }</Button>
+        <Tooltip target={ this.loginForm } message={ this.props.user.errorMessage } />
+        <LoginForm onSubmit={ this.handleLogin } ref={ (ref) => this.loginForm = ref } />
+        <button onClick={ this.push('/signup') }>{ 'Sign Up' }</button>
       </div>
     )
   }

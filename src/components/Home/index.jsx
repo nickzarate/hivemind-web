@@ -1,15 +1,21 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
+import Categories from './Categories'
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props)
     this.handleLogout = this.handleLogout.bind(this)
+    this.handleCategoryChoice = this.handleCategoryChoice.bind(this)
   }
 
   componentWillMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+  }
+
+  componentDidMount() {
+    if (!Parse.User.current()) { this.props.push('/') }
     this.props.actions.getCategories(Parse)
   }
 
@@ -22,24 +28,10 @@ export default class Home extends React.Component {
     return () => this.props.push(path)
   }
 
-  chooseCategory(category) {
+  handleCategoryChoice(category) {
     return () => {
       this.props.actions.setCurrentCategory(category)
       this.props.push('/round')
-    }
-  }
-
-  renderCategories() {
-    if (this.props.categories) {
-      return this.props.categories.map(
-        (category) => (
-          <li key={ category.id }>
-            <button onClick={ this.chooseCategory(category) }>
-              { 'Start new ' }{ category.get('name') }{ ' round' }
-            </button>
-          </li>
-        )
-      )
     }
   }
 
@@ -47,8 +39,10 @@ export default class Home extends React.Component {
     return (
       <div>
         <h1>{ 'Home' }</h1>
-        <ul>{ this.renderCategories() }</ul>
-        <button onClick={ this.push('/stats') }>{ 'Check out latest round!' }</button>
+        <Categories
+          categories={ this.props.categories }
+          onChoose={ this.handleCategoryChoice }
+        />
         <button onClick={ this.handleLogout }>{ 'Log Out' }</button>
       </div>
     )

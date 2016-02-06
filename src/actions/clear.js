@@ -1,4 +1,4 @@
-import { CLEAR, CLEAR_ERROR } from 'constants'
+import { CLEAR, SET_ERROR_MESSAGE } from 'constants'
 
 export function clear() {
   return {
@@ -6,8 +6,11 @@ export function clear() {
   }
 }
 
-export function clearError() {
+export function setErrorMessage(errorMessage) {
   return {
-    type: CLEAR_ERROR
+    type: SET_ERROR_MESSAGE,
+    payload: {
+      errorMessage: errorMessage
+    }
   }
 }

@@ -1,4 +1,5 @@
-import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, SET_BINS, SET_BANK } from 'constants'
+import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, SET_BINS, SET_BANK, SET_HAS_ESTIMATED } from 'constants'
+import { reset as resetReduxForm } from 'redux-form'
 import { rand } from 'toolbox/misc'
 
 export function withdraw() {
@@ -52,7 +53,20 @@ export function setCurrentQuestion(question) {
   }
 }
 
-export function reset() {
+export function setHasEstimated(hasEstimated) {
+  return {
+    type: SET_HAS_ESTIMATED,
+    payload: {
+      hasEstimated: hasEstimated
+    }
+  }
+}
+
+export function resetForm(formName) {
+  return resetReduxForm(formName)
+}
+
+export function reset(formName) {
   return (dispatch, getState) => {
     const { round } = getState()
     let bins = []
@@ -62,6 +76,8 @@ export function reset() {
     dispatch(setBins(bins))
     dispatch(setBank(round.questionInfo.currentCategory.get('tokens')))
     dispatch(setPointEstimate(0))
+    dispatch(setHasEstimated(false))
+    dispatch(resetForm(formName))
   }
 }
 
@@ -81,15 +97,16 @@ export function handleDeposit(index) {
 /*
  *  Set the pointEstimate state if the new value is a valid estimate
  */
-export function handleEstimate(event) {
+export function handlePointEstimate(data) {
   return (dispatch) => {
-    let pointEstimate = Number(event.target.value)
+    data.outcome = Number(data.outcome)
     //TODO: More robust error checking?
-    //TODO: Dispatch error message if its an invalid number
-    if (!pointEstimate) {
+    if (!data.outcome) {
+      //TODO: dispatch error message
       return
     }
-    dispatch(setPointEstimate(pointEstimate))
+    dispatch(setPointEstimate(data.outcome))
+    dispatch(setHasEstimated(true))
   }
 }
 

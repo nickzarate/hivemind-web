@@ -53,7 +53,7 @@ export function handleMonthlyEarnings(event) {
  *  TODO: Make everything abstract
  */
 export function asyncSubmitSurvey(Parse, survey) {
-  return (dispatch) => {
+  return () => {
     let surveyResponses = {
       age: survey.age,
       sex: survey.sex,
@@ -64,10 +64,6 @@ export function asyncSubmitSurvey(Parse, survey) {
       monthlyEarnings: survey.monthlyEarnings
     }
     let user = Parse.User.current()
-    user.save({ characteristics: surveyResponses }).then(function() {}, {
-      error(error) {
-        console.log('Error: ' + error.code + ' ' + error.message)
-      }
-    })
+    user.save({ characteristics: surveyResponses })
   }
 }

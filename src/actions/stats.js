@@ -103,7 +103,7 @@ export function asyncGetPhi() {
  *  TODO: Call Parse and get initial user data about covariates
  */
 export function getCovariateData() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     let covariateData = [[0],[0]]
     dispatch(setCovariateData(covariateData))
   }
