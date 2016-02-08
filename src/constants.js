@@ -1,8 +1,6 @@
 export const ADD_ANSWER_TO_ROUND = 'ADD_ANSWER_TO_ROUND'
 export const ADD_ANSWERS = 'ADD_ANSWERS'
-export const ADD_COVARIATES = 'ADD_COVARIATES'
 export const ADD_OUTCOMES = 'ADD_OUTCOMES'
-export const ADD_POINT_ESTIMATE = 'ADD_POINT_ESTIMATE'
 export const CLEAR = 'CLEAR'
 export const DEPOSIT = 'DEPOSIT'
 export const ERROR = 'ERROR'

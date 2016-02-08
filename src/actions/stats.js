@@ -79,8 +79,10 @@ export function asyncGetPhi() {
     let predictions = []
     let covariates = []
     if (round.currentRound) {
-      predictions = round.responseInfo.pointEstimateVector.slice(0)
-      covariates = round.covariates.slice(0)
+      for (let answer of round.currentRound.get('answers')) {
+        predictions.push(answer.get('pointEstimate'))
+        covariates.push(answer.get('question').get('covariateValues'))
+      }
     } else { return }
 
     // TODO we need a diff name than 'env.source'
@@ -144,8 +146,6 @@ export function getData() {
 }
 
 //TODO: Build an array of x/y pairs, and create lineData
-//TODO: Make server call to analyze data (round.responseInfo.answersVector &&
-//    : round.responseInfo.estimateVector) and retrieve phi
 //TODO: Dispatch setLineData with newly created lineData variable
 //TODO: Change value of z to reflect the user characteristic for the covariate that is not being graphed.
 //TODO: Change value '10' in 'i * 10' to be a variable that represents the desired range of the data.

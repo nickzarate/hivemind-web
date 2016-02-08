@@ -1,5 +1,5 @@
-import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND, ADD_POINT_ESTIMATE,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES, ADD_OUTCOMES } from 'constants'
+import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND,
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES } from 'constants'
 
 export function setRound(savedRound) {
   return {
@@ -19,29 +19,11 @@ export function addAnswerToRound(savedAnswer) {
   }
 }
 
-export function addPointEstimate(pointEstimate) {
-  return {
-    type: ADD_POINT_ESTIMATE,
-    payload: {
-      pointEstimate: pointEstimate
-    }
-  }
-}
-
 export function addAnswers(answers) {
   return {
     type: ADD_ANSWERS,
     payload: {
       answers: answers
-    }
-  }
-}
-
-export function addCovariates(covariates) {
-  return {
-    type: ADD_COVARIATES,
-    payload: {
-      covariates: covariates
     }
   }
 }
@@ -113,10 +95,8 @@ export function asyncHandleSubmit(Parse, push) {
   return (dispatch, getState) => {
     const { question, round } = getState()
 
-    //Save answers and covariates in vectors
+    //Save token distribution and outcomes
     dispatch(addAnswers(question.bins))
-    dispatch(addPointEstimate(question.pointEstimate))
-    dispatch(addCovariates(question.currentQuestion.get('covariateValues')))
     dispatch(addOutcomes(question.currentQuestion.get('outcomes')))
 
     //Create new answer to save to a round
