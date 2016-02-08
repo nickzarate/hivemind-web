@@ -11,6 +11,8 @@ class HomeContainer extends React.Component {
         actions={ this.props.actions }
         push={ this.props.push }
         categories={ this.props.categories }
+        showModal={ this.props.showModal }
+        currentCategory={ this.props.currentCategory }
       />
     )
   }

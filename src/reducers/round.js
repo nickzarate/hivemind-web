@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, SET_ROUND, ADD_ANSWER_TO_ROUND, SET_CURRENT_CATEGORY,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, SET_CATEGORIES, ADD_OUTCOMES, CLEAR } from 'constants'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, SET_CATEGORIES, ADD_OUTCOMES, CLEAR, SHOW_MODAL, SET_RANGE } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
@@ -8,7 +8,9 @@ const initialState = {
   answersVector: [],
   outcomes: [],
   currentRound: null,
-  categories: null
+  categories: null,
+  showModal: false,
+  range: []
 }
 
 export default function round(state = initialState, action) {
@@ -31,6 +33,13 @@ export default function round(state = initialState, action) {
     return update(state, {categories: {$set: action.payload.categories}})
   case ADD_OUTCOMES:
     return update(state, {outcomes: {$push: [action.payload.outcomes]}})
+  case SHOW_MODAL:
+    return update(state, {showModal: {$set: action.payload.showModal}})
+  case SET_RANGE:
+    let range = state.range.slice(0)
+    range.push(action.payload.min)
+    range.push(action.payload.max)
+    return update(state, {range: {$set: range}})
   case CLEAR:
     return initialState
   default:

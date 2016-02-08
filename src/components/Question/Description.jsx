@@ -9,7 +9,7 @@ export default class Question extends React.Component {
           question={ this.props.question }
           currentCategory={ this.props.currentCategory }
         />
-        <p>{ this.props.currentCategory.get('instructions') }</p>
+        <p>{ this.props.currentCategory.get('questionInstructions') }</p>
       </div>
     )
   }

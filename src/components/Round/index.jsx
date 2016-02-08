@@ -13,8 +13,7 @@ export default class Round extends React.Component {
   }
 
   componentDidMount() {
-    if (!Parse.User.current()) { this.props.push('/') }
-    if (!this.props.round.currentCategory) {
+    if (!this.props.round.currentCategory || !Parse.User.current()) {
       this.props.push('/home')
     } else {
       this.props.actions.asyncCreateRound(Parse)
