@@ -1,5 +1,4 @@
 import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, SET_BINS, SET_BANK, SET_HAS_ESTIMATED } from 'constants'
-import { reset as resetReduxForm } from 'redux-form'
 import { rand } from 'toolbox/misc'
 
 export function withdraw() {
@@ -62,11 +61,7 @@ export function setHasEstimated(hasEstimated) {
   }
 }
 
-export function resetForm(formName) {
-  return resetReduxForm(formName)
-}
-
-export function reset(formName) {
+export function reset() {
   return (dispatch, getState) => {
     const { round } = getState()
     let bins = []
@@ -77,7 +72,6 @@ export function reset(formName) {
     dispatch(setBank(round.currentCategory.get('tokens')))
     dispatch(setPointEstimate(0))
     dispatch(setHasEstimated(false))
-    dispatch(resetForm(formName))
   }
 }
 

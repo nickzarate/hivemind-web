@@ -26,7 +26,6 @@ module.exports = {
       'react-redux',
       'react-router-redux',
       'redux',
-      'redux-form',
       'redux-thunk',
       'reselect',
       'parse',
