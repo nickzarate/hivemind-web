@@ -1,23 +1,16 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import Form from 'components/Lib/Form'
 
-class EstimateForm extends React.Component {
+export default class EstimateForm extends React.Component {
   render() {
-    const { fields: { outcome }, handleSubmit, outcomeName } = this.props
     return (
-      <form onSubmit={ handleSubmit }>
+      <Form onSubmit={ this.props.onSubmit }>
         <input
-          placeholder={ outcomeName }
+          placeholder={ this.props.outcomeName }
           type="number"
-          {...outcome}
         />
-        <button onClick={ handleSubmit }>{ 'Submit Estimate' }</button>
-      </form>
+        <input type="submit" value="Submit Estimate" />
+      </Form>
     )
   }
 }
-
-export default reduxForm({
-  form: 'estimate',
-  fields: ['outcome']
-})(EstimateForm)

@@ -99,13 +99,13 @@ export function handleDeposit(index) {
  */
 export function handlePointEstimate(data) {
   return (dispatch) => {
-    data.outcome = Number(data.outcome)
+    data[0] = Number(data[0])
     //TODO: More robust error checking?
-    if (!data.outcome) {
+    if (!data[0]) {
       //TODO: dispatch error message
       return
     }
-    dispatch(setPointEstimate(data.outcome))
+    dispatch(setPointEstimate(data[0]))
     dispatch(setHasEstimated(true))
   }
 }
