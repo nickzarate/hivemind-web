@@ -79,7 +79,7 @@ export function setNumQuestions(numQuestions) {
 export function getNumQuestions() {
   return (dispatch, getState) => {
     const { round } = getState()
-    dispatch(setNumQuestions(round.questionInfo.currentCategory.get('questionsPerRound')))
+    dispatch(setNumQuestions(round.currentCategory.get('questionsPerRound')))
   }
 }
 
@@ -148,7 +148,7 @@ export function asyncHandleSubmit(Parse, push) {
       answers.push(savedAnswer)
       return round.currentRound.save({ answers: answers })
     }).then(function() {
-      if (round.questionInfo.currentQuestion >= round.numQuestions) {
+      if (round.currentQuestion >= round.currentCategory.get('questionsPerRound')) {
         dispatch(resetCurrentQuestion())
         push('/stats')
       } else {

@@ -70,11 +70,11 @@ export function reset(formName) {
   return (dispatch, getState) => {
     const { round } = getState()
     let bins = []
-    for (let i = 0; i < round.questionInfo.currentCategory.get('binText').length; i++) {
+    for (let i = 0; i < round.currentCategory.get('binText').length; i++) {
       bins.push(0)
     }
     dispatch(setBins(bins))
-    dispatch(setBank(round.questionInfo.currentCategory.get('tokens')))
+    dispatch(setBank(round.currentCategory.get('tokens')))
     dispatch(setPointEstimate(0))
     dispatch(setHasEstimated(false))
     dispatch(resetForm(formName))
@@ -121,7 +121,7 @@ export function pullQuestion(Parse) {
     let observationId = rand(1, 3010)
     let Question = Parse.Object.extend('Questions')
     let query = new Parse.Query(Question)
-    query.equalTo('type', round.questionInfo.currentCategory.get('name'))
+    query.equalTo('type', round.currentCategory.get('name'))
     query.equalTo('observationId', observationId)
     //Pull question and set state
     query.first().then(function(question) {

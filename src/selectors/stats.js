@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
 const statsSelector = (state) => state.stats
-const categorySelector = (state) => state.round.questionInfo.currentCategory
+const categorySelector = (state) => state.round.currentCategory
 
 export default createSelector(
   statsSelector,

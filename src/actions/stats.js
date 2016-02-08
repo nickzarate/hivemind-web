@@ -116,7 +116,7 @@ export function getCovariateData() {
 export function getData() {
   return (dispatch, getState) => {
     const { round } = getState()
-    let labels = round.questionInfo.currentCategory.get('covariateRanges')
+    let labels = round.currentCategory.get('covariateRanges')
     for (let label of labels) {
       let range = label[1] - label[0]
       let numXAxisValues = 10
@@ -159,7 +159,7 @@ export function getData() {
 export function updateChart(chartIndex) {
   return (dispatch, getState) => {
     const { stats, round } = getState()
-    let covariateRanges = round.questionInfo.currentCategory.get('covariateRanges')
+    let covariateRanges = round.currentCategory.get('covariateRanges')
 
     //Create array of betas and array of covariate values to multiply together
     let betas = stats.phi.slice(1)
