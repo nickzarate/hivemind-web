@@ -18,7 +18,6 @@ export default class Round extends React.Component {
       this.props.push('/home')
     } else {
       this.props.actions.asyncCreateRound(Parse)
-      this.props.actions.getNumQuestions()
     }
   }
 

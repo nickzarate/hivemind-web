@@ -1,6 +1,6 @@
 import { INCREMENT_CURRENT_QUESTION, SET_ROUND, ADD_ANSWER_TO_ROUND, SET_CURRENT_CATEGORY,
   ADD_POINT_ESTIMATE, ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES, SET_CATEGORIES,
-  SET_NUM_QUESTIONS, ADD_OUTCOMES, CLEAR } from 'constants'
+  ADD_OUTCOMES, CLEAR } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
@@ -13,8 +13,7 @@ const initialState = {
   covariates: [],
   outcomes: [],
   currentRound: null,
-  categories: null,
-  numQuestions: 1
+  categories: null
 }
 
 export default function round(state = initialState, action) {
@@ -39,8 +38,6 @@ export default function round(state = initialState, action) {
     return update(state, {covariates: {$push: [action.payload.covariates]}})
   case SET_CATEGORIES:
     return update(state, {categories: {$set: action.payload.categories}})
-  case SET_NUM_QUESTIONS:
-    return update(state, {numQuestions: {$set: action.payload.numQuestions}})
   case ADD_OUTCOMES:
     return update(state, {outcomes: {$push: [action.payload.outcomes]}})
   case CLEAR:

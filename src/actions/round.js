@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND, ADD_POINT_ESTIMATE,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES, SET_NUM_QUESTIONS, ADD_OUTCOMES } from 'constants'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES, ADD_OUTCOMES } from 'constants'
 
 export function setRound(savedRound) {
   return {
@@ -64,22 +64,6 @@ export function incrementCurrentQuestion() {
 export function resetCurrentQuestion() {
   return {
     type: RESET_CURRENT_QUESTION
-  }
-}
-
-export function setNumQuestions(numQuestions) {
-  return {
-    type: SET_NUM_QUESTIONS,
-    payload: {
-      numQuestions: numQuestions
-    }
-  }
-}
-
-export function getNumQuestions() {
-  return (dispatch, getState) => {
-    const { round } = getState()
-    dispatch(setNumQuestions(round.currentCategory.get('questionsPerRound')))
   }
 }
 

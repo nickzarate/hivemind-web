@@ -1,16 +1,4 @@
-import { INCREMENT_NUM_QUESTIONS, DECREMENT_NUM_QUESTIONS, SET_CATEGORIES, SET_CURRENT_CATEGORY } from 'constants'
-
-export function incrementNumQuestions() {
-  return {
-    type: INCREMENT_NUM_QUESTIONS
-  }
-}
-
-export function decrementNumQuestions() {
-  return {
-    type: DECREMENT_NUM_QUESTIONS
-  }
-}
+import { SET_CATEGORIES, SET_CURRENT_CATEGORY } from 'constants'
 
 export function setCurrentCategory(currentCategory) {
   return {
