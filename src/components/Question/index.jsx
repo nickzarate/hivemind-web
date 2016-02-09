@@ -53,7 +53,7 @@ export default class Question extends React.Component {
   }
 
   render() {
-    const { question, actions, currentCategory } = this.props
+    const { question, actions, currentCategory, outcomeName } = this.props
     return (
       <div>
         <Description
@@ -62,7 +62,7 @@ export default class Question extends React.Component {
         />
         <EstimateForm
           onSubmit={ actions.handlePointEstimate }
-          outcomeName={ currentCategory.get('outcomeName') }
+          outcomeName={ outcomeName }
         />
         { this.renderBins() }
       </div>

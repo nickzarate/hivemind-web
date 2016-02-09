@@ -13,6 +13,7 @@ class QuestionContainer extends React.Component {
         push={ this.props.push }
         onSubmit={ this.props.onSubmit }
         currentCategory={ this.props.currentCategory }
+        outcomeName={ this.props.outcomeName }
       />
     )
   }

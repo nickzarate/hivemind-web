@@ -38,7 +38,7 @@ export default class Round extends React.Component {
       currentCategory: this.props.round.currentCategory
     }
     let RouteHandler = null
-    if (this.props.round.currentCategory) {
+    if (childProps.currentCategory) {
       RouteHandler = React.cloneElement(this.props.children, childProps)
     }
     return (

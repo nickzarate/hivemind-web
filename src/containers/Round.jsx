@@ -11,8 +11,9 @@ class RoundContainer extends React.Component {
         actions={ this.props.actions }
         push={ this.props.push }
         round={ this.props.round }
-        children={ this.props.children }
-      />
+      >
+          { this.props.children }
+      </Round>
     )
   }
 }
