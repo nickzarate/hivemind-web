@@ -4,7 +4,7 @@ import Form from 'components/Lib/Form'
 export default class SignupForm extends React.Component {
   render() {
     return (
-      <Form onSubmit={ this.props.onSubmit }>
+      <Form onSubmit={ this.props.onSubmit } ref={ (ref) => this.form = ref } errorMessage={ this.props.errorMessage }>
         <input
           placeholder="Email"
           type="email"

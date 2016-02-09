@@ -2,7 +2,6 @@ import Parse from 'parse'
 import React from 'react'
 import LoginForm from './LoginForm'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import Tooltip from 'components/Lib/Tooltip'
 
 export default class Login extends React.Component {
   componentWillMount() {
@@ -27,8 +26,7 @@ export default class Login extends React.Component {
     return (
       <div>
         <h1>{ 'Login' }</h1>
-        <Tooltip target={ this.loginForm } message={ this.props.user.errorMessage } />
-        <LoginForm onSubmit={ this.handleLogin } ref={ (ref) => this.loginForm = ref } />
+        <LoginForm onSubmit={ this.handleLogin } errorMessage={ this.props.user.errorMessage } />
         <button onClick={ this.push('/signup') }>{ 'Sign Up' }</button>
       </div>
     )
