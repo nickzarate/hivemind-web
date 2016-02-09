@@ -38,25 +38,23 @@ export default class Home extends React.Component {
   }
 
   handleProceed(data) {
-    this.props.actions.setRange(data)
-    this.props.push('/round')
+    this.props.actions.handleRange(data, this.props.push)
   }
 
   render() {
-    const { categories, currentCategory, showModal, actions } = this.props
+    const { home, actions } = this.props
     return (
       <div>
         <h1>{ 'Choose a Topic' }</h1>
         <Categories
-          categories={ categories }
+          categories={ home.categories }
           onChoose={ this.handleCategoryChoice }
         />
         <button onClick={ this.handleLogout }>{ 'Log Out' }</button>
         <Modal
-          show={ showModal }
           onProceed={ this.handleProceed }
           handleHide={ () => actions.showModal(false) }
-          currentCategory={ currentCategory }
+          home={ home }
         />
       </div>
     )

@@ -2,17 +2,17 @@ import React from 'react'
 import { Modal } from 'react-bootstrap'
 import RangeForm from './RangeForm'
 
-export default class Home extends React.Component {
+export default class CategoryModal extends React.Component {
   render() {
-    if (this.props.currentCategory) {
+    if (this.props.home.currentCategory) {
       return (
-        <Modal show={ this.props.show } onHide={ this.props.handleHide }>
+        <Modal show={ this.props.home.showModal } onHide={ this.props.handleHide }>
           <Modal.Header closeButton>
-            { this.props.currentCategory.get('name') }{ ' Instructions' }
+            { this.props.home.currentCategory.get('name') }{ ' Instructions' }
           </Modal.Header>
           <Modal.Body>
-            { this.props.currentCategory.get('instructions') }
-            <RangeForm onSubmit={ this.props.onProceed } />
+            { this.props.home.currentCategory.get('instructions') }
+            <RangeForm onSubmit={ this.props.onProceed } errorMessage={ this.props.home.errorMessage } />
           </Modal.Body>
         </Modal>
       )

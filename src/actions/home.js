@@ -1,4 +1,5 @@
 import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW_MODAL, SET_RANGE } from 'constants'
+import { setErrorMessage } from 'actions/clear'
 
 export function setCurrentCategory(currentCategory) {
   return {
@@ -27,12 +28,28 @@ export function showModal(showModal) {
   }
 }
 
-export function setRange(data) {
+export function setRange(min, max) {
   return {
     type: SET_RANGE,
     payload: {
-      min: data[0],
-      max: data[1]
+      min: min,
+      max: max
+    }
+  }
+}
+
+/*
+ *  Check ranges to see if an error message needs to be dispatched
+ */
+export function handleRange(data, push) {
+  return (dispatch) => {
+    let min = Number(data[0])
+    let max = Number(data[1])
+    if (max <= min) {
+      dispatch(setErrorMessage('Uh oh! Upper bound is smaller than lower bound. Try again.'))
+    } else {
+      dispatch(setRange(min, max))
+      push('/round')
     }
   }
 }

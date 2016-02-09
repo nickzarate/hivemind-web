@@ -1,5 +1,6 @@
 import { INCREMENT_CURRENT_QUESTION, SET_ROUND, ADD_ANSWER_TO_ROUND, SET_CURRENT_CATEGORY,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, SET_CATEGORIES, ADD_OUTCOMES, CLEAR, SHOW_MODAL, SET_RANGE } from 'constants'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, SET_CATEGORIES, ADD_OUTCOMES, CLEAR, SHOW_MODAL, SET_RANGE,
+  SET_ERROR_MESSAGE } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
@@ -10,7 +11,8 @@ const initialState = {
   currentRound: null,
   categories: null,
   showModal: false,
-  range: []
+  range: [],
+  errorMessage: null
 }
 
 export default function round(state = initialState, action) {
@@ -40,6 +42,8 @@ export default function round(state = initialState, action) {
     range.push(action.payload.min)
     range.push(action.payload.max)
     return update(state, {range: {$set: range}})
+  case SET_ERROR_MESSAGE:
+    return update(state, {errorMessage: {$set: action.payload.errorMessage}})
   case CLEAR:
     return initialState
   default:
