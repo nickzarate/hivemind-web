@@ -1,10 +1,24 @@
 import { createSelector } from 'reselect'
 
-const homeSelector = (state) => state.round.categories
+const categoriesSelector = (state) => state.round.categories
+const modalSelector = (state) => state.round.showModal
+const currentCategorySelector = (state) => state.round.currentCategory
+const errorMessageSelector = (state) => state.round.errorMessage
 
 export default createSelector(
-  homeSelector,
-  (categories) => ({
-    categories
-  })
+  categoriesSelector,
+  currentCategorySelector,
+  modalSelector,
+  errorMessageSelector,
+  (categories, currentCategory, showModal, errorMessage) => {
+    let home = {
+      categories,
+      currentCategory,
+      showModal,
+      errorMessage
+    }
+    return {
+      home
+    }
+  }
 )

@@ -7,7 +7,7 @@ export default class Categories extends React.Component {
         (category) => (
           <li key={ category.id }>
             <button onClick={ this.props.onChoose(category) }>
-              { 'Start new ' }{ category.get('name') }{ ' round' }
+              { 'New ' }{ category.get('name') }{ ' round' }
             </button>
           </li>
         )

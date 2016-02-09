@@ -17,7 +17,7 @@ export default class Question extends React.Component {
 
   componentDidMount() {
     if (!Parse.User.current()) { this.props.push('/') }
-    this.props.actions.reset('estimate')
+    this.props.actions.reset()
     this.props.actions.pullQuestion(Parse)
   }
 
@@ -32,7 +32,7 @@ export default class Question extends React.Component {
   handleSubmit() {
     return () => {
       this.props.onSubmit()
-      this.props.actions.reset('estimate')
+      this.props.actions.reset()
       this.props.actions.pullQuestion(Parse)
     }
   }

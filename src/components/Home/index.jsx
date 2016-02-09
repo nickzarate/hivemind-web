@@ -2,12 +2,14 @@ import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import Categories from './Categories'
+import Modal from './CategoryModal'
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleCategoryChoice = this.handleCategoryChoice.bind(this)
+    this.handleProceed = this.handleProceed.bind(this)
   }
 
   componentWillMount() {
@@ -31,19 +33,29 @@ export default class Home extends React.Component {
   handleCategoryChoice(category) {
     return () => {
       this.props.actions.setCurrentCategory(category)
-      this.props.push('/round')
+      this.props.actions.showModal(true)
     }
   }
 
+  handleProceed(data) {
+    this.props.actions.handleRange(data, this.props.push)
+  }
+
   render() {
+    const { home, actions } = this.props
     return (
       <div>
-        <h1>{ 'Home' }</h1>
+        <h1>{ 'Choose a Topic' }</h1>
         <Categories
-          categories={ this.props.categories }
+          categories={ home.categories }
           onChoose={ this.handleCategoryChoice }
         />
         <button onClick={ this.handleLogout }>{ 'Log Out' }</button>
+        <Modal
+          onProceed={ this.handleProceed }
+          handleHide={ () => actions.showModal(false) }
+          home={ home }
+        />
       </div>
     )
   }

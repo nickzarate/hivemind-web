@@ -10,7 +10,7 @@ class HomeContainer extends React.Component {
       <Home
         actions={ this.props.actions }
         push={ this.props.push }
-        categories={ this.props.categories }
+        home={ this.props.home }
       />
     )
   }

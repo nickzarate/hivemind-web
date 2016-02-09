@@ -13,12 +13,10 @@ export default class Round extends React.Component {
   }
 
   componentDidMount() {
-    if (!Parse.User.current()) { this.props.push('/') }
-    if (!this.props.round.questionInfo.currentCategory) {
+    if (!this.props.round.currentCategory || !Parse.User.current()) {
       this.props.push('/home')
     } else {
       this.props.actions.asyncCreateRound(Parse)
-      this.props.actions.getNumQuestions()
     }
   }
 
@@ -37,10 +35,10 @@ export default class Round extends React.Component {
     const childProps = {
       onSubmit: this.handleSubmit,
       push: this.push(),
-      currentCategory: this.props.round.questionInfo.currentCategory
+      currentCategory: this.props.round.currentCategory
     }
     let RouteHandler = null
-    if (this.props.round.questionInfo.currentCategory) {
+    if (this.props.round.currentCategory) {
       RouteHandler = React.cloneElement(this.props.children, childProps)
     }
     return (

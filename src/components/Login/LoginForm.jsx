@@ -1,30 +1,20 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import Form from 'components/Lib/Form'
 
-class LoginForm extends React.Component {
+export default class LoginForm extends React.Component {
   render() {
-    const { fields: { email, password }, handleSubmit } = this.props
     return (
-      <form onSubmit={ handleSubmit }>
+      <Form onSubmit={ this.props.onSubmit } ref={ (ref) => this.form = ref } errorMessage={ this.props.errorMessage }>
         <input
           placeholder="Email"
           type="email"
-          {...email}
         />
         <input
           placeholder="Password"
           type="password"
-          {...password}
         />
-        <button onClick={ handleSubmit }>{ 'Log In' }</button>
-      </form>
+        <input type="submit" value="Log In" />
+      </Form>
     )
   }
 }
-
-LoginForm = reduxForm({
-  form: 'login',
-  fields: ['email', 'password']
-})(LoginForm)
-
-export default LoginForm

@@ -1,16 +1,5 @@
-import { INCREMENT_NUM_QUESTIONS, DECREMENT_NUM_QUESTIONS, SET_CATEGORIES, SET_CURRENT_CATEGORY } from 'constants'
-
-export function incrementNumQuestions() {
-  return {
-    type: INCREMENT_NUM_QUESTIONS
-  }
-}
-
-export function decrementNumQuestions() {
-  return {
-    type: DECREMENT_NUM_QUESTIONS
-  }
-}
+import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW_MODAL, SET_RANGE } from 'constants'
+import { setErrorMessage } from 'actions/clear'
 
 export function setCurrentCategory(currentCategory) {
   return {
@@ -30,12 +19,47 @@ export function setCategories(categories) {
   }
 }
 
+export function showModal(showModal) {
+  return {
+    type: SHOW_MODAL,
+    payload: {
+      showModal: showModal
+    }
+  }
+}
+
+export function setRange(min, max) {
+  return {
+    type: SET_RANGE,
+    payload: {
+      min: min,
+      max: max
+    }
+  }
+}
+
+/*
+ *  Check ranges to see if an error message needs to be dispatched
+ */
+export function handleRange(data, push) {
+  return (dispatch) => {
+    let min = Number(data[0])
+    let max = Number(data[1])
+    if (max <= min) {
+      dispatch(setErrorMessage('Uh oh! Upper bound is smaller than lower bound. Try again.'))
+    } else {
+      dispatch(setRange(min, max))
+      push('/round')
+    }
+  }
+}
+
 /*
  *  Make a query to Parse to check how many categories are currently up
  */
 export function getCategories(Parse) {
   return (dispatch) => {
-    var query = new Parse.Query('Categories')
+    let query = new Parse.Query('Categories')
     query.find({
       success(categories) {
         dispatch(setCategories(categories))

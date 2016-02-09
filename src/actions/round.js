@@ -1,5 +1,5 @@
-import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND, ADD_POINT_ESTIMATE,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_COVARIATES, SET_NUM_QUESTIONS, ADD_OUTCOMES } from 'constants'
+import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND,
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES } from 'constants'
 
 export function setRound(savedRound) {
   return {
@@ -19,29 +19,11 @@ export function addAnswerToRound(savedAnswer) {
   }
 }
 
-export function addPointEstimate(pointEstimate) {
-  return {
-    type: ADD_POINT_ESTIMATE,
-    payload: {
-      pointEstimate: pointEstimate
-    }
-  }
-}
-
 export function addAnswers(answers) {
   return {
     type: ADD_ANSWERS,
     payload: {
       answers: answers
-    }
-  }
-}
-
-export function addCovariates(covariates) {
-  return {
-    type: ADD_COVARIATES,
-    payload: {
-      covariates: covariates
     }
   }
 }
@@ -64,22 +46,6 @@ export function incrementCurrentQuestion() {
 export function resetCurrentQuestion() {
   return {
     type: RESET_CURRENT_QUESTION
-  }
-}
-
-export function setNumQuestions(numQuestions) {
-  return {
-    type: SET_NUM_QUESTIONS,
-    payload: {
-      numQuestions: numQuestions
-    }
-  }
-}
-
-export function getNumQuestions() {
-  return (dispatch, getState) => {
-    const { round } = getState()
-    dispatch(setNumQuestions(round.questionInfo.currentCategory.get('questionsPerRound')))
   }
 }
 
@@ -129,10 +95,8 @@ export function asyncHandleSubmit(Parse, push) {
   return (dispatch, getState) => {
     const { question, round } = getState()
 
-    //Save answers and covariates in vectors
+    //Save token distribution and outcomes
     dispatch(addAnswers(question.bins))
-    dispatch(addPointEstimate(question.pointEstimate))
-    dispatch(addCovariates(question.currentQuestion.get('covariateValues')))
     dispatch(addOutcomes(question.currentQuestion.get('outcomes')))
 
     //Create new answer to save to a round
@@ -148,7 +112,7 @@ export function asyncHandleSubmit(Parse, push) {
       answers.push(savedAnswer)
       return round.currentRound.save({ answers: answers })
     }).then(function() {
-      if (round.questionInfo.currentQuestion >= round.numQuestions) {
+      if (round.currentQuestion >= round.currentCategory.get('questionsPerRound')) {
         dispatch(resetCurrentQuestion())
         push('/stats')
       } else {
