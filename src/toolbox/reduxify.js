@@ -5,20 +5,20 @@ import merge from './merge'
 import * as clear from 'actions/clear'
 
 /**
- * Reduxifies a component.
+ * Reduxifies a container.
  *
- * @param state     - The name of the desired state. The component will
+ * @param state     - The name of the desired state. The container will
  *                    be given read-access to this state.
- * @param actions   - An array of actions, or a single actionset. The component will
+ * @param actions   - An array of actions, or a single actionset. The container will
  *                    be allowed to execute these actions.
- * @param component - The component to be connected.
- * @return the connected component
+ * @param container - The container to be connected.
+ * @return the connected container
  */
-export default function reduxify({ selector, actions, component }) {
+export default function reduxify({ selector, actions, container }) {
   const push = routeActions.push
   actions = merge(actions, clear)
 
-  // the component will be provided actions
+  // the container will be provided actions
   let mapDispatchToProps = (dispatch) => {
     return {
       actions: bindActionCreators(actions, dispatch),
@@ -29,5 +29,5 @@ export default function reduxify({ selector, actions, component }) {
   return connect(
     selector,
     mapDispatchToProps
-  )(component)
+  )(container)
 }

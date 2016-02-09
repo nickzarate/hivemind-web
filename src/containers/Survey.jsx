@@ -19,5 +19,5 @@ class SurveyContainer extends React.Component {
 export default reduxify({
   selector: surveySelector,
   actions: surveyActions,
-  component: SurveyContainer
+  container: SurveyContainer
 })

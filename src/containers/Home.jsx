@@ -19,5 +19,5 @@ class HomeContainer extends React.Component {
 export default reduxify({
   selector: homeSelector,
   actions: homeActions,
-  component: HomeContainer
+  container: HomeContainer
 })

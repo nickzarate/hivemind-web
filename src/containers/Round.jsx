@@ -20,5 +20,5 @@ class RoundContainer extends React.Component {
 export default reduxify({
   selector: roundSelector,
   actions: roundActions,
-  component: RoundContainer
+  container: RoundContainer
 })
