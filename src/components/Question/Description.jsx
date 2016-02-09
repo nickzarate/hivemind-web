@@ -1,7 +1,7 @@
 import React from 'react'
 import Covariates from './Covariates'
 
-export default class Question extends React.Component {
+export default class Description extends React.Component {
   render() {
     return (
       <div>
