@@ -107,15 +107,13 @@ export function handlePointEstimate(data) {
 /*
  *  Pull a random question from Parse database and setState accordingly
  */
-export function pullQuestion(Parse) {
-  return (dispatch, getState) => {
-    const { round } = getState()
-
+export function pullQuestion(Parse, categoryType) {
+  return (dispatch) => {
     //Create query for random question
     let observationId = rand(1, 3010)
     let Question = Parse.Object.extend('Questions')
     let query = new Parse.Query(Question)
-    query.equalTo('type', round.currentCategory.get('name'))
+    query.equalTo('type', categoryType)
     query.equalTo('observationId', observationId)
     //Pull question and set state
     query.first().then(function(question) {

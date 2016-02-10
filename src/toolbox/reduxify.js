@@ -15,14 +15,18 @@ import * as clear from 'actions/clear'
  * @return the connected container
  */
 export default function reduxify({ selector, actions, container }) {
-  const push = routeActions.push
-  actions = merge(actions, clear)
+  let mapDispatchToProps = null
 
-  // the container will be provided actions
-  let mapDispatchToProps = (dispatch) => {
-    return {
-      actions: bindActionCreators(actions, dispatch),
-      push: bindActionCreators(push, dispatch)
+  if (actions) {
+    const push = routeActions.push
+    actions = merge(actions, clear)
+
+    // the container will be provided actions
+    mapDispatchToProps = (dispatch) => {
+      return {
+        actions: bindActionCreators(actions, dispatch),
+        push: bindActionCreators(push, dispatch)
+      }
     }
   }
 
