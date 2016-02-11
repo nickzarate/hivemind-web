@@ -5,6 +5,7 @@ import round from './round'
 import survey from './survey'
 import stats from './stats'
 import form from './form'
+import modal from './modal'
 import { routeReducer as routing } from 'react-router-redux' // REMEMBER
 
 const rootReducer = combineReducers({
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   survey,
   stats,
   user,
-  form
+  form,
+  modal
 })
 
 export default rootReducer
