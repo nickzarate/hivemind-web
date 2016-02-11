@@ -22,7 +22,7 @@ export default function round(state = initialState, action) {
   case SET_CURRENT_CATEGORY:
     return update(state, {currentCategory: {$set: action.payload.currentCategory}})
   case ADD_ANSWERS:
-    return update(state, {answersVector: {$push: [action.payload.answersVector]}})
+    return update(state, {answersVector: {$push: [action.payload.answers]}})
   case SET_ROUND:
     return update(state, {currentRound: {$set: action.payload.currentRound}})
   case ADD_ANSWER_TO_ROUND:
