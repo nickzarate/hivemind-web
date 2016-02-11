@@ -99,13 +99,13 @@ export function handleEstimates(data) {
 /*
  *  Pull a random question from Parse database and setState accordingly
  */
-export function pullQuestion(Parse, categoryType) {
+export function pullQuestion(Parse, categoryName) {
   return (dispatch) => {
     //Create query for random question
     let observationId = rand(1, 3010)
     let Question = Parse.Object.extend('Questions')
     let query = new Parse.Query(Question)
-    query.equalTo('type', categoryType)
+    query.equalTo('type', categoryName)
     query.equalTo('observationId', observationId)
     //Pull question and set state
     query.first().then(function(question) {

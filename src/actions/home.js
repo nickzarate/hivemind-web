@@ -43,12 +43,6 @@ export function handleCategoryChoice(category) {
   return (dispatch) => {
     dispatch(setCurrentCategory(category))
     dispatch(showModal(true))
-    let binValuesLength = category.get('binText').length
-    let estimatesLength = category.get('outcomeNames').length
-    let bank = category.get('tokens')
-    dispatch(setBinValues(Array(binValuesLength).fill(0)))
-    dispatch(setEstimates(Array(estimatesLength).fill(0)))
-    dispatch(setBank(bank))
   }
 }
 

@@ -6,9 +6,10 @@ export default createSelector(
   roundSelector,
   (currentCategory) => {
     return {
-      currentCategory,
-      categoryName: currentCategory ? currentCategory.get('name') : '',
-      bank: currentCategory ? currentCategory.get('tokens') : 0
+      categoryName: currentCategory.get('name'),
+      bank: currentCategory.get('tokens'),
+      numBins: currentCategory.get('binText').length,
+      numOutcomes: currentCategory.get('outcomeNames').length
     }
   }
 )

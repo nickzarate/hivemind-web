@@ -1,5 +1,6 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND,
   ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES } from 'constants'
+import { setBinValues, setEstimates, setBank } from 'actions/question'
 
 export function setRound(savedRound) {
   return {
@@ -46,6 +47,14 @@ export function incrementCurrentQuestion() {
 export function resetCurrentQuestion() {
   return {
     type: RESET_CURRENT_QUESTION
+  }
+}
+
+export function initializeQuestion(numBins, numOutcomes, bank) {
+  return (dispatch) => {
+    dispatch(setBinValues(Array(numBins).fill(0)))
+    dispatch(setEstimates(Array(numOutcomes).fill(0)))
+    dispatch(setBank(bank))
   }
 }
 

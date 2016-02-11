@@ -1,7 +1,7 @@
 import React from 'react'
 import Parse from 'parse'
 import roundSelector from 'selectors/round'
-import { asyncCreateRound, asyncHandleSubmit, asyncAwardPoints } from 'actions/round'
+import { asyncCreateRound, asyncHandleSubmit, asyncAwardPoints, initializeQuestion } from 'actions/round'
 import { pullQuestion, reset } from 'actions/question'
 import reduxify from 'toolbox/reduxify'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
@@ -14,11 +14,13 @@ class Round extends React.Component {
 
   componentDidMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    if (!this.props.currentCategory || !Parse.User.current()) {
+    const { actions, bank, numOutcomes, numBins } = this.props
+    if (!Parse.User.current()) {
       this.props.push('/home')
     }
-    this.props.actions.asyncCreateRound(Parse)
-    this.props.actions.pullQuestion(Parse, this.props.categoryName)
+    actions.asyncCreateRound(Parse)
+    actions.pullQuestion(Parse, this.props.categoryName)
+    actions.initializeQuestion(numBins, numOutcomes, bank)
   }
 
   handleSubmit() {
@@ -41,6 +43,6 @@ class Round extends React.Component {
 
 export default reduxify({
   selector: roundSelector,
-  actions: { asyncHandleSubmit, asyncAwardPoints, asyncCreateRound, pullQuestion, reset },
+  actions: { asyncHandleSubmit, asyncAwardPoints, asyncCreateRound, pullQuestion, reset, initializeQuestion },
   container: Round
 })
