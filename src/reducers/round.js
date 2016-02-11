@@ -9,9 +9,7 @@ const initialState = {
   outcomes: [],
   currentRound: null,
   categories: null,
-  showModal: false,
-  range: [],
-  errorMessage: null
+  range: []
 }
 
 export default function round(state = initialState, action) {
@@ -34,17 +32,11 @@ export default function round(state = initialState, action) {
     return update(state, {categories: {$set: action.payload.categories}})
   case ADD_OUTCOMES:
     return update(state, {outcomes: {$push: [action.payload.outcomes]}})
-  case SHOW_MODAL:
-    return update(state, {showModal: {$set: action.payload.showModal}})
   case SET_RANGE:
     let range = state.range.slice(0)
     range.push(action.payload.min)
     range.push(action.payload.max)
     return update(state, {range: {$set: range}})
-  case SET_ERROR_MESSAGE:
-    return update(state, {errorMessage: {$set: action.payload.errorMessage}})
-  case CLEAR:
-    return initialState
   default:
     return state
   }
