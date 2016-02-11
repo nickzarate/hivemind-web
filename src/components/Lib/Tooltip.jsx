@@ -8,15 +8,18 @@ export default class Tooltip extends React.Component {
     onHide: null
   };
 
+  handleHide = () => this.props.onHide();
+  getTarget = () => ReactDOM.findDOMNode(this.props.target);
+
   renderTooltip() {
     let rootClose = this.props.onHide ? true : false
     return (
       <Overlay
-        onHide={ () => this.props.onHide() }
+        onHide={ this.handleHide }
         placement={ this.props.placement }
         rootClose={ rootClose }
         show
-        target={ () => ReactDOM.findDOMNode(this.props.target) }
+        target={ this.getTarget }
       >
         <TooltipBS id={ this.props.message }>
           { this.props.message }
