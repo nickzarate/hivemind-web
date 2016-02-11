@@ -32,8 +32,7 @@ export default class Home extends React.Component {
 
   handleCategoryChoice(category) {
     return () => {
-      this.props.actions.setCurrentCategory(category)
-      this.props.actions.showModal(true)
+      this.props.actions.handleCategoryChoice(category)
     }
   }
 
