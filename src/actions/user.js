@@ -32,7 +32,7 @@ export function asyncLogin(Parse, push, data) {
   return (dispatch) => {
     Parse.User.logIn(data[0], data[1], {
       success() {
-        push()
+        push('/home')
       },
       error(user, error) {
         dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message))

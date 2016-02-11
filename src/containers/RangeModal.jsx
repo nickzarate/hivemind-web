@@ -1,5 +1,6 @@
 import React from 'react'
-import { handleRange, showModal } from 'actions/home'
+import { handleRange } from 'actions/home'
+import { showModal } from 'actions/modal'
 import rangeModalSelector from 'selectors/rangeModal'
 import RangeModal from 'components/RangeModal'
 import reduxify from 'toolbox/reduxify'
