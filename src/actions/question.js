@@ -57,15 +57,12 @@ export function setCurrentQuestion(question) {
  */
 export function reset(bank) {
   return (dispatch, getState) => {
-    const { round } = getState()
-    let bins = []
-    for (let i = 0; i < round.currentCategory.get('binText').length; i++) {
-      bins.push(0)
-    }
-    dispatch(setBins(bins))
-    dispatch(setBank(round.currentCategory.get('tokens')))
-    dispatch(setPointEstimate(0))
-    dispatch(setHasEstimated(false))
+    const { question } = getState()
+    let binValues = Array(question.binValues.length).fill(0)
+    let estimates = Array(question.estimates.length).fill(0)
+    dispatch(setBinValues(binValues))
+    dispatch(setBank(bank))
+    dispatch(setEstimates(estimates))
   }
 }
 
