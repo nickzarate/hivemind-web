@@ -1,6 +1,5 @@
 import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW_MODAL, SET_RANGE } from 'constants'
 import { setErrorMessage } from 'actions/clear'
-import { setBinValues, setEstimates, setBank } from 'actions/question'
 
 export function setCurrentCategory(currentCategory) {
   return {
@@ -57,7 +56,7 @@ export function handleRange(data, push) {
       dispatch(setErrorMessage('Uh oh! Upper bound is smaller than lower bound. Try again.'))
     } else {
       dispatch(setRange(min, max))
-      push('/round')
+      push
     }
   }
 }
