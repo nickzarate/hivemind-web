@@ -38,18 +38,16 @@ export default class Question extends React.Component {
   }
 
   renderBins() {
-    if (this.props.question.hasEstimated) {
-      return (
-        <div>
-          <Bins
-            question={ this.props.question }
-            currentCategory={ this.props.currentCategory }
-            onDeposit={ this.handleDeposit }
-          />
-          <button onClick={ this.handleSubmit() }>{ 'Submit Question' }</button>
-        </div>
-      )
-    }
+    return (
+      <div>
+        <Bins
+          question={ this.props.question }
+          currentCategory={ this.props.currentCategory }
+          onDeposit={ this.handleDeposit }
+        />
+        <button onClick={ this.handleSubmit() }>{ 'Submit Question' }</button>
+      </div>
+    )
   }
 
   render() {

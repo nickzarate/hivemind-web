@@ -1,4 +1,4 @@
-import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_POINT_ESTIMATE, SET_BINS, SET_BANK, SET_HAS_ESTIMATED } from 'constants'
+import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_ESTIMATES, SET_BIN_VALUES, SET_BANK } from 'constants'
 import { rand } from 'toolbox/misc'
 
 export function withdraw() {
@@ -52,16 +52,10 @@ export function setCurrentQuestion(question) {
   }
 }
 
-export function setHasEstimated(hasEstimated) {
-  return {
-    type: SET_HAS_ESTIMATED,
-    payload: {
-      hasEstimated: hasEstimated
-    }
-  }
-}
-
-export function reset() {
+/*
+ *  Reset the bins, estimates, and bank to their initial values.
+ */
+export function reset(bank) {
   return (dispatch, getState) => {
     const { round } = getState()
     let bins = []
