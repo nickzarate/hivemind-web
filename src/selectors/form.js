@@ -1,10 +1,13 @@
 import { createSelector } from 'reselect'
 
-const formSelector = (state) => state.form.errorMessage
+const formSelector = (state) => state.form
 
 export default createSelector(
   formSelector,
-  (errorMessage) => ({
-    errorMessage
-  })
+  (form) => {
+    return {
+      data: form.data,
+      errorMessage: form.errorMessage
+    }
+  }
 )
