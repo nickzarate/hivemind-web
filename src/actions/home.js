@@ -56,7 +56,7 @@ export function handleRange(data, push) {
       dispatch(setErrorMessage('Uh oh! Upper bound is smaller than lower bound. Try again.'))
     } else {
       dispatch(setRange(min, max))
-      push
+      push('/round')
     }
   }
 }
