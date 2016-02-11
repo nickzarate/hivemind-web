@@ -4,11 +4,12 @@ import formSelector from 'selectors/form'
 import InputForm from 'components/InputForm'
 import reduxify from 'toolbox/reduxify'
 
-class Ranges extends React.Component {
+class RangeForm extends React.Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
   }
+
   componentDidMount() {
     this.props.actions.initializeData([0,0])
   }
@@ -26,6 +27,7 @@ class Ranges extends React.Component {
         errorMessage={ this.props.errorMessage }
         placeholders={ ['Lower bound','Upper bound'] }
         types={ ['number','number'] }
+        values={ this.props.data }
       />
     )
   }
@@ -34,5 +36,5 @@ class Ranges extends React.Component {
 export default reduxify({
   selector: formSelector,
   actions: { updateValue, initializeData },
-  container: Ranges
+  container: RangeForm
 })
