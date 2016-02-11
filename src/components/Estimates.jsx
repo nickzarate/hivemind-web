@@ -1,5 +1,5 @@
 import React from 'react'
-import Form from './Lib/Form'
+import Form from './lib/Form'
 
 export default class Estimates extends React.Component {
   renderOutcomeInputs() {

@@ -1,5 +1,5 @@
 import React from 'react'
-import Form from 'components/Lib/Form'
+import Form from 'components/lib/Form'
 
 export default class LoginForm extends React.Component {
   render() {

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import UnwrappedForm from './UnwrappedForm'
-import Tooltip from 'components/Lib/Tooltip'
+import Tooltip from 'components/lib/Tooltip'
 
 export default class Form extends React.Component {
   constructor(props) {
