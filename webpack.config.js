@@ -13,7 +13,6 @@ module.exports = {
   entry: {
     common: [
       'chartist',
-      'history',
       'immutable',
       'jquery',
       'rc-slider',

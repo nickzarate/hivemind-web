@@ -1,16 +1,14 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import configureRoutes from './configureRoutes'
+import Routes from './Routes'
 import configureStore from 'store/configureStore'
-import createHistory from 'history/lib/createBrowserHistory'
+import { browserHistory as history } from 'react-router'
 import DevTools from 'containers/DevTools'
-
-const history = createHistory()
 
 export default (
   <Provider store={ configureStore(history) }>
     <div>
-      { configureRoutes(history) }
+      <Routes history={ history } />
       <DevTools />
     </div>
   </Provider>
