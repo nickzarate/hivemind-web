@@ -7,7 +7,7 @@ import reduxify from 'toolbox/reduxify'
 
 class RangeModalContainer extends React.Component {
   
-  handleSubmit = () => this.props.actions.handleRange(this.props.data, this.props.push);
+  handleSubmit = () => this.props.actions.handleRange(this.props.values, this.props.push);
   handleHide = () => this.props.actions.showModal(false);
 
   render() {

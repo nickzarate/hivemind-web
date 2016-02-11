@@ -1,4 +1,4 @@
-import { SET_ERROR_MESSAGE, UPDATE_VALUE, INITIALIZE_DATA } from 'constants'
+import { SET_ERROR_MESSAGE, UPDATE_VALUE, INITIALIZE_VALUES } from 'constants'
 
 export function setErrorMessage(errorMessage) {
   return {
@@ -19,11 +19,11 @@ export function updateValue(value, index) {
   }
 }
 
-export function initializeData(data) {
+export function initializeValues(values) {
   return {
-    type: INITIALIZE_DATA,
+    type: INITIALIZE_VALUES,
     payload: {
-      data: data
+      values: values
     }
   }
 }

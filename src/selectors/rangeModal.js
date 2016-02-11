@@ -1,16 +1,16 @@
 import { createSelector } from 'reselect'
 
-const dataSelector = (state) => state.form.data
+const valuesSelector = (state) => state.form.values
 const showModalSelector = (state) => state.modal.showModal
 const categorySelector = (state) => state.round.currentCategory
 
 export default createSelector(
-  dataSelector,
+  valuesSelector,
   showModalSelector,
   categorySelector,
-  (data, showModal, currentCategory) => {
+  (values, showModal, currentCategory) => {
     return {
-      data,
+      values,
       showModal,
       instructions: currentCategory ? currentCategory.get('instructions') : ''
     }

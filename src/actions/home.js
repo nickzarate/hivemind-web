@@ -48,10 +48,10 @@ export function handleCategoryChoice(category) {
 /*
  *  Check ranges to see if an error message needs to be dispatched
  */
-export function handleRange(data, push) {
+export function handleRange(values, push) {
   return (dispatch) => {
-    let min = Number(data[0])
-    let max = Number(data[1])
+    let min = Number(values[0])
+    let max = Number(values[1])
     if (max <= min) {
       dispatch(setErrorMessage('Uh oh! Upper bound is smaller than lower bound. Try again.'))
     } else {

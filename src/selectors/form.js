@@ -6,7 +6,7 @@ export default createSelector(
   formSelector,
   (form) => {
     return {
-      data: form.data,
+      values: form.values,
       errorMessage: form.errorMessage
     }
   }

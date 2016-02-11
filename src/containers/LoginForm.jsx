@@ -1,5 +1,5 @@
 import React from 'react'
-import { updateValue, initializeData } from 'actions/form'
+import { updateValue, initializeValues } from 'actions/form'
 import formSelector from 'selectors/form'
 import InputForm from 'components/InputForm'
 import reduxify from 'toolbox/reduxify'
@@ -11,7 +11,7 @@ class LoginForm extends React.Component {
   }
 
   componentDidMount() {
-    this.props.actions.initializeData(['',''])
+    this.props.actions.initializeValues(['',''])
   }
 
   handleChange () {
@@ -27,7 +27,7 @@ class LoginForm extends React.Component {
         errorMessage={ this.props.errorMessage }
         placeholders={ ['Email','Password'] }
         types={ ['email','password'] }
-        values={ this.props.data }
+        values={ this.props.values }
       />
     )
   }
@@ -35,6 +35,6 @@ class LoginForm extends React.Component {
 
 export default reduxify({
   selector: formSelector,
-  actions: { updateValue, initializeData },
+  actions: { updateValue, initializeValues },
   container: LoginForm
 })

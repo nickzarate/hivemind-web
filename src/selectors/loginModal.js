@@ -1,13 +1,13 @@
 import { createSelector } from 'reselect'
 
-const dataSelector = (state) => state.form.data
+const valuesSelector = (state) => state.form.values
 const showModalSelector = (state) => state.modal.showModal
 
 export default createSelector(
-  dataSelector,
+  valuesSelector,
   showModalSelector,
-  (data, showModal) => ({
-    data,
+  (values, showModal) => ({
+    values,
     showModal
   })
 )

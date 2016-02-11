@@ -20,7 +20,7 @@ export default class Signup extends React.Component {
     return () => this.props.push(path)
   }
 
-  handleSignup = (data) => this.props.actions.asyncSignup(Parse, this.push('/survey'), data);
+  handleSignup = (values) => this.props.actions.asyncSignup(Parse, this.push('/survey'), values);
 
   render() {
     return (

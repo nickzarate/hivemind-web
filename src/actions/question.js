@@ -82,9 +82,9 @@ export function handleDeposit(index) {
 /*
  *  Set the estimates state if the new value is a valid estimate
  */
-export function handleEstimates(data) {
+export function handleEstimates(values) {
   return (dispatch) => {
-    for (let item of data) {
+    for (let item of values) {
       item = Number(item)
       //TODO: More robust error checking?
       if (!item) {
@@ -92,7 +92,7 @@ export function handleEstimates(data) {
         return
       }
     }
-    dispatch(setEstimates(data))
+    dispatch(setEstimates(values))
   }
 }
 
