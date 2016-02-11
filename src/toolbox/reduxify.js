@@ -1,8 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
-import merge from './merge'
-import * as clear from 'actions/clear'
 
 /**
  * Reduxifies a container.
@@ -19,8 +17,6 @@ export default function reduxify({ selector, actions, container }) {
 
   if (actions) {
     const push = routeActions.push
-    actions = merge(actions, clear)
-
     // the container will be provided actions
     mapDispatchToProps = (dispatch) => {
       return {

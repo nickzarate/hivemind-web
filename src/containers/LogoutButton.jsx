@@ -1,7 +1,6 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import { clear } from 'actions/clear'
 import reduxify from 'toolbox/reduxify'
 
 class LogoutButton extends React.Component {
@@ -22,6 +21,6 @@ class LogoutButton extends React.Component {
 }
 
 export default reduxify({
-  actions: { clear },
+  actions: {},
   container: LogoutButton
 })

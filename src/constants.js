@@ -1,7 +1,6 @@
 export const ADD_ANSWER_TO_ROUND = 'ADD_ANSWER_TO_ROUND'
 export const ADD_ANSWERS = 'ADD_ANSWERS'
 export const ADD_OUTCOMES = 'ADD_OUTCOMES'
-export const CLEAR = 'CLEAR'
 export const DEPOSIT = 'DEPOSIT'
 export const ERROR = 'ERROR'
 export const INCREMENT_CURRENT_QUESTION = 'INCREMENT_CURRENT_QUESTION'

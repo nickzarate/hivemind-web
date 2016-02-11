@@ -1,4 +1,4 @@
-import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_ESTIMATES, CLEAR, SET_BIN_VALUES, SET_BANK } from 'constants'
+import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_ESTIMATES, SET_BIN_VALUES, SET_BANK } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
@@ -22,8 +22,6 @@ export default function question(state = initialState, action) {
     return update(state, {binValues: {$set: action.payload.binValues}})
   case SET_BANK:
     return update(state, {bank: {$set: action.payload.bank}})
-  case CLEAR:
-    return initialState
   default:
     return state
   }

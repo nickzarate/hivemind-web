@@ -1,5 +1,5 @@
 import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW_MODAL, SET_RANGE } from 'constants'
-import { setErrorMessage } from 'actions/clear'
+import { setErrorMessage } from 'actions/form'
 
 export function setCurrentCategory(currentCategory) {
   return {

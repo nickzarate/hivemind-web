@@ -1,4 +1,4 @@
-import { setErrorMessage } from 'actions/clear'
+import { setErrorMessage } from 'actions/form'
 
 /*
  *  Sign up a new user with the given email and go to the home page
