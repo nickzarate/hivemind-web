@@ -59,7 +59,7 @@ export default class Question extends React.Component {
           currentCategory={ currentCategory }
         />
         <EstimateForm
-          onSubmit={ actions.handlePointEstimate }
+          onSubmit={ actions.handleEstimates }
           outcomeName={ outcomeName }
         />
         { this.renderBins() }

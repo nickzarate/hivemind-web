@@ -78,7 +78,7 @@ export function asyncAwardPoints(Parse) {
     const { question } = getState()
 
     //TODO: Calculate how many points are earned for answering correctly
-    let points = question.bins[question.currentQuestion.get('correctAnswerIndex')] * 50
+    let points = question.binValues[question.currentQuestion.get('correctAnswerIndex')] * 50
     let currentUser = Parse.User.current()
     let honey = currentUser.get('honey')
     honey += points
@@ -96,7 +96,7 @@ export function asyncHandleSubmit(Parse, push) {
     const { question, round } = getState()
 
     //Save token distribution and outcomes
-    dispatch(addAnswers(question.bins))
+    dispatch(addAnswers(question.binValues))
     dispatch(addOutcomes(question.currentQuestion.get('outcomes')))
 
     //Create new answer to save to a round
@@ -105,8 +105,8 @@ export function asyncHandleSubmit(Parse, push) {
 
     newAnswer.save({
       question: question.currentQuestion,
-      bins: question.bins,
-      pointEstimate: question.pointEstimate
+      binValues: question.binValues,
+      estimates: question.estimates
     }).then(function(savedAnswer) {
       let answers = round.currentRound.get('answers')
       answers.push(savedAnswer)

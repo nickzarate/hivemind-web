@@ -80,7 +80,7 @@ export function asyncGetPhi() {
     let covariates = []
     if (round.currentRound) {
       for (let answer of round.currentRound.get('answers')) {
-        predictions.push(answer.get('pointEstimate'))
+        predictions.push(answer.get('estimates'))
         covariates.push(answer.get('question').get('covariateValues'))
       }
     } else { return }

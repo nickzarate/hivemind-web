@@ -16,20 +16,20 @@ export function deposit(index) {
   }
 }
 
-export function setPointEstimate(pointEstimate) {
+export function setEstimates(estimates) {
   return {
-    type: SET_POINT_ESTIMATE,
+    type: SET_ESTIMATES,
     payload: {
-      pointEstimate: pointEstimate
+      estimates: estimates
     }
   }
 }
 
-export function setBins(bins) {
+export function setBinValues(binValues) {
   return {
-    type: SET_BINS,
+    type: SET_BIN_VALUES,
     payload: {
-      bins: bins
+      binValues: binValues
     }
   }
 }
