@@ -7,14 +7,16 @@ export default class InputForm extends React.Component {
       this.props.onChange(event, index)
     }
   }
+
   renderInputs() {
-    return this.props.types.map(
-      (type, index) => (
+    return this.props.values.map(
+      (value, index) => (
         <input
           key={ index }
-          type={ type }
+          type={ this.props.types[index] }
           placeholder={ this.props.placeholders[index] }
           onChange={ this.handleChange(index) }
+          value={ value }
         />
       )
     )

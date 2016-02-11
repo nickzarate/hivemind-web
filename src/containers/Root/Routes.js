@@ -2,7 +2,7 @@ import React from 'react'
 import { Router, Route, IndexRoute } from 'react-router'
 
 /* Pages */
-import Login from 'pages/Login'
+import Landing from 'pages/Landing'
 import Signup from 'pages/Signup'
 import Home from 'pages/Home'
 import Round from 'pages/Round'
@@ -15,7 +15,7 @@ export default function Routes({ history }) {
   return (
     <Router history={ history }>
       <Route path="/" component={ App }>
-        <IndexRoute component={ Login } />
+        <IndexRoute component={ Landing } />
         <Route path="signup" component={ Signup } />
         <Route path="home" component={ Home } />
         <Route path="round" component={ Round }>
