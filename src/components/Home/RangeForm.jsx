@@ -3,9 +3,8 @@ import Form from 'components/Lib/Form'
 
 export default class RangeForm extends React.Component {
   render() {
-    const { onSubmit, errorMessage } = this.props
     return (
-      <Form onSubmit={ onSubmit } ref={ (ref) => this.form = ref } errorMessage={ errorMessage }>
+      <Form onSubmit={ this.props.onSubmit } errorMessage={ this.props.errorMessage }>
         <input
           placeholder="Lower bound"
           type="number"
