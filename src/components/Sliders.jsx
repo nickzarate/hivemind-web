@@ -3,27 +3,27 @@ import 'rc-slider/assets/index.css'
 import Slider from 'rc-slider'
 
 export default class Graph extends React.Component {
-  render() {
-    const { chartIndex, numCharts, covariateRanges } = this.props
-    let sliders = []
-    let index = 0
-    for (let i = 0; i < numCharts - 1; i++) {
-      if (chartIndex === i) { index += 1 }
-      sliders.push(
-        <li key={ i }>
+  renderSliders() {
+    const { covariateRanges, chartIndex } = this.props
+    let ranges = covariateRanges.slice(0)
+    ranges.splice(chartIndex, 1)
+    return ranges.map(
+      (range, index) => (
+        <li key={ index }>
           <Slider
-            onChange={ this.props.onSliderChange(chartIndex, i) }
-            max={ covariateRanges[index][covariateRanges[index].length - 1] }
-            min={ covariateRanges[index][0] }
+            onChange={ this.props.onSliderChange(chartIndex, index) }
+            max={ range[range.length - 1] }
+            min={ range[0] }
           />
         </li>
       )
-      index += 1
-    }
+    )
+  }
 
+  render() {
     return (
       <ul>
-        { sliders }
+        { this.renderSliders() }
       </ul>
     )
   }
