@@ -1,4 +1,4 @@
-import { SET_ERROR_MESSAGE, UPDATE_VALUE, INITIALIZE_VALUES } from 'constants'
+import { SET_ERROR_MESSAGE, UPDATE_VALUE, INITIALIZE_VALUES, CLEAR_VALUES } from 'constants'
 
 export function setErrorMessage(errorMessage) {
   return {
@@ -25,5 +25,11 @@ export function initializeValues(values) {
     payload: {
       values: values
     }
+  }
+}
+
+export function clearValues() {
+  return {
+    type: CLEAR_VALUES
   }
 }
