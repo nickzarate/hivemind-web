@@ -1,16 +1,15 @@
 import React from 'react'
 
 /* Containers */
-import SignupForm from 'containers/SignupForm'
-import LoginButton from 'containers/temp/LoginButton'
+import SignupModal from 'containers/SignupModal'
 
 export default class Signup extends React.Component {
   render() {
     return (
       <div>
         <h1>{ 'Sign Up' }</h1>
-        <SignupForm />
-        <LoginButton />
+        <p>{ '(Will have survey before signup modal)' }</p>
+        <SignupModal />
       </div>
     )
   }
