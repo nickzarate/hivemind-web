@@ -22,11 +22,13 @@ export default class InputForm extends React.Component {
     )
   }
 
+  ref = (ref) => this.form = ref;
+
   render() {
     return (
       <div>
         <Tooltip target={ this.form } message={ this.props.errorMessage } />
-        <form ref={ (ref) => this.form = ref }>
+        <form ref={ this.ref }>
           { this.renderInputs() }
         </form>
       </div>

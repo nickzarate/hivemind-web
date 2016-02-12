@@ -9,9 +9,11 @@ export default class Selector extends React.Component {
     )
   }
 
+  ref = (ref) => this.selector = ref;
+
   render() {
     return (
-      <select ref={ (ref) => this.selector = ref } name={ this.props.title }>
+      <select ref={ this.ref } name={ this.props.title }>
         { this.renderOptions() }
       </select>
     )
