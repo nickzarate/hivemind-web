@@ -1,5 +1,5 @@
 import React from 'react'
-import { updateValue, initializeValues } from 'actions/form'
+import * as formActions from 'actions/form'
 import formSelector from 'selectors/form'
 import InputForm from 'components/InputForm'
 import reduxify from 'toolbox/reduxify'
@@ -12,6 +12,10 @@ class RangeForm extends React.Component {
 
   componentDidMount() {
     this.props.actions.initializeValues(['',''])
+  }
+
+  componentWillUnmount() {
+    this.props.actions.clearValues()
   }
 
   handleChange () {
@@ -35,6 +39,6 @@ class RangeForm extends React.Component {
 
 export default reduxify({
   selector: formSelector,
-  actions: { updateValue, initializeValues },
+  actions: formActions,
   container: RangeForm
 })
