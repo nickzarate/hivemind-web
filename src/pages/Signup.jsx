@@ -1,11 +1,16 @@
 import React from 'react'
-import SignupContainer from 'containers/Signup'
+
+/* Containers */
+import SignupForm from 'containers/SignupForm'
+import LoginButton from 'containers/temp/LoginButton'
 
 export default class Signup extends React.Component {
   render() {
     return (
       <div>
-        <SignupContainer />
+        <h1>{ 'Sign Up' }</h1>
+        <SignupForm />
+        <LoginButton />
       </div>
     )
   }
