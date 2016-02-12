@@ -1,11 +1,12 @@
 import React from 'react'
-import StatsContainer from 'containers/Stats'
+import LineCharts from 'containers/LineCharts'
 
 export default class Stats extends React.Component {
   render() {
     return (
       <div>
-        <StatsContainer />
+        <h1>{ 'Stats Page' }</h1>
+        <LineCharts />
       </div>
     )
   }
