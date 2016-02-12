@@ -1,12 +1,17 @@
 import { createSelector } from 'reselect'
 
 const categorySelector = (state) => state.round.currentCategory
+const formSelector = (state) => state.form
 
 export default createSelector(
   categorySelector,
-  (currentCategory) => {
+  formSelector,
+  (currentCategory, form) => {
     return {
-      outcomeNames: currentCategory ? currentCategory.get('outcomeNames') : []
+      placeholders: currentCategory ? currentCategory.get('outcomeNames') : [],
+      types: currentCategory ? Array(currentCategory.get('outcomeNames').length).fill('number') : [],
+      errorMessage: form.errorMessage,
+      values: form.values
     }
   }
 )
