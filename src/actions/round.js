@@ -134,7 +134,7 @@ export function asyncAwardPoints(Parse) {
  */
 export function asyncHandleSubmit(Parse, push) {
   return (dispatch, getState) => {
-    const { question, round } = getState()
+    const { question, round, form } = getState()
 
     //Save token distribution and outcomes
     dispatch(addAnswers(question.binValues))
@@ -147,7 +147,7 @@ export function asyncHandleSubmit(Parse, push) {
     newAnswer.save({
       question: question.currentQuestion,
       binValues: question.binValues,
-      estimates: question.estimates
+      estimates: form.values
     }).then(function(savedAnswer) {
       let answers = round.currentRound.get('answers')
       answers.push(savedAnswer)
