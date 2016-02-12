@@ -2,7 +2,7 @@ import React from 'react'
 
 /* Containers */
 import Instructions from 'containers/Instructions'
-import Estimates from 'containers/Estimates'
+import EstimatesForm from 'containers/EstimatesForm'
 import Bins from 'containers/Bins'
 
 export default class Question extends React.Component {
@@ -10,8 +10,8 @@ export default class Question extends React.Component {
     return (
       <div>
         <Instructions />
-        <Estimates />
-        <Bins onSubmit={ this.props.onSubmit } />
+        <EstimatesForm />
+        <Bins />
       </div>
     )
   }

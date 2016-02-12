@@ -22,7 +22,6 @@ export default class Bins extends React.Component {
       <div>
         <p>{ 'Bank: ' }{ this.props.bank }</p>
         { this.renderBins() }
-        <button onClick={ this.props.onSubmit }>{ 'Submit Question' }</button>
       </div>
     )
   }

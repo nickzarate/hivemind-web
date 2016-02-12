@@ -24,18 +24,18 @@ class Round extends React.Component {
   }
 
   handleSubmit() {
-    const { actions, push, categoryName } = this.props
+    const { actions, push, categoryName, numBins, numOutcomes, bank } = this.props
     actions.asyncHandleSubmit(Parse, push)
     actions.asyncAwardPoints(Parse)
-    actions.reset(this.props.bank)
+    actions.initializeQuestion(numBins, numOutcomes, bank)
     actions.pullQuestion(Parse, categoryName)
   }
 
   render() {
-    let RouteHandler = React.cloneElement(this.props.children, { onSubmit: this.handleSubmit })
     return (
-      <div onSubmit={ this.handleSubmit }>
-        { RouteHandler }
+      <div>
+        { React.cloneElement(this.props.children) }
+        <button onClick={ this.handleSubmit }>{ 'Submit Question' }</button>
       </div>
     )
   }
