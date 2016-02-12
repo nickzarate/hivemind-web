@@ -16,7 +16,7 @@ export function asyncSignup(Parse, push, values) {
     newUser.set('password', values[1])
     newUser.signUp(null, {
       success() {
-        push()
+        push('/home')
       },
       error(user, error) {
         dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message))
