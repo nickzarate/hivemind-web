@@ -6,6 +6,9 @@ import RangeModal from 'components/RangeModal'
 import reduxify from 'toolbox/reduxify'
 
 class RangeModalContainer extends React.Component {
+  componentWillUnmount() {
+    this.props.actions.showModal(false)
+  }
   
   handleSubmit = () => this.props.actions.handleRange(this.props.values, this.props.push);
   handleHide = () => this.props.actions.showModal(false);

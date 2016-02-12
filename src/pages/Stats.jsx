@@ -1,5 +1,8 @@
 import React from 'react'
+
+/* Containers */
 import LineCharts from 'containers/LineCharts'
+import HomeButton from 'containers/HomeButton'
 
 export default class Stats extends React.Component {
   render() {
@@ -7,6 +10,7 @@ export default class Stats extends React.Component {
       <div>
         <h1>{ 'Stats Page' }</h1>
         <LineCharts />
+        <HomeButton />
       </div>
     )
   }

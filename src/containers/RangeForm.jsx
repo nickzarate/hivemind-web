@@ -16,6 +16,7 @@ class RangeForm extends React.Component {
 
   componentWillUnmount() {
     this.props.actions.clearValues()
+    this.props.actions.setErrorMessage(null)
   }
 
   handleChange () {

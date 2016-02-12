@@ -15,6 +15,11 @@ class EstimatesContainer extends React.Component {
     this.props.actions.initializeValues(values)
   }
 
+  componentWillUnmount() {
+    this.props.actions.clearValues()
+    this.props.actions.setErrorMessage(null)
+  }
+
   handleChange () {
     return (event, index) => {
       this.props.actions.updateValue(event.target.value, index)
