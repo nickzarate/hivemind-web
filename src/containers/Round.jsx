@@ -1,8 +1,8 @@
 import React from 'react'
 import Parse from 'parse'
 import roundSelector from 'selectors/round'
-import { asyncCreateRound, asyncHandleSubmit, asyncAwardPoints, initializeQuestion } from 'actions/round'
-import { pullQuestion, reset } from 'actions/question'
+import { asyncCreateRound, asyncHandleSubmit, asyncAwardPoints,
+  initializeQuestion, pullQuestion } from 'actions/round'
 import reduxify from 'toolbox/reduxify'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
@@ -43,6 +43,7 @@ class Round extends React.Component {
 
 export default reduxify({
   selector: roundSelector,
-  actions: { asyncHandleSubmit, asyncAwardPoints, asyncCreateRound, pullQuestion, reset, initializeQuestion },
+  actions: { asyncHandleSubmit, asyncAwardPoints, asyncCreateRound,
+    pullQuestion, initializeQuestion },
   container: Round
 })

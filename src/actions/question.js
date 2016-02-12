@@ -1,5 +1,4 @@
-import { WITHDRAW, DEPOSIT, SET_CURRENT_QUESTION, SET_ESTIMATES, SET_BIN_VALUES, SET_BANK } from 'constants'
-import { rand } from 'toolbox/misc'
+import { WITHDRAW, DEPOSIT, SET_ESTIMATES, SET_BIN_VALUES, SET_BANK } from 'constants'
 
 export function withdraw() {
   return {
@@ -43,29 +42,6 @@ export function setBank(bank) {
   }
 }
 
-export function setCurrentQuestion(question) {
-  return {
-    type: SET_CURRENT_QUESTION,
-    payload: {
-      currentQuestion: question
-    }
-  }
-}
-
-/*
- *  Reset the bins, estimates, and bank to their initial values.
- */
-export function reset(bank) {
-  return (dispatch, getState) => {
-    const { question } = getState()
-    let binValues = Array(question.binValues.length).fill(0)
-    let estimates = Array(question.estimates.length).fill(0)
-    dispatch(setBinValues(binValues))
-    dispatch(setBank(bank))
-    dispatch(setEstimates(estimates))
-  }
-}
-
 /*
  *  If any cubes left, distribute one to the specified index
  */
@@ -93,23 +69,5 @@ export function handleEstimates(values) {
       }
     }
     dispatch(setEstimates(values))
-  }
-}
-
-/*
- *  Pull a random question from Parse database and setState accordingly
- */
-export function pullQuestion(Parse, categoryName) {
-  return (dispatch) => {
-    //Create query for random question
-    let observationId = rand(1, 3010)
-    let Question = Parse.Object.extend('Questions')
-    let query = new Parse.Query(Question)
-    query.equalTo('type', categoryName)
-    query.equalTo('observationId', observationId)
-    //Pull question and set state
-    query.first().then(function(question) {
-      dispatch(setCurrentQuestion(question))
-    })
   }
 }

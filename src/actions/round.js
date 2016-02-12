@@ -1,6 +1,8 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES } from 'constants'
-import { setBinValues, setEstimates, setBank } from 'actions/question'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION } from 'constants'
+import { setBinValues, setEstimates, setBank } from './question'
+import { initializeValues } from './form'
+import { rand } from 'toolbox/misc'
 
 export function setRound(savedRound) {
   return {
@@ -50,10 +52,41 @@ export function resetCurrentQuestion() {
   }
 }
 
+export function setCurrentQuestion(question) {
+  return {
+    type: SET_CURRENT_QUESTION,
+    payload: {
+      currentQuestion: question
+    }
+  }
+}
+
+/*
+ *  Pull a random question from Parse database and setState accordingly
+ */
+export function pullQuestion(Parse, categoryName) {
+  return (dispatch) => {
+    //Create query for random question
+    let observationId = rand(1, 3010)
+    let Question = Parse.Object.extend('Questions')
+    let query = new Parse.Query(Question)
+    query.equalTo('type', categoryName)
+    query.equalTo('observationId', observationId)
+    //Pull question and set state
+    query.first().then(function(question) {
+      dispatch(setCurrentQuestion(question))
+    })
+  }
+}
+
+/*
+ *  Initialize the values in question
+ */
 export function initializeQuestion(numBins, numOutcomes, bank) {
   return (dispatch) => {
     dispatch(setBinValues(Array(numBins).fill(0)))
     dispatch(setEstimates(Array(numOutcomes).fill(0)))
+    dispatch(initializeValues(Array(numOutcomes).fill('')))
     dispatch(setBank(bank))
   }
 }
