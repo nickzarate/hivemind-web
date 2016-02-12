@@ -1,6 +1,6 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND,
   ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION } from 'constants'
-import { setBinValues, setEstimates, setBank } from './question'
+import { setBinValues, setBank } from './question'
 import { initializeValues } from './form'
 import { rand } from 'toolbox/misc'
 
@@ -85,7 +85,6 @@ export function pullQuestion(Parse, categoryName) {
 export function initializeQuestion(numBins, numOutcomes, bank) {
   return (dispatch) => {
     dispatch(setBinValues(Array(numBins).fill(0)))
-    dispatch(setEstimates(Array(numOutcomes).fill(0)))
     dispatch(initializeValues(Array(numOutcomes).fill('')))
     dispatch(setBank(bank))
   }

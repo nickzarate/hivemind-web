@@ -1,4 +1,4 @@
-import { WITHDRAW, DEPOSIT, SET_ESTIMATES, SET_BIN_VALUES, SET_BANK } from 'constants'
+import { WITHDRAW, DEPOSIT, SET_BIN_VALUES, SET_BANK } from 'constants'
 
 export function withdraw() {
   return {
@@ -11,15 +11,6 @@ export function deposit(index) {
     type: DEPOSIT,
     payload: {
       index: index
-    }
-  }
-}
-
-export function setEstimates(estimates) {
-  return {
-    type: SET_ESTIMATES,
-    payload: {
-      estimates: estimates
     }
   }
 }
@@ -52,22 +43,5 @@ export function handleDeposit(index) {
       dispatch(withdraw())
       dispatch(deposit(index))
     }
-  }
-}
-
-/*
- *  Set the estimates state if the new value is a valid estimate
- */
-export function handleEstimates(values) {
-  return (dispatch) => {
-    for (let item of values) {
-      item = Number(item)
-      //TODO: More robust error checking?
-      if (!item) {
-        //TODO: dispatch error message
-        return
-      }
-    }
-    dispatch(setEstimates(values))
   }
 }

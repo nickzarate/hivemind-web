@@ -1,10 +1,9 @@
-import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_ESTIMATES, SET_BIN_VALUES, SET_BANK } from 'constants'
+import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_BIN_VALUES, SET_BANK } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
   bank: 0,
   binValues: [],
-  estimates: [],
   currentQuestion: null
 }
 
@@ -16,8 +15,6 @@ export default function question(state = initialState, action) {
     return update(state, {binValues: {$splice: [[action.payload.index, 1, state.binValues[action.payload.index] + 1]]}})
   case SET_CURRENT_QUESTION:
     return update(state, {currentQuestion: {$set: action.payload.currentQuestion}})
-  case SET_ESTIMATES:
-    return update(state, {estimates: {$set: action.payload.estimates}})
   case SET_BIN_VALUES:
     return update(state, {binValues: {$set: action.payload.binValues}})
   case SET_BANK:
