@@ -6,33 +6,31 @@ import Sliders from './Sliders'
 export default class Graph extends React.Component {
 
   renderCharts() {
-    let charts = []
-    for (let i = 0; i < this.props.numCharts; i++) {
-      let options = {
-        high: this.props.ranges.outcomes[0][1],
-        low: this.props.ranges.outcomes[0][0],
-        showArea: false,
-        showPoint: true,
-        width: '400px',
-        height: '300px'
-      }
-      charts.push(
-        <li key={ i }>
+    let options = {
+      high: this.props.outcomeRanges[0][1],
+      low: this.props.outcomeRanges[0][0],
+      showArea: false,
+      showPoint: true,
+      width: '400px',
+      height: '300px'
+    }
+    return this.props.data.map(
+      (item, index) => (
+        <li key={ index }>
           <LineChart
-            data={ this.props.data[i] }
-            type={ this.props.type }
+            data={ item }
+            type={ 'Line' }
             options={ options }
           />
           <Sliders
-            numCharts={ this.props.numCharts }
-            chartIndex={ i }
-            covariateRanges={ this.props.ranges.covariates }
+            numCharts={ this.props.data.length }
+            chartIndex={ index }
+            covariateRanges={ this.props.covariateRanges }
             onSliderChange={ this.props.onSliderChange }
           />
         </li>
       )
-    }
-    return charts
+    )
   }
 
   render() {
