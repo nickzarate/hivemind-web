@@ -1,7 +1,7 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import statsSelector from 'selectors/stats'
+import lineChartsSelector from 'selectors/lineCharts'
 import { asyncGetPhi, getData, getCovariateData, updateCovariateData } from 'actions/stats'
 import LineCharts from 'components/LineCharts'
 import reduxify from 'toolbox/reduxify'
@@ -14,13 +14,12 @@ class LineChartsContainer extends React.Component {
 
   componentDidMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    if (!Parse.User.current() || !this.props.ranges) {
+    if (!Parse.User.current()) {
       this.props.push('/home')
-    } else {
-      this.props.actions.asyncGetPhi()
-      this.props.actions.getCovariateData()
-      this.props.actions.getData()
     }
+    this.props.actions.asyncGetPhi()
+    this.props.actions.getCovariateData()
+    this.props.actions.getData()
   }
 
   handleSliderChange(chartIndex, sliderIndex) {
@@ -32,18 +31,17 @@ class LineChartsContainer extends React.Component {
   render() {
     return (
       <LineCharts
-        numCharts={ this.props.stats.covariateData.length }
-        data={ this.props.stats.data }
-        type={ 'Line' }
+        data={ this.props.data }
         onSliderChange={ this.handleSliderChange }
-        ranges={ this.props.ranges }
+        covariateRanges={ this.props.covariateRanges }
+        outcomeRanges={ this.props.outcomeRanges }
       />
     )
   }
 }
 
 export default reduxify({
-  selector: statsSelector,
+  selector: lineChartsSelector,
   actions: { asyncGetPhi, getData, getCovariateData, updateCovariateData },
   container: LineChartsContainer
 })
