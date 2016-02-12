@@ -1,4 +1,4 @@
-import { SET_COVARIATE_DATA, SET_DATA, SET_PHI, SET_SERIES, SET_OUTCOMES, CLEAR } from 'constants'
+import { SET_COVARIATE_DATA, SET_DATA, SET_PHI, SET_SERIES, SET_OUTCOMES } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
@@ -20,8 +20,6 @@ export default function stats(state = initialState, action) {
     return update(state, {data: {$splice: [[action.payload.index, 1, action.payload.data]]}})
   case SET_OUTCOMES:
     return update(state, {outcomes: {$set: action.payload.outcomes}})
-  case CLEAR:
-    return initialState
   default:
     return state
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import UnwrappedForm from './UnwrappedForm'
-import Tooltip from 'components/Lib/Tooltip'
+import Tooltip from 'components/lib/Tooltip'
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -9,13 +9,13 @@ export default class Form extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit = (data) => {
-    let modifiedData = []
+  handleSubmit = (values) => {
+    let modifiedValues = []
     for (let i = 0; i < this.props.children.length - 1; i++) {
-      modifiedData.push(data.target[i].value)
+      modifiedValues.push(values.target[i].value)
     }
-    data.preventDefault()
-    this.props.onSubmit(modifiedData)
+    values.preventDefault()
+    this.props.onSubmit(modifiedValues)
     if (this.props.resetOnSubmit) {
       ReactDOM.findDOMNode(this.unwrappedForm).reset()
     }

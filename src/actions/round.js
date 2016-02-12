@@ -1,5 +1,8 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES } from 'constants'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION } from 'constants'
+import { setBinValues, setBank } from './question'
+import { initializeValues } from './form'
+import { rand } from 'toolbox/misc'
 
 export function setRound(savedRound) {
   return {
@@ -49,6 +52,44 @@ export function resetCurrentQuestion() {
   }
 }
 
+export function setCurrentQuestion(question) {
+  return {
+    type: SET_CURRENT_QUESTION,
+    payload: {
+      currentQuestion: question
+    }
+  }
+}
+
+/*
+ *  Pull a random question from Parse database and setState accordingly
+ */
+export function pullQuestion(Parse, categoryName) {
+  return (dispatch) => {
+    //Create query for random question
+    let observationId = rand(1, 3010)
+    let Question = Parse.Object.extend('Questions')
+    let query = new Parse.Query(Question)
+    query.equalTo('type', categoryName)
+    query.equalTo('observationId', observationId)
+    //Pull question and set state
+    query.first().then(function(question) {
+      dispatch(setCurrentQuestion(question))
+    })
+  }
+}
+
+/*
+ *  Initialize the values in question
+ */
+export function initializeQuestion(numBins, numOutcomes, bank) {
+  return (dispatch) => {
+    dispatch(setBinValues(Array(numBins).fill(0)))
+    dispatch(initializeValues(Array(numOutcomes).fill('')))
+    dispatch(setBank(bank))
+  }
+}
+
 /*
  *  Create a new round in Parse and save with:
  *    answers: [],
@@ -78,7 +119,7 @@ export function asyncAwardPoints(Parse) {
     const { question } = getState()
 
     //TODO: Calculate how many points are earned for answering correctly
-    let points = question.bins[question.currentQuestion.get('correctAnswerIndex')] * 50
+    let points = question.binValues[question.currentQuestion.get('correctAnswerIndex')] * 50
     let currentUser = Parse.User.current()
     let honey = currentUser.get('honey')
     honey += points
@@ -93,10 +134,10 @@ export function asyncAwardPoints(Parse) {
  */
 export function asyncHandleSubmit(Parse, push) {
   return (dispatch, getState) => {
-    const { question, round } = getState()
+    const { question, round, form } = getState()
 
     //Save token distribution and outcomes
-    dispatch(addAnswers(question.bins))
+    dispatch(addAnswers(question.binValues))
     dispatch(addOutcomes(question.currentQuestion.get('outcomes')))
 
     //Create new answer to save to a round
@@ -105,8 +146,8 @@ export function asyncHandleSubmit(Parse, push) {
 
     newAnswer.save({
       question: question.currentQuestion,
-      bins: question.bins,
-      pointEstimate: question.pointEstimate
+      binValues: question.binValues,
+      estimates: form.values
     }).then(function(savedAnswer) {
       let answers = round.currentRound.get('answers')
       answers.push(savedAnswer)
