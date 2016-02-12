@@ -3,7 +3,7 @@ import React from 'react'
 /* Containers */
 import Categories from 'containers/Categories'
 import RangeModal from 'containers/RangeModal'
-import LogoutButton from 'containers/LogoutButton'
+import LogoutButton from 'containers/temp/LogoutButton'
 
 export default class Home extends React.Component {
   render() {
