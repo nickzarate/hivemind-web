@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
-import LoginForm from 'containers/LoginForm'
+import LoginForm from 'components/LoginForm'
 
 export default class LoginModal extends React.Component {
   render() {

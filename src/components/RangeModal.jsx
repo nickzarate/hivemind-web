@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
-import RangeForm from 'containers/RangeForm'
+import RangeForm from 'components/RangeForm'
 
 export default class RangeModal extends React.Component {
   render() {
