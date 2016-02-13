@@ -1,5 +1,5 @@
 import React from 'react'
-import { handleRange } from 'actions/home'
+import { handleRangeSubmission } from 'actions/home'
 import { showModal } from 'actions/modal'
 import rangeModalSelector from 'selectors/rangeModal'
 import RangeModal from 'components/RangeModal'
@@ -9,8 +9,8 @@ class RangeModalContainer extends React.Component {
   componentWillUnmount() {
     this.props.actions.showModal(false)
   }
-  
-  handleSubmit = () => this.props.actions.handleRange(this.props.values, this.props.push);
+
+  handleSubmit = () => this.props.actions.handleRangeSubmission(this.props.push, '/round');
   handleHide = () => this.props.actions.showModal(false);
 
   render() {
@@ -27,6 +27,6 @@ class RangeModalContainer extends React.Component {
 
 export default reduxify({
   selector: rangeModalSelector,
-  actions: { handleRange, showModal },
+  actions: { handleRangeSubmission, showModal },
   container: RangeModalContainer
 })
