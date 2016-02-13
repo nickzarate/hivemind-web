@@ -1,14 +1,14 @@
-import { SHOW } from 'constants'
+import { SHOW_MODAL } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
-  show: false
+  showModal: false
 }
 
 export default function question(state = initialState, action) {
   switch (action.type) {
-  case SHOW:
-    return update(state, {show: {$set: action.payload.show}})
+  case SHOW_MODAL:
+    return update(state, {showModal: {$set: action.payload.showModal}})
   default:
     return state
   }

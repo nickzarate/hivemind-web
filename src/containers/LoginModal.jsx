@@ -1,7 +1,7 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import { show } from 'actions/modal'
+import { showModal } from 'actions/modal'
 import { asyncLogin } from 'actions/user'
 import loginModalSelector from 'selectors/loginModal'
 import LoginModal from 'components/LoginModal'
@@ -16,16 +16,16 @@ class LoginModalContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.actions.show(false)
+    this.props.actions.showModal(false)
   }
 
   handleSubmit = () => this.props.actions.asyncLogin(Parse, this.props.push, this.props.values);
-  handleHide = () => this.props.actions.show(false);
+  handleHide = () => this.props.actions.showModal(false);
 
   render() {
     return (
       <LoginModal
-        show={ this.props.show }
+        show={ this.props.showModal }
         onSubmit={ this.handleSubmit }
         onHide={ this.handleHide }
       />
@@ -35,6 +35,6 @@ class LoginModalContainer extends React.Component {
 
 export default reduxify({
   selector: loginModalSelector,
-  actions: { show, asyncLogin },
+  actions: { showModal, asyncLogin },
   container: LoginModalContainer
 })

@@ -1,4 +1,4 @@
-import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW, SET_RANGE } from 'constants'
+import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW_MODAL, SET_RANGE } from 'constants'
 import { setErrorMessage } from 'actions/form'
 
 export function setCurrentCategory(currentCategory) {
@@ -19,11 +19,11 @@ export function setCategories(categories) {
   }
 }
 
-export function show(show) {
+export function showModal(showModal) {
   return {
-    type: SHOW,
+    type: SHOW_MODAL,
     payload: {
-      show: show
+      showModal: showModal
     }
   }
 }
@@ -41,7 +41,7 @@ export function setRange(min, max) {
 export function handleCategoryChoice(category) {
   return (dispatch) => {
     dispatch(setCurrentCategory(category))
-    dispatch(show(true))
+    dispatch(showModal(true))
   }
 }
 
