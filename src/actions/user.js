@@ -4,10 +4,12 @@ import { setErrorMessage } from 'actions/form'
  *  Sign up a new user with the given email and go to the home page
  *  values = [email, password1, password2]
  */
-export function asyncSignup(Parse, push, values) {
-  return (dispatch) => {
+export function asyncSignup(Parse, push, formIndex = 0) {
+  return (dispatch, getState) => {
+    const { form } = getState()
+    let values = form.values[formIndex]
     if (values[1] !== values[2]) {
-      dispatch(setErrorMessage('Passwords don\'t match, try again!'))
+      dispatch(setErrorMessage('Passwords don\'t match, try again!'), formIndex)
       return
     }
     let newUser = new Parse.User()
@@ -19,7 +21,7 @@ export function asyncSignup(Parse, push, values) {
         push('/survey')
       },
       error(user, error) {
-        dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message))
+        dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
       }
     })
   }
@@ -28,14 +30,17 @@ export function asyncSignup(Parse, push, values) {
 /*
  *  Login the user and go to the home page
  */
-export function asyncLogin(Parse, push, values) {
-  return (dispatch) => {
+export function asyncLogin(Parse, push, formIndex = 0) {
+  return (dispatch, getState) => {
+    const { form } = getState()
+    let values = form.values[formIndex]
     Parse.User.logIn(values[0], values[1], {
       success() {
         push('/home')
       },
       error(user, error) {
-        dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message))
+        console.log(formIndex)
+        dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
       }
     })
   }
