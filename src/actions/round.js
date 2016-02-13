@@ -1,7 +1,7 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND,
   ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION } from 'constants'
 import { setBinValues, setBank } from './question'
-import { initializeValues } from './form'
+import { resetValues } from './form'
 import { rand } from 'toolbox/misc'
 
 export function setRound(savedRound) {
@@ -84,9 +84,9 @@ export function pullQuestion(Parse, categoryName) {
  */
 export function initializeQuestion(numBins, numOutcomes, bank) {
   return (dispatch) => {
-    dispatch(setBinValues(Array(numBins).fill(0)))
-    dispatch(initializeValues(Array(numOutcomes).fill('')))
+    dispatch(resetValues())
     dispatch(setBank(bank))
+    dispatch(setBinValues(Array(numBins).fill(0)))
   }
 }
 
@@ -136,6 +136,12 @@ export function asyncHandleSubmit(Parse, push) {
   return (dispatch, getState) => {
     const { question, round, form } = getState()
 
+    //Retrieve form information
+    let values = []
+    for (let value of form.values) {
+      values.push(Number(value[0]))
+    }
+
     //Save token distribution and outcomes
     dispatch(addAnswers(question.binValues))
     dispatch(addOutcomes(question.currentQuestion.get('outcomes')))
@@ -147,7 +153,7 @@ export function asyncHandleSubmit(Parse, push) {
     newAnswer.save({
       question: question.currentQuestion,
       binValues: question.binValues,
-      estimates: form.values
+      estimates: values
     }).then(function(savedAnswer) {
       let answers = round.currentRound.get('answers')
       answers.push(savedAnswer)
