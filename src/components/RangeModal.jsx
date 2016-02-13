@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
-import RangeForm from 'components/RangeForm'
+import InputForm from 'containers/InputForm'
 
 export default class RangeModal extends React.Component {
   render() {
@@ -11,7 +11,10 @@ export default class RangeModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           { this.props.instructions }
-          <RangeForm />
+          <InputForm
+            placeholders={ ['Lower bound','Upper bound'] }
+            types={ ['number','number'] }
+          />
         </Modal.Body>
         <Modal.Footer>
           <button onClick={ this.props.onSubmit }>{ 'Start Round' }</button>
