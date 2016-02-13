@@ -1,4 +1,4 @@
-import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW_MODAL, SET_RANGE } from 'constants'
+import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW_MODAL, SET_RANGE, SET_RANGES } from 'constants'
 import { setErrorMessage } from 'actions/form'
 
 export function setCurrentCategory(currentCategory) {
@@ -28,12 +28,21 @@ export function showModal(showModal) {
   }
 }
 
-export function setRange(min, max) {
+export function setRange(range, index) {
   return {
     type: SET_RANGE,
     payload: {
-      min: min,
-      max: max
+      range: range,
+      index: index
+    }
+  }
+}
+
+export function setRanges(ranges) {
+  return {
+    type: SET_RANGES,
+    payload: {
+      ranges: ranges
     }
   }
 }
@@ -48,16 +57,36 @@ export function handleCategoryChoice(category) {
 /*
  *  Check ranges to see if an error message needs to be dispatched
  */
-export function handleRange(values, push, formIndex = 0) {
-  return (dispatch) => {
-    let min = Number(values[0])
-    let max = Number(values[1])
-    if (max <= min) {
-      dispatch(setErrorMessage('Uh oh! Upper bound is smaller than lower bound. Try again.', formIndex))
-    } else {
-      dispatch(setRange(min, max))
-      push('/round')
+export function handleRangeSubmission(push, path) {
+  return (dispatch, getState) => {
+    const { form } = getState()
+    let values = []
+
+    //Error handling
+    for (let i = 0; i < form.values.length; i++) {
+      //Turn information in form 'i' to numbers
+      let value = []
+      value.push(Number(form.values[i][0]))
+      value.push(Number(form.values[i][1]))
+      values.push(value)
+
+      //Dispatch errors if any range value is empty, or if upper bound is smaller than lower bound
+      if (values[i][1] === '' || values[i][0] === '') {
+        dispatch(setErrorMessage('Please fill all of the ranges.', i))
+      }
+      if (values[i][1] <= values[i][0]) {
+        dispatch(setErrorMessage('Uh oh! Upper bound is smaller than lower bound. Try again.', i))
+      }
     }
+    //Return if any errors have been dispatched
+    for (let error of form.errorMessages) {
+      if (error) {
+        return
+      }
+    }
+    //Set the range and move on
+    dispatch(setRanges(values))
+    push(path)
   }
 }
 
