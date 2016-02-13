@@ -3,15 +3,15 @@ import { createSelector } from 'reselect'
 const categorySelector = (state) => state.round.currentCategory
 const binValuesSelector = (state) => state.question.binValues
 const bankSelector = (state) => state.question.bank
-const rangeSelector = (state) => state.round.range
+const rangesSelector = (state) => state.round.ranges
 
-function getBinText(numBins, range) {
+function getBinText(numBins, ranges) {
   let binValues = []
   let binText = []
-  let difference = range[1] - range[0]
+  let difference = ranges[1] - ranges[0]
   let step = difference / numBins
   step = Math.floor(step + 0.5)
-  binValues.push(Math.floor(range[0] + 0.5))
+  binValues.push(Math.floor(ranges[0] + 0.5))
   for (let i = 0; i < numBins; i++) {
     let lastValue = binValues[binValues.length - 1]
     let nextValue = lastValue + step
@@ -22,16 +22,23 @@ function getBinText(numBins, range) {
   return binText
 }
 
+function getBinTexts(numBins, ranges) {
+  let binTexts = []
+  for (let i = 0; i < numBins.length; i++) {
+    binTexts.push(getBinText(numBins[i], ranges[i]))
+  }
+}
+
 export default createSelector(
   categorySelector,
   binValuesSelector,
   bankSelector,
-  rangeSelector,
-  (currentCategory, binValues, bank, range) => {
+  rangesSelector,
+  (currentCategory, binValues, bank, ranges) => {
     return {
-      binText: currentCategory ? getBinText(currentCategory.get('numBins'), range) : [],
-      binValues,
-      bank
+      bank: bank.length > 0 ? bank : [[]],
+      binTexts: currentCategory ? getBinTexts(currentCategory.get('numBins'), ranges) : [[]],
+      binValues: binValues.length > 0 ? binValues : [[]]
     }
   }
 )
