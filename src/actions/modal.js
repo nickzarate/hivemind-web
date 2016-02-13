@@ -1,10 +1,10 @@
-import { SHOW_MODAL } from 'constants'
+import { SHOW } from 'constants'
 
-export function showModal(showModal) {
+export function show(show) {
   return {
-    type: SHOW_MODAL,
+    type: SHOW,
     payload: {
-      showModal: showModal
+      show: show
     }
   }
 }

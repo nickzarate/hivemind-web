@@ -1,22 +1,22 @@
 import React from 'react'
 import { handleRange } from 'actions/home'
-import { showModal } from 'actions/modal'
+import { show } from 'actions/modal'
 import rangeModalSelector from 'selectors/rangeModal'
 import RangeModal from 'components/RangeModal'
 import reduxify from 'toolbox/reduxify'
 
 class RangeModalContainer extends React.Component {
   componentWillUnmount() {
-    this.props.actions.showModal(false)
+    this.props.actions.show(false)
   }
   
   handleSubmit = () => this.props.actions.handleRange(this.props.values, this.props.push);
-  handleHide = () => this.props.actions.showModal(false);
+  handleHide = () => this.props.actions.show(false);
 
   render() {
     return (
       <RangeModal
-        show={ this.props.showModal }
+        show={ this.props.show }
         instructions={ this.props.instructions }
         onSubmit={ this.handleSubmit }
         onHide={ this.handleHide }
@@ -27,6 +27,6 @@ class RangeModalContainer extends React.Component {
 
 export default reduxify({
   selector: rangeModalSelector,
-  actions: { handleRange, showModal },
+  actions: { handleRange, show },
   container: RangeModalContainer
 })

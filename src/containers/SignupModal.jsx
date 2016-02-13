@@ -1,7 +1,7 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import { showModal } from 'actions/modal'
+import { show } from 'actions/modal'
 import { asyncSignup } from 'actions/user'
 import signupModalSelector from 'selectors/signupModal'
 import SignupModal from 'components/SignupModal'
@@ -13,23 +13,23 @@ class SignupModalContainer extends React.Component {
     if (Parse.User.current()) {
       this.props.push('/home')
     }
-    this.props.actions.showModal(true)
+    this.props.actions.show(true)
   }
 
   componentWillUnmount() {
-    this.props.actions.showModal(false)
+    this.props.actions.show(false)
   }
 
   handleSubmit = () => this.props.actions.asyncSignup(Parse, this.props.push, this.props.values);
   handleHide = () => {
-    this.props.actions.showModal(false)
+    this.props.actions.show(false)
     this.props.push('/')
   };
 
   render() {
     return (
       <SignupModal
-        show={ this.props.showModal }
+        show={ this.props.show }
         onSubmit={ this.handleSubmit }
         onHide={ this.handleHide }
       />
@@ -39,6 +39,6 @@ class SignupModalContainer extends React.Component {
 
 export default reduxify({
   selector: signupModalSelector,
-  actions: { showModal, asyncSignup },
+  actions: { show, asyncSignup },
   container: SignupModalContainer
 })
