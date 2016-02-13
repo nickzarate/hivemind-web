@@ -12,7 +12,6 @@ class BinsContainer extends React.Component {
     return (
       <Bins
         onClick={ this.handleClick }
-        onSubmit={ this.props.onSubmit }
         binText={ this.props.binText }
         binValues={ this.props.binValues }
         bank={ this.props.bank }
