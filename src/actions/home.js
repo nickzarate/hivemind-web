@@ -55,34 +55,66 @@ export function handleCategoryChoice(category) {
 }
 
 /*
+ *  If the range at the given index is valid, set the range state
+ */
+export function checkRange(rangeIndex) {
+  return (dispatch, getState) => {
+    const { form } = getState()
+    let ranges = form.values.slice(0)
+    let range = ranges[rangeIndex].slice(0)
+    if (range[0] != '') {
+      range[0] = Number(range[0])
+    }
+    if (range[1] != '') {
+      range[1] = Number(range[1])
+    }
+    if (typeof range[0] === 'number' && typeof range[1] === 'number') {
+      if (range[1] > range[0]) {
+        if (form.errorMessages[rangeIndex]) {
+          dispatch(setErrorMessage(null, rangeIndex))
+        }
+        dispatch(setRange(range, rangeIndex))
+      } else {
+        dispatch(setErrorMessage('Upper bound is smaller than lower bound. Try another range.', rangeIndex))
+      }
+    } else {
+      if (form.errorMessages[rangeIndex]) {
+        dispatch(setErrorMessage(null, rangeIndex))
+      }
+    }
+  }
+}
+
+/*
  *  Check ranges to see if an error message needs to be dispatched
  */
 export function handleRangeSubmission(push, path) {
   return (dispatch, getState) => {
     const { form } = getState()
     let values = []
+    let error = false
 
     //Error handling
     for (let i = 0; i < form.values.length; i++) {
       //Turn information in form 'i' to numbers
-      let value = []
-      value.push(Number(form.values[i][0]))
-      value.push(Number(form.values[i][1]))
+      let value = form.values[i].slice(0)
+      value[0] = value[0].length > 0 ? Number(value[0]) : value[0]
+      value[1] = value[1].length > 0 ? Number(value[1]) : value[1]
       values.push(value)
 
       //Dispatch errors if any range value is empty, or if upper bound is smaller than lower bound
-      if (values[i][1] === '' || values[i][0] === '') {
+      if (value[0] === '' || value[1] === '') {
         dispatch(setErrorMessage('Please fill all of the ranges.', i))
+        error = true
       }
-      if (values[i][1] <= values[i][0]) {
+      if (value[0] > value[1]) {
         dispatch(setErrorMessage('Uh oh! Upper bound is smaller than lower bound. Try again.', i))
+        error = true
       }
     }
     //Return if any errors have been dispatched
-    for (let error of form.errorMessages) {
-      if (error) {
-        return
-      }
+    if (error) {
+      return
     }
     //Set the range and move on
     dispatch(setRanges(values))
