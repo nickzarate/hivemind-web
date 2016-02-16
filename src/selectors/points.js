@@ -16,8 +16,13 @@ const tokenSelector = createSelector(
 
 function getWorth(discrete, pointsPerToken, outcomeRanges, ranges) {
   //SKETCHY
+  let numDiscrete = 0
   for (let i = 0; i < discrete.length; i++) {
+    numDiscrete += discrete[i] ? 0 : 1
     if (!discrete[i] && ranges.length === 0) {
+      return []
+    }
+    if (ranges.length < numDiscrete) {
       return []
     }
   }

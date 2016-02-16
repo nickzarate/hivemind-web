@@ -32,8 +32,13 @@ function getDiscreteBinText(range) {
 }
 
 function getBinTexts(currentCategory, ranges) {
+  let numDiscrete = 0
   for (let discrete of currentCategory.get('discrete')) {
+    numDiscrete += discrete ? 0 : 1
     if (!discrete && ranges.length === 0) {
+      return [[]]
+    }
+    if (ranges.length < numDiscrete) {
       return [[]]
     }
   }
