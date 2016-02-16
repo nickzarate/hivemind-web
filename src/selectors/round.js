@@ -8,8 +8,7 @@ export default createSelector(
     return {
       categoryName: currentCategory.get('name'),
       bank: currentCategory.get('tokens'),
-      numBins: currentCategory.get('binText').length,
-      numOutcomes: currentCategory.get('outcomeNames').length
+      numBins: currentCategory.get('numBins')
     }
   }
 )
