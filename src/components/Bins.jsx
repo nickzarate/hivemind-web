@@ -2,7 +2,15 @@ import React from 'react'
 
 export default class Bins extends React.Component {
   handleClick(index) {
-    return () => this.props.onClick(index)
+    if (!this.props.presentational) {
+      return () => this.props.onClick(index)
+    }
+  }
+
+  binValue(index) {
+    if (!this.props.presentational) {
+      return ': ' + this.props.binValues[index]
+    }
   }
 
   renderBins() {
@@ -10,7 +18,7 @@ export default class Bins extends React.Component {
       (text, index) => (
         <li key={ index }>
           <button onClick={ this.handleClick(index) }>
-            { text }{ ': ' }{ this.props.binValues[index] }
+            { text }{ this.binValue(index) }
           </button>
         </li>
       )
@@ -21,7 +29,10 @@ export default class Bins extends React.Component {
     return (
       <div>
         <p>{ 'Bank: ' }{ this.props.bank }</p>
-        { this.renderBins() }
+        <p>{ 'Worth: ' }{ this.props.worth }</p>
+        <ul>
+          { this.renderBins() }
+        </ul>
       </div>
     )
   }
