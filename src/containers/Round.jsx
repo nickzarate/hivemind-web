@@ -14,20 +14,20 @@ class Round extends React.Component {
 
   componentDidMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    const { actions, bank, numOutcomes, numBins } = this.props
+    const { actions, bank, numBins } = this.props
     if (!Parse.User.current()) {
       this.props.push('/home')
     }
     actions.asyncCreateRound(Parse)
     actions.pullQuestion(Parse, this.props.categoryName)
-    actions.initializeQuestion(numBins, numOutcomes, bank)
+    actions.initializeQuestion(numBins, bank)
   }
 
   handleSubmit() {
-    const { actions, push, categoryName, numBins, numOutcomes, bank } = this.props
+    const { actions, push, categoryName, numBins, bank } = this.props
     actions.asyncHandleSubmit(Parse, push)
     actions.asyncAwardPoints(Parse)
-    actions.initializeQuestion(numBins, numOutcomes, bank)
+    actions.initializeQuestion(numBins, bank)
     actions.pullQuestion(Parse, categoryName)
   }
 
