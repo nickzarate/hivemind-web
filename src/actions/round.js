@@ -82,11 +82,15 @@ export function pullQuestion(Parse, categoryName) {
 /*
  *  Initialize the values in question
  */
-export function initializeQuestion(numBins, numOutcomes, bank) {
+export function initializeQuestion(numBins, bank) {
   return (dispatch) => {
+    let binValues = []
+    for (let num of numBins) {
+      binValues.push(Array(num).fill(0))
+    }
     dispatch(resetValues())
     dispatch(setBank(bank))
-    dispatch(setBinValues(Array(numBins).fill(0)))
+    dispatch(setBinValues(binValues))
   }
 }
 

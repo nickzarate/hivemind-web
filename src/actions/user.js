@@ -39,7 +39,6 @@ export function asyncLogin(Parse, push, formIndex = 0) {
         push('/home')
       },
       error(user, error) {
-        console.log(formIndex)
         dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
       }
     })
