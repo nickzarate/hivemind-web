@@ -7,7 +7,8 @@ import reduxify from 'toolbox/reduxify'
 class InputFormContainer extends React.Component {
   static defaultProps = {
     formIndex: 0,
-    onChange: () => null
+    onChange: () => null,
+    onBlur: () => null
   };
 
   constructor(props) {
@@ -34,14 +35,19 @@ class InputFormContainer extends React.Component {
     }
   }
 
+  handleBlur = () => this.props.onBlur(this.props.formIndex);
+
   render() {
+    const { values, formIndex } = this.props
+    let value = formIndex < values.length ? values[formIndex] : values[0]
     return (
       <InputForm
         onChange={ this.handleChange() }
+        onBlur={ this.handleBlur }
         types={ this.props.types }
         placeholders={ this.props.placeholders }
-        errorMessage={ this.props.errorMessages[this.props.formIndex] }
-        values={ this.props.values[this.props.formIndex] }
+        errorMessage={ this.props.errorMessages[formIndex] }
+        values={ value }
       />
     )
   }

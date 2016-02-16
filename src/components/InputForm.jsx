@@ -16,6 +16,7 @@ export default class InputForm extends React.Component {
           type={ this.props.types[index] }
           placeholder={ this.props.placeholders[index] }
           onChange={ this.handleChange(index) }
+          onBlur={ this.props.onBlur }
           value={ value }
         />
       )
