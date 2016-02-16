@@ -2,7 +2,7 @@ import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_BIN_VALUES, SET_BANK } fro
 import update from 'react-addons-update'
 
 const initialState = {
-  bank: 0,
+  bank: [],
   binValues: [],
   currentQuestion: null
 }
@@ -10,9 +10,9 @@ const initialState = {
 export default function question(state = initialState, action) {
   switch (action.type) {
   case WITHDRAW:
-    return update(state, {bank: {$set: state.bank - 1}})
+    return update(state, {bank: {[action.payload.bankIndex]: {$apply: (bank) => bank - 1}}})
   case DEPOSIT:
-    return update(state, {binValues: {$splice: [[action.payload.index, 1, state.binValues[action.payload.index] + 1]]}})
+    return update(state, {binValues: {[action.payload.binsIndex]: {[action.payload.index]: {$apply: (value) => value + 1}}}})//$splice: [[action.payload.index, 1, state.binValues[action.payload.binsIndex][action.payload.index] + 1]]}}})
   case SET_CURRENT_QUESTION:
     return update(state, {currentQuestion: {$set: action.payload.currentQuestion}})
   case SET_BIN_VALUES:
