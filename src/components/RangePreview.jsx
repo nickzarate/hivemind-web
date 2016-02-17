@@ -17,6 +17,7 @@ export default class RangePreview extends React.Component {
           types={ ['number','number'] }
           formIndex={ formIndex }
           onBlur={ this.props.onBlur }
+          onFormChange={ this.props.onFormChange }
         />
       )
     }

@@ -8,7 +8,8 @@ class InputFormContainer extends React.Component {
   static defaultProps = {
     formIndex: 0,
     onChange: () => null,
-    onBlur: () => null
+    onBlur: () => null,
+    onFormChange: () => null
   };
 
   constructor(props) {
@@ -32,6 +33,7 @@ class InputFormContainer extends React.Component {
     return (event, index) => {
       this.props.actions.setValue(event.target.value, this.props.formIndex, index)
       this.props.onChange(event.target.value, this.props.formIndex, index)
+      this.props.onFormChange(this.props.formIndex)
     }
   }
 
