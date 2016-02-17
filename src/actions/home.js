@@ -1,4 +1,4 @@
-import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW_MODAL, SET_RANGE, SET_RANGES } from 'constants'
+import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW_MODAL, SET_RANGE, SET_RANGES, SET_UNLOCKED } from 'constants'
 import { setErrorMessage } from 'actions/form'
 
 export function setCurrentCategory(currentCategory) {
@@ -43,6 +43,15 @@ export function setRanges(ranges) {
     type: SET_RANGES,
     payload: {
       ranges: ranges
+    }
+  }
+}
+
+export function setUnlocked(unlocked) {
+  return {
+    type: SET_UNLOCKED,
+    payload: {
+      unlocked: unlocked
     }
   }
 }
