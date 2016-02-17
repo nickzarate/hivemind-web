@@ -1,16 +1,29 @@
 import React from 'react'
-import { handleRangeSubmission } from 'actions/home'
+import Parse from 'parse'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
+import { handleRangeSubmission, handleSurveySubmission, unlock } from 'actions/home'
 import { showModal } from 'actions/modal'
 import rangeModalSelector from 'selectors/rangeModal'
 import RangeModal from 'components/RangeModal'
 import reduxify from 'toolbox/reduxify'
 
 class RangeModalContainer extends React.Component {
+  componentDidMount() {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+    for (let name in Parse.User.current().get('unlockedCategories')) {
+      if (name === this.props.name) {
+        this.props.actions.unlock()
+      }
+    }
+
+  }
+
   componentWillUnmount() {
     this.props.actions.showModal(false)
   }
 
-  handleSubmit = () => this.props.actions.handleRangeSubmission(this.props.push, '/round');
+  handleStart = () => this.props.actions.handleRangeSubmission(this.props.push, '/round');
+  handleSubmit = () => this.props.actions.handleSurveySubmission();
   handleHide = () => this.props.actions.showModal(false);
 
   render() {
@@ -18,8 +31,10 @@ class RangeModalContainer extends React.Component {
       <RangeModal
         show={ this.props.showModal }
         instructions={ this.props.instructions }
+        onStart={ this.handleStart }
         onSubmit={ this.handleSubmit }
         onHide={ this.handleHide }
+        unlocked={ this.props.unlocked }
       />
     )
   }
@@ -27,6 +42,6 @@ class RangeModalContainer extends React.Component {
 
 export default reduxify({
   selector: rangeModalSelector,
-  actions: { handleRangeSubmission, showModal },
+  actions: { handleRangeSubmission, showModal, handleSurveySubmission, unlock },
   container: RangeModalContainer
 })
