@@ -1,6 +1,6 @@
 import React from 'react'
 import { initializeQuestion } from 'actions/round'
-import { setRanges, checkRange } from 'actions/home'
+import { setRanges, validateRange, checkRange } from 'actions/home'
 import { clearValues } from 'actions/form'
 import rangePreviewSelector from 'selectors/rangePreview'
 import RangePreview from 'components/RangePreview'
@@ -16,7 +16,8 @@ class RangePreviewContainer extends React.Component {
     this.props.actions.clearValues()
   }
 
-  handleBlur = (formIndex) => this.props.actions.checkRange(formIndex);
+  handleBlur = (formIndex) => this.props.actions.validateRange(formIndex);
+  handleFormChange = (formIndex) => this.props.actions.checkRange(formIndex)
 
   render() {
     return (
@@ -24,6 +25,7 @@ class RangePreviewContainer extends React.Component {
         outcomeNames={ this.props.outcomeNames }
         discrete={ this.props.discrete }
         onBlur={ this.handleBlur }
+        onFormChange={ this.handleFormChange }
       />
     )
   }
@@ -31,6 +33,6 @@ class RangePreviewContainer extends React.Component {
 
 export default reduxify({
   selector: rangePreviewSelector,
-  actions: { initializeQuestion, setRanges, clearValues, checkRange },
+  actions: { initializeQuestion, setRanges, clearValues, validateRange, checkRange },
   container: RangePreviewContainer
 })

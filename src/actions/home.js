@@ -55,7 +55,8 @@ export function handleCategoryChoice(category) {
 }
 
 /*
- *  If the range at the given index is valid, set the range state
+ *  If the range at the given index is valid, set the state of that range.
+ *  If the range is valid and there is an error message, delete the message.
  */
 export function checkRange(rangeIndex) {
   return (dispatch, getState) => {
@@ -75,11 +76,34 @@ export function checkRange(rangeIndex) {
         }
         dispatch(setRange(range, rangeIndex))
       } else {
-        dispatch(setErrorMessage('Upper bound is smaller than lower bound. Try another range.', rangeIndex))
+        dispatch(setRange(['',''], rangeIndex))
       }
     } else {
       if (form.errorMessages[rangeIndex]) {
         dispatch(setErrorMessage(null, rangeIndex))
+      }
+      dispatch(setRange(['',''], rangeIndex))
+    }
+  }
+}
+
+/*
+ *  If the range at the given index is valid, set the range state
+ */
+export function validateRange(rangeIndex) {
+  return (dispatch, getState) => {
+    const { form } = getState()
+    let ranges = form.values.slice(0)
+    let range = ranges[rangeIndex].slice(0)
+    if (range[0] != '') {
+      range[0] = Number(range[0])
+    }
+    if (range[1] != '') {
+      range[1] = Number(range[1])
+    }
+    if (typeof range[0] === 'number' && typeof range[1] === 'number') {
+      if (range[1] <= range[0]) {
+        dispatch(setErrorMessage('Upper bound is smaller than lower bound. Try another range.', rangeIndex))
       }
     }
   }
