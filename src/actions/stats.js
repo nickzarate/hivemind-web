@@ -1,4 +1,4 @@
-import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES } from 'constants'
+import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES, SET_OUTCOME_INDEX, ADD_PHI } from 'constants'
 
 export function setData(data) {
   return {
@@ -46,6 +46,24 @@ export function setOutcomes(outcomes) {
   }
 }
 
+export function setOutcomeIndex(outcomeIndex) {
+  return {
+    type: SET_OUTCOME_INDEX,
+    payload: {
+      outcomeIndex: outcomeIndex
+    }
+  }
+}
+
+export function addPhi(phi) {
+  return {
+    type: ADD_PHI,
+    payload: {
+      phi: phi
+    }
+  }
+}
+
 export function updateSeries(index, series) {
   return (dispatch, getState) => {
     const { stats } = getState()
@@ -71,32 +89,32 @@ export function updateCovariateData(chartIndex, covariateIndex, covariateValue) 
 /*
  *  Call Python server and get Phi given the info in the current state.
  */
-export function asyncGetPhi() {
+export function asyncGetPhis() {
   return (dispatch, getState) => {
     const { round } = getState()
-
-    // Get covariates and predictions from the latest round to analyze and get phi
-    let predictions = []
-    let covariates = []
-    if (round.currentRound) {
+    let estimates = round.currentRound ? round.currentRound.get('answers')[0].get('estimates') : []
+    for (let i = 0; i < estimates.length; i++) {
+      // Get covariates and predictions from the latest round to analyze and get phi
+      let predictions = []
+      let covariates = []
       for (let answer of round.currentRound.get('answers')) {
-        predictions.push(answer.get('estimates'))
+        predictions.push(answer.get('estimates')[i])
         covariates.push(answer.get('question').get('covariateValues'))
       }
-    } else { return }
 
-    // TODO we need a diff name than 'env.source'
-    $.ajax({
-      url: env.SOURCE + '/api/v1/get_phi',
-      method: 'POST',
-      data: JSON.stringify({
-        covariates: covariates,
-        p: predictions
-      }),
-      dataType: 'json',
-      contentType: 'application/json; charset=utf-8',
-      success: (response) => dispatch(setPhi(response.phi))
-    })
+      // TODO: we need a different name than 'env.source'
+      $.ajax({
+        url: env.SOURCE + '/api/v1/get_phi',
+        method: 'POST',
+        data: JSON.stringify({
+          covariates: covariates,
+          p: predictions
+        }),
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: (response) => dispatch(addPhi(response.phi))
+      })
+    }
   }
 }
 
@@ -153,7 +171,7 @@ export function getData() {
 //TODO: Change hardcoded name to the users custom name?
 //TODO: Make the f(x) inside updateChart be abstract or easy to change for different use cases?
 /*
- *  Update the chart of the given index based on the current value of Phi
+ *  Update the chart of the given index based on the current value of Phi at the 'outcomeIndex'
  *  Plot several points of the given equation y = alpha + beta1 * x + beta2 * c2 ... + beta * x^2 + ... + betaN * cn
  */
 export function updateChart(chartIndex) {
@@ -162,12 +180,12 @@ export function updateChart(chartIndex) {
     let covariateRanges = round.currentCategory.get('covariateRanges')
 
     //Create array of betas and array of covariate values to multiply together
-    let betas = stats.phi.slice(1)
+    let betas = stats.phi[stats.outcomeIndex].slice(1)
     let covariateValues = stats.covariateData[chartIndex].slice(0)
     for (let i = 0; i < stats.covariateData[chartIndex].length; i++) {
       covariateValues.push(Math.pow(stats.covariateData[chartIndex][i], 2))
     }
-    let alpha = stats.phi[0]
+    let alpha = stats.phi[stats.outcomeIndex][0]
     let single = []
     for (let item of covariateRanges[chartIndex]) {
       let tempCovariateValues = covariateValues.slice(0)
