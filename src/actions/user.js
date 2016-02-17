@@ -16,6 +16,8 @@ export function asyncSignup(Parse, push, formIndex = 0) {
     newUser.set('username', values[0])
     newUser.set('email', values[0])
     newUser.set('password', values[1])
+    newUser.set('unlockedCategories', [])
+    newUser.set('points', 0)
     newUser.signUp(null, {
       success() {
         push('/survey')
