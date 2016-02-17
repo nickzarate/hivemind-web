@@ -2,7 +2,8 @@ import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import lineChartsSelector from 'selectors/lineCharts'
-import { asyncGetPhi, getData, getCovariateData, updateCovariateData } from 'actions/stats'
+import { asyncGetPhis, getData, getCovariateData,
+  updateCovariateData, setOutcomeIndex } from 'actions/stats'
 import LineCharts from 'components/LineCharts'
 import reduxify from 'toolbox/reduxify'
 
@@ -10,6 +11,7 @@ class LineChartsContainer extends React.Component {
   constructor(props) {
     super(props)
     this.handleSliderChange = this.handleSliderChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
@@ -17,7 +19,7 @@ class LineChartsContainer extends React.Component {
     if (!Parse.User.current()) {
       this.props.push('/home')
     }
-    this.props.actions.asyncGetPhi()
+    this.props.actions.asyncGetPhis()
     this.props.actions.getCovariateData()
     this.props.actions.getData()
   }
@@ -28,6 +30,12 @@ class LineChartsContainer extends React.Component {
     }
   }
 
+  handleClick(index) {
+    return () => {
+      this.props.actions.setOutcomeIndex(index)
+    }
+  }
+
   render() {
     return (
       <LineCharts
@@ -35,6 +43,9 @@ class LineChartsContainer extends React.Component {
         onSliderChange={ this.handleSliderChange }
         covariateRanges={ this.props.covariateRanges }
         outcomeRanges={ this.props.outcomeRanges }
+        onClick={ this.handleClick }
+        outcomeNames={ this.props.outcomeNames }
+        outcomeIndex={ this.props.outcomeIndex }
       />
     )
   }
@@ -42,6 +53,7 @@ class LineChartsContainer extends React.Component {
 
 export default reduxify({
   selector: lineChartsSelector,
-  actions: { asyncGetPhi, getData, getCovariateData, updateCovariateData },
+  actions: { asyncGetPhis, getData, getCovariateData,
+    updateCovariateData, setOutcomeIndex },
   container: LineChartsContainer
 })
