@@ -1,6 +1,6 @@
 import React from 'react'
 import { handleDeposit } from 'actions/question'
-import { setWorth } from 'actions/round'
+import { setWorth, setCorrectAnswerIndices } from 'actions/round'
 import binsSelector from 'selectors/bins'
 import Bins from 'components/Bins'
 import reduxify from 'toolbox/reduxify'
@@ -13,6 +13,10 @@ class BinsContainer extends React.Component {
 
   componentDidMount() {
     this.props.actions.setWorth(this.props.worth)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.props.actions.setCorrectAnswerIndices(nextProps.correctAnswerIndices)
   }
 
   handleClick = (index) => this.props.actions.handleDeposit(this.props.binsIndex, index);
@@ -35,6 +39,6 @@ class BinsContainer extends React.Component {
 
 export default reduxify({
   selector: binsSelector,
-  actions: { handleDeposit, setWorth },
+  actions: { handleDeposit, setWorth, setCorrectAnswerIndices },
   container: BinsContainer
 })
