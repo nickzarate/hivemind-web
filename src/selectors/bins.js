@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 import pointsSelector from 'selectors/points'
+import correctAnswerIndicesSelector from 'selectors/correctAnswerIndices'
 
 const categorySelector = (state) => state.round.currentCategory
 const binValuesSelector = (state) => state.question.binValues
@@ -67,12 +68,14 @@ export default createSelector(
   bankSelector,
   rangesSelector,
   pointsSelector,
-  (currentCategory, binValues, bank, ranges, worth) => {
+  correctAnswerIndicesSelector,
+  (currentCategory, binValues, bank, ranges, worth, correctAnswerIndices) => {
     return {
       bank: bank.length > 0 ? bank : [[]],
       binTexts: currentCategory ? getBinTexts(currentCategory, ranges) : [[]],
       binValues: binValues.length > 0 ? binValues : [[]],
-      worth: worth.worth
+      worth: worth.worth,
+      correctAnswerIndices: correctAnswerIndices.correctAnswerIndices
     }
   }
 )
