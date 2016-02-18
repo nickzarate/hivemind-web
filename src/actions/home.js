@@ -71,6 +71,31 @@ export function setUnlocks(categories, Parse) {
   }
 }
 
+/*
+ *  If all values in the form are filled, unlock the category, and set the information on the current user
+ */
+export function handleSurveySubmission(Parse) {
+  return (dispatch, getState) => {
+    const { form, round } = getState()
+    var values = form.values[0].slice(0)
+    for (var i = 0; i < values.length; i++) {
+      if (values[i] != '') {
+        values[i] = Number(values[i])
+      } else {
+        return
+      }
+    }
+    dispatch(setUnlocked(true, round.currentCategory.get('index')))
+    let information = { [round.currentCategory.get('name')]: values }
+    let user = Parse.User.current()
+    user.add('unlockedCategories', round.currentCategory.get('name'))
+    user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
+  }
+}
+
+/*
+ *  Set the chosen category and open up the modal
+ */
 export function handleCategoryChoice(category) {
   return (dispatch) => {
     dispatch(setCurrentCategory(category))
