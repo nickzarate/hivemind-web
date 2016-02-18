@@ -1,4 +1,5 @@
-import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES, SET_OUTCOME_INDEX, ADD_PHI } from 'constants'
+import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES, SET_OUTCOME_INDEX,
+  ADD_PHI, CLEAR_WINNINGS } from 'constants'
 
 export function setData(data) {
   return {
@@ -6,6 +7,12 @@ export function setData(data) {
     payload: {
       data: data
     }
+  }
+}
+
+export function clearWinnings() {
+  return {
+    type: CLEAR_WINNINGS
   }
 }
 

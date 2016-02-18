@@ -4,7 +4,6 @@ import 'chartist/dist/chartist.min.css'
 import Sliders from './Sliders'
 
 export default class Graph extends React.Component {
-
   renderCharts() {
     let options = {
       high: this.props.outcomeRanges[this.props.outcomeIndex][1],
@@ -47,6 +46,7 @@ export default class Graph extends React.Component {
   render() {
     return (
       <div>
+        <h1>{ 'Points Earned: ' }{ this.props.winnings }</h1>
         { this.renderButtons() }
         <ul>
           { this.renderCharts() }

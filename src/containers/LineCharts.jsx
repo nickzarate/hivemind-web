@@ -3,7 +3,7 @@ import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import lineChartsSelector from 'selectors/lineCharts'
 import { asyncGetPhis, getData, getCovariateData,
-  updateCovariateData, setOutcomeIndex } from 'actions/stats'
+  updateCovariateData, setOutcomeIndex, clearWinnings } from 'actions/stats'
 import LineCharts from 'components/LineCharts'
 import reduxify from 'toolbox/reduxify'
 
@@ -22,6 +22,10 @@ class LineChartsContainer extends React.Component {
     this.props.actions.asyncGetPhis()
     this.props.actions.getCovariateData(Parse.User.current())
     this.props.actions.getData()
+  }
+
+  componentWillUnmount() {
+    this.props.actions.clearWinnings()
   }
 
   handleSliderChange(chartIndex, sliderIndex) {
@@ -47,6 +51,7 @@ class LineChartsContainer extends React.Component {
         outcomeNames={ this.props.outcomeNames }
         outcomeIndex={ this.props.outcomeIndex }
         covariateData={ this.props.covariateData }
+        winnings={ this.props.winnings }
       />
     )
   }
@@ -55,6 +60,6 @@ class LineChartsContainer extends React.Component {
 export default reduxify({
   selector: lineChartsSelector,
   actions: { asyncGetPhis, getData, getCovariateData,
-    updateCovariateData, setOutcomeIndex },
+    updateCovariateData, setOutcomeIndex, clearWinnings },
   container: LineChartsContainer
 })
