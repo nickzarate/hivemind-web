@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND, SET_CORRECT_ANSWER_INDICES,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, SET_WORTH } from 'constants'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, SET_WORTH, ADD_WINNINGS } from 'constants'
 import { setBinValues, setBank } from './question'
 import { resetValues } from './form'
 import { rand } from 'toolbox/misc'
@@ -79,6 +79,15 @@ export function setCorrectAnswerIndices(correctAnswerIndices) {
   }
 }
 
+export function addWinnings(winnings) {
+  return {
+    type: ADD_WINNINGS,
+    payload: {
+      winnings: winnings
+    }
+  }
+}
+
 /*
  *  Pull a random question from Parse database and setState accordingly
  */
@@ -147,6 +156,7 @@ export function asyncAwardPoints(Parse) {
     let currentUser = Parse.User.current()
     let points = currentUser.get('points')
     points += winnings
+    dispatch(addWinnings(winnings))
     currentUser.save({ points: points })
   }
 }
