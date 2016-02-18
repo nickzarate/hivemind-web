@@ -11,7 +11,7 @@ const initialState = {
   currentRound: null,
   categories: null,
   ranges: [],
-  unlocked: false
+  unlocked: []
 }
 
 export default function round(state = initialState, action) {
@@ -39,7 +39,7 @@ export default function round(state = initialState, action) {
   case SET_RANGES:
     return update(state, {ranges: {$set: action.payload.ranges}})
   case SET_UNLOCKED:
-    return update(state, {unlocked: {$set: action.payload.unlocked}})
+    return update(state, {unlocked: {[action.payload.index]: {$set: action.payload.unlocked}}})
   default:
     return state
   }
