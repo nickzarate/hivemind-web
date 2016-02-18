@@ -1,7 +1,7 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import { handleCategoryChoice, getCategories } from 'actions/home'
+import { handleCategoryChoice, asyncGetCategories, setUnlocked } from 'actions/home'
 import categoriesSelector from 'selectors/categories'
 import Categories from 'components/Categories'
 import reduxify from 'toolbox/reduxify'
@@ -29,6 +29,6 @@ class CategoriesContainer extends React.Component {
 
 export default reduxify({
   selector: categoriesSelector,
-  actions: { handleCategoryChoice, getCategories },
+  actions: { handleCategoryChoice, asyncGetCategories, setUnlocked },
   container: CategoriesContainer
 })

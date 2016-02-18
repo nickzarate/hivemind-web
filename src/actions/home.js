@@ -47,11 +47,26 @@ export function setRanges(ranges) {
   }
 }
 
-export function setUnlocked(unlocked) {
+export function setUnlocked(unlocked, index) {
   return {
     type: SET_UNLOCKED,
     payload: {
-      unlocked: unlocked
+      unlocked: unlocked,
+      index: index
+    }
+  }
+}
+
+export function setUnlocks(categories, Parse) {
+  return (dispatch) => {
+    for (var category of categories) {
+      var unlocked = false
+      for (var name of Parse.User.current().get('unlockedCategories')) {
+        if (name === category.get('name')) {
+          unlocked = true
+        }
+      }
+      dispatch(setUnlocked(unlocked, category.get('index')))
     }
   }
 }
@@ -64,8 +79,8 @@ export function handleCategoryChoice(category) {
 }
 
 /*
- *  If the range at the given index is valid, set the state of that range.
- *  If the range is valid and there is an error message, delete the message.
+ *  If the range at the given index is valid, set the state of that range
+ *  If the range is valid and there is an error message, delete the message
  */
 export function checkRange(rangeIndex) {
   return (dispatch, getState) => {
@@ -164,6 +179,7 @@ export function getCategories(Parse) {
     query.find({
       success(categories) {
         dispatch(setCategories(categories))
+        dispatch(setUnlocks(categories, Parse))
       }
     })
   }
