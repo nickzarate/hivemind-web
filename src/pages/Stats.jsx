@@ -8,7 +8,6 @@ export default class Stats extends React.Component {
   render() {
     return (
       <div>
-        <h1>{ 'Stats Page' }</h1>
         <LineCharts />
         <HomeButton />
       </div>
