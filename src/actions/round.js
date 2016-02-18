@@ -129,14 +129,17 @@ export function asyncCreateRound(Parse) {
  */
 export function asyncAwardPoints(Parse) {
   return (dispatch, getState) => {
-    const { question } = getState()
-
+    const { question, round } = getState()
+    let worth = 0
+    for (let tokenWorth of round.worth) {
+      worth += tokenWorth
+    }
     //TODO: Calculate how many points are earned for answering correctly
-    let points = question.binValues[question.currentQuestion.get('correctAnswerIndex')] * 50
+    let winnings = question.binValues[question.currentQuestion.get('correctAnswerIndex')] * worth
     let currentUser = Parse.User.current()
-    let honey = currentUser.get('honey')
-    honey += points
-    currentUser.save({ honey: honey })
+    let points = currentUser.get('points')
+    points += winnings
+    currentUser.save({ points: points })
   }
 }
 
