@@ -82,6 +82,7 @@ export function handleSurveySubmission(Parse) {
       if (values[i] != '') {
         values[i] = Number(values[i])
       } else {
+        dispatch(setErrorMessage('All information must be filled in before submitting', 0))
         return
       }
     }
