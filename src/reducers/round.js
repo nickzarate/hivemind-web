@@ -1,6 +1,6 @@
 import { INCREMENT_CURRENT_QUESTION, SET_ROUND, ADD_ANSWER_TO_ROUND, SET_CURRENT_CATEGORY,
   ADD_ANSWERS, RESET_CURRENT_QUESTION, SET_CATEGORIES, ADD_OUTCOMES, SET_RANGE, SET_RANGES,
-  SET_UNLOCKED, SET_WORTH } from 'constants'
+  SET_UNLOCKED, SET_WORTH, SET_CORRECT_ANSWER_INDICES } from 'constants'
 import update from 'react-addons-update'
 
 const initialState = {
@@ -12,7 +12,8 @@ const initialState = {
   categories: null,
   ranges: [],
   unlocked: [],
-  worth: []
+  worth: [],
+  correctAnswerIndices: []
 }
 
 export default function round(state = initialState, action) {
@@ -43,6 +44,8 @@ export default function round(state = initialState, action) {
     return update(state, {unlocked: {[action.payload.index]: {$set: action.payload.unlocked}}})
   case SET_WORTH:
     return update(state, {worth: {$set: action.payload.worth}})
+  case SET_CORRECT_ANSWER_INDICES:
+    return update(state, {correctAnswerIndices: {$set: action.payload.correctAnswerIndices}})
   default:
     return state
   }
