@@ -1,22 +1,20 @@
 import { combineReducers } from 'redux'
-import user from './user'
-import question from './question'
-import round from './round'
-import survey from './survey'
-import stats from './stats'
+import { routeReducer as routing } from 'react-router-redux' // REMEMBER
 import form from './form'
 import modal from './modal'
-import { routeReducer as routing } from 'react-router-redux' // REMEMBER
+import question from './question'
+import round from './round'
+import stats from './stats'
+import survey from './survey'
+import user from './user'
 
-const rootReducer = combineReducers({
+export default combineReducers({
+  form,
+  modal,
   question,
   round,
   routing,
-  survey,
   stats,
-  user,
-  form,
-  modal
+  survey,
+  user
 })
-
-export default rootReducer
