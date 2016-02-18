@@ -27,6 +27,7 @@ export default class Graph extends React.Component {
             chartIndex={ index }
             covariateRanges={ this.props.covariateRanges }
             onSliderChange={ this.props.onSliderChange }
+            values={ this.props.covariateData[index] }
           />
         </li>
       )

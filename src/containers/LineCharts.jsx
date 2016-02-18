@@ -46,6 +46,7 @@ class LineChartsContainer extends React.Component {
         onClick={ this.handleClick }
         outcomeNames={ this.props.outcomeNames }
         outcomeIndex={ this.props.outcomeIndex }
+        covariateData={ this.props.covariateData }
       />
     )
   }
