@@ -9,16 +9,16 @@ const initialState = {
 
 export default function question(state = initialState, action) {
   switch (action.type) {
-  case WITHDRAW:
-    return update(state, {bank: {[action.payload.bankIndex]: {$apply: (bank) => bank - 1}}})
   case DEPOSIT:
-    return update(state, {binValues: {[action.payload.binsIndex]: {[action.payload.index]: {$apply: (value) => value + 1}}}})//$splice: [[action.payload.index, 1, state.binValues[action.payload.binsIndex][action.payload.index] + 1]]}}})
-  case SET_CURRENT_QUESTION:
-    return update(state, {currentQuestion: {$set: action.payload.currentQuestion}})
-  case SET_BIN_VALUES:
-    return update(state, {binValues: {$set: action.payload.binValues}})
+    return update(state, {binValues: {[action.payload.binsIndex]: {[action.payload.index]: {$apply: (value) => value + 1}}}})
   case SET_BANK:
     return update(state, {bank: {$set: action.payload.bank}})
+  case SET_BIN_VALUES:
+    return update(state, {binValues: {$set: action.payload.binValues}})
+  case SET_CURRENT_QUESTION:
+    return update(state, {currentQuestion: {$set: action.payload.currentQuestion}})
+  case WITHDRAW:
+    return update(state, {bank: {[action.payload.bankIndex]: {$apply: (bank) => bank - 1}}})
   default:
     return state
   }
