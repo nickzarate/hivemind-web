@@ -1,4 +1,4 @@
-import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND,
+import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND, SET_CORRECT_ANSWER_INDICES,
   ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, SET_WORTH } from 'constants'
 import { setBinValues, setBank } from './question'
 import { resetValues } from './form'
@@ -66,6 +66,15 @@ export function setWorth(worth) {
     type: SET_WORTH,
     payload: {
       worth: worth
+    }
+  }
+}
+
+export function setCorrectAnswerIndices(correctAnswerIndices) {
+  return {
+    type: SET_CORRECT_ANSWER_INDICES,
+    payload: {
+      correctAnswerIndices: correctAnswerIndices
     }
   }
 }
