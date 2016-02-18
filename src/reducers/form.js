@@ -3,8 +3,8 @@ import { SET_ERROR_MESSAGE, SET_VALUE, INITIALIZE_VALUES, CLEAR_VALUES,
 import update from 'react-addons-update'
 
 const initialState = {
-  values: [],
-  errorMessages: []
+  errorMessages: [],
+  values: []
 }
 
 export default function question(state = initialState, action) {
