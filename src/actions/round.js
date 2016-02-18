@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION } from 'constants'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, SET_WORTH } from 'constants'
 import { setBinValues, setBank } from './question'
 import { resetValues } from './form'
 import { rand } from 'toolbox/misc'
@@ -57,6 +57,15 @@ export function setCurrentQuestion(question) {
     type: SET_CURRENT_QUESTION,
     payload: {
       currentQuestion: question
+    }
+  }
+}
+
+export function setWorth(worth) {
+  return {
+    type: SET_WORTH,
+    payload: {
+      worth: worth
     }
   }
 }
