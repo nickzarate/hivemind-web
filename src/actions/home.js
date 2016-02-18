@@ -198,7 +198,7 @@ export function handleRangeSubmission(push, path) {
 /*
  *  Make a query to Parse to check how many categories are currently up
  */
-export function getCategories(Parse) {
+export function asyncGetCategories(Parse) {
   return (dispatch) => {
     let query = new Parse.Query('Categories')
     query.find({

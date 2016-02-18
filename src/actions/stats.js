@@ -122,9 +122,21 @@ export function asyncGetPhis() {
  *  Get initial covariate data
  *  TODO: Call Parse and get initial user data about covariates
  */
-export function getCovariateData() {
-  return (dispatch) => {
-    let covariateData = [[0],[0]]
+export function getCovariateData(user) {
+  return (dispatch, getState) => {
+    const { round } = getState()
+    var information = user.get('categoryInformation')
+    var data = information[round.currentCategory.get('name')]
+    var covariateData = []
+    for (var i = 0; i < data.length; i++) {
+      var item = []
+      for (var j = 0; j < data.length; j++) {
+        if (j !== i) {
+          item.push(data[j])
+        }
+      }
+      covariateData.push(item)
+    }
     dispatch(setCovariateData(covariateData))
   }
 }
