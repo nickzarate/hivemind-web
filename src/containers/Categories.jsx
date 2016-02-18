@@ -12,7 +12,7 @@ class CategoriesContainer extends React.Component {
     if (!Parse.User.current()) {
       this.props.push('/')
     }
-    this.props.actions.getCategories(Parse)
+    this.props.actions.asyncGetCategories(Parse)
   }
 
   handleClick = (choice) => this.props.actions.handleCategoryChoice(choice);

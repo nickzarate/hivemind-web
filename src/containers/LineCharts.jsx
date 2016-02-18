@@ -20,7 +20,7 @@ class LineChartsContainer extends React.Component {
       this.props.push('/home')
     }
     this.props.actions.asyncGetPhis()
-    this.props.actions.getCovariateData()
+    this.props.actions.getCovariateData(Parse.User.current())
     this.props.actions.getData()
   }
 

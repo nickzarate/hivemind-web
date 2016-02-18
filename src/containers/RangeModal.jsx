@@ -17,7 +17,7 @@ class RangeModalContainer extends React.Component {
   }
 
   handleStart = () => this.props.actions.handleRangeSubmission(this.props.push, '/round');
-  handleSubmit = () => this.props.actions.handleSurveySubmission();
+  handleSubmit = () => this.props.actions.handleSurveySubmission(Parse);
   handleHide = () => this.props.actions.showModal(false);
 
   render() {
