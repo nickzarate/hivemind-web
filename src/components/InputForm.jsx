@@ -16,17 +16,20 @@ export default class InputForm extends React.Component {
           type={ this.props.types[index] }
           placeholder={ this.props.placeholders[index] }
           onChange={ this.handleChange(index) }
+          onBlur={ this.props.onBlur }
           value={ value }
         />
       )
     )
   }
 
+  ref = (ref) => this.form = ref;
+
   render() {
     return (
       <div>
         <Tooltip target={ this.form } message={ this.props.errorMessage } />
-        <form ref={ (ref) => this.form = ref }>
+        <form ref={ this.ref }>
           { this.renderInputs() }
         </form>
       </div>

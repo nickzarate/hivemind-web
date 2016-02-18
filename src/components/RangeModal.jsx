@@ -1,20 +1,23 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
-import RangeForm from 'components/RangeForm'
+import RangePreview from 'containers/RangePreview'
+import CategorySurvey from 'containers/CategorySurvey'
 
 export default class RangeModal extends React.Component {
+
+  handleClick = () => this.props.unlocked ? this.props.onStart() : this.props.onSubmit();
+
   render() {
     return (
       <Modal show={ this.props.show } onHide={ this.props.onHide }>
         <Modal.Header closeButton>
-          { 'Instructions' }
+          { this.props.unlocked ? 'Instructions' : 'Unlock Category' }
         </Modal.Header>
         <Modal.Body>
-          { this.props.instructions }
-          <RangeForm />
+          { this.props.unlocked ? <RangePreview /> : <CategorySurvey /> }
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={ this.props.onSubmit }>{ 'Start Round' }</button>
+          <button onClick={ this.handleClick }>{ this.props.unlocked ? 'Start Round' : 'Submit' }</button>
         </Modal.Footer>
       </Modal>
     )

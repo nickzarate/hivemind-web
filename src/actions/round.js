@@ -1,7 +1,7 @@
-import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION } from 'constants'
+import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND, SET_CORRECT_ANSWER_INDICES,
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, SET_WORTH, ADD_WINNINGS } from 'constants'
 import { setBinValues, setBank } from './question'
-import { initializeValues } from './form'
+import { resetValues } from './form'
 import { rand } from 'toolbox/misc'
 
 export function setRound(savedRound) {
@@ -61,6 +61,33 @@ export function setCurrentQuestion(question) {
   }
 }
 
+export function setWorth(worth) {
+  return {
+    type: SET_WORTH,
+    payload: {
+      worth: worth
+    }
+  }
+}
+
+export function setCorrectAnswerIndices(correctAnswerIndices) {
+  return {
+    type: SET_CORRECT_ANSWER_INDICES,
+    payload: {
+      correctAnswerIndices: correctAnswerIndices
+    }
+  }
+}
+
+export function addWinnings(winnings) {
+  return {
+    type: ADD_WINNINGS,
+    payload: {
+      winnings: winnings
+    }
+  }
+}
+
 /*
  *  Pull a random question from Parse database and setState accordingly
  */
@@ -82,11 +109,15 @@ export function pullQuestion(Parse, categoryName) {
 /*
  *  Initialize the values in question
  */
-export function initializeQuestion(numBins, numOutcomes, bank) {
+export function initializeQuestion(numBins, bank) {
   return (dispatch) => {
-    dispatch(setBinValues(Array(numBins).fill(0)))
-    dispatch(initializeValues(Array(numOutcomes).fill('')))
+    let binValues = []
+    for (let num of numBins) {
+      binValues.push(Array(num).fill(0))
+    }
+    dispatch(resetValues())
     dispatch(setBank(bank))
+    dispatch(setBinValues(binValues))
   }
 }
 
@@ -116,14 +147,17 @@ export function asyncCreateRound(Parse) {
  */
 export function asyncAwardPoints(Parse) {
   return (dispatch, getState) => {
-    const { question } = getState()
-
+    const { question, round } = getState()
     //TODO: Calculate how many points are earned for answering correctly
-    let points = question.binValues[question.currentQuestion.get('correctAnswerIndex')] * 50
+    var winnings = 0
+    for (let i = 0; i < round.worth.length; i++) {
+      winnings += round.correctAnswerIndices[i] === -1 ? 0 : question.binValues[i][round.correctAnswerIndices[i]] * round.worth[i]
+    }
     let currentUser = Parse.User.current()
-    let honey = currentUser.get('honey')
-    honey += points
-    currentUser.save({ honey: honey })
+    let points = currentUser.get('points')
+    points += winnings
+    dispatch(addWinnings(winnings))
+    currentUser.save({ points: points })
   }
 }
 
@@ -136,6 +170,12 @@ export function asyncHandleSubmit(Parse, push) {
   return (dispatch, getState) => {
     const { question, round, form } = getState()
 
+    //Retrieve form information
+    let values = []
+    for (let value of form.values) {
+      values.push(Number(value[0]))
+    }
+
     //Save token distribution and outcomes
     dispatch(addAnswers(question.binValues))
     dispatch(addOutcomes(question.currentQuestion.get('outcomes')))
@@ -147,7 +187,7 @@ export function asyncHandleSubmit(Parse, push) {
     newAnswer.save({
       question: question.currentQuestion,
       binValues: question.binValues,
-      estimates: form.values
+      estimates: values
     }).then(function(savedAnswer) {
       let answers = round.currentRound.get('answers')
       answers.push(savedAnswer)

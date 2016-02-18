@@ -10,7 +10,7 @@ export default createSelector(
     return {
       covariateValues: currentQuestion ? currentQuestion.get('covariateValues') : [],
       covariateNames: currentCategory ? currentCategory.get('covariateNames') : [],
-      instructions: currentCategory ? currentCategory.get('questionInstructions') : ''
+      instructions: currentCategory ? currentCategory.get('questionInstructions') : []
     }
   }
 )

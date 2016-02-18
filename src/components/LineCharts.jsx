@@ -4,11 +4,10 @@ import 'chartist/dist/chartist.min.css'
 import Sliders from './Sliders'
 
 export default class Graph extends React.Component {
-
   renderCharts() {
     let options = {
-      high: this.props.outcomeRanges[0][1],
-      low: this.props.outcomeRanges[0][0],
+      high: this.props.outcomeRanges[this.props.outcomeIndex][1],
+      low: this.props.outcomeRanges[this.props.outcomeIndex][0],
       showArea: false,
       showPoint: true,
       width: '400px',
@@ -27,17 +26,32 @@ export default class Graph extends React.Component {
             chartIndex={ index }
             covariateRanges={ this.props.covariateRanges }
             onSliderChange={ this.props.onSliderChange }
+            values={ this.props.covariateData[index] }
           />
         </li>
       )
     )
   }
 
+  renderButtons() {
+    if (this.props.outcomeNames.length > 1) {
+      return this.props.outcomeNames.map(
+        (outcomeName, index) => (
+          <button key={ index } onClick={ this.props.onClick(index) }>{ outcomeName }</button>
+        )
+      )
+    }
+  }
+
   render() {
     return (
-      <ul>
-        { this.renderCharts() }
-      </ul>
+      <div>
+        <h1>{ 'Points Earned: ' }{ this.props.winnings }</h1>
+        { this.renderButtons() }
+        <ul>
+          { this.renderCharts() }
+        </ul>
+      </div>
     )
   }
 }

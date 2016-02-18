@@ -14,6 +14,7 @@ export default class Graph extends React.Component {
             onChange={ this.props.onSliderChange(chartIndex, index) }
             max={ range[range.length - 1] }
             min={ range[0] }
+            value={ this.props.values[index] }
           />
         </li>
       )

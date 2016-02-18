@@ -2,7 +2,8 @@ import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import lineChartsSelector from 'selectors/lineCharts'
-import { asyncGetPhi, getData, getCovariateData, updateCovariateData } from 'actions/stats'
+import { asyncGetPhis, getData, getCovariateData,
+  updateCovariateData, setOutcomeIndex, clearWinnings } from 'actions/stats'
 import LineCharts from 'components/LineCharts'
 import reduxify from 'toolbox/reduxify'
 
@@ -10,6 +11,7 @@ class LineChartsContainer extends React.Component {
   constructor(props) {
     super(props)
     this.handleSliderChange = this.handleSliderChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
@@ -17,14 +19,24 @@ class LineChartsContainer extends React.Component {
     if (!Parse.User.current()) {
       this.props.push('/home')
     }
-    this.props.actions.asyncGetPhi()
-    this.props.actions.getCovariateData()
+    this.props.actions.asyncGetPhis()
+    this.props.actions.getCovariateData(Parse.User.current())
     this.props.actions.getData()
+  }
+
+  componentWillUnmount() {
+    this.props.actions.clearWinnings()
   }
 
   handleSliderChange(chartIndex, sliderIndex) {
     return (value) => {
       this.props.actions.updateCovariateData(chartIndex, sliderIndex, value)
+    }
+  }
+
+  handleClick(index) {
+    return () => {
+      this.props.actions.setOutcomeIndex(index)
     }
   }
 
@@ -35,6 +47,11 @@ class LineChartsContainer extends React.Component {
         onSliderChange={ this.handleSliderChange }
         covariateRanges={ this.props.covariateRanges }
         outcomeRanges={ this.props.outcomeRanges }
+        onClick={ this.handleClick }
+        outcomeNames={ this.props.outcomeNames }
+        outcomeIndex={ this.props.outcomeIndex }
+        covariateData={ this.props.covariateData }
+        winnings={ this.props.winnings }
       />
     )
   }
@@ -42,6 +59,7 @@ class LineChartsContainer extends React.Component {
 
 export default reduxify({
   selector: lineChartsSelector,
-  actions: { asyncGetPhi, getData, getCovariateData, updateCovariateData },
+  actions: { asyncGetPhis, getData, getCovariateData,
+    updateCovariateData, setOutcomeIndex, clearWinnings },
   container: LineChartsContainer
 })

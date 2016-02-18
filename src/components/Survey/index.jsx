@@ -37,37 +37,44 @@ export default class Survey extends React.Component {
     this.props.push('/home')
   }
 
+  ageSelector = (ref) => this.ageSelector = ref;
+  sexSelector = (ref) => this.sexSelector = ref;
+  raceSelector = (ref) => this.raceSelector = ref;
+  educationSelector = (ref) => this.educationSelector = ref;
+  experienceSelector = (ref) => this.experienceSelector = ref;
+  occupationSelector = (ref) => this.occupationSelector = ref;
+
   render() {
     return (
       <div>
         <h1>{ 'Survey' }</h1>
         <Selector
-          ref={ (ref) => this.ageSelector = ref }
+          ref={ this.ageSelector }
           title={ 'Age' }
           options={ survey.AGE_OPTIONS }
         />
         <Selector
-          ref={ (ref) => this.sexSelector = ref }
+          ref={ this.sexSelector }
           title={ 'Sex' }
           options={ survey.SEX_OPTIONS }
         />
         <Selector
-          ref={ (ref) => this.raceSelector = ref }
+          ref={ this.raceSelector }
           title={ 'Race' }
           options={ survey.RACE_OPTIONS }
         />
         <Selector
-          ref={ (ref) => this.educationSelector = ref }
+          ref={ this.educationSelector }
           title={ 'Education' }
           options={ survey.EDUCATION_OPTIONS }
         />
         <Selector
-          ref={ (ref) => this.occupationSelector = ref }
+          ref={ this.occupationSelector }
           title={ 'Occupation' }
           options={ survey.OCCUPATION_OPTIONS }
         />
         <Selector
-          ref={ (ref) => this.experienceSelector = ref }
+          ref={ this.experienceSelector }
           title={ 'Experience' }
           options={ survey.EXPERIENCE_OPTIONS }
         />

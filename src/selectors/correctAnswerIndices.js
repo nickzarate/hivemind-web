@@ -1,38 +1,31 @@
 import { createSelector } from 'reselect'
-import pointsSelector from 'selectors/points'
-import correctAnswerIndicesSelector from 'selectors/correctAnswerIndices'
 
 const categorySelector = (state) => state.round.currentCategory
-const binValuesSelector = (state) => state.question.binValues
-const bankSelector = (state) => state.question.bank
 const rangesSelector = (state) => state.round.ranges
+const outcomesSelector = (state) => state.question.currentQuestion
 
-function getContinuousBinText(numBins, range) {
+function getContinuousAnswerIndex(numBins, range, outcome) {
   let binValues = []
-  let binText = []
   let difference = range[1] - range[0]
+  //If correct answer index is not within the specified range, return -1
+  if (outcome < range[0] || outcome > range[1]) {
+    return -1
+  }
+  //Find the correct answer index within the given range
   let step = difference / numBins
   step = Math.floor(step + 0.5)
   binValues.push(Math.floor(range[0] + 0.5))
   for (let i = 0; i < numBins; i++) {
     let lastValue = binValues[binValues.length - 1]
     let nextValue = lastValue + step
-    let text = lastValue + '-' + nextValue
+    if (outcome >= lastValue && outcome <= nextValue) {
+      return i
+    }
     binValues.push(nextValue)
-    binText.push(text)
   }
-  return binText
 }
 
-function getDiscreteBinText(range) {
-  let binText = []
-  for (let i = range[0]; i <= range[1]; i++) {
-    binText.push(i)
-  }
-  return binText
-}
-
-function getBinTexts(currentCategory, ranges) {
+function getCorrectAnswerIndices(currentCategory, ranges, currentQuestion) {
   let numDiscrete = 0
   for (let discrete of currentCategory.get('discrete')) {
     numDiscrete += discrete ? 0 : 1
@@ -43,11 +36,11 @@ function getBinTexts(currentCategory, ranges) {
       return [[]]
     }
   }
-  let bins = []
+  let correctAnswerIndices = []
   let newRanges = ranges.slice(0)
   for (let i = 0; i < currentCategory.get('outcomeRanges').length; i++) {
     if (currentCategory.get('discrete')[i]) {
-      bins.push(getDiscreteBinText(currentCategory.get('outcomeRanges')[i]))
+      correctAnswerIndices.push(currentQuestion.get('outcomes')[i] - currentCategory.get('outcomeRanges')[i][0])
     } else {
       //SKETCHY
       let index = 0
@@ -56,26 +49,19 @@ function getBinTexts(currentCategory, ranges) {
       }
       newRanges[index][0] = Number(newRanges[index][0])
       newRanges[index][1] = Number(newRanges[index][1])
-      bins.push(getContinuousBinText(currentCategory.get('numBins')[i], newRanges[index]))
+      correctAnswerIndices.push(getContinuousAnswerIndex(currentCategory.get('numBins')[i], newRanges[index], currentQuestion.get('outcomes')[index]))
     }
   }
-  return bins.length ? bins : [[]]
+  return correctAnswerIndices.length ? correctAnswerIndices : []
 }
 
 export default createSelector(
   categorySelector,
-  binValuesSelector,
-  bankSelector,
   rangesSelector,
-  pointsSelector,
-  correctAnswerIndicesSelector,
-  (currentCategory, binValues, bank, ranges, worth, correctAnswerIndices) => {
+  outcomesSelector,
+  (currentCategory, ranges, currentQuestion) => {
     return {
-      bank: bank.length > 0 ? bank : [[]],
-      binTexts: currentCategory ? getBinTexts(currentCategory, ranges) : [[]],
-      binValues: binValues.length > 0 ? binValues : [[]],
-      worth: worth.worth,
-      correctAnswerIndices: correctAnswerIndices.correctAnswerIndices
+      correctAnswerIndices: (currentCategory && currentQuestion) ? getCorrectAnswerIndices(currentCategory, ranges, currentQuestion) : []
     }
   }
 )

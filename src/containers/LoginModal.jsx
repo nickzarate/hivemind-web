@@ -19,7 +19,7 @@ class LoginModalContainer extends React.Component {
     this.props.actions.showModal(false)
   }
 
-  handleSubmit = () => this.props.actions.asyncLogin(Parse, this.props.push, this.props.values);
+  handleSubmit = () => this.props.actions.asyncLogin(Parse, this.props.push);
   handleHide = () => this.props.actions.showModal(false);
 
   render() {

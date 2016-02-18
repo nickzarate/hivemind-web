@@ -8,6 +8,7 @@ import Home from 'pages/Home'
 import Round from 'pages/Round'
 import Question from 'pages/Question'
 import Stats from 'pages/Stats'
+import Survey from 'pages/Survey'
 import NotFound from 'pages/NotFound'
 
 export default function Routes({ history }) {
@@ -22,6 +23,7 @@ export default function Routes({ history }) {
           <IndexRoute component={ Question } />
         </Route>
         <Route path="stats" component={ Stats } />
+        <Route path="survey" component={ Survey } />
         <Route path="*" component={ NotFound } />
       </Route>
     </Router>
