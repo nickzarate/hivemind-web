@@ -1,106 +1,26 @@
 import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW_MODAL, SET_RANGE, SET_RANGES, SET_UNLOCKED } from 'constants'
 import { setErrorMessage } from 'actions/form'
+import createAction from './actionCreator'
 
-export function setCurrentCategory(currentCategory) {
-  return {
-    type: SET_CURRENT_CATEGORY,
-    payload: {
-      currentCategory: currentCategory
-    }
-  }
-}
-
-export function setCategories(categories) {
-  return {
-    type: SET_CATEGORIES,
-    payload: {
-      categories: categories
-    }
-  }
-}
-
-export function showModal(showModal) {
-  return {
-    type: SHOW_MODAL,
-    payload: {
-      showModal: showModal
-    }
-  }
-}
-
-export function setRange(range, index) {
-  return {
-    type: SET_RANGE,
-    payload: {
-      range: range,
-      index: index
-    }
-  }
-}
-
-export function setRanges(ranges) {
-  return {
-    type: SET_RANGES,
-    payload: {
-      ranges: ranges
-    }
-  }
-}
-
-export function setUnlocked(unlocked, index) {
-  return {
-    type: SET_UNLOCKED,
-    payload: {
-      unlocked: unlocked,
-      index: index
-    }
-  }
-}
-
-export function setUnlocks(categories, Parse) {
-  return (dispatch) => {
-    for (var category of categories) {
-      var unlocked = false
-      for (var name of Parse.User.current().get('unlockedCategories')) {
-        if (name === category.get('name')) {
-          unlocked = true
-        }
-      }
-      dispatch(setUnlocked(unlocked, category.get('index')))
-    }
-  }
-}
+export const setCategories = createAction(SET_CATEGORIES, 'categories')
+export const setCurrentCategory = createAction(SET_CURRENT_CATEGORY, 'currentCategory')
+export const setRange = createAction(SET_RANGE, 'range', 'index')
+export const setRanges = createAction(SET_RANGES, 'ranges')
+export const setUnlocked = createAction(SET_UNLOCKED, 'unlocked', 'index')
+export const showModal = createAction(SHOW_MODAL, 'showModal')
 
 /*
- *  If all values in the form are filled, unlock the category, and set the information on the current user
+ *  Make a query to Parse to check how many categories are currently up
  */
-export function handleSurveySubmission(Parse) {
-  return (dispatch, getState) => {
-    const { form, round } = getState()
-    var values = form.values[0].slice(0)
-    for (var i = 0; i < values.length; i++) {
-      if (values[i] != '') {
-        values[i] = Number(values[i])
-      } else {
-        dispatch(setErrorMessage('All information must be filled in before submitting', 0))
-        return
-      }
-    }
-    dispatch(setUnlocked(true, round.currentCategory.get('index')))
-    let information = { [round.currentCategory.get('name')]: values }
-    let user = Parse.User.current()
-    user.add('unlockedCategories', round.currentCategory.get('name'))
-    user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
-  }
-}
-
-/*
- *  Set the chosen category and open up the modal
- */
-export function handleCategoryChoice(category) {
+export function asyncGetCategories(Parse) {
   return (dispatch) => {
-    dispatch(setCurrentCategory(category))
-    dispatch(showModal(true))
+    let query = new Parse.Query('Categories')
+    query.find({
+      success(categories) {
+        dispatch(setCategories(categories))
+        dispatch(setUnlocks(categories, Parse))
+      }
+    })
   }
 }
 
@@ -138,24 +58,12 @@ export function checkRange(rangeIndex) {
 }
 
 /*
- *  If the range at the given index is valid, set the range state
+ *  Set the chosen category and open up the modal
  */
-export function validateRange(rangeIndex) {
-  return (dispatch, getState) => {
-    const { form } = getState()
-    let ranges = form.values.slice(0)
-    let range = ranges[rangeIndex].slice(0)
-    if (range[0] != '') {
-      range[0] = Number(range[0])
-    }
-    if (range[1] != '') {
-      range[1] = Number(range[1])
-    }
-    if (typeof range[0] === 'number' && typeof range[1] === 'number') {
-      if (range[1] <= range[0]) {
-        dispatch(setErrorMessage('Upper bound is smaller than lower bound. Try another range.', rangeIndex))
-      }
-    }
+export function handleCategoryChoice(category) {
+  return (dispatch) => {
+    dispatch(setCurrentCategory(category))
+    dispatch(showModal(true))
   }
 }
 
@@ -197,16 +105,63 @@ export function handleRangeSubmission(push, path) {
 }
 
 /*
- *  Make a query to Parse to check how many categories are currently up
+ *  If all values in the form are filled, unlock the category, and set the information on the current user
  */
-export function asyncGetCategories(Parse) {
-  return (dispatch) => {
-    let query = new Parse.Query('Categories')
-    query.find({
-      success(categories) {
-        dispatch(setCategories(categories))
-        dispatch(setUnlocks(categories, Parse))
+export function handleSurveySubmission(Parse) {
+  return (dispatch, getState) => {
+    const { form, round } = getState()
+    var values = form.values[0].slice(0)
+    for (var i = 0; i < values.length; i++) {
+      if (values[i] != '') {
+        values[i] = Number(values[i])
+      } else {
+        dispatch(setErrorMessage('All information must be filled in before submitting', 0))
+        return
       }
-    })
+    }
+    dispatch(setUnlocked(true, round.currentCategory.get('index')))
+    let information = { [round.currentCategory.get('name')]: values }
+    let user = Parse.User.current()
+    user.add('unlockedCategories', round.currentCategory.get('name'))
+    user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
+  }
+}
+
+/*
+ *  Initialize the array of booleans that represent which categories are unlocked to the current user
+ */
+export function setUnlocks(categories, Parse) {
+  return (dispatch) => {
+    for (var category of categories) {
+      var unlocked = false
+      for (var name of Parse.User.current().get('unlockedCategories')) {
+        if (name === category.get('name')) {
+          unlocked = true
+        }
+      }
+      dispatch(setUnlocked(unlocked, category.get('index')))
+    }
+  }
+}
+
+/*
+ *  If the range at the given index is valid, set the range state
+ */
+export function validateRange(rangeIndex) {
+  return (dispatch, getState) => {
+    const { form } = getState()
+    let ranges = form.values.slice(0)
+    let range = ranges[rangeIndex].slice(0)
+    if (range[0] != '') {
+      range[0] = Number(range[0])
+    }
+    if (range[1] != '') {
+      range[1] = Number(range[1])
+    }
+    if (typeof range[0] === 'number' && typeof range[1] === 'number') {
+      if (range[1] <= range[0]) {
+        dispatch(setErrorMessage('Upper bound is smaller than lower bound. Try another range.', rangeIndex))
+      }
+    }
   }
 }
