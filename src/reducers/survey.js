@@ -9,9 +9,9 @@ const initialState = {
 export default function survey(state = initialState, action) {
   switch (action.type) {
   case SET_HOURLY_WAGES:
-    return update(state, {hourlyWages: {$set: action.payload.hourlyWages}})
+    return update(state, {hourlyWages: {$set: action.hourlyWages}})
   case SET_MONTHLY_EARNINGS:
-    return update(state, {monthlyEarnings: {$set: action.payload.monthlyEarnings}})
+    return update(state, {monthlyEarnings: {$set: action.monthlyEarnings}})
   default:
     return state
   }
