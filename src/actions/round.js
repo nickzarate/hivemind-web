@@ -1,4 +1,4 @@
-import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_ROUND, SET_CORRECT_ANSWER_INDICES,
+import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_CURRENT_ROUND, SET_CORRECT_ANSWER_INDICES,
   ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, SET_WORTH, ADD_WINNINGS } from 'constants'
 import { setBinValues, setBank } from './question'
 import { resetValues } from './form'
@@ -12,8 +12,8 @@ export const addWinnings = createAction(ADD_WINNINGS, 'winnings')
 export const incrementCurrentQuestion = createAction(INCREMENT_CURRENT_QUESTION)
 export const resetCurrentQuestion = createAction(RESET_CURRENT_QUESTION)
 export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, 'correctAnswerIndices')
-export const setCurrentQuestion = createAction(SET_CURRENT_QUESTION, 'question')
-export const setRound = createAction(SET_ROUND, 'savedRound')
+export const setCurrentQuestion = createAction(SET_CURRENT_QUESTION, 'currentQuestion')
+export const setCurrentRound = createAction(SET_CURRENT_ROUND, 'currentRound')
 export const setWorth = createAction(SET_WORTH, 'worth')
 
 /*
@@ -51,7 +51,7 @@ export function asyncCreateRound(Parse) {
       answers: [],
       createdBy: Parse.User.current()
     }).then(function(savedRound) {
-      dispatch(setRound(savedRound))
+      dispatch(setCurrentRound(savedRound))
     })
   }
 }

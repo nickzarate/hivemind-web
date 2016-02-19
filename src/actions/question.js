@@ -3,7 +3,7 @@ import createAction from './actionCreator'
 
 export const deposit = createAction(DEPOSIT, 'binsIndex', 'index')
 export const setBank = createAction(SET_BANK, 'bank')
-export const setBinsValues = createAction(SET_BIN_VALUES, 'binValues')
+export const setBinValues = createAction(SET_BIN_VALUES, 'binValues')
 export const withdraw = createAction(WITHDRAW, 'bankIndex')
 
 /*
