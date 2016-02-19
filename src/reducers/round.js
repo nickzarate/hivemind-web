@@ -1,4 +1,4 @@
-import { INCREMENT_CURRENT_QUESTION, SET_ROUND, ADD_ANSWER_TO_ROUND, SET_CURRENT_CATEGORY,
+import { INCREMENT_CURRENT_QUESTION, SET_CURRENT_ROUND, ADD_ANSWER_TO_ROUND, SET_CURRENT_CATEGORY,
   ADD_ANSWERS, RESET_CURRENT_QUESTION, SET_CATEGORIES, ADD_OUTCOMES, SET_RANGE, SET_RANGES,
   SET_UNLOCKED, SET_WORTH, SET_CORRECT_ANSWER_INDICES, ADD_WINNINGS, CLEAR_WINNINGS } from 'constants'
 import update from 'react-addons-update'
@@ -39,12 +39,12 @@ export default function round(state = initialState, action) {
     return update(state, {correctAnswerIndices: {$set: action.correctAnswerIndices}})
   case SET_CURRENT_CATEGORY:
     return update(state, {currentCategory: {$set: action.currentCategory}})
+  case SET_CURRENT_ROUND:
+    return update(state, {currentRound: {$set: action.currentRound}})
   case SET_RANGE:
     return update(state, {ranges: {[action.index]: {$set: action.range}}})
   case SET_RANGES:
     return update(state, {ranges: {$set: action.ranges}})
-  case SET_ROUND:
-    return update(state, {currentRound: {$set: action.currentRound}})
   case SET_UNLOCKED:
     return update(state, {unlocked: {[action.index]: {$set: action.unlocked}}})
   case SET_WORTH:
