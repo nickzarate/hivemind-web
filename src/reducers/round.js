@@ -20,13 +20,13 @@ const initialState = {
 export default function round(state = initialState, action) {
   switch (action.type) {
   case ADD_ANSWER_TO_ROUND:
-    return update(state, {currentRound: {$apply: (currentRound) => currentRound.get('answers').push(action.payload.answer)}})
+    return update(state, {currentRound: {$apply: (currentRound) => currentRound.get('answers').push(action.answer)}})
   case ADD_ANSWERS:
-    return update(state, {answersVector: {$push: [action.payload.answers]}})
+    return update(state, {answersVector: {$push: [action.answers]}})
   case ADD_OUTCOMES:
-    return update(state, {outcomes: {$push: [action.payload.outcomes]}})
+    return update(state, {outcomes: {$push: [action.outcomes]}})
   case ADD_WINNINGS:
-    return update(state, {winnings: {$set: state.winnings + action.payload.winnings}})
+    return update(state, {winnings: {$set: state.winnings + action.winnings}})
   case CLEAR_WINNINGS:
     return update(state, {winnings: {$set: 0}})
   case INCREMENT_CURRENT_QUESTION:
@@ -34,21 +34,21 @@ export default function round(state = initialState, action) {
   case RESET_CURRENT_QUESTION:
     return update(state, {currentQuestion: {$set: 1}})
   case SET_CATEGORIES:
-    return update(state, {categories: {$set: action.payload.categories}})
+    return update(state, {categories: {$set: action.categories}})
   case SET_CORRECT_ANSWER_INDICES:
-    return update(state, {correctAnswerIndices: {$set: action.payload.correctAnswerIndices}})
+    return update(state, {correctAnswerIndices: {$set: action.correctAnswerIndices}})
   case SET_CURRENT_CATEGORY:
-    return update(state, {currentCategory: {$set: action.payload.currentCategory}})
+    return update(state, {currentCategory: {$set: action.currentCategory}})
   case SET_RANGE:
-    return update(state, {ranges: {[action.payload.index]: {$set: action.payload.range}}})
+    return update(state, {ranges: {[action.index]: {$set: action.range}}})
   case SET_RANGES:
-    return update(state, {ranges: {$set: action.payload.ranges}})
+    return update(state, {ranges: {$set: action.ranges}})
   case SET_ROUND:
-    return update(state, {currentRound: {$set: action.payload.currentRound}})
+    return update(state, {currentRound: {$set: action.currentRound}})
   case SET_UNLOCKED:
-    return update(state, {unlocked: {[action.payload.index]: {$set: action.payload.unlocked}}})
+    return update(state, {unlocked: {[action.index]: {$set: action.unlocked}}})
   case SET_WORTH:
-    return update(state, {worth: {$set: action.payload.worth}})
+    return update(state, {worth: {$set: action.worth}})
   default:
     return state
   }

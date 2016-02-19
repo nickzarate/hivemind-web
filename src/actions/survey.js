@@ -1,20 +1,26 @@
 import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from 'constants'
+import createAction from './actionCreator'
 
-export function setHourlyWages(hourlyWages) {
-  return {
-    type: SET_HOURLY_WAGES,
-    payload: {
-      hourlyWages: hourlyWages
-    }
-  }
-}
+export const setHourlyWages = createAction(SET_HOURLY_WAGES, 'hourlyWages')
+export const setMonthlyEarnings = createAction(SET_MONTHLY_EARNINGS, 'monthlyEarnings')
 
-export function setMonthlyEarnings(monthlyEarnings) {
-  return {
-    type: SET_MONTHLY_EARNINGS,
-    payload: {
-      monthlyEarnings: monthlyEarnings
+/*
+ *  Submit the one time only pre-survey
+ *  TODO: Make everything abstract
+ */
+export function asyncSubmitSurvey(Parse, survey) {
+  return () => {
+    let surveyResponses = {
+      age: survey.age,
+      sex: survey.sex,
+      race: survey.race,
+      education: survey.education,
+      experience: survey.experience,
+      hourlyWages: survey.hourlyWages,
+      monthlyEarnings: survey.monthlyEarnings
     }
+    let user = Parse.User.current()
+    user.save({ characteristics: surveyResponses })
   }
 }
 
@@ -45,25 +51,5 @@ export function handleMonthlyEarnings(event) {
       return
     }
     dispatch(setMonthlyEarnings(monthlyEarnings))
-  }
-}
-
-/*
- *  Submit the one time only pre-survey
- *  TODO: Make everything abstract
- */
-export function asyncSubmitSurvey(Parse, survey) {
-  return () => {
-    let surveyResponses = {
-      age: survey.age,
-      sex: survey.sex,
-      race: survey.race,
-      education: survey.education,
-      experience: survey.experience,
-      hourlyWages: survey.hourlyWages,
-      monthlyEarnings: survey.monthlyEarnings
-    }
-    let user = Parse.User.current()
-    user.save({ characteristics: surveyResponses })
   }
 }

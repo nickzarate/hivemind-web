@@ -1,97 +1,15 @@
 import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES, SET_OUTCOME_INDEX,
   ADD_PHI, CLEAR_WINNINGS } from 'constants'
+import createAction from './actionCreator'
 
-export function setData(data) {
-  return {
-    type: SET_DATA,
-    payload: {
-      data: data
-    }
-  }
-}
-
-export function clearWinnings() {
-  return {
-    type: CLEAR_WINNINGS
-  }
-}
-
-export function setCovariateData(covariateData) {
-  return {
-    type: SET_COVARIATE_DATA,
-    payload: {
-      covariateData: covariateData
-    }
-  }
-}
-
-export function setPhi(phi) {
-  return {
-    type: SET_PHI,
-    payload: {
-      phi: phi
-    }
-  }
-}
-
-export function setSeries(index, data) {
-  return {
-    type: SET_SERIES,
-    payload: {
-      index: index,
-      data: data
-    }
-  }
-}
-
-export function setOutcomes(outcomes) {
-  return {
-    type: SET_OUTCOMES,
-    payload: {
-      outcomes: outcomes
-    }
-  }
-}
-
-export function setOutcomeIndex(outcomeIndex) {
-  return {
-    type: SET_OUTCOME_INDEX,
-    payload: {
-      outcomeIndex: outcomeIndex
-    }
-  }
-}
-
-export function addPhi(phi) {
-  return {
-    type: ADD_PHI,
-    payload: {
-      phi: phi
-    }
-  }
-}
-
-export function updateSeries(index, series) {
-  return (dispatch, getState) => {
-    const { stats } = getState()
-    let data = Object.assign({}, stats.data[index])
-    data.series = series
-    dispatch(setSeries(index, data))
-  }
-}
-
-/*
- *  Update the covariate data at the specified index with the specified value
- */
-export function updateCovariateData(chartIndex, covariateIndex, covariateValue) {
-  return (dispatch, getState) => {
-    const { stats } = getState()
-    let covariateData = stats.covariateData.slice(0)
-    covariateData[chartIndex][covariateIndex] = covariateValue
-    dispatch(setCovariateData(covariateData))
-    dispatch(updateChart(chartIndex))
-  }
-}
+export const setData = createAction(SET_DATA, 'data')
+export const clearWinnings = createAction(CLEAR_WINNINGS)
+export const setCovariateData = createAction(SET_COVARIATE_DATA, 'covariateData')
+export const setPhi = createAction(SET_PHI, 'phi')
+export const setSeries = createAction(SET_SERIES, 'index', 'data')
+export const setOutcomes = createAction(SET_OUTCOMES, 'outcomes')
+export const setOutcomeIndex = createAction(SET_OUTCOME_INDEX, 'outcomeIndex')
+export const addPhi = createAction(ADD_PHI, 'phi')
 
 /*
  *  Call Python server and get Phi given the info in the current state.
@@ -182,13 +100,6 @@ export function getData() {
   }
 }
 
-//TODO: Build an array of x/y pairs, and create lineData
-//TODO: Dispatch setLineData with newly created lineData variable
-//TODO: Change value of z to reflect the user characteristic for the covariate that is not being graphed.
-//TODO: Change value '10' in 'i * 10' to be a variable that represents the desired range of the data.
-//TODO: Change value '10' in 'i < 10' to be a variable that represents the number of points displayed.
-//TODO: Change hardcoded name to the users custom name?
-//TODO: Make the f(x) inside updateChart be abstract or easy to change for different use cases?
 /*
  *  Update the chart of the given index based on the current value of Phi at the 'outcomeIndex'
  *  Plot several points of the given equation y = alpha + beta1 * x + beta2 * c2 ... + beta * x^2 + ... + betaN * cn
@@ -219,5 +130,30 @@ export function updateChart(chartIndex) {
     let series = []
     series.push(single)
     dispatch(updateSeries(chartIndex, series))
+  }
+}
+
+/*
+ *  Update the covariate data at the specified index with the specified value
+ */
+export function updateCovariateData(chartIndex, covariateIndex, covariateValue) {
+  return (dispatch, getState) => {
+    const { stats } = getState()
+    let covariateData = stats.covariateData.slice(0)
+    covariateData[chartIndex][covariateIndex] = covariateValue
+    dispatch(setCovariateData(covariateData))
+    dispatch(updateChart(chartIndex))
+  }
+}
+
+/*
+ *  Update the x-axes at the given chart index
+ */
+export function updateSeries(index, series) {
+  return (dispatch, getState) => {
+    const { stats } = getState()
+    let data = Object.assign({}, stats.data[index])
+    data.series = series
+    dispatch(setSeries(index, data))
   }
 }

@@ -1,10 +1,4 @@
 import { SHOW_MODAL } from 'constants'
+import createAction from './actionCreator'
 
-export function showModal(showModal) {
-  return {
-    type: SHOW_MODAL,
-    payload: {
-      showModal: showModal
-    }
-  }
-}
+export const showModal = createAction(SHOW_MODAL, 'showModal')

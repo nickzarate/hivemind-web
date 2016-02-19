@@ -14,15 +14,15 @@ export default function question(state = initialState, action) {
   case CLEAR_VALUES:
     return update(state, {values: {$set: []}})
   case INITIALIZE_ERROR_MESSAGE:
-    return update(state, {errorMessages: {$push: [action.payload.errorMessage]}})
+    return update(state, {errorMessages: {$push: [action.errorMessage]}})
   case INITIALIZE_VALUES:
-    return update(state, {values: {$push: [action.payload.values]}})
+    return update(state, {values: {$push: [action.values]}})
   case SET_ERROR_MESSAGE:
-    return update(state, {errorMessages: {$splice: [[action.payload.formIndex, 1, action.payload.errorMessage]]}})
+    return update(state, {errorMessages: {$splice: [[action.formIndex, 1, action.errorMessage]]}})
   case SET_VALUE:
-    return update(state, {values: {[action.payload.formIndex]: {$splice: [[action.payload.index, 1, action.payload.value]]}}})
+    return update(state, {values: {[action.formIndex]: {$splice: [[action.index, 1, action.value]]}}})
   case SET_VALUES:
-    return update(state, {values: {$set: action.payload.values}})
+    return update(state, {values: {$set: action.values}})
   default:
     return state
   }

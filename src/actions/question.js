@@ -1,41 +1,10 @@
 import { WITHDRAW, DEPOSIT, SET_BIN_VALUES, SET_BANK } from 'constants'
+import createAction from './actionCreator'
 
-export function withdraw(bankIndex) {
-  return {
-    type: WITHDRAW,
-    payload: {
-      bankIndex: bankIndex
-    }
-  }
-}
-
-export function deposit(binsIndex, index) {
-  return {
-    type: DEPOSIT,
-    payload: {
-      binsIndex: binsIndex,
-      index: index
-    }
-  }
-}
-
-export function setBinValues(binValues) {
-  return {
-    type: SET_BIN_VALUES,
-    payload: {
-      binValues: binValues
-    }
-  }
-}
-
-export function setBank(bank) {
-  return {
-    type: SET_BANK,
-    payload: {
-      bank: bank
-    }
-  }
-}
+export const deposit = createAction(DEPOSIT, 'binsIndex', 'index')
+export const setBank = createAction(SET_BANK, 'bank')
+export const setBinsValues = createAction(SET_BIN_VALUES, 'binValues')
+export const withdraw = createAction(WITHDRAW, 'bankIndex')
 
 /*
  *  If any cubes left, distribute one to the specified index
