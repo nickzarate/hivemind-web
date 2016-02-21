@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, IndexRoute } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 /* Pages */
 import Landing from 'pages/Landing'
@@ -11,10 +11,10 @@ import Stats from 'pages/Stats'
 import Survey from 'pages/Survey'
 import NotFound from 'pages/NotFound'
 
-export default function Routes({ history }) {
+export default function Routes() {
   const App = ({ children }) => children
   return (
-    <Router history={ history }>
+    <Router history={ browserHistory }>
       <Route path="/" component={ App }>
         <IndexRoute component={ Landing } />
         <Route path="signup" component={ Signup } />
