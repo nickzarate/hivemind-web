@@ -1,0 +1,33 @@
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/grid";
+
+$main-blue: #76B5F0;
+$main-yellow: #DDB14A;
+$light-blue: #A8E2FF;
+$light-yellow: #F6E78F;
+$dark-blue: #13304C;
+
+#content {
+  padding: 20px;
+  background-color: $main-blue;
+  min-height: 100vh;
+}
+
+h1 {
+  color: $dark-blue;
+}
+
+button {
+  @extend .btn;
+  @extend .btn-default;
+}
+
+input {
+  @extend .form-control;
+}
+
+form {
+  @extend .form-inline;
+}
