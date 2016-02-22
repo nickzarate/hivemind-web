@@ -70,6 +70,10 @@ gulp.task("webpack-dev-server", function(callback) {
         host: "localhost"
       }
     });
+    apiProxy.on("error", function(err, req, res) {
+      console.log("error")
+      console.log(err)
+    });
   });
 
   app.listen(8080, "localhost", function(err) {
