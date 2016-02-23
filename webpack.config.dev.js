@@ -75,12 +75,9 @@ module.exports = {
       // Sass loader
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
+        include: path.join(srcPath, "assets/sass"),
         loaders: ['style-loader', 'css', 'sass']
       },
-
-      // Stylus loader
-      // { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
 
       // required to write "require('./style.css')"
       {
@@ -126,23 +123,5 @@ module.exports = {
       name: "commons",
       filename: "commons.js"
     })
-    // new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
-    // new HtmlWebpackPlugin({
-    //   inject: true,
-    //   template: 'src/index.html'
-    // }),
-    // new webpack.NoErrorsPlugin(),
-    // new webpack.ProvidePlugin({
-    //   $: "jquery",
-    //   jQuery: "jquery",
-    //   "window.jQuery": "jquery"
-    // }),
-    // new webpack.DefinePlugin({
-    //   "process.env": {
-    //     NODE_ENV: JSON.stringify(inDevMode ? "development" : "production")
-    //   },
-    //   "IN_DEV_MODE": inDevMode,
-    //   'env.SOURCE': inDevMode ? JSON.stringify('http://localhost:5000') : JSON.stringify('https://hivemind-analytics.herokuapp.com')
-    // })
   ]
 }
