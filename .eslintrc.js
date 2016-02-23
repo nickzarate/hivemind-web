@@ -2,7 +2,10 @@
 module.exports = {
   "parser": "babel-eslint",
   "rules": {
-    "strict": 0,
+    "display-name": [
+      0,
+      { "ignoreTranspilerName": false }
+    ],
     "indent": [
       2,
       2
@@ -18,14 +21,6 @@ module.exports = {
     "quotes": [
       1,
       "single"
-    ],
-    "semi": [
-      1,
-      "never"
-    ],
-    "react/display-name": [
-      1,
-      { "acceptTranspilerName": true }
     ],
     "react/forbid-prop-types": 1,
     "react/jsx-boolean-value": 1,
@@ -49,7 +44,6 @@ module.exports = {
     "react/jsx-no-literals": 1,
     "react/jsx-no-undef": 1,
     "react/jsx-pascal-case": 1,
-    "react/jsx-sort-prop-types": 1,
     "react/jsx-sort-props": 0,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
@@ -69,7 +63,13 @@ module.exports = {
     "react/require-extension": 1,
     "react/self-closing-comp": 1,
     "react/sort-comp": 1,
-    "react/wrap-multilines": 1
+    "react/sort-prop-types": 1,
+    "react/wrap-multilines": 1,
+    "semi": [
+      1,
+      "never"
+    ],
+    "strict": 0
   },
   "env": {
     "es6": true,
