@@ -29,7 +29,7 @@ export function asyncGetPhis() {
 
       // TODO: we need a different name than 'env.source'
       $.ajax({
-        url: env.SOURCE + '/api/v1/get_phi',
+        url: '/api/v1/get_phi',
         method: 'POST',
         data: JSON.stringify({
           covariates: covariates,

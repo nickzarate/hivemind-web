@@ -10,9 +10,6 @@ import reduxify from 'toolbox/reduxify'
 class LoginModalContainer extends React.Component {
   componentDidMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    if (Parse.User.current()) {
-      this.props.push('/home')
-    }
   }
 
   componentWillUnmount() {

@@ -1,7 +1,8 @@
-/* Global Styles */
-import 'app.scss'
+/* global __DEV__ */
 
-/* <process.env.NODE_ENV> from Webpack's DefinePlugin */
-module.exports = process.env.NODE_ENV === 'production' ?
-  require('./Root.prod')
-: require('./Root.dev')
+/* Global Styles */
+import 'assets/sass/app.scss'
+
+module.exports = __DEV__ ?
+  require('./Root.dev')
+: require('./Root.prod')
