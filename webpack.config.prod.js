@@ -5,7 +5,6 @@ var webpack = require("webpack");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var srcPath = path.join(__dirname, "src");
 
-
 module.exports = {
   resolve: {
     root: srcPath,
@@ -104,12 +103,12 @@ module.exports = {
       "window.jQuery": "jquery",
       "fetch": "isomorphic-fetch"
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: "commons",
       filename: "js/[name]-[hash].js"
     }),
     new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false }
     })
