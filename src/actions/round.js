@@ -3,18 +3,18 @@ import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_CURRENT_ROUND, SET
 import { setBinValues, setBank } from './question'
 import { resetValues } from './form'
 import { rand } from 'toolbox/misc'
-import createAction from './actionCreator'
+import { createAction } from 'redux-actions'
 
-export const addAnswers = createAction(ADD_ANSWERS, 'answers')
-export const addAnswerToRound = createAction(ADD_ANSWER_TO_ROUND, 'savedAnswer')
-export const addOutcomes = createAction(ADD_OUTCOMES, 'outcomes')
-export const addWinnings = createAction(ADD_WINNINGS, 'winnings')
+export const addAnswers = createAction(ADD_ANSWERS, answers => answers)
+export const addAnswerToRound = createAction(ADD_ANSWER_TO_ROUND, savedAnswer => savedAnswer)
+export const addOutcomes = createAction(ADD_OUTCOMES, outcomes => outcomes)
+export const addWinnings = createAction(ADD_WINNINGS, winnings => winnings)
 export const incrementCurrentQuestion = createAction(INCREMENT_CURRENT_QUESTION)
 export const resetCurrentQuestion = createAction(RESET_CURRENT_QUESTION)
-export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, 'correctAnswerIndices')
-export const setCurrentQuestion = createAction(SET_CURRENT_QUESTION, 'currentQuestion')
-export const setCurrentRound = createAction(SET_CURRENT_ROUND, 'currentRound')
-export const setWorth = createAction(SET_WORTH, 'worth')
+export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, correctAnswerIndices => correctAnswerIndices)
+export const setCurrentQuestion = createAction(SET_CURRENT_QUESTION, currentQuestion => currentQuestion)
+export const setCurrentRound = createAction(SET_CURRENT_ROUND, currentRound => currentRound)
+export const setWorth = createAction(SET_WORTH, worth => worth)
 
 /*
  *  Award the user points according to the correctness of their answer
