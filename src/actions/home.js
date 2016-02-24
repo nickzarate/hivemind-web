@@ -1,13 +1,13 @@
 import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from 'constants'
 import { setErrorMessage } from 'actions/form'
 import { showModal } from 'actions/modal'
-import createAction from './actionCreator'
+import { createAction } from 'redux-actions'
 
-export const setCategories = createAction(SET_CATEGORIES, 'categories')
-export const setCurrentCategory = createAction(SET_CURRENT_CATEGORY, 'currentCategory')
-export const setRange = createAction(SET_RANGE, 'range', 'index')
-export const setRanges = createAction(SET_RANGES, 'ranges')
-export const setUnlocked = createAction(SET_UNLOCKED, 'unlocked', 'index')
+export const setCategories = createAction(SET_CATEGORIES, categories => categories)
+export const setCurrentCategory = createAction(SET_CURRENT_CATEGORY, currentCategory => currentCategory)
+export const setRange = createAction(SET_RANGE, (range, index) => { return { range, index } })
+export const setRanges = createAction(SET_RANGES, ranges => ranges)
+export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => { return { unlocked, index } })
 
 /*
  *  Make a query to Parse to check how many categories are currently up
