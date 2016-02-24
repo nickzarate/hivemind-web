@@ -6,7 +6,6 @@ import question from './question'
 import round from './round'
 import stats from './stats'
 import survey from './survey'
-import user from './user'
 
 export default combineReducers({
   form,
@@ -15,6 +14,5 @@ export default combineReducers({
   round,
   routing,
   stats,
-  survey,
-  user
+  survey
 })
