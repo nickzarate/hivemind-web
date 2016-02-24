@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_CURRENT_ROUND, SET_CORRECT_ANSWER_INDICES,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, SET_WORTH, ADD_WINNINGS } from 'constants'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, SET_WORTH, ADD_WINNINGS } from './constants'
 import { setBinValues, setBank } from './question'
 import { resetValues } from './form'
 import { rand } from 'toolbox/misc'

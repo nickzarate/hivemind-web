@@ -1,5 +1,5 @@
 import { SET_ERROR_MESSAGE, SET_VALUE, INITIALIZE_VALUES, CLEAR_VALUES,
-  CLEAR_ERRORS, INITIALIZE_ERROR_MESSAGE, SET_VALUES } from 'constants'
+  CLEAR_ERRORS, INITIALIZE_ERROR_MESSAGE, SET_VALUES } from 'actions/constants'
 import update from 'react-addons-update'
 
 const initialState = {

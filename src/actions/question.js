@@ -1,4 +1,4 @@
-import { WITHDRAW, DEPOSIT, SET_BIN_VALUES, SET_BANK } from 'constants'
+import { WITHDRAW, DEPOSIT, SET_BIN_VALUES, SET_BANK } from './constants'
 import { createAction } from 'redux-actions'
 
 export const deposit = createAction(DEPOSIT, (binsIndex, index) => { return { binsIndex, index } })

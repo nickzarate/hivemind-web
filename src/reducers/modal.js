@@ -1,4 +1,4 @@
-import { SHOW_MODAL } from 'constants'
+import { SHOW_MODAL } from 'actions/constants'
 import update from 'react-addons-update'
 
 const initialState = {

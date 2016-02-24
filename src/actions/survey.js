@@ -1,4 +1,4 @@
-import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from 'constants'
+import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from './constants'
 import { createAction } from 'redux-actions'
 
 export const setHourlyWages = createAction(SET_HOURLY_WAGES, hourlyWages => hourlyWages)

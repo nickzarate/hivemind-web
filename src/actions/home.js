@@ -1,4 +1,4 @@
-import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from 'constants'
+import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
 import { setErrorMessage } from 'actions/form'
 import { showModal } from 'actions/modal'
 import { createAction } from 'redux-actions'

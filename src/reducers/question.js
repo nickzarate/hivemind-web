@@ -1,4 +1,4 @@
-import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_BIN_VALUES, SET_BANK } from 'constants'
+import { DEPOSIT, WITHDRAW, SET_CURRENT_QUESTION, SET_BIN_VALUES, SET_BANK } from 'actions/constants'
 import update from 'react-addons-update'
 
 const initialState = {

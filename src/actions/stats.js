@@ -1,5 +1,5 @@
 import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES, SET_OUTCOME_INDEX,
-  ADD_PHI, CLEAR_WINNINGS } from 'constants'
+  ADD_PHI, CLEAR_WINNINGS } from './constants'
 import { createAction } from 'redux-actions'
 
 export const setData = createAction(SET_DATA, data => data)

@@ -1,4 +1,4 @@
-import { SET_ERROR_MESSAGE } from 'constants'
+import { SET_ERROR_MESSAGE } from 'actions/constants'
 import update from 'react-addons-update'
 
 const initialState = {
