@@ -4,7 +4,7 @@ import { setRanges, validateRange, checkRange } from 'actions/home'
 import { clearValues } from 'actions/form'
 import rangePreviewSelector from 'selectors/rangePreview'
 import RangePreview from 'components/RangePreview'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class RangePreviewContainer extends React.Component {
   componentDidMount() {

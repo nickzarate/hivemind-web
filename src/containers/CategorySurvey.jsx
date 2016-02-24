@@ -1,7 +1,7 @@
 import React from 'react'
 import categorySurveySelector from 'selectors/categorySurvey'
 import CategorySurvey from 'components/CategorySurvey'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class CategorySurveyContainer extends React.Component {
   render() {

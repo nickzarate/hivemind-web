@@ -4,7 +4,7 @@ import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { handleCategoryChoice, asyncGetCategories, setUnlocked } from 'actions/home'
 import categoriesSelector from 'selectors/categories'
 import Categories from 'components/Categories'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class CategoriesContainer extends React.Component {
   componentDidMount() {

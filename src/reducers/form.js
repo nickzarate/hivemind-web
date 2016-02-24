@@ -1,5 +1,5 @@
 import { SET_ERROR_MESSAGE, SET_VALUE, INITIALIZE_VALUES, CLEAR_VALUES,
-  CLEAR_ERRORS, INITIALIZE_ERROR_MESSAGE, SET_VALUES } from 'constants'
+  CLEAR_ERRORS, INITIALIZE_ERROR_MESSAGE, SET_VALUES } from 'actions/constants'
 import update from 'react-addons-update'
 
 const initialState = {
@@ -14,15 +14,15 @@ export default function question(state = initialState, action) {
   case CLEAR_VALUES:
     return update(state, {values: {$set: []}})
   case INITIALIZE_ERROR_MESSAGE:
-    return update(state, {errorMessages: {$push: [action.errorMessage]}})
+    return update(state, {errorMessages: {$push: [action.payload]}})
   case INITIALIZE_VALUES:
-    return update(state, {values: {$push: [action.values]}})
+    return update(state, {values: {$push: [action.payload]}})
   case SET_ERROR_MESSAGE:
-    return update(state, {errorMessages: {$splice: [[action.formIndex, 1, action.errorMessage]]}})
+    return update(state, {errorMessages: {$splice: [[action.payload.formIndex, 1, action.payload.errorMessage]]}})
   case SET_VALUE:
-    return update(state, {values: {[action.formIndex]: {$splice: [[action.index, 1, action.value]]}}})
+    return update(state, {values: {[action.payload.formIndex]: {$splice: [[action.payload.index, 1, action.payload.value]]}}})
   case SET_VALUES:
-    return update(state, {values: {$set: action.values}})
+    return update(state, {values: {$set: action.payload}})
   default:
     return state
   }

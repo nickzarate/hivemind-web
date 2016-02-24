@@ -1,7 +1,7 @@
 import React from 'react'
 import estimatesSelector from 'selectors/estimates'
 import InputForm from 'containers/InputForm'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class EstimatesForm extends React.Component {
   static defaultProps = {

@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class HomeButton extends React.Component {
   handleClick = () => {

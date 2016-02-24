@@ -3,7 +3,7 @@ import Parse from 'parse'
 import roundSelector from 'selectors/round'
 import { asyncCreateRound, asyncHandleSubmit, asyncAwardPoints,
   initializeQuestion, pullQuestion } from 'actions/round'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
 class Round extends React.Component {

@@ -2,7 +2,7 @@ import React from 'react'
 import * as formActions from 'actions/form'
 import formSelector from 'selectors/form'
 import InputForm from 'components/InputForm'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class InputFormContainer extends React.Component {
   static defaultProps = {

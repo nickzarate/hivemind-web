@@ -40,6 +40,7 @@ module.exports = {
       "react-router-redux",
       "redbox-react",
       "redux",
+      "redux-actions",
       "redux-devtools",
       "redux-devtools-dock-monitor",
       "redux-devtools-log-monitor",

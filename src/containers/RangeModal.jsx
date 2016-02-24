@@ -5,7 +5,7 @@ import { handleRangeSubmission, handleSurveySubmission } from 'actions/home'
 import { showModal } from 'actions/modal'
 import rangeModalSelector from 'selectors/rangeModal'
 import RangeModal from 'components/RangeModal'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class RangeModalContainer extends React.Component {
   componentDidMount() {

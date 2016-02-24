@@ -5,7 +5,7 @@ import { showModal } from 'actions/modal'
 import { asyncLogin } from 'actions/user'
 import loginModalSelector from 'selectors/loginModal'
 import LoginModal from 'components/LoginModal'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class LoginModalContainer extends React.Component {
   componentDidMount() {
