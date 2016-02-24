@@ -7,7 +7,7 @@ const initialState = {
   values: []
 }
 
-export default function question(state = initialState, action) {
+export default function form(state = initialState, action) {
   switch (action.type) {
   case CLEAR_ERRORS:
     return update(state, {errorMessages: {$set: []}})
