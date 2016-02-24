@@ -94,6 +94,6 @@ gulp.task("webpack-dev-server", function(callback) {
 gulp.task("deploy", function() {
   return gulp.src('./dist/**/*')
     .pipe(gitSubtree({
-      branch: "production"
+      branch: "build"
     }));
 });
