@@ -36,6 +36,7 @@ module.exports = {
       "react-chartist",
       "react-dom",
       "react-redux",
+      "react-redux-form",
       "react-router",
       "react-router-redux",
       "redbox-react",
