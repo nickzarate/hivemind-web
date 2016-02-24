@@ -1,8 +1,8 @@
 import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from 'constants'
-import createAction from './actionCreator'
+import { createAction } from 'redux-actions'
 
-export const setHourlyWages = createAction(SET_HOURLY_WAGES, 'hourlyWages')
-export const setMonthlyEarnings = createAction(SET_MONTHLY_EARNINGS, 'monthlyEarnings')
+export const setHourlyWages = createAction(SET_HOURLY_WAGES, hourlyWages => hourlyWages)
+export const setMonthlyEarnings = createAction(SET_MONTHLY_EARNINGS, monthlyEarnings => monthlyEarnings)
 
 /*
  *  Submit the one time only pre-survey
