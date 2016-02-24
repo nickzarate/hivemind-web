@@ -1,5 +1,6 @@
-import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SHOW_MODAL, SET_RANGE, SET_RANGES, SET_UNLOCKED } from 'constants'
+import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from 'constants'
 import { setErrorMessage } from 'actions/form'
+import { showModal } from 'actions/modal'
 import createAction from './actionCreator'
 
 export const setCategories = createAction(SET_CATEGORIES, 'categories')
@@ -7,7 +8,6 @@ export const setCurrentCategory = createAction(SET_CURRENT_CATEGORY, 'currentCat
 export const setRange = createAction(SET_RANGE, 'range', 'index')
 export const setRanges = createAction(SET_RANGES, 'ranges')
 export const setUnlocked = createAction(SET_UNLOCKED, 'unlocked', 'index')
-export const showModal = createAction(SHOW_MODAL, 'showModal')
 
 /*
  *  Make a query to Parse to check how many categories are currently up
