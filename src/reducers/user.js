@@ -8,7 +8,7 @@ const initialState = {
 export default function user(state = initialState, action) {
   switch (action.type) {
   case SET_ERROR_MESSAGE:
-    return update(state, {errorMessage: {$set: action.errorMessage}})
+    return update(state, {errorMessage: {$set: action.payload}})
   default:
     return state
   }
