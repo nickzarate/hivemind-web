@@ -1,7 +1,7 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class LogoutButton extends React.Component {
   componentDidMount() {

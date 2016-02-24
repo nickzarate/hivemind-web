@@ -5,7 +5,7 @@ import lineChartsSelector from 'selectors/lineCharts'
 import { asyncGetPhis, getData, getCovariateData,
   updateCovariateData, setOutcomeIndex, clearWinnings } from 'actions/stats'
 import LineCharts from 'components/LineCharts'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class LineChartsContainer extends React.Component {
   constructor(props) {

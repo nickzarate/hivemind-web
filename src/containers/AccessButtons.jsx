@@ -1,7 +1,7 @@
 import React from 'react'
 import { showModal } from 'actions/modal'
 import AccessButtons from 'components/AccessButtons'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class AccessButtonsContainer extends React.Component {
 

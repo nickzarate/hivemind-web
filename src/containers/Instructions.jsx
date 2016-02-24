@@ -1,7 +1,7 @@
 import React from 'react'
 import instructionsSelector from 'selectors/instructions'
 import Instructions from 'components/Instructions'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class InstructionsContainer extends React.Component {
   render() {

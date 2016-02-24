@@ -1,7 +1,7 @@
 import React from 'react'
 import estimatesSelector from 'selectors/estimates'
 import QuestionBody from 'components/QuestionBody'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class QuestionBodyContainer extends React.Component {
   render() {

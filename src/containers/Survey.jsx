@@ -2,7 +2,7 @@ import React from 'react'
 import surveySelector from 'selectors/survey'
 import * as surveyActions from 'actions/survey'
 import Survey from 'components/Survey'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class SurveyContainer extends React.Component {
   render() {

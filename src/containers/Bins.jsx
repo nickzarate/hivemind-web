@@ -3,7 +3,7 @@ import { handleDeposit } from 'actions/question'
 import { setWorth, setCorrectAnswerIndices } from 'actions/round'
 import binsSelector from 'selectors/bins'
 import Bins from 'components/Bins'
-import reduxify from 'toolbox/reduxify'
+import reduxify from 'store/reduxify'
 
 class BinsContainer extends React.Component {
   static defaultProps = {
