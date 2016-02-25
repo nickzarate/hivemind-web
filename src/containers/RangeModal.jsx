@@ -3,6 +3,7 @@ import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { handleRangeSubmission, handleSurveySubmission } from 'actions/home'
 import { showModal } from 'actions/modal'
+import { actions } from 'react-redux-form'
 import rangeModalSelector from 'selectors/rangeModal'
 import RangeModal from 'components/RangeModal'
 import reduxify from 'store/reduxify'
@@ -18,7 +19,10 @@ class RangeModalContainer extends React.Component {
 
   handleStart = () => this.props.actions.handleRangeSubmission(this.props.push, '/round');
   handleSubmit = () => this.props.actions.handleSurveySubmission(Parse);
-  handleHide = () => this.props.actions.showModal(false);
+  handleHide = () => {
+    this.props.actions.showModal(false)
+    this.props.actions.reset('ranges')
+  };
 
   render() {
     return (
@@ -36,6 +40,6 @@ class RangeModalContainer extends React.Component {
 
 export default reduxify({
   selector: rangeModalSelector,
-  actions: { handleRangeSubmission, showModal, handleSurveySubmission },
+  actions: { handleRangeSubmission, showModal, handleSurveySubmission, reset: actions.reset },
   container: RangeModalContainer
 })
