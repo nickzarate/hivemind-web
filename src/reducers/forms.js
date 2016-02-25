@@ -1,15 +1,19 @@
-const initialLoginState = {
+const loginState = {
   email: '',
   password: ''
 }
 
-const initialSignupState = {
+const signupState = {
   email: '',
   password: '',
   passwordConfirm: ''
 }
 
+const rangesState = {
+}
+
 export default {
-  initialLoginState,
-  initialSignupState
+  loginState,
+  signupState,
+  rangesState
 }
