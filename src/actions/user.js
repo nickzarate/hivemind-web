@@ -5,9 +5,8 @@ import { setErrorMessage } from 'actions/form'
  */
 export function asyncLogin(Parse, push, formIndex = 0) {
   return (dispatch, getState) => {
-    const { form } = getState()
-    let values = form.values[formIndex]
-    Parse.User.logIn(values[0], values[1], {
+    const { login } = getState()
+    Parse.User.logIn(login.email, login.password, {
       success() {
         push('/home')
       },
