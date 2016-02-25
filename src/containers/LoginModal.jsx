@@ -3,6 +3,7 @@ import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { showModal } from 'actions/modal'
 import { asyncLogin } from 'actions/user'
+import { actions } from 'react-redux-form'
 import loginModalSelector from 'selectors/loginModal'
 import LoginModal from 'components/LoginModal'
 import reduxify from 'store/reduxify'
@@ -17,7 +18,10 @@ class LoginModalContainer extends React.Component {
   }
 
   handleSubmit = () => this.props.actions.asyncLogin(Parse, this.props.push);
-  handleHide = () => this.props.actions.showModal(false);
+  handleHide = () => {
+    this.props.actions.showModal(false)
+    this.props.actions.reset('login')
+  };
 
   render() {
     return (
@@ -32,6 +36,6 @@ class LoginModalContainer extends React.Component {
 
 export default reduxify({
   selector: loginModalSelector,
-  actions: { showModal, asyncLogin },
+  actions: { showModal, asyncLogin, reset: actions.reset },
   container: LoginModalContainer
 })
