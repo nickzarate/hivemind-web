@@ -1,34 +1,31 @@
 import React from 'react'
-import InputForm from 'containers/InputForm'
 import Bins from 'containers/Bins'
+import { Field } from 'react-redux-form'
 
 export default class RangePreview extends React.Component {
-  renderForm(index) {
-    if (!this.props.discrete[index]) {
-      //SKETCHY
-      let formIndex = 0
-      for (let i = 0; i < index; i++) {
-        formIndex += this.props.discrete[i] ? 0 : 1
-      }
-
-      return (
-        <InputForm
-          placeholders={ ['Lower bound','Upper bound'] }
-          types={ ['number','number'] }
-          formIndex={ formIndex }
-          onBlur={ this.props.onBlur }
-          onFormChange={ this.props.onFormChange }
-        />
-      )
-    }
-  }
-
   renderPreview() {
     return this.props.outcomeNames.map(
       (outcomeName, index) => (
         <li key={ index }>
           { outcomeName }
-          { this.renderForm(index) }
+
+          { !this.props.discrete[index] &&
+            <form>
+              <Field model={ `ranges.${ outcomeName }.lower` }>
+                <input
+                  type="number"
+                  placeholder="Lower Bound"
+                />
+              </Field>
+              <Field model={ `ranges.${ outcomeName }.upper` }>
+                <input
+                  type="number"
+                  placeholder="Upper Bound"
+                />
+              </Field>
+            </form>
+          }
+
           <Bins
             binsIndex={ index }
             presentational
