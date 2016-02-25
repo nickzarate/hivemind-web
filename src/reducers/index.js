@@ -11,7 +11,8 @@ import survey from './survey'
 
 export default combineReducers({
   form,
-  login: createModelReducer('login', forms.initialLoginState),
+  login: createModelReducer('login', forms.loginState),
+  ranges: createModelReducer('ranges', forms.rangesState),
   modal,
   question,
   round,
