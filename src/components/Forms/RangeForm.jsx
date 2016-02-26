@@ -2,7 +2,7 @@ import React from 'react'
 import { Field } from 'react-redux-form'
 import { makeNumber } from 'toolbox/parsers'
 
-export default class RangePreview extends React.Component {
+export default class RangeForm extends React.Component {
   render() {
     return (
       <form>

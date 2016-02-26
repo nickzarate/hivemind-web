@@ -1,4 +1,5 @@
 import { setErrorMessage } from 'actions/form'
+import { actions } from 'react-redux-form'
 
 /*
  *  Login the user and go to the home page
@@ -8,6 +9,7 @@ export function asyncLogin(Parse, push, formIndex = 0) {
     const { forms: { login } } = getState()
     Parse.User.logIn(login.email, login.password, {
       success() {
+        dispatch(actions.reset('login'))
         push('/home')
       },
       error(user, error) {
