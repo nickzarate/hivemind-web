@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
 const categorySelector = (state) => state.round.currentCategory
-const rangesSelector = (state) => state.round.ranges
+const rangesSelector = (state) => state.forms.ranges
 
 const tokenSelector = createSelector(
   categorySelector,
@@ -9,48 +9,38 @@ const tokenSelector = createSelector(
     return {
       pointsPerToken: currentCategory ? currentCategory.get('pointsPerToken') : [],
       outcomeRanges: currentCategory ? currentCategory.get('outcomeRanges') : [],
-      discrete: currentCategory ? currentCategory.get('discrete') : []
+      discrete: currentCategory ? currentCategory.get('discrete') : [],
+      outcomeNames: currentCategory ? currentCategory.get('outcomeNames') : []
     }
   }
 )
 
-function getWorth(discrete, pointsPerToken, outcomeRanges, ranges) {
-  //SKETCHY
-  let numDiscrete = 0
-  for (let i = 0; i < discrete.length; i++) {
-    numDiscrete += discrete[i] ? 0 : 1
-    if (!discrete[i] && ranges.length === 0) {
-      return []
-    }
-    if (ranges.length < numDiscrete) {
-      return []
-    }
-  }
+function getWorth(discrete, pointsPerToken, outcomeRanges, outcomeNames, ranges) {
+  var worth = []
+  for (var i = 0; i < pointsPerToken.length; i++) {
+    var temp = discrete[i] ? pointsPerToken[i] : 0
 
-  let worth = []
-  for (let i = 0; i < outcomeRanges.length; i++) {
-    let temp = pointsPerToken[i]
-    if (!discrete[i]) {
-      //SKETCHY
-      let index = 0
-      for (let j = 0; j < i; j++) {
-        index += discrete[j] ? 0 : 1
-      }
-      let estimatedRange = ranges[index][1] - ranges[index][0]
-      let actualRange = outcomeRanges[i][1] - outcomeRanges[i][0]
+    if ( !discrete[i]
+         && ranges[outcomeNames[i]]
+         && ranges[outcomeNames[i]].lower >= 0
+         && ranges[outcomeNames[i]].upper > 0 )
+    {
+      var estimatedRange = ranges[outcomeNames[i]].upper - ranges[outcomeNames[i]].lower
+      var actualRange = outcomeRanges[i][1] - outcomeRanges[i][0]
+      temp += pointsPerToken[i]
       temp *= estimatedRange === 0 ? 0 : (actualRange / estimatedRange)
     }
+
     worth.push(Math.floor(temp))
   }
   return worth
 }
 
 export default createSelector(
-  tokenSelector,
-  rangesSelector,
+  [tokenSelector, rangesSelector],
   (token, ranges) => {
     return {
-      worth: getWorth(token.discrete, token.pointsPerToken, token.outcomeRanges, ranges)
+      worth: getWorth(token.discrete, token.pointsPerToken, token.outcomeRanges, token.outcomeNames, ranges)
     }
   }
 )
