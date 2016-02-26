@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import { routeReducer as routing } from 'react-router-redux' // REMEMBER
-import { createModelReducer } from 'react-redux-form'
 import forms from './forms'
 import form from './form'
 import modal from './modal'
@@ -11,8 +10,7 @@ import survey from './survey'
 
 export default combineReducers({
   form,
-  login: createModelReducer('login', forms.loginState),
-  ranges: createModelReducer('ranges', forms.rangesState),
+  forms,
   modal,
   question,
   round,
