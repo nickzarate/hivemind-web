@@ -7,8 +7,7 @@ class QuestionBodyContainer extends React.Component {
   render() {
     return (
       <QuestionBody
-        types={ this.props.types }
-        placeholders={ this.props.placeholders }
+        outcomeNames={ this.props.outcomeNames }
       />
     )
   }

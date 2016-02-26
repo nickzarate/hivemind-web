@@ -6,9 +6,7 @@ export default createSelector(
   categorySelector,
   (currentCategory) => {
     return {
-      placeholders: currentCategory ? currentCategory.get('outcomeNames') : [],
-      types: currentCategory ? Array(currentCategory.get('outcomeNames').length).fill('number') : [],
-      discrete: currentCategory ? currentCategory.get('discrete') : []
+      outcomeNames: currentCategory ? currentCategory.get('outcomeNames') : []
     }
   }
 )
