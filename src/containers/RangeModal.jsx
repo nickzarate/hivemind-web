@@ -22,7 +22,7 @@ class RangeModalContainer extends React.Component {
     this.props.actions.reset('ranges')
   };
   handleStart = () => {
-    if (this.props.forms.rangesForm.valid) {
+    if (this.props.rangesForm.valid) {
       this.props.push('/round')
     }
   };
