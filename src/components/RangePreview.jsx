@@ -1,11 +1,8 @@
 import React from 'react'
 import Bins from 'containers/Bins'
-import { Field } from 'react-redux-form'
+import RangeForm from './Form/RangeForm'
 
 export default class RangePreview extends React.Component {
-
-  makeNumber = (val) => +val;
-
   renderPreview() {
     return this.props.outcomeNames.map(
       (outcomeName, index) => (
@@ -13,20 +10,9 @@ export default class RangePreview extends React.Component {
           { outcomeName }
 
           { !this.props.discrete[index] &&
-            <form>
-              <Field model={ `ranges.${ outcomeName }.lower` } parser={ this.makeNumber }>
-                <input
-                  type="number"
-                  placeholder="Lower Bound"
-                />
-              </Field>
-              <Field model={ `ranges.${ outcomeName }.upper` } parser={ this.makeNumber }>
-                <input
-                  type="number"
-                  placeholder="Upper Bound"
-                />
-              </Field>
-            </form>
+            <RangeForm
+              outcomeName={ outcomeName }
+            />
           }
 
           <Bins
