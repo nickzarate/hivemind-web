@@ -1,6 +1,6 @@
 import React from 'react'
 import Bins from 'containers/Bins'
-import RangeForm from './Form/RangeForm'
+import RangeForm from './Forms/RangeForm'
 
 export default class RangePreview extends React.Component {
   renderPreview() {

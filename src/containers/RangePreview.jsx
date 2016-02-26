@@ -26,6 +26,7 @@ class RangePreviewContainer extends React.Component {
         discrete={ this.props.discrete }
         onBlur={ this.handleBlur }
         onFormChange={ this.handleFormChange }
+        rangesForm={ this.props.rangesForm }
       />
     )
   }
