@@ -1,6 +1,12 @@
+const estimates = {
+}
+
 const login = {
   email: '',
   password: ''
+}
+
+const ranges = {
 }
 
 const signup = {
@@ -9,11 +15,9 @@ const signup = {
   passwordConfirm: ''
 }
 
-const ranges = {
-}
-
 export default {
+  estimates,
   login,
-  signup,
-  ranges
+  ranges,
+  signup
 }
