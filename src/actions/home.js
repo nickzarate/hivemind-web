@@ -70,7 +70,7 @@ export function handleCategoryChoice(category) {
 /*
  *  If all values in the form are filled, unlock the category, and set the information on the current user
  */
-export function handleSurveySubmission(Parse) {
+export function handleSurveySubmission(user) {
   return (dispatch, getState) => {
     const { form, round } = getState()
     var values = form.values[0].slice(0)
@@ -84,7 +84,6 @@ export function handleSurveySubmission(Parse) {
     }
     dispatch(setUnlocked(true, round.currentCategory.get('index')))
     let information = { [round.currentCategory.get('name')]: values }
-    let user = Parse.User.current()
     user.add('unlockedCategories', round.currentCategory.get('name'))
     user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
   }

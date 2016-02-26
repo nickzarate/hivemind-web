@@ -21,12 +21,14 @@ class RangeModalContainer extends React.Component {
     this.props.actions.showModal(false)
     this.props.actions.reset('ranges')
   };
+
   handleStart = () => {
     if (this.props.rangesForm.valid) {
       this.props.push('/round')
     }
   };
-  handleSubmit = () => this.props.actions.handleSurveySubmission(Parse);
+
+  handleSubmit = () => this.props.actions.handleSurveySubmission(Parse.User.current());
 
   render() {
     return (
