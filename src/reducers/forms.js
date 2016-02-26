@@ -1,19 +1,10 @@
-const loginState = {
-  email: '',
-  password: ''
-}
+import initialFormState from './initialFormState'
+import { createModelReducer, createFormReducer } from 'react-redux-form'
+import { combineReducers } from 'redux'
 
-const signupState = {
-  email: '',
-  password: '',
-  passwordConfirm: ''
-}
-
-const rangesState = {
-}
-
-export default {
-  loginState,
-  signupState,
-  rangesState
-}
+export default combineReducers({
+  login: createModelReducer('login', initialFormState.login),
+  loginForm: createFormReducer('login'),
+  ranges: createModelReducer('ranges', initialFormState.ranges),
+  rangesForm: createFormReducer('ranges')
+})
