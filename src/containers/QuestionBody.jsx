@@ -8,6 +8,7 @@ class QuestionBodyContainer extends React.Component {
     return (
       <QuestionBody
         outcomeNames={ this.props.outcomeNames }
+        estimates={ this.props.estimates }
       />
     )
   }

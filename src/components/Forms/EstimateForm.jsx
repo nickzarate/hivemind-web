@@ -13,6 +13,7 @@ export default class EstimateForm extends React.Component {
           <input
             type="number"
             placeholder={ this.props.outcomeName }
+            value={ this.props.estimates[this.props.outcomeName] }
           />
         </Field>
       </form>

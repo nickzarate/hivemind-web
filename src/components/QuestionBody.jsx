@@ -9,6 +9,7 @@ export default class QuestionBody extends React.Component {
         <li key={ index }>
           <EstimateForm
             outcomeName={ outcomeName }
+            estimates={ this.props.estimates }
           />
           <Bins
             binsIndex={ index }
