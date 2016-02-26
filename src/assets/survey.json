@@ -11,7 +11,8 @@
   "SEX_OPTIONS": [
     "Sex",
     "M",
-    "F"
+    "F",
+    "Other"
   ],
   "EDUCATION_OPTIONS": [
     "Education",
