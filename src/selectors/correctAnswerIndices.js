@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
 const categorySelector = (state) => state.round.currentCategory
-const rangesSelector = (state) => state.round.ranges
+const rangesSelector = (state) => state.forms.ranges
 const outcomesSelector = (state) => state.question.currentQuestion
 
 function getContinuousAnswerIndex(numBins, range, outcome) {
@@ -26,33 +26,23 @@ function getContinuousAnswerIndex(numBins, range, outcome) {
 }
 
 function getCorrectAnswerIndices(currentCategory, ranges, currentQuestion) {
-  let numDiscrete = 0
-  for (let discrete of currentCategory.get('discrete')) {
-    numDiscrete += discrete ? 0 : 1
-    if (!discrete && ranges.length === 0) {
-      return [[]]
-    }
-    if (ranges.length < numDiscrete) {
-      return [[]]
-    }
-  }
   let correctAnswerIndices = []
-  let newRanges = ranges.slice(0)
   for (let i = 0; i < currentCategory.get('outcomeRanges').length; i++) {
+    var outcomeName = currentCategory.get('outcomeNames')[i]
     if (currentCategory.get('discrete')[i]) {
       correctAnswerIndices.push(currentQuestion.get('outcomes')[i] - currentCategory.get('outcomeRanges')[i][0])
     } else {
-      //SKETCHY
-      let index = 0
-      for (let j = 0; j < i; j++) {
-        index += currentCategory.get('discrete')[j] ? 0 : 1
+      var range = [0,0]
+      if ( ranges[outcomeName]
+           && ranges[outcomeName].lower >= 0
+           && ranges[outcomeName].upper > 0 )
+      {
+        range = [ranges[outcomeName].lower, ranges[outcomeName].upper]
       }
-      newRanges[index][0] = Number(newRanges[index][0])
-      newRanges[index][1] = Number(newRanges[index][1])
-      correctAnswerIndices.push(getContinuousAnswerIndex(currentCategory.get('numBins')[i], newRanges[index], currentQuestion.get('outcomes')[index]))
+      correctAnswerIndices.push(getContinuousAnswerIndex(currentCategory.get('numBins')[i], range, currentQuestion.get('outcomes')[i]))
     }
   }
-  return correctAnswerIndices.length ? correctAnswerIndices : []
+  return correctAnswerIndices
 }
 
 export default createSelector(
