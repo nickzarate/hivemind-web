@@ -68,43 +68,6 @@ export function handleCategoryChoice(category) {
 }
 
 /*
- *  Check ranges to see if an error message needs to be dispatched
- */
-export function handleRangeSubmission(push, path) {
-  return (dispatch, getState) => {
-    const { form } = getState()
-    let values = []
-    let error = false
-
-    //Error handling
-    for (let i = 0; i < form.values.length; i++) {
-      //Turn information in form 'i' to numbers
-      let value = form.values[i].slice(0)
-      value[0] = value[0].length > 0 ? Number(value[0]) : value[0]
-      value[1] = value[1].length > 0 ? Number(value[1]) : value[1]
-      values.push(value)
-
-      //Dispatch errors if any range value is empty, or if upper bound is smaller than lower bound
-      if (value[0] === '' || value[1] === '') {
-        dispatch(setErrorMessage('Please fill all of the ranges.', i))
-        error = true
-      }
-      if (value[0] > value[1]) {
-        dispatch(setErrorMessage('Uh oh! Upper bound is smaller than lower bound. Try again.', i))
-        error = true
-      }
-    }
-    //Return if any errors have been dispatched
-    if (error) {
-      return
-    }
-    //Set the range and move on
-    dispatch(setRanges(values))
-    push(path)
-  }
-}
-
-/*
  *  If all values in the form are filled, unlock the category, and set the information on the current user
  */
 export function handleSurveySubmission(Parse) {
