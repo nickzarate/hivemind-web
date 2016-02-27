@@ -9,6 +9,9 @@ export default createSelector(
   (currentCategory, ranges) => {
     return {
       outcomeNames: currentCategory.get('outcomeNames'),
+      numBins: currentCategory.get('numBins'),
+      bank: currentCategory.get('tokens'),
+      discrete: currentCategory.get('discrete'),
       ranges
     }
   }

@@ -14,6 +14,7 @@ class RangePreviewContainer extends React.Component {
       <RangePreview
         outcomeNames={ this.props.outcomeNames }
         ranges={ this.props.ranges }
+        discrete={ this.props.discrete }
       />
     )
   }
