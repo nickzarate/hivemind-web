@@ -13,6 +13,7 @@ export default class RangeForm extends React.Component {
           <input
             type="number"
             placeholder="Lower Bound"
+            value={ this.props.value.lower }
           />
         </Field>
         <Field
@@ -22,6 +23,7 @@ export default class RangeForm extends React.Component {
           <input
             type="number"
             placeholder="Upper Bound"
+            value={ this.props.value.upper }
           />
         </Field>
       </form>

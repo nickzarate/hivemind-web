@@ -12,6 +12,7 @@ export default class RangePreview extends React.Component {
           { !this.props.discrete[index] &&
             <RangeForm
               outcomeName={ outcomeName }
+              value={ this.props.ranges[outcomeName] }
             />
           }
 
