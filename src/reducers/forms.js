@@ -8,5 +8,7 @@ export default combineReducers({
   login: createModelReducer('login', initialFormsState.login),
   loginForm: createFormReducer('login'),
   ranges: createModelReducer('ranges', initialFormsState.ranges),
-  rangesForm: createFormReducer('ranges')
+  rangesForm: createFormReducer('ranges'),
+  signup: createModelReducer('signup', initialFormsState.signup),
+  signupForm: createFormReducer('signup')
 })
