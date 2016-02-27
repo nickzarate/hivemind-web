@@ -30,7 +30,7 @@ class BinsContainer extends React.Component {
         binText={ binText }
         binValues={ this.props.binValues[binsIndex] }
         bank={ this.props.bank[binsIndex] }
-        worth={ this.props.worth[binsIndex] }
+        worth={ this.props.worth }
         presentational={ this.props.presentational }
       />
     )

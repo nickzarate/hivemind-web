@@ -63,7 +63,7 @@ export default createSelector(
   correctAnswerIndicesSelector,
   (currentCategory, binValues, bank, ranges, worth, correctAnswerIndices) => {
     return {
-      bank: bank.length > 0 ? bank : [[]],
+      bank,
       binTexts: currentCategory ? getBinTexts(currentCategory, ranges) : [[]],
       binValues: binValues.length > 0 ? binValues : [[]],
       worth: worth.worth,
