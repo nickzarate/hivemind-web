@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
-import { Field } from 'react-redux-form'
+import LoginForm from './Forms/LoginForm'
 
 export default class LoginModal extends React.Component {
   render() {
@@ -10,14 +10,7 @@ export default class LoginModal extends React.Component {
           { 'Log In' }
         </Modal.Header>
         <Modal.Body>
-          <form>
-            <Field model="login.email">
-              <input type="email" placeholder="Email" />
-            </Field>
-            <Field model="login.password">
-              <input type="password" placeholder="Password" />
-            </Field>
-          </form>
+          <LoginForm />
           <button onClick={ this.props.onSubmit }>{ 'Log In' }</button>
         </Modal.Body>
       </Modal>
