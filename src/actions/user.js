@@ -25,21 +25,17 @@ export function asyncLogin(Parse, push, formIndex = 0) {
  */
 export function asyncSignup(Parse, push, formIndex = 0) {
   return (dispatch, getState) => {
-    const { form } = getState()
-    let values = form.values[formIndex]
-    if (values[1] !== values[2]) {
-      dispatch(setErrorMessage('Passwords don\'t match, try again!'), formIndex)
-      return
-    }
+    const { forms: { signup } } = getState()
     let newUser = new Parse.User()
-    newUser.set('username', values[0])
-    newUser.set('email', values[0])
-    newUser.set('password', values[1])
+    newUser.set('username', signup.email)
+    newUser.set('email', signup.email)
+    newUser.set('password', signup.password)
     newUser.set('unlockedCategories', [])
     newUser.set('categoryInformation', {})
     newUser.set('points', 0)
     newUser.signUp(null, {
       success() {
+        dispatch(actions.reset('signup'))
         push('/survey')
       },
       error(user, error) {
