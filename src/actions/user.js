@@ -1,20 +1,19 @@
-import { setErrorMessage } from 'actions/form'
 import { actions } from 'react-redux-form'
 
 /*
  *  Login the user and go to the home page
  */
-export function asyncLogin(Parse, push, formIndex = 0) {
+export function asyncLogin(Parse, push) {
   return (dispatch, getState) => {
     const { forms: { login } } = getState()
     Parse.User.logIn(login.email, login.password, {
       success() {
         dispatch(actions.reset('login'))
         push('/home')
-      },
-      error(user, error) {
-        dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
       }
+      // error(user, error) {
+      //   dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
+      // }
     })
   }
 }
@@ -23,7 +22,7 @@ export function asyncLogin(Parse, push, formIndex = 0) {
  *  Sign up a new user with the given email and go to the home page
  *  values = [email, password1, password2]
  */
-export function asyncSignup(Parse, push, formIndex = 0) {
+export function asyncSignup(Parse, push) {
   return (dispatch, getState) => {
     const { forms: { signup } } = getState()
     let newUser = new Parse.User()
@@ -37,10 +36,10 @@ export function asyncSignup(Parse, push, formIndex = 0) {
       success() {
         dispatch(actions.reset('signup'))
         push('/survey')
-      },
-      error(user, error) {
-        dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
       }
+      // error(user, error) {
+      //   dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
+      // }
     })
   }
 }

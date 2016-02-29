@@ -1,5 +1,4 @@
 import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
-import { setErrorMessage } from 'actions/form'
 import { showModal } from 'actions/modal'
 import { createAction } from 'redux-actions'
 
@@ -42,7 +41,7 @@ export function checkRange(rangeIndex) {
     if (typeof range[0] === 'number' && typeof range[1] === 'number') {
       if (range[1] > range[0]) {
         if (form.errorMessages[rangeIndex]) {
-          dispatch(setErrorMessage(null, rangeIndex))
+          // dispatch(setErrorMessage(null, rangeIndex))
         }
         dispatch(setRange(range, rangeIndex))
       } else {
@@ -50,7 +49,7 @@ export function checkRange(rangeIndex) {
       }
     } else {
       if (form.errorMessages[rangeIndex]) {
-        dispatch(setErrorMessage(null, rangeIndex))
+        // dispatch(setErrorMessage(null, rangeIndex))
       }
       dispatch(setRange(['',''], rangeIndex))
     }
@@ -78,7 +77,7 @@ export function handleSurveySubmission(user) {
       if (values[i] != '') {
         values[i] = Number(values[i])
       } else {
-        dispatch(setErrorMessage('All information must be filled in before submitting', 0))
+        // dispatch(setErrorMessage('All information must be filled in before submitting', 0))
         return
       }
     }
@@ -122,7 +121,7 @@ export function validateRange(rangeIndex) {
     }
     if (typeof range[0] === 'number' && typeof range[1] === 'number') {
       if (range[1] <= range[0]) {
-        dispatch(setErrorMessage('Upper bound is smaller than lower bound. Try another range.', rangeIndex))
+        //dispatch(setErrorMessage('Upper bound is smaller than lower bound. Try another range.', rangeIndex))
       }
     }
   }
