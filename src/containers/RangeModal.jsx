@@ -20,6 +20,7 @@ class RangeModalContainer extends React.Component {
   handleHide = () => {
     this.props.actions.showModal(false)
     this.props.actions.reset('ranges')
+    this.props.actions.reset('covariates')
   };
 
   handleStart = () => {
