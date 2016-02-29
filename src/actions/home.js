@@ -71,18 +71,13 @@ export function handleCategoryChoice(category) {
  */
 export function handleSurveySubmission(user) {
   return (dispatch, getState) => {
-    const { form, round } = getState()
-    var values = form.values[0].slice(0)
-    for (var i = 0; i < values.length; i++) {
-      if (values[i] != '') {
-        values[i] = Number(values[i])
-      } else {
-        // dispatch(setErrorMessage('All information must be filled in before submitting', 0))
-        return
-      }
+    const { forms: { covariates }, round } = getState()
+    var covariateValues = []
+    for (let covariateName of round.currentCategory.get('covariateNames')) {
+      covariateValues.push(covariates[covariateName])
     }
     dispatch(setUnlocked(true, round.currentCategory.get('index')))
-    let information = { [round.currentCategory.get('name')]: values }
+    let information = { [round.currentCategory.get('name')]: covariateValues }
     user.add('unlockedCategories', round.currentCategory.get('name'))
     user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
   }
