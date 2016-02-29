@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'react-redux-form'
 
-export default class LoginModal extends React.Component {
+export default class LoginForm extends React.Component {
   render() {
     return (
       <form>
