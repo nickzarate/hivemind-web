@@ -1,3 +1,6 @@
+const covariates = {
+}
+
 const estimates = {
 }
 
@@ -16,6 +19,7 @@ const signup = {
 }
 
 export default {
+  covariates,
   estimates,
   login,
   ranges,

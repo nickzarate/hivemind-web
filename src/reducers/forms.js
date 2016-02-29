@@ -3,6 +3,8 @@ import { createModelReducer, createFormReducer } from 'react-redux-form'
 import { combineReducers } from 'redux'
 
 export default combineReducers({
+  covariates: createModelReducer('covariates', initialFormsState.covariates),
+  covariatesForm: createFormReducer('covariates'),
   estimates: createModelReducer('estimates', initialFormsState.estimates),
   estimatesForm: createFormReducer('estimates'),
   login: createModelReducer('login', initialFormsState.login),
