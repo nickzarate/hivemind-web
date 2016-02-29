@@ -1,5 +1,4 @@
 import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
-import { setErrorMessage } from 'actions/form'
 import { showModal } from 'actions/modal'
 import { createAction } from 'redux-actions'
 
@@ -42,7 +41,7 @@ export function checkRange(rangeIndex) {
     if (typeof range[0] === 'number' && typeof range[1] === 'number') {
       if (range[1] > range[0]) {
         if (form.errorMessages[rangeIndex]) {
-          dispatch(setErrorMessage(null, rangeIndex))
+          // dispatch(setErrorMessage(null, rangeIndex))
         }
         dispatch(setRange(range, rangeIndex))
       } else {
@@ -50,7 +49,7 @@ export function checkRange(rangeIndex) {
       }
     } else {
       if (form.errorMessages[rangeIndex]) {
-        dispatch(setErrorMessage(null, rangeIndex))
+        // dispatch(setErrorMessage(null, rangeIndex))
       }
       dispatch(setRange(['',''], rangeIndex))
     }
@@ -68,60 +67,17 @@ export function handleCategoryChoice(category) {
 }
 
 /*
- *  Check ranges to see if an error message needs to be dispatched
- */
-export function handleRangeSubmission(push, path) {
-  return (dispatch, getState) => {
-    const { form } = getState()
-    let values = []
-    let error = false
-
-    //Error handling
-    for (let i = 0; i < form.values.length; i++) {
-      //Turn information in form 'i' to numbers
-      let value = form.values[i].slice(0)
-      value[0] = value[0].length > 0 ? Number(value[0]) : value[0]
-      value[1] = value[1].length > 0 ? Number(value[1]) : value[1]
-      values.push(value)
-
-      //Dispatch errors if any range value is empty, or if upper bound is smaller than lower bound
-      if (value[0] === '' || value[1] === '') {
-        dispatch(setErrorMessage('Please fill all of the ranges.', i))
-        error = true
-      }
-      if (value[0] > value[1]) {
-        dispatch(setErrorMessage('Uh oh! Upper bound is smaller than lower bound. Try again.', i))
-        error = true
-      }
-    }
-    //Return if any errors have been dispatched
-    if (error) {
-      return
-    }
-    //Set the range and move on
-    dispatch(setRanges(values))
-    push(path)
-  }
-}
-
-/*
  *  If all values in the form are filled, unlock the category, and set the information on the current user
  */
-export function handleSurveySubmission(Parse) {
+export function handleSurveySubmission(user) {
   return (dispatch, getState) => {
-    const { form, round } = getState()
-    var values = form.values[0].slice(0)
-    for (var i = 0; i < values.length; i++) {
-      if (values[i] != '') {
-        values[i] = Number(values[i])
-      } else {
-        dispatch(setErrorMessage('All information must be filled in before submitting', 0))
-        return
-      }
+    const { forms: { covariates }, round } = getState()
+    var covariateValues = []
+    for (let covariateName of round.currentCategory.get('covariateNames')) {
+      covariateValues.push(covariates[covariateName])
     }
     dispatch(setUnlocked(true, round.currentCategory.get('index')))
-    let information = { [round.currentCategory.get('name')]: values }
-    let user = Parse.User.current()
+    let information = { [round.currentCategory.get('name')]: covariateValues }
     user.add('unlockedCategories', round.currentCategory.get('name'))
     user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
   }
@@ -160,7 +116,7 @@ export function validateRange(rangeIndex) {
     }
     if (typeof range[0] === 'number' && typeof range[1] === 'number') {
       if (range[1] <= range[0]) {
-        dispatch(setErrorMessage('Upper bound is smaller than lower bound. Try another range.', rangeIndex))
+        //dispatch(setErrorMessage('Upper bound is smaller than lower bound. Try another range.', rangeIndex))
       }
     }
   }

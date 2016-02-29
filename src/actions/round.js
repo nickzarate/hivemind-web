@@ -1,7 +1,7 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_CURRENT_ROUND, SET_CORRECT_ANSWER_INDICES,
   ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, SET_WORTH, ADD_WINNINGS } from './constants'
 import { setBinValues, setBank } from './question'
-import { resetValues } from './form'
+import { actions } from 'react-redux-form'
 import { rand } from 'toolbox/misc'
 import { createAction } from 'redux-actions'
 
@@ -63,13 +63,13 @@ export function asyncCreateRound(Parse) {
  */
 export function asyncHandleSubmit(Parse, push) {
   return (dispatch, getState) => {
-    const { question, round, form } = getState()
+    const { question, round, forms: { estimates } } = getState()
 
-    //Retrieve form information
-    let values = []
-    for (let value of form.values) {
-      values.push(Number(value[0]))
+    var estimatesArray = []
+    for (let outcome of round.currentCategory.get('outcomeNames')) {
+      estimatesArray.push(estimates[outcome])
     }
+    dispatch(actions.reset('estimates'))
 
     //Save token distribution and outcomes
     dispatch(addAnswers(question.binValues))
@@ -82,7 +82,7 @@ export function asyncHandleSubmit(Parse, push) {
     newAnswer.save({
       question: question.currentQuestion,
       binValues: question.binValues,
-      estimates: values
+      estimates: estimatesArray
     }).then(function(savedAnswer) {
       let answers = round.currentRound.get('answers')
       answers.push(savedAnswer)
@@ -107,7 +107,6 @@ export function initializeQuestion(numBins, bank) {
     for (let num of numBins) {
       binValues.push(Array(num).fill(0))
     }
-    dispatch(resetValues())
     dispatch(setBank(bank))
     dispatch(setBinValues(binValues))
   }

@@ -1,15 +1,18 @@
 import { createSelector } from 'reselect'
 
 const categorySelector = (state) => state.round.currentCategory
+const rangesSelector = (state) => state.forms.ranges
 
 export default createSelector(
   categorySelector,
-  (currentCategory) => {
+  rangesSelector,
+  (currentCategory, ranges) => {
     return {
       outcomeNames: currentCategory.get('outcomeNames'),
       numBins: currentCategory.get('numBins'),
       bank: currentCategory.get('tokens'),
-      discrete: currentCategory.get('discrete')
+      discrete: currentCategory.get('discrete'),
+      ranges
     }
   }
 )

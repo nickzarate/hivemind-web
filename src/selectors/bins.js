@@ -5,7 +5,7 @@ import correctAnswerIndicesSelector from 'selectors/correctAnswerIndices'
 const categorySelector = (state) => state.round.currentCategory
 const binValuesSelector = (state) => state.question.binValues
 const bankSelector = (state) => state.question.bank
-const rangesSelector = (state) => state.round.ranges
+const rangesSelector = (state) => state.forms.ranges
 
 function getContinuousBinText(numBins, range) {
   let binValues = []
@@ -33,30 +33,22 @@ function getDiscreteBinText(range) {
 }
 
 function getBinTexts(currentCategory, ranges) {
-  let numDiscrete = 0
-  for (let discrete of currentCategory.get('discrete')) {
-    numDiscrete += discrete ? 0 : 1
-    if (!discrete && ranges.length === 0) {
-      return [[]]
-    }
-    if (ranges.length < numDiscrete) {
-      return [[]]
-    }
-  }
-  let bins = []
-  let newRanges = ranges.slice(0)
-  for (let i = 0; i < currentCategory.get('outcomeRanges').length; i++) {
+  var bins = []
+  for (var i = 0; i < currentCategory.get('outcomeRanges').length; i++) {
+    var outcomeName = currentCategory.get('outcomeNames')[i]
     if (currentCategory.get('discrete')[i]) {
       bins.push(getDiscreteBinText(currentCategory.get('outcomeRanges')[i]))
     } else {
-      //SKETCHY
-      let index = 0
-      for (let j = 0; j < i; j++) {
-        index += currentCategory.get('discrete')[j] ? 0 : 1
+      var range = [0,0]
+
+      if ( ranges[outcomeName]
+           && ranges[outcomeName].lower >= 0
+           && ranges[outcomeName].upper > 0 )
+      {
+        range = [ranges[outcomeName].lower, ranges[outcomeName].upper]
       }
-      newRanges[index][0] = Number(newRanges[index][0])
-      newRanges[index][1] = Number(newRanges[index][1])
-      bins.push(getContinuousBinText(currentCategory.get('numBins')[i], newRanges[index]))
+
+      bins.push(getContinuousBinText(currentCategory.get('numBins')[i], range))
     }
   }
   return bins.length ? bins : [[]]
@@ -71,7 +63,7 @@ export default createSelector(
   correctAnswerIndicesSelector,
   (currentCategory, binValues, bank, ranges, worth, correctAnswerIndices) => {
     return {
-      bank: bank.length > 0 ? bank : [[]],
+      bank,
       binTexts: currentCategory ? getBinTexts(currentCategory, ranges) : [[]],
       binValues: binValues.length > 0 ? binValues : [[]],
       worth: worth.worth,

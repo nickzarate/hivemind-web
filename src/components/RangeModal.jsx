@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
 import RangePreview from 'containers/RangePreview'
-import CategorySurvey from 'containers/CategorySurvey'
+import CategorySurveyForm from 'containers/Forms/CategorySurveyForm'
 
 export default class RangeModal extends React.Component {
 
@@ -14,7 +14,7 @@ export default class RangeModal extends React.Component {
           { this.props.unlocked ? 'Instructions' : 'Unlock Category' }
         </Modal.Header>
         <Modal.Body>
-          { this.props.unlocked ? <RangePreview /> : <CategorySurvey /> }
+          { this.props.unlocked ? <RangePreview /> : <CategorySurveyForm /> }
         </Modal.Body>
         <Modal.Footer>
           <button onClick={ this.handleClick }>{ this.props.unlocked ? 'Start Round' : 'Submit' }</button>

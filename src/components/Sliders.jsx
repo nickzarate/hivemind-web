@@ -2,7 +2,7 @@ import React from 'react'
 import 'rc-slider/assets/index.css'
 import Slider from 'rc-slider'
 
-export default class Graph extends React.Component {
+export default class Sliders extends React.Component {
   renderSliders() {
     const { covariateRanges, chartIndex } = this.props
     let ranges = covariateRanges.slice(0)

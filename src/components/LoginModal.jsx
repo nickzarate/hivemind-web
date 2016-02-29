@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
-import InputForm from 'containers/InputForm'
+import LoginForm from './Forms/LoginForm'
 
 export default class LoginModal extends React.Component {
   render() {
@@ -10,10 +10,7 @@ export default class LoginModal extends React.Component {
           { 'Log In' }
         </Modal.Header>
         <Modal.Body>
-          <InputForm
-            placeholders={ ['Email','Password'] }
-            types={ ['email','password'] }
-          />
+          <LoginForm />
           <button onClick={ this.props.onSubmit }>{ 'Log In' }</button>
         </Modal.Body>
       </Modal>

@@ -1,19 +1,19 @@
-import { setErrorMessage } from 'actions/form'
+import { actions } from 'react-redux-form'
 
 /*
  *  Login the user and go to the home page
  */
-export function asyncLogin(Parse, push, formIndex = 0) {
+export function asyncLogin(Parse, push) {
   return (dispatch, getState) => {
-    const { form } = getState()
-    let values = form.values[formIndex]
-    Parse.User.logIn(values[0], values[1], {
+    const { forms: { login } } = getState()
+    Parse.User.logIn(login.email, login.password, {
       success() {
+        dispatch(actions.reset('login'))
         push('/home')
-      },
-      error(user, error) {
-        dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
       }
+      // error(user, error) {
+      //   dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
+      // }
     })
   }
 }
@@ -22,28 +22,24 @@ export function asyncLogin(Parse, push, formIndex = 0) {
  *  Sign up a new user with the given email and go to the home page
  *  values = [email, password1, password2]
  */
-export function asyncSignup(Parse, push, formIndex = 0) {
+export function asyncSignup(Parse, push) {
   return (dispatch, getState) => {
-    const { form } = getState()
-    let values = form.values[formIndex]
-    if (values[1] !== values[2]) {
-      dispatch(setErrorMessage('Passwords don\'t match, try again!'), formIndex)
-      return
-    }
+    const { forms: { signup } } = getState()
     let newUser = new Parse.User()
-    newUser.set('username', values[0])
-    newUser.set('email', values[0])
-    newUser.set('password', values[1])
+    newUser.set('username', signup.email)
+    newUser.set('email', signup.email)
+    newUser.set('password', signup.password)
     newUser.set('unlockedCategories', [])
     newUser.set('categoryInformation', {})
     newUser.set('points', 0)
     newUser.signUp(null, {
       success() {
+        dispatch(actions.reset('signup'))
         push('/survey')
-      },
-      error(user, error) {
-        dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
       }
+      // error(user, error) {
+      //   dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
+      // }
     })
   }
 }

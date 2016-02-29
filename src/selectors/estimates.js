@@ -1,14 +1,15 @@
 import { createSelector } from 'reselect'
 
 const categorySelector = (state) => state.round.currentCategory
+const estimatesSelector = (state) => state.forms.estimates
 
 export default createSelector(
   categorySelector,
-  (currentCategory) => {
+  estimatesSelector,
+  (currentCategory, estimates) => {
     return {
-      placeholders: currentCategory ? currentCategory.get('outcomeNames') : [],
-      types: currentCategory ? Array(currentCategory.get('outcomeNames').length).fill('number') : [],
-      discrete: currentCategory ? currentCategory.get('discrete') : []
+      outcomeNames: currentCategory ? currentCategory.get('outcomeNames') : [],
+      estimates
     }
   }
 )

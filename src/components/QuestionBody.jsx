@@ -1,16 +1,15 @@
 import React from 'react'
 import Bins from 'containers/Bins'
-import InputForm from 'containers/InputForm'
+import EstimateForm from './Forms/EstimateForm'
 
 export default class QuestionBody extends React.Component {
   renderBody() {
-    return this.props.types.map(
-      (type, index) => (
+    return this.props.outcomeNames.map(
+      (outcomeName, index) => (
         <li key={ index }>
-          <InputForm
-            placeholders={ [this.props.placeholders[index]] }
-            types={ [type] }
-            formIndex={ index }
+          <EstimateForm
+            outcomeName={ outcomeName }
+            estimates={ this.props.estimates }
           />
           <Bins
             binsIndex={ index }

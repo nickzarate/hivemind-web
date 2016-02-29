@@ -5,7 +5,7 @@ const initialState = {
   showModal: false
 }
 
-export default function question(state = initialState, action) {
+export default function modal(state = initialState, action) {
   switch (action.type) {
   case SHOW_MODAL:
     return update(state, {showModal: {$set: action.payload}})

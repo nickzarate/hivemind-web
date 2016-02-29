@@ -3,6 +3,7 @@ import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { showModal } from 'actions/modal'
 import { asyncSignup } from 'actions/user'
+import { actions } from 'react-redux-form'
 import signupModalSelector from 'selectors/signupModal'
 import SignupModal from 'components/SignupModal'
 import reduxify from 'store/reduxify'
@@ -18,8 +19,10 @@ class SignupModalContainer extends React.Component {
   }
 
   handleSubmit = () => this.props.actions.asyncSignup(Parse, this.props.push);
+
   handleHide = () => {
     this.props.actions.showModal(false)
+    this.props.actions.reset('signup')
     this.props.push('/')
   };
 
@@ -36,6 +39,6 @@ class SignupModalContainer extends React.Component {
 
 export default reduxify({
   selector: signupModalSelector,
-  actions: { showModal, asyncSignup },
+  actions: { showModal, asyncSignup, reset: actions.reset },
   container: SignupModalContainer
 })
