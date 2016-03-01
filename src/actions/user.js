@@ -19,7 +19,6 @@ export function asyncLogin(Parse, push) {
 
 /*
  *  Sign up a new user with the given email and go to the home page
- *  values = [email, password1, password2]
  */
 export function asyncSignup(Parse, push) {
   return (dispatch, getState) => {
@@ -34,10 +33,10 @@ export function asyncSignup(Parse, push) {
     newUser.signUp(null, {
       success() {
         push('/survey')
+      },
+      error(user, error) {
+        dispatch(setMessage('Error: ' + error.code + ' ' + error.message))
       }
-      // error(user, error) {
-      //   dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
-      // }
     })
   }
 }
