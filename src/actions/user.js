@@ -1,4 +1,5 @@
 import { actions } from 'react-redux-form'
+import { setMessage } from './tooltip'
 
 /*
  *  Login the user and go to the home page
@@ -10,10 +11,10 @@ export function asyncLogin(Parse, push) {
       success() {
         dispatch(actions.reset('login'))
         push('/home')
+      },
+      error(user, error) {
+        dispatch(setMessage('Error: ' + error.code + ' ' + error.message))
       }
-      // error(user, error) {
-      //   dispatch(setErrorMessage('Error: ' + error.code + ' ' + error.message, formIndex))
-      // }
     })
   }
 }
