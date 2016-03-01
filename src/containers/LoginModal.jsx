@@ -1,5 +1,4 @@
 import React from 'react'
-import { actions } from 'react-redux-form'
 import reduxify from 'store/reduxify'
 import LoginModal from 'components/LoginModal'
 import { showModal } from 'actions/modal'
@@ -12,14 +11,12 @@ class LoginModalContainer extends React.Component {
 
   handleHide = () => {
     this.props.actions.showModal(false)
-    this.props.actions.reset('login')
   };
 
   render() {
     return (
       <LoginModal
         show={ this.props.showModal }
-        onSubmit={ this.handleSubmit }
         onHide={ this.handleHide }
       />
     )
@@ -28,6 +25,6 @@ class LoginModalContainer extends React.Component {
 
 export default reduxify({
   selector: loginModalSelector,
-  actions: { showModal, reset: actions.reset },
+  actions: { showModal },
   container: LoginModalContainer
 })
