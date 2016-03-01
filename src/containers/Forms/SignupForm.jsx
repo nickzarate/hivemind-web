@@ -4,8 +4,8 @@ import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import reduxify from 'store/reduxify'
 import SignupForm from 'components/Forms/SignupForm'
 import { actions } from 'react-redux-form'
-import { asyncSignup } from 'actions/user'
-import { setMessage } from 'actions/tooltip'
+import { asyncHandleSignup } from 'actions/user'
+import { setMessage, setTarget } from 'actions/tooltip'
 import signupFormSelector from 'selectors/forms/signup'
 
 class SignupFormContainer extends React.Component {
@@ -15,12 +15,13 @@ class SignupFormContainer extends React.Component {
 
   componentWillUnmount() {
     this.props.actions.setMessage('')
+    this.props.actions.setTarget('')
     this.props.actions.reset('signup')
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.actions.asyncSignup(Parse, this.props.push)
+    this.props.actions.asyncHandleSignup(Parse, this.props.push)
   };
 
   render() {
@@ -36,6 +37,6 @@ class SignupFormContainer extends React.Component {
 
 export default reduxify({
   selector: signupFormSelector,
-  actions: { asyncSignup, setMessage, reset: actions.reset },
+  actions: { asyncHandleSignup, setMessage, setTarget, reset: actions.reset },
   container: SignupFormContainer
 })
