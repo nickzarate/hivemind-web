@@ -1,4 +1,3 @@
-import { actions } from 'react-redux-form'
 import { setMessage } from './tooltip'
 
 /*
@@ -9,7 +8,6 @@ export function asyncLogin(Parse, push) {
     const { forms: { login } } = getState()
     Parse.User.logIn(login.email, login.password, {
       success() {
-        dispatch(actions.reset('login'))
         push('/home')
       },
       error(user, error) {
@@ -35,7 +33,6 @@ export function asyncSignup(Parse, push) {
     newUser.set('points', 0)
     newUser.signUp(null, {
       success() {
-        dispatch(actions.reset('signup'))
         push('/survey')
       }
       // error(user, error) {
