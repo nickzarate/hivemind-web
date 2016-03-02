@@ -1,18 +1,19 @@
 import { createSelector } from 'reselect'
 
 const categorySelector = (state) => state.round.currentCategory
-const rangesSelector = (state) => state.forms.ranges
+const tooltipSelector = (state) => state.tooltip
 
 export default createSelector(
   categorySelector,
-  rangesSelector,
-  (currentCategory, ranges) => {
+  tooltipSelector,
+  (currentCategory, tooltip) => {
     return {
       outcomeNames: currentCategory.get('outcomeNames'),
       numBins: currentCategory.get('numBins'),
       bank: currentCategory.get('tokens'),
       discrete: currentCategory.get('discrete'),
-      ranges
+      tooltipMessage: tooltip.message,
+      tooltipTarget: tooltip.target
     }
   }
 )

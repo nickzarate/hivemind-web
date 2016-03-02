@@ -1,1 +1,1 @@
-export const makeNumber = (val) => +val
+export const makeNumber = (val) => { if (val !== '') { return +val } }

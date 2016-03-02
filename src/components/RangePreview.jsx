@@ -1,6 +1,7 @@
 import React from 'react'
 import Bins from 'containers/Bins'
-import RangeForm from './Forms/RangeForm'
+import RangeForm from 'containers/Forms/RangeForm'
+import Tooltip from 'components/Lib/Tooltip'
 
 export default class RangePreview extends React.Component {
   renderPreview() {
@@ -8,11 +9,10 @@ export default class RangePreview extends React.Component {
       (outcomeName, index) => (
         <li key={ index }>
           { outcomeName }
-
           { !this.props.discrete[index] &&
             <RangeForm
               outcomeName={ outcomeName }
-              value={ this.props.ranges[outcomeName] }
+              ref={ (ref) => this[outcomeName] = ref }
             />
           }
 
@@ -27,9 +27,12 @@ export default class RangePreview extends React.Component {
 
   render() {
     return (
-      <ul>
-        { this.renderPreview() }
-      </ul>
+      <div>
+        <Tooltip target={ this[this.props.tooltipTarget] } message={ this.props.tooltipMessage } />
+        <ul>
+          { this.renderPreview() }
+        </ul>
+      </div>
     )
   }
 }

@@ -1,21 +1,19 @@
 import React from 'react'
 import reduxify from 'store/reduxify'
-import LoginModal from 'components/LoginModal'
+import ChangeRangeModal from 'components/ChangeRangeModal'
 import { showModal } from 'actions/modal'
-import loginModalSelector from 'selectors/loginModal'
+import changeRangeModalSelector from 'selectors/changeRangeModal'
 
-class LoginModalContainer extends React.Component {
+class ChangeRangeModalContainer extends React.Component {
   componentWillUnmount() {
     this.props.actions.showModal(false)
   }
 
-  handleHide = () => {
-    this.props.actions.showModal(false)
-  };
+  handleHide = () => this.props.actions.showModal(false);
 
   render() {
     return (
-      <LoginModal
+      <ChangeRangeModal
         show={ this.props.showModal }
         onHide={ this.handleHide }
       />
@@ -24,7 +22,7 @@ class LoginModalContainer extends React.Component {
 }
 
 export default reduxify({
-  selector: loginModalSelector,
+  selector: changeRangeModalSelector,
   actions: { showModal },
-  container: LoginModalContainer
+  container: ChangeRangeModalContainer
 })

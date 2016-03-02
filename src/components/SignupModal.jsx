@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
-import SignupForm from './Forms/SignupForm'
+import SignupForm from 'containers/Forms/SignupForm'
 
 export default class LoginModal extends React.Component {
   render() {
@@ -11,7 +11,6 @@ export default class LoginModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <SignupForm />
-          <button onClick={ this.props.onSubmit }>{ 'Sign Up' }</button>
         </Modal.Body>
       </Modal>
     )

@@ -1,5 +1,5 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_CURRENT_ROUND, SET_CORRECT_ANSWER_INDICES,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, SET_WORTH, ADD_WINNINGS } from './constants'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, ADD_WINNINGS } from './constants'
 import { setBinValues, setBank } from './question'
 import { actions } from 'react-redux-form'
 import { rand } from 'toolbox/misc'
@@ -14,24 +14,22 @@ export const resetCurrentQuestion = createAction(RESET_CURRENT_QUESTION)
 export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, correctAnswerIndices => correctAnswerIndices)
 export const setCurrentQuestion = createAction(SET_CURRENT_QUESTION, currentQuestion => currentQuestion)
 export const setCurrentRound = createAction(SET_CURRENT_ROUND, currentRound => currentRound)
-export const setWorth = createAction(SET_WORTH, worth => worth)
 
 /*
  *  Award the user points according to the correctness of their answer
  */
-export function asyncAwardPoints(Parse) {
+export function asyncAwardPoints(user, worth) {
   return (dispatch, getState) => {
-    const { question, round } = getState()
+    const { question: { binValues }, round : { correctAnswerIndices } } = getState()
     //TODO: Calculate how many points are earned for answering correctly
     var winnings = 0
-    for (let i = 0; i < round.worth.length; i++) {
-      winnings += round.correctAnswerIndices[i] === -1 ? 0 : question.binValues[i][round.correctAnswerIndices[i]] * round.worth[i]
+    for (let i = 0; i < worth.length; i++) {
+      winnings += correctAnswerIndices[i] === -1 ? 0 : binValues[i][correctAnswerIndices[i]] * worth[i]
     }
-    let currentUser = Parse.User.current()
-    let points = currentUser.get('points')
+    let points = user.get('points')
     points += winnings
     dispatch(addWinnings(winnings))
-    currentUser.save({ points: points })
+    user.save({ points: points })
   }
 }
 

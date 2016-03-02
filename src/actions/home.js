@@ -1,5 +1,6 @@
 import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
 import { showModal } from 'actions/modal'
+import { setMessage, setTarget } from 'actions/tooltip'
 import { createAction } from 'redux-actions'
 
 export const setCategories = createAction(SET_CATEGORIES, categories => categories)
@@ -24,39 +25,6 @@ export function asyncGetCategories(Parse) {
 }
 
 /*
- *  If the range at the given index is valid, set the state of that range
- *  If the range is valid and there is an error message, delete the message
- */
-export function checkRange(rangeIndex) {
-  return (dispatch, getState) => {
-    const { form } = getState()
-    let ranges = form.values.slice(0)
-    let range = ranges[rangeIndex].slice(0)
-    if (range[0] != '') {
-      range[0] = Number(range[0])
-    }
-    if (range[1] != '') {
-      range[1] = Number(range[1])
-    }
-    if (typeof range[0] === 'number' && typeof range[1] === 'number') {
-      if (range[1] > range[0]) {
-        if (form.errorMessages[rangeIndex]) {
-          // dispatch(setErrorMessage(null, rangeIndex))
-        }
-        dispatch(setRange(range, rangeIndex))
-      } else {
-        dispatch(setRange(['',''], rangeIndex))
-      }
-    } else {
-      if (form.errorMessages[rangeIndex]) {
-        // dispatch(setErrorMessage(null, rangeIndex))
-      }
-      dispatch(setRange(['',''], rangeIndex))
-    }
-  }
-}
-
-/*
  *  Set the chosen category and open up the modal
  */
 export function handleCategoryChoice(category) {
@@ -67,18 +35,61 @@ export function handleCategoryChoice(category) {
 }
 
 /*
+ *  Validate ranges, if everything looks good, start the round.
+ */
+export function handleStart(push, path) {
+  return (dispatch, getState) => {
+    const { forms: { ranges }, round: { currentCategory } } = getState()
+    var outcomeNames = currentCategory.get('outcomeNames')
+    var discrete = currentCategory.get('discrete')
+
+    // Validation
+    for (let i = 0; i < outcomeNames.length; i++) {
+      if (!discrete[i] && !ranges[outcomeNames[i]]) {
+        dispatch(setMessage('All fields must be filled in.'))
+        dispatch(setTarget(outcomeNames[i]))
+        return
+      }
+    }
+    for (let outcomeName in ranges) {
+      if (isNaN(ranges[outcomeName].lower) || isNaN(ranges[outcomeName].upper)) {
+        dispatch(setMessage('All fields must be filled in.'))
+        dispatch(setTarget(outcomeName))
+        return
+      }
+    }
+    for (let outcomeName in ranges) {
+      if (ranges[outcomeName].lower >= ranges[outcomeName].upper) {
+        dispatch(setMessage(outcomeName + ' range has a smaller upper bound than lower bound, try again.'))
+        dispatch(setTarget(outcomeName))
+        return
+      }
+    }
+    push(path)
+  }
+}
+
+/*
  *  If all values in the form are filled, unlock the category, and set the information on the current user
  */
 export function handleSurveySubmission(user) {
   return (dispatch, getState) => {
-    const { forms: { covariates }, round } = getState()
+    const { forms: { covariates }, round: { currentCategory } } = getState()
     var covariateValues = []
-    for (let covariateName of round.currentCategory.get('covariateNames')) {
+
+    // Validation
+    for (let covariateName of currentCategory.get('covariateNames')) {
+      if (isNaN(covariates[covariateName])) {
+        dispatch(setMessage('All fields must be filled in.'))
+        dispatch(setTarget(covariateName))
+        return
+      }
       covariateValues.push(covariates[covariateName])
     }
-    dispatch(setUnlocked(true, round.currentCategory.get('index')))
-    let information = { [round.currentCategory.get('name')]: covariateValues }
-    user.add('unlockedCategories', round.currentCategory.get('name'))
+
+    dispatch(setUnlocked(true, currentCategory.get('index')))
+    let information = { [currentCategory.get('name')]: covariateValues }
+    user.add('unlockedCategories', currentCategory.get('name'))
     user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
   }
 }
@@ -96,28 +107,6 @@ export function setUnlocks(categories, Parse) {
         }
       }
       dispatch(setUnlocked(unlocked, category.get('index')))
-    }
-  }
-}
-
-/*
- *  If the range at the given index is valid, set the range state
- */
-export function validateRange(rangeIndex) {
-  return (dispatch, getState) => {
-    const { form } = getState()
-    let ranges = form.values.slice(0)
-    let range = ranges[rangeIndex].slice(0)
-    if (range[0] != '') {
-      range[0] = Number(range[0])
-    }
-    if (range[1] != '') {
-      range[1] = Number(range[1])
-    }
-    if (typeof range[0] === 'number' && typeof range[1] === 'number') {
-      if (range[1] <= range[0]) {
-        //dispatch(setErrorMessage('Upper bound is smaller than lower bound. Try another range.', rangeIndex))
-      }
     }
   }
 }
