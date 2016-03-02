@@ -41,23 +41,24 @@ export function handleStart(push, path) {
   return (dispatch, getState) => {
     const { forms: { ranges }, round: { currentCategory } } = getState()
     var outcomeNames = currentCategory.get('outcomeNames')
+    var discrete = currentCategory.get('discrete')
 
     // Validation
-    for (let outcomeName of outcomeNames) {
-      if (!ranges[outcomeName]) {
+    for (let i = 0; i < outcomeNames.length; i++) {
+      if (!discrete[i] && !ranges[outcomeNames[i]]) {
         dispatch(setMessage('All fields must be filled in.'))
-        dispatch(setTarget(outcomeName))
+        dispatch(setTarget(outcomeNames[i]))
         return
       }
     }
-    for (let outcomeName of outcomeNames) {
+    for (let outcomeName in ranges) {
       if (isNaN(ranges[outcomeName].lower) || isNaN(ranges[outcomeName].upper)) {
         dispatch(setMessage('All fields must be filled in.'))
         dispatch(setTarget(outcomeName))
         return
       }
     }
-    for (let outcomeName of outcomeNames) {
+    for (let outcomeName in ranges) {
       if (ranges[outcomeName].lower >= ranges[outcomeName].upper) {
         dispatch(setMessage(outcomeName + ' range has a smaller upper bound than lower bound, try again.'))
         dispatch(setTarget(outcomeName))
