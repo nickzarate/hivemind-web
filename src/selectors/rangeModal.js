@@ -11,8 +11,7 @@ export default createSelector(
   (showModal, currentCategory, unlocked) => {
     return {
       showModal,
-      unlocked: currentCategory ? unlocked[currentCategory.get('index')] : false,
-      categoryName: currentCategory ? currentCategory.get('name') : ''
+      unlocked: currentCategory ? unlocked[currentCategory.get('index')] : false
     }
   }
 )
