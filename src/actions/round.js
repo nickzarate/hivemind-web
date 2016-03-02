@@ -19,19 +19,18 @@ export const setWorth = createAction(SET_WORTH, worth => worth)
 /*
  *  Award the user points according to the correctness of their answer
  */
-export function asyncAwardPoints(Parse) {
+export function asyncAwardPoints(user, worth) {
   return (dispatch, getState) => {
-    const { question, round } = getState()
+    const { question: { binValues }, round : { correctAnswerIndices } } = getState()
     //TODO: Calculate how many points are earned for answering correctly
     var winnings = 0
-    for (let i = 0; i < round.worth.length; i++) {
-      winnings += round.correctAnswerIndices[i] === -1 ? 0 : question.binValues[i][round.correctAnswerIndices[i]] * round.worth[i]
+    for (let i = 0; i < worth.length; i++) {
+      winnings += correctAnswerIndices[i] === -1 ? 0 : binValues[i][correctAnswerIndices[i]] * worth[i]
     }
-    let currentUser = Parse.User.current()
-    let points = currentUser.get('points')
+    let points = user.get('points')
     points += winnings
     dispatch(addWinnings(winnings))
-    currentUser.save({ points: points })
+    user.save({ points: points })
   }
 }
 

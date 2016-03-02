@@ -32,7 +32,7 @@ class Round extends React.Component {
       }
     }
     actions.asyncHandleSubmit(Parse, push)
-    actions.asyncAwardPoints(Parse)
+    actions.asyncAwardPoints(Parse.User.current(), this.props.worth)
     actions.initializeQuestion(numBins, bank)
     actions.pullQuestion(Parse, categoryName)
   }
