@@ -34,6 +34,7 @@ export default class QuestionBody extends React.Component {
         <ul>
           { this.renderBody() }
         </ul>
+        <button onClick={ this.props.onClick }>{ 'Change Ranges' }</button>
       </div>
     )
   }
