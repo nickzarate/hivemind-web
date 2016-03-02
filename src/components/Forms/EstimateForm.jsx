@@ -9,6 +9,7 @@ export default class EstimateForm extends React.Component {
         <Field
           model={ `estimates.${ this.props.outcomeName }` }
           parser={ makeNumber }
+          ref={ (ref) => this.form = ref }
         >
           <input
             type="number"

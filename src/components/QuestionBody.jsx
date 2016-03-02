@@ -1,6 +1,7 @@
 import React from 'react'
 import Bins from 'containers/Bins'
 import EstimateForm from './Forms/EstimateForm'
+import Tooltip from 'components/Lib/Tooltip'
 
 export default class QuestionBody extends React.Component {
   renderBody() {
@@ -10,6 +11,7 @@ export default class QuestionBody extends React.Component {
           <EstimateForm
             outcomeName={ outcomeName }
             estimates={ this.props.estimates }
+            ref={ (ref) => this[outcomeName] = ref }
           />
           <Bins
             binsIndex={ index }
@@ -20,10 +22,19 @@ export default class QuestionBody extends React.Component {
   }
 
   render() {
+    const { tooltipTarget } = this.props
     return (
-      <ul>
-        { this.renderBody() }
-      </ul>
+      <div>
+        <Tooltip
+          onHide={ this.props.onHide }
+          message={ this.props.tooltipMessage }
+          target={ this[tooltipTarget] ? this[tooltipTarget].form : this[tooltipTarget] }
+          placement="right"
+        />
+        <ul>
+          { this.renderBody() }
+        </ul>
+      </div>
     )
   }
 }
