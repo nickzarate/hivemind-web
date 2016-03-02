@@ -1,5 +1,6 @@
 import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
 import { showModal } from 'actions/modal'
+import { setMessage, setTarget } from 'actions/tooltip'
 import { createAction } from 'redux-actions'
 
 export const setCategories = createAction(SET_CATEGORIES, categories => categories)
@@ -34,18 +35,60 @@ export function handleCategoryChoice(category) {
 }
 
 /*
+ *  Validate ranges, if everything looks good, start the round.
+ */
+export function handleStart(push, path) {
+  return (dispatch, getState) => {
+    const { forms: { ranges }, round: { currentCategory } } = getState()
+    var outcomeNames = currentCategory.get('outcomeNames')
+
+    // Validation
+    for (let outcomeName of outcomeNames) {
+      if (!ranges[outcomeName]) {
+        dispatch(setMessage('All fields must be filled in.'))
+        dispatch(setTarget(outcomeName))
+        return
+      }
+    }
+    for (let outcomeName of outcomeNames) {
+      if (isNaN(ranges[outcomeName].lower) || isNaN(ranges[outcomeName].upper)) {
+        dispatch(setMessage('All fields must be filled in.'))
+        dispatch(setTarget(outcomeName))
+        return
+      }
+    }
+    for (let outcomeName of outcomeNames) {
+      if (ranges[outcomeName].lower >= ranges[outcomeName].upper) {
+        dispatch(setMessage(outcomeName + ' range has a smaller upper bound than lower bound, try again.'))
+        dispatch(setTarget(outcomeName))
+        return
+      }
+    }
+    push(path)
+  }
+}
+
+/*
  *  If all values in the form are filled, unlock the category, and set the information on the current user
  */
 export function handleSurveySubmission(user) {
   return (dispatch, getState) => {
-    const { forms: { covariates }, round } = getState()
+    const { forms: { covariates }, round: { currentCategory } } = getState()
     var covariateValues = []
-    for (let covariateName of round.currentCategory.get('covariateNames')) {
+
+    // Validation
+    for (let covariateName of currentCategory.get('covariateNames')) {
+      if (isNaN(covariates[covariateName])) {
+        dispatch(setMessage('All fields must be filled in.'))
+        dispatch(setTarget(covariateName))
+        return
+      }
       covariateValues.push(covariates[covariateName])
     }
-    dispatch(setUnlocked(true, round.currentCategory.get('index')))
-    let information = { [round.currentCategory.get('name')]: covariateValues }
-    user.add('unlockedCategories', round.currentCategory.get('name'))
+
+    dispatch(setUnlocked(true, currentCategory.get('index')))
+    let information = { [currentCategory.get('name')]: covariateValues }
+    user.add('unlockedCategories', currentCategory.get('name'))
     user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
   }
 }
