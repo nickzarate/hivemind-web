@@ -1,6 +1,6 @@
 import React from 'react'
 import { handleDeposit } from 'actions/question'
-import { setWorth, setCorrectAnswerIndices } from 'actions/round'
+import { setCorrectAnswerIndices } from 'actions/round'
 import binsSelector from 'selectors/bins'
 import Bins from 'components/Bins'
 import reduxify from 'store/reduxify'
@@ -10,10 +10,6 @@ class BinsContainer extends React.Component {
     binsIndex: 0,
     presentational: false
   };
-
-  componentDidMount() {
-    this.props.actions.setWorth(this.props.worth)
-  }
 
   componentWillReceiveProps(nextProps) {
     this.props.actions.setCorrectAnswerIndices(nextProps.correctAnswerIndices)
@@ -39,6 +35,6 @@ class BinsContainer extends React.Component {
 
 export default reduxify({
   selector: binsSelector,
-  actions: { handleDeposit, setWorth, setCorrectAnswerIndices },
+  actions: { handleDeposit, setCorrectAnswerIndices },
   container: BinsContainer
 })
