@@ -1,6 +1,6 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_CURRENT_ROUND, SET_CORRECT_ANSWER_INDICES,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, ADD_WINNINGS } from './constants'
-import { setBinValues, setBank } from './question'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_QUESTION, ADD_WINNINGS } from './constants'
+import { setBinValues, setBank, setAnswerSubmitted } from './answer'
 import { actions } from 'react-redux-form'
 import { rand } from 'toolbox/misc'
 import { createAction } from 'redux-actions'
@@ -12,7 +12,7 @@ export const addWinnings = createAction(ADD_WINNINGS, winnings => winnings)
 export const incrementCurrentQuestion = createAction(INCREMENT_CURRENT_QUESTION)
 export const resetCurrentQuestion = createAction(RESET_CURRENT_QUESTION)
 export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, correctAnswerIndices => correctAnswerIndices)
-export const setCurrentQuestion = createAction(SET_CURRENT_QUESTION, currentQuestion => currentQuestion)
+export const setQuestion = createAction(SET_QUESTION, currentQuestion => currentQuestion)
 export const setCurrentRound = createAction(SET_CURRENT_ROUND, currentRound => currentRound)
 
 /*
@@ -123,7 +123,13 @@ export function pullQuestion(Parse, categoryName) {
     query.equalTo('observationId', observationId)
     //Pull question and set state
     query.first().then(function(question) {
-      dispatch(setCurrentQuestion(question))
+      var selectedQuestion = {
+        covariateValues: question.get('covariateValues'),
+        objectId: question.id,
+        outcomes: question.get('outcomes')
+      }
+      dispatch(setAnswerSubmitted(false))
+      dispatch(setQuestion(selectedQuestion))
     })
   }
 }
