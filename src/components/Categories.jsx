@@ -1,22 +1,20 @@
 import React from 'react'
 
 export default class Categories extends React.Component {
-  handleClick(category) {
-    return () => this.props.onClick(category)
+  handleClick(categoryName) {
+    return () => this.props.onClick(categoryName)
   }
 
   renderCategories() {
-    if (this.props.categories) {
-      return this.props.categories.map(
-        (category) => (
-          <li key={ category.id }>
-            <button onClick={ this.handleClick(category) }>
-              { 'New ' }{ category.get('name') }{ ' round' }
-            </button>
-          </li>
-        )
+    return this.props.categoryNames.map(
+      (categoryName) => (
+        <li key={ categoryName }>
+          <button onClick={ this.handleClick(categoryName) }>
+            { 'New ' }{ categoryName }{ ' round' }
+          </button>
+        </li>
       )
-    }
+    )
   }
 
   render() {
