@@ -1,13 +1,12 @@
-import { INCREMENT_CURRENT_QUESTION, SET_CURRENT_ROUND, ADD_ANSWER_TO_ROUND, SET_CURRENT_CATEGORY,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, SET_CATEGORIES, ADD_OUTCOMES, SET_RANGE, SET_RANGES,
-  SET_UNLOCKED, SET_CORRECT_ANSWER_INDICES, ADD_WINNINGS, CLEAR_WINNINGS } from 'actions/constants'
+import { INCREMENT_CURRENT_QUESTION, SET_CURRENT_ROUND, ADD_ANSWER_TO_ROUND, ADD_ANSWERS, RESET_CURRENT_QUESTION,
+  SET_CATEGORY_NAMES, ADD_OUTCOMES, SET_RANGE, SET_RANGES, SET_UNLOCKED, SET_CORRECT_ANSWER_INDICES, ADD_WINNINGS,
+  CLEAR_WINNINGS } from 'actions/constants'
 import update from 'react-addons-update'
 
 const initialState = {
   answersVector: [],
-  categories: null,
+  categoryNames: [],
   correctAnswerIndices: [],
-  currentCategory: null,
   currentQuestion: 1,
   currentRound: null,
   outcomes: [],
@@ -32,12 +31,10 @@ export default function round(state = initialState, action) {
     return update(state, {currentQuestion: {$set: state.currentQuestion + 1}})
   case RESET_CURRENT_QUESTION:
     return update(state, {currentQuestion: {$set: 1}})
-  case SET_CATEGORIES:
-    return update(state, {categories: {$set: action.payload}})
+  case SET_CATEGORY_NAMES:
+    return update(state, {categoryNames: {$set: action.payload}})
   case SET_CORRECT_ANSWER_INDICES:
     return update(state, {correctAnswerIndices: {$set: action.payload}})
-  case SET_CURRENT_CATEGORY:
-    return update(state, {currentCategory: {$set: action.payload}})
   case SET_CURRENT_ROUND:
     return update(state, {currentRound: {$set: action.payload}})
   case SET_RANGE:

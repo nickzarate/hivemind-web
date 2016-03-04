@@ -1,10 +1,10 @@
-import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
+import { SET_CATEGORY_NAMES, SET_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
 import { showModal } from 'actions/modal'
 import { setMessage, setTarget } from 'actions/tooltip'
 import { createAction } from 'redux-actions'
 
-export const setCategories = createAction(SET_CATEGORIES, categories => categories)
-export const setCurrentCategory = createAction(SET_CURRENT_CATEGORY, currentCategory => currentCategory)
+export const setCategoryNames = createAction(SET_CATEGORY_NAMES, categoryNames => categoryNames)
+export const setCategory = createAction(SET_CATEGORY, category => category)
 export const setRange = createAction(SET_RANGE, (range, index) => { return { range, index } })
 export const setRanges = createAction(SET_RANGES, ranges => ranges)
 export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => { return { unlocked, index } })
@@ -12,13 +12,17 @@ export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => { ret
 /*
  *  Make a query to Parse to check how many categories are currently up
  */
-export function asyncGetCategories(Parse) {
+export function asyncGetCategoryNames(Parse) {
   return (dispatch) => {
     let query = new Parse.Query('Categories')
     query.find({
       success(categories) {
-        dispatch(setCategories(categories))
-        dispatch(setUnlocks(categories, Parse))
+        var categoryNames = []
+        for (var category of categories) {
+          categoryNames.push(category.get('name'))
+        }
+        dispatch(setCategoryNames(categoryNames))
+        dispatch(setUnlockedCategories(categories, Parse.User.current()))
       }
     })
   }
