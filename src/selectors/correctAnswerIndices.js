@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
 
-const categorySelector = (state) => state.round.currentCategory
+const categorySelector = (state) => state.category
 const rangesSelector = (state) => state.forms.ranges
-const outcomesSelector = (state) => state.question.currentQuestion
+const outcomesSelector = (state) => state.question.outcomes
 
 function getContinuousAnswerIndex(numBins, range, outcome) {
   let binValues = []
@@ -25,12 +25,12 @@ function getContinuousAnswerIndex(numBins, range, outcome) {
   }
 }
 
-function getCorrectAnswerIndices(currentCategory, ranges, currentQuestion) {
+function getCorrectAnswerIndices(category, ranges, outcomes) {
   let correctAnswerIndices = []
-  for (let i = 0; i < currentCategory.get('outcomeRanges').length; i++) {
-    var outcomeName = currentCategory.get('outcomeNames')[i]
-    if (currentCategory.get('discrete')[i]) {
-      correctAnswerIndices.push(currentQuestion.get('outcomes')[i] - currentCategory.get('outcomeRanges')[i][0])
+  for (let i = 0; i < category.outcomeRanges.length; i++) {
+    var outcomeName = category.outcomeNames[i]
+    if (category.discrete[i]) {
+      correctAnswerIndices.push(outcomes[i] - category.outcomeRanges[i][0])
     } else {
       var range = [0,0]
       if ( ranges[outcomeName]
@@ -39,7 +39,7 @@ function getCorrectAnswerIndices(currentCategory, ranges, currentQuestion) {
       {
         range = [ranges[outcomeName].lower, ranges[outcomeName].upper]
       }
-      correctAnswerIndices.push(getContinuousAnswerIndex(currentCategory.get('numBins')[i], range, currentQuestion.get('outcomes')[i]))
+      correctAnswerIndices.push(getContinuousAnswerIndex(category.numBins[i], range, outcomes[i]))
     }
   }
   return correctAnswerIndices
@@ -49,9 +49,9 @@ export default createSelector(
   categorySelector,
   rangesSelector,
   outcomesSelector,
-  (currentCategory, ranges, currentQuestion) => {
+  (category, ranges, outcomes) => {
     return {
-      correctAnswerIndices: (currentCategory && currentQuestion) ? getCorrectAnswerIndices(currentCategory, ranges, currentQuestion) : []
+      correctAnswerIndices: getCorrectAnswerIndices(category, ranges, outcomes)
     }
   }
 )
