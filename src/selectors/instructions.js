@@ -1,16 +1,16 @@
 import { createSelector } from 'reselect'
 
-const instructionsSelector = (state) => state.round.currentCategory
-const covariateValuesSelector = (state) => state.question.currentQuestion
+const categorySelector = (state) => state.category
+const covariateValuesSelector = (state) => state.question.covariateValues
 
 export default createSelector(
   covariateValuesSelector,
-  instructionsSelector,
-  (currentQuestion, currentCategory) => {
+  categorySelector,
+  (covariateValues, category) => {
     return {
-      covariateValues: currentQuestion ? currentQuestion.get('covariateValues') : [],
-      covariateNames: currentCategory ? currentCategory.get('covariateNames') : [],
-      instructions: currentCategory ? currentCategory.get('questionInstructions') : []
+      covariateValues: covariateValues,
+      covariateNames: category.covariateNames,
+      instructions: category.questionInstructions
     }
   }
 )
