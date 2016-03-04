@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-const categorySelector = (state) => state.round.currentCategory
+const categorySelector = (state) => state.category
 const dataSelector = (state) => state.stats.data
 const indexSelector = (state) => state.stats.outcomeIndex
 const covariateDataSelector = (state) => state.stats.covariateData
@@ -12,15 +12,15 @@ export default createSelector(
   indexSelector,
   covariateDataSelector,
   winningsSelector,
-  (currentCategory, data, outcomeIndex, covariateData, winnings) => {
+  (category, data, outcomeIndex, covariateData, winnings) => {
     return {
       data,
       outcomeIndex,
       covariateData,
       winnings,
-      covariateRanges: currentCategory ? currentCategory.get('covariateRanges') : [],
-      outcomeRanges: currentCategory ? currentCategory.get('outcomeRanges') : [],
-      outcomeNames: currentCategory ? currentCategory.get('outcomeNames') : []
+      covariateRanges: category.covariateRanges,
+      outcomeRanges: category.outcomeRanges,
+      outcomeNames: category.outcomeNames
     }
   }
 )
