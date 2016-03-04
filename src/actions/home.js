@@ -121,11 +121,11 @@ export function handleSurveySubmission(user) {
 /*
  *  Initialize the array of booleans that represent which categories are unlocked to the current user
  */
-export function setUnlocks(categories, Parse) {
+export function setUnlockedCategories(categories, user) {
   return (dispatch) => {
     for (var category of categories) {
       var unlocked = false
-      for (var name of Parse.User.current().get('unlockedCategories')) {
+      for (var name of user.get('unlockedCategories')) {
         if (name === category.get('name')) {
           unlocked = true
         }
