@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import thunk from 'redux-thunk'
 import reducers from 'reducers'
 import DevTools from 'containers/DevTools'
+import persistState from 'redux-localstorage'
 const reduxRouterMiddleware = syncHistory(browserHistory)
 
 export default function configureStore(initialState) {
@@ -12,6 +13,7 @@ export default function configureStore(initialState) {
     initialState,
     compose(
       applyMiddleware(thunk, reduxRouterMiddleware),
+      persistState(['category', 'question', 'answer']),
       DevTools.instrument()
     )
   )

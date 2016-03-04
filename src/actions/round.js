@@ -1,6 +1,6 @@
 import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_CURRENT_ROUND, SET_CORRECT_ANSWER_INDICES,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_CURRENT_QUESTION, ADD_WINNINGS } from './constants'
-import { setBinValues, setBank } from './question'
+  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_QUESTION, ADD_WINNINGS } from './constants'
+import { setBinValues, setBank, setAnswerSubmitted } from './answer'
 import { actions } from 'react-redux-form'
 import { rand } from 'toolbox/misc'
 import { createAction } from 'redux-actions'
@@ -12,7 +12,7 @@ export const addWinnings = createAction(ADD_WINNINGS, winnings => winnings)
 export const incrementCurrentQuestion = createAction(INCREMENT_CURRENT_QUESTION)
 export const resetCurrentQuestion = createAction(RESET_CURRENT_QUESTION)
 export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, correctAnswerIndices => correctAnswerIndices)
-export const setCurrentQuestion = createAction(SET_CURRENT_QUESTION, currentQuestion => currentQuestion)
+export const setQuestion = createAction(SET_QUESTION, currentQuestion => currentQuestion)
 export const setCurrentRound = createAction(SET_CURRENT_ROUND, currentRound => currentRound)
 
 /*
@@ -20,7 +20,7 @@ export const setCurrentRound = createAction(SET_CURRENT_ROUND, currentRound => c
  */
 export function asyncAwardPoints(user, worth) {
   return (dispatch, getState) => {
-    const { question: { binValues }, round : { correctAnswerIndices } } = getState()
+    const { answer: { binValues }, round : { correctAnswerIndices } } = getState()
     //TODO: Calculate how many points are earned for answering correctly
     var winnings = 0
     for (let i = 0; i < worth.length; i++) {
@@ -61,32 +61,39 @@ export function asyncCreateRound(Parse) {
  */
 export function asyncHandleSubmit(Parse, push) {
   return (dispatch, getState) => {
-    const { question, round, forms: { estimates } } = getState()
+    const { answer, category, round, forms: { estimates }, question: { objectId } } = getState()
 
+    // Create an array of all of the outcomes estimated by the user
     var estimatesArray = []
-    for (let outcome of round.currentCategory.get('outcomeNames')) {
+    for (let outcome of category.outcomeNames) {
       estimatesArray.push(estimates[outcome])
     }
     dispatch(actions.reset('estimates'))
 
-    //Save token distribution and outcomes
-    dispatch(addAnswers(question.binValues))
-    dispatch(addOutcomes(question.currentQuestion.get('outcomes')))
+    // Save token distribution and outcomes
+    dispatch(addAnswers(answer.binValues))
+    dispatch(addOutcomes(answer.outcomes))
 
-    //Create new answer to save to a round
-    let Answer = Parse.Object.extend('Answer')
-    let newAnswer = new Answer()
+    // Create query for the question that the user answered
+    var Questions = Parse.Object.extend('Questions')
+    var query = new Parse.Query(Questions)
 
-    newAnswer.save({
-      question: question.currentQuestion,
-      binValues: question.binValues,
-      estimates: estimatesArray
+    dispatch(setAnswerSubmitted(true))
+    query.get(objectId).then(function(question) {
+      // Create new answer to save to a round
+      var Answer = Parse.Object.extend('Answer')
+      var newAnswer = new Answer()
+      return newAnswer.save({
+        question: question,
+        binValues: answer.binValues,
+        estimates: estimatesArray
+      })
     }).then(function(savedAnswer) {
-      let answers = round.currentRound.get('answers')
+      var answers = round.currentRound.get('answers')
       answers.push(savedAnswer)
       return round.currentRound.save({ answers: answers })
     }).then(function() {
-      if (round.currentQuestion >= round.currentCategory.get('questionsPerRound')) {
+      if (round.currentQuestion >= category.questionsPerRound) {
         dispatch(resetCurrentQuestion())
         push('/stats')
       } else {
@@ -114,7 +121,14 @@ export function initializeQuestion(numBins, bank) {
  *  Pull a random question from Parse database and setState accordingly
  */
 export function pullQuestion(Parse, categoryName) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { answer: { submitted } } = getState()
+
+    // If the question currently stored has not been submitted, do not pull a new question
+    if (!submitted) {
+      return
+    }
+
     //Create query for random question
     let observationId = rand(1, 3010)
     let Question = Parse.Object.extend('Questions')
@@ -123,7 +137,13 @@ export function pullQuestion(Parse, categoryName) {
     query.equalTo('observationId', observationId)
     //Pull question and set state
     query.first().then(function(question) {
-      dispatch(setCurrentQuestion(question))
+      var selectedQuestion = {
+        covariateValues: question.get('covariateValues'),
+        objectId: question.id,
+        outcomes: question.get('outcomes')
+      }
+      dispatch(setAnswerSubmitted(false))
+      dispatch(setQuestion(selectedQuestion))
     })
   }
 }

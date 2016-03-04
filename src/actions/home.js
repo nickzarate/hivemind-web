@@ -1,10 +1,10 @@
-import { SET_CATEGORIES, SET_CURRENT_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
+import { SET_CATEGORY_NAMES, SET_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
 import { showModal } from 'actions/modal'
 import { setMessage, setTarget } from 'actions/tooltip'
 import { createAction } from 'redux-actions'
 
-export const setCategories = createAction(SET_CATEGORIES, categories => categories)
-export const setCurrentCategory = createAction(SET_CURRENT_CATEGORY, currentCategory => currentCategory)
+export const setCategoryNames = createAction(SET_CATEGORY_NAMES, categoryNames => categoryNames)
+export const setCategory = createAction(SET_CATEGORY, category => category)
 export const setRange = createAction(SET_RANGE, (range, index) => { return { range, index } })
 export const setRanges = createAction(SET_RANGES, ranges => ranges)
 export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => { return { unlocked, index } })
@@ -12,13 +12,17 @@ export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => { ret
 /*
  *  Make a query to Parse to check how many categories are currently up
  */
-export function asyncGetCategories(Parse) {
+export function asyncGetCategoryNames(Parse) {
   return (dispatch) => {
     let query = new Parse.Query('Categories')
     query.find({
       success(categories) {
-        dispatch(setCategories(categories))
-        dispatch(setUnlocks(categories, Parse))
+        var categoryNames = []
+        for (var category of categories) {
+          categoryNames.push(category.get('name'))
+        }
+        dispatch(setCategoryNames(categoryNames))
+        dispatch(setUnlockedCategories(categories, Parse.User.current()))
       }
     })
   }
@@ -27,10 +31,32 @@ export function asyncGetCategories(Parse) {
 /*
  *  Set the chosen category and open up the modal
  */
-export function handleCategoryChoice(category) {
+export function asyncHandleCategoryChoice(Parse, categoryName) {
   return (dispatch) => {
-    dispatch(setCurrentCategory(category))
-    dispatch(showModal(true))
+    var query = new Parse.Query('Categories')
+    query.equalTo('name', categoryName)
+    query.first({
+      success(category) {
+        var selectedCategory = {
+          categorySurveyInstructions: category.get('categorySurveyInstructions'),
+          covariateNames: category.get('covariateNames'),
+          covariateRanges: category.get('covariateRanges'),
+          discrete: category.get('discrete'),
+          index: category.get('index'),
+          instructions: category.get('instructions'),
+          name: category.get('name'),
+          numBins: category.get('numBins'),
+          outcomeNames: category.get('outcomeNames'),
+          outcomeRanges: category.get('outcomeRanges'),
+          pointsPerToken: category.get('pointsPerToken'),
+          questionInstructions: category.get('questionInstructions'),
+          questionsPerRound: category.get('questionsPerRound'),
+          tokens: category.get('tokens')
+        }
+        dispatch(setCategory(selectedCategory))
+        dispatch(showModal(true))
+      }
+    })
   }
 }
 
@@ -39,9 +65,7 @@ export function handleCategoryChoice(category) {
  */
 export function handleStart(push, path) {
   return (dispatch, getState) => {
-    const { forms: { ranges }, round: { currentCategory } } = getState()
-    var outcomeNames = currentCategory.get('outcomeNames')
-    var discrete = currentCategory.get('discrete')
+    const { forms: { ranges }, category: { outcomeNames, discrete } } = getState()
 
     // Validation
     for (let i = 0; i < outcomeNames.length; i++) {
@@ -74,11 +98,11 @@ export function handleStart(push, path) {
  */
 export function handleSurveySubmission(user) {
   return (dispatch, getState) => {
-    const { forms: { covariates }, round: { currentCategory } } = getState()
+    const { forms: { covariates }, category: { covariateNames, index, name } } = getState()
     var covariateValues = []
 
     // Validation
-    for (let covariateName of currentCategory.get('covariateNames')) {
+    for (let covariateName of covariateNames) {
       if (isNaN(covariates[covariateName])) {
         dispatch(setMessage('All fields must be filled in.'))
         dispatch(setTarget(covariateName))
@@ -87,9 +111,9 @@ export function handleSurveySubmission(user) {
       covariateValues.push(covariates[covariateName])
     }
 
-    dispatch(setUnlocked(true, currentCategory.get('index')))
-    let information = { [currentCategory.get('name')]: covariateValues }
-    user.add('unlockedCategories', currentCategory.get('name'))
+    dispatch(setUnlocked(true, index))
+    let information = { [name]: covariateValues }
+    user.add('unlockedCategories', name)
     user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
   }
 }
@@ -97,11 +121,11 @@ export function handleSurveySubmission(user) {
 /*
  *  Initialize the array of booleans that represent which categories are unlocked to the current user
  */
-export function setUnlocks(categories, Parse) {
+export function setUnlockedCategories(categories, user) {
   return (dispatch) => {
     for (var category of categories) {
       var unlocked = false
-      for (var name of Parse.User.current().get('unlockedCategories')) {
+      for (var name of user.get('unlockedCategories')) {
         if (name === category.get('name')) {
           unlocked = true
         }

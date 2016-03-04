@@ -1,7 +1,7 @@
 import React from 'react'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
-import { handleCategoryChoice, asyncGetCategories, setUnlocked } from 'actions/home'
+import { asyncHandleCategoryChoice, asyncGetCategoryNames } from 'actions/home'
 import categoriesSelector from 'selectors/categories'
 import Categories from 'components/Categories'
 import reduxify from 'store/reduxify'
@@ -9,19 +9,16 @@ import reduxify from 'store/reduxify'
 class CategoriesContainer extends React.Component {
   componentDidMount() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    if (!Parse.User.current()) {
-      this.props.push('/')
-    }
-    this.props.actions.asyncGetCategories(Parse)
+    this.props.actions.asyncGetCategoryNames(Parse)
   }
 
-  handleClick = (choice) => this.props.actions.handleCategoryChoice(choice);
+  handleClick = (categoryName) => this.props.actions.asyncHandleCategoryChoice(Parse, categoryName);
 
   render() {
     return (
       <Categories
         onClick={ this.handleClick }
-        categories={ this.props.categories }
+        categoryNames={ this.props.categoryNames }
       />
     )
   }
@@ -29,6 +26,6 @@ class CategoriesContainer extends React.Component {
 
 export default reduxify({
   selector: categoriesSelector,
-  actions: { handleCategoryChoice, asyncGetCategories, setUnlocked },
+  actions: { asyncHandleCategoryChoice, asyncGetCategoryNames },
   container: CategoriesContainer
 })

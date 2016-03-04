@@ -1,17 +1,15 @@
 import { createSelector } from 'reselect'
 
 const categorySelector = (state) => state.category
-const estimatesSelector = (state) => state.forms.estimates
 const tooltipSelector = (state) => state.tooltip
 
 export default createSelector(
   categorySelector,
-  estimatesSelector,
   tooltipSelector,
-  (category, estimates, tooltip) => {
+  (category, tooltip) => {
     return {
-      outcomeNames: category.outcomeNames,
-      estimates,
+      instructions: category.categorySurveyInstructions,
+      covariateNames: category.covariateNames,
       tooltipMessage: tooltip.message,
       tooltipTarget: tooltip.target
     }
