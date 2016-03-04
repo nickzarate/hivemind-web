@@ -1,5 +1,5 @@
 import React from 'react'
-import { handleDeposit } from 'actions/question'
+import { handleDeposit } from 'actions/answer'
 import { setCorrectAnswerIndices } from 'actions/round'
 import binsSelector from 'selectors/bins'
 import Bins from 'components/Bins'
