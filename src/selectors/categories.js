@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect'
 
-const categoriesSelector = (state) => state.round.categories
+const categoryNamesSelector = (state) => state.round.categoryNames
 
 export default createSelector(
-  categoriesSelector,
-  (categories) => ({
-    categories
+  categoryNamesSelector,
+  (categoryNames) => ({
+    categoryNames
   })
 )
