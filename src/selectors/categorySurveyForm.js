@@ -1,15 +1,15 @@
 import { createSelector } from 'reselect'
 
-const categorySelector = (state) => state.round.currentCategory
+const categorySelector = (state) => state.category
 const tooltipSelector = (state) => state.tooltip
 
 export default createSelector(
   categorySelector,
   tooltipSelector,
-  (currentCategory, tooltip) => {
+  (category, tooltip) => {
     return {
-      instructions: currentCategory ? currentCategory.get('categorySurveyInstructions') : '',
-      covariateNames: currentCategory ? currentCategory.get('covariateNames') : [],
+      instructions: category.categorySurveyInstructions,
+      covariateNames: category.covariateNames,
       tooltipMessage: tooltip.message,
       tooltipTarget: tooltip.target
     }
