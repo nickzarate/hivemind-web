@@ -1,16 +1,14 @@
 import { createSelector } from 'reselect'
 
-const categorySelector = (state) => state.round.currentCategory
+const categorySelector = (state) => state.category
 const rangesSelector = (state) => state.forms.ranges
 
-const tokenSelector = createSelector(
+export default createSelector(
   categorySelector,
-  (currentCategory) => {
+  rangesSelector,
+  (category, ranges) => {
     return {
-      pointsPerToken: currentCategory ? currentCategory.get('pointsPerToken') : [],
-      outcomeRanges: currentCategory ? currentCategory.get('outcomeRanges') : [],
-      discrete: currentCategory ? currentCategory.get('discrete') : [],
-      outcomeNames: currentCategory ? currentCategory.get('outcomeNames') : []
+      worth: getWorth(category.discrete, category.pointsPerToken, category.outcomeRanges, category.outcomeNames, ranges)
     }
   }
 )
@@ -35,12 +33,3 @@ function getWorth(discrete, pointsPerToken, outcomeRanges, outcomeNames, ranges)
   }
   return worth
 }
-
-export default createSelector(
-  [tokenSelector, rangesSelector],
-  (token, ranges) => {
-    return {
-      worth: getWorth(token.discrete, token.pointsPerToken, token.outcomeRanges, token.outcomeNames, ranges)
-    }
-  }
-)
