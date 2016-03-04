@@ -65,9 +65,7 @@ export function asyncHandleCategoryChoice(Parse, categoryName) {
  */
 export function handleStart(push, path) {
   return (dispatch, getState) => {
-    const { forms: { ranges }, round: { currentCategory } } = getState()
-    var outcomeNames = currentCategory.get('outcomeNames')
-    var discrete = currentCategory.get('discrete')
+    const { forms: { ranges }, category: { outcomeNames, discrete } } = getState()
 
     // Validation
     for (let i = 0; i < outcomeNames.length; i++) {
@@ -100,11 +98,11 @@ export function handleStart(push, path) {
  */
 export function handleSurveySubmission(user) {
   return (dispatch, getState) => {
-    const { forms: { covariates }, round: { currentCategory } } = getState()
+    const { forms: { covariates }, category: { covariateNames, index, name } } = getState()
     var covariateValues = []
 
     // Validation
-    for (let covariateName of currentCategory.get('covariateNames')) {
+    for (let covariateName of covariateNames) {
       if (isNaN(covariates[covariateName])) {
         dispatch(setMessage('All fields must be filled in.'))
         dispatch(setTarget(covariateName))
@@ -113,9 +111,9 @@ export function handleSurveySubmission(user) {
       covariateValues.push(covariates[covariateName])
     }
 
-    dispatch(setUnlocked(true, currentCategory.get('index')))
-    let information = { [currentCategory.get('name')]: covariateValues }
-    user.add('unlockedCategories', currentCategory.get('name'))
+    dispatch(setUnlocked(true, index))
+    let information = { [name]: covariateValues }
+    user.add('unlockedCategories', name)
     user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
   }
 }

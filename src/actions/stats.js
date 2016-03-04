@@ -49,9 +49,9 @@ export function asyncGetPhis() {
  */
 export function getCovariateData(user) {
   return (dispatch, getState) => {
-    const { round } = getState()
+    const { category: { name } } = getState()
     var information = user.get('categoryInformation')
-    var data = information[round.currentCategory.get('name')]
+    var data = information[name]
     var covariateData = []
     for (var i = 0; i < data.length; i++) {
       var item = []
@@ -72,8 +72,8 @@ export function getCovariateData(user) {
  */
 export function getData() {
   return (dispatch, getState) => {
-    const { round } = getState()
-    let labels = round.currentCategory.get('covariateRanges')
+    const { category: { covariateRanges } } = getState()
+    let labels = covariateRanges
     for (let label of labels) {
       let range = label[1] - label[0]
       let numXAxisValues = 10
@@ -106,8 +106,7 @@ export function getData() {
  */
 export function updateChart(chartIndex) {
   return (dispatch, getState) => {
-    const { stats, round } = getState()
-    let covariateRanges = round.currentCategory.get('covariateRanges')
+    const { stats, category: { covariateRanges } } = getState()
 
     //Create array of betas and array of covariate values to multiply together
     let betas = stats.phi[stats.outcomeIndex].slice(1)
