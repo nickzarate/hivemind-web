@@ -1,19 +1,19 @@
 import { createSelector } from 'reselect'
 import worthSelector from './points'
 
-const roundSelector = (state) => state.round.currentCategory
+const categorySelector = (state) => state.category
 const estimatesSelector = (state) => state.forms.estimates
 
 export default createSelector(
-  roundSelector,
+  categorySelector,
   estimatesSelector,
   worthSelector,
-  (currentCategory, estimates, worth) => {
+  (category, estimates, worth) => {
     return {
-      categoryName: currentCategory.get('name'),
-      bank: currentCategory.get('tokens'),
-      numBins: currentCategory.get('numBins'),
-      outcomeNames: currentCategory.get('outcomeNames'),
+      categoryName: category.name,
+      bank: category.tokens,
+      numBins: category.numBins,
+      outcomeNames: category.outcomeNames,
       estimates,
       worth: worth.worth
     }
