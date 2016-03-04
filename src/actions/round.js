@@ -121,7 +121,14 @@ export function initializeQuestion(numBins, bank) {
  *  Pull a random question from Parse database and setState accordingly
  */
 export function pullQuestion(Parse, categoryName) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { answer: { submitted } } = getState()
+
+    // If the question currently stored has not been submitted, do not pull a new question
+    if (!submitted) {
+      return
+    }
+
     //Create query for random question
     let observationId = rand(1, 3010)
     let Question = Parse.Object.extend('Questions')
