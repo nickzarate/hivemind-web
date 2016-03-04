@@ -1,17 +1,17 @@
 import { createSelector } from 'reselect'
 
 const showModalSelector = (state) => state.modal.showModal
-const categorySelector = (state) => state.round.currentCategory
+const categorySelector = (state) => state.category
 const unlockedSelector = (state) => state.round.unlocked
 
 export default createSelector(
   showModalSelector,
   categorySelector,
   unlockedSelector,
-  (showModal, currentCategory, unlocked) => {
+  (showModal, category, unlocked) => {
     return {
       showModal,
-      unlocked: currentCategory ? unlocked[currentCategory.get('index')] : false
+      unlocked: unlocked[category.index]
     }
   }
 )
