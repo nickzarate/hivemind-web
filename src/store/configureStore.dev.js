@@ -13,7 +13,7 @@ export default function configureStore(initialState) {
     initialState,
     compose(
       applyMiddleware(thunk, reduxRouterMiddleware),
-      persistState(['category', 'question', 'answer']),
+      persistState(['answer', 'category', 'question']),
       DevTools.instrument()
     )
   )
