@@ -2,9 +2,9 @@ import { createSelector } from 'reselect'
 import pointsSelector from 'selectors/points'
 import correctAnswerIndicesSelector from 'selectors/correctAnswerIndices'
 
-const categorySelector = (state) => state.round.currentCategory
-const binValuesSelector = (state) => state.question.binValues
-const bankSelector = (state) => state.question.bank
+const categorySelector = (state) => state.category
+const binValuesSelector = (state) => state.answer.binValues
+const bankSelector = (state) => state.answer.bank
 const rangesSelector = (state) => state.forms.ranges
 
 function getContinuousBinText(numBins, range) {
@@ -32,12 +32,12 @@ function getDiscreteBinText(range) {
   return binText
 }
 
-function getBinTexts(currentCategory, ranges) {
+function getBinTexts(category, ranges) {
   var bins = []
-  for (var i = 0; i < currentCategory.get('outcomeRanges').length; i++) {
-    var outcomeName = currentCategory.get('outcomeNames')[i]
-    if (currentCategory.get('discrete')[i]) {
-      bins.push(getDiscreteBinText(currentCategory.get('outcomeRanges')[i]))
+  for (var i = 0; i < category.outcomeRanges.length; i++) {
+    var outcomeName = category.outcomeNames[i]
+    if (category.discrete[i]) {
+      bins.push(getDiscreteBinText(category.outcomeRanges[i]))
     } else {
       var range = [0,0]
 
@@ -48,7 +48,7 @@ function getBinTexts(currentCategory, ranges) {
         range = [ranges[outcomeName].lower, ranges[outcomeName].upper]
       }
 
-      bins.push(getContinuousBinText(currentCategory.get('numBins')[i], range))
+      bins.push(getContinuousBinText(category.numBins[i], range))
     }
   }
   return bins.length ? bins : [[]]
@@ -61,10 +61,10 @@ export default createSelector(
   rangesSelector,
   pointsSelector,
   correctAnswerIndicesSelector,
-  (currentCategory, binValues, bank, ranges, worth, correctAnswerIndices) => {
+  (category, binValues, bank, ranges, worth, correctAnswerIndices) => {
     return {
       bank,
-      binTexts: currentCategory ? getBinTexts(currentCategory, ranges) : [[]],
+      binTexts: getBinTexts(category, ranges),
       binValues: binValues.length > 0 ? binValues : [[]],
       worth: worth.worth,
       correctAnswerIndices: correctAnswerIndices.correctAnswerIndices
