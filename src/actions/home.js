@@ -31,10 +31,32 @@ export function asyncGetCategoryNames(Parse) {
 /*
  *  Set the chosen category and open up the modal
  */
-export function handleCategoryChoice(category) {
+export function asyncHandleCategoryChoice(Parse, categoryName) {
   return (dispatch) => {
-    dispatch(setCurrentCategory(category))
-    dispatch(showModal(true))
+    var query = new Parse.Query('Categories')
+    query.equalTo('name', categoryName)
+    query.first({
+      success(category) {
+        var selectedCategory = {
+          categorySurveyInstructions: category.get('categorySurveyInstructions'),
+          covariateNames: category.get('covariateNames'),
+          covariateRanges: category.get('covariateRanges'),
+          discrete: category.get('discrete'),
+          index: category.get('index'),
+          instructions: category.get('instructions'),
+          name: category.get('name'),
+          numBins: category.get('numBins'),
+          outcomeNames: category.get('outcomeNames'),
+          outcomeRanges: category.get('outcomeRanges'),
+          pointsPerToken: category.get('pointsPerToken'),
+          questionInstructions: category.get('questionInstructions'),
+          questionsPerRound: category.get('questionsPerRound'),
+          tokens: category.get('tokens')
+        }
+        dispatch(setCategory(selectedCategory))
+        dispatch(showModal(true))
+      }
+    })
   }
 }
 
