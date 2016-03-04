@@ -30,6 +30,7 @@ module.exports = {
       "react-router-redux",
       "redux",
       "redux-actions",
+      "redux-localstorage",
       "redux-thunk",
       "reselect"
     ],

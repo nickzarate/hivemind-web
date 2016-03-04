@@ -45,6 +45,7 @@ module.exports = {
       "redux-devtools",
       "redux-devtools-dock-monitor",
       "redux-devtools-log-monitor",
+      "redux-localstorage",
       "redux-thunk",
       "reselect"
     ],
