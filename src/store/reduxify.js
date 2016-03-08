@@ -1,6 +1,5 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { routeActions } from 'react-router-redux'
 
 /**
  * Reduxifies a container.
@@ -16,12 +15,10 @@ export default function reduxify({ selector, actions, container }) {
   let mapDispatchToProps = null
 
   if (actions) {
-    const push = routeActions.push
     // the container will be provided actions
     mapDispatchToProps = (dispatch) => {
       return {
-        actions: bindActionCreators(actions, dispatch),
-        push: bindActionCreators(push, dispatch)
+        actions: bindActionCreators(actions, dispatch)
       }
     }
   }
