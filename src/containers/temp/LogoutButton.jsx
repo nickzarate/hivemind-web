@@ -1,17 +1,9 @@
 import React from 'react'
-import Parse from 'parse'
-import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import reduxify from 'store/reduxify'
+import { logOut } from 'actions/user'
 
 class LogoutButton extends React.Component {
-  componentDidMount() {
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-  }
-
-  handleClick = () => {
-    Parse.User.logOut()
-    this.props.push('/')
-  };
+  handleClick = () => this.props.actions.logOut();
 
   render() {
     return (
@@ -21,6 +13,6 @@ class LogoutButton extends React.Component {
 }
 
 export default reduxify({
-  actions: {},
+  actions: { logOut },
   container: LogoutButton
 })
