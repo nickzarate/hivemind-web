@@ -1,14 +1,18 @@
 import { setMessage, setTarget } from './tooltip'
+import Parse from 'parse'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
+import { browserHistory } from 'react-router'
 
 /*
  *  Login the user and go to the home page
  */
-export function asyncLogin(Parse, push) {
+export function asyncLogin() {
   return (dispatch, getState) => {
     const { forms: { login } } = getState()
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     Parse.User.logIn(login.email, login.password, {
       success() {
-        push('/home')
+        browserHistory.push('/home')
       },
       error(user, error) {
         dispatch(setMessage('Error: ' + error.code + ' ' + error.message))
@@ -20,10 +24,11 @@ export function asyncLogin(Parse, push) {
 /*
  *  Sign up a new user with the given email and go to the home page
  */
-export function asyncHandleSignup(Parse, push) {
+export function asyncHandleSignup() {
   return (dispatch, getState) => {
     const { forms: { signup } } = getState()
     let newUser = new Parse.User()
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
 
     // Validation
     if (signup.email.length === 0) {
@@ -59,11 +64,19 @@ export function asyncHandleSignup(Parse, push) {
     newUser.set('points', 0)
     newUser.signUp(null, {
       success() {
-        push('/survey')
+        browserHistory.push('/survey')
       },
       error(user, error) {
         dispatch(setMessage('Error: ' + error.code + ' ' + error.message))
       }
     })
+  }
+}
+
+export function logOut() {
+  return () => {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+    Parse.User.logOut()
+    browserHistory.push('/')
   }
 }
