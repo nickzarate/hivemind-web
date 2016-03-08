@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'react-redux-form'
-import { makeNumber } from 'toolbox/parsers'
+import { makeNumber } from 'toolbox/parser'
 
 export default class EstimateForm extends React.Component {
   render() {

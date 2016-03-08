@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'react-redux-form'
-import { makeNumber } from 'toolbox/parsers'
+import { makeNumber } from 'toolbox/parser'
 import Tooltip from 'components/Lib/Tooltip'
 
 export default class CategorySurveyForm extends React.Component {
