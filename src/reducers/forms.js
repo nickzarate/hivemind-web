@@ -12,5 +12,7 @@ export default combineReducers({
   ranges: createModelReducer('ranges', initialFormsState.ranges),
   rangesForm: createFormReducer('ranges'),
   signup: createModelReducer('signup', initialFormsState.signup),
-  signupForm: createFormReducer('signup')
+  signupForm: createFormReducer('signup'),
+  survey: createModelReducer('survey', initialFormsState.survey),
+  surveyForm: createFormReducer('survey')
 })
