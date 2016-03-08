@@ -1,6 +1,4 @@
 import React from 'react'
-import Parse from 'parse'
-import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import reduxify from 'store/reduxify'
 import LoginForm from 'components/Forms/LoginForm'
 import { asyncLogin } from 'actions/user'
@@ -9,10 +7,6 @@ import { actions } from 'react-redux-form'
 import loginFormSelector from 'selectors/forms/login'
 
 class LoginFormContainer extends React.Component {
-  componentDidMount() {
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-  }
-
   componentWillUnmount() {
     this.props.actions.setMessage('')
     this.props.actions.reset('login')
@@ -20,7 +14,7 @@ class LoginFormContainer extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.actions.asyncLogin(Parse, this.props.push)
+    this.props.actions.asyncLogin()
   };
 
   render() {

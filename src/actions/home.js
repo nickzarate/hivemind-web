@@ -2,6 +2,9 @@ import { SET_CATEGORY_NAMES, SET_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED }
 import { showModal } from 'actions/modal'
 import { setMessage, setTarget } from 'actions/tooltip'
 import { createAction } from 'redux-actions'
+import Parse from 'parse'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
+import { browserHistory } from 'react-router'
 
 export const setCategoryNames = createAction(SET_CATEGORY_NAMES, categoryNames => categoryNames)
 export const setCategory = createAction(SET_CATEGORY, category => category)
@@ -12,8 +15,9 @@ export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => { ret
 /*
  *  Make a query to Parse to check how many categories are currently up
  */
-export function asyncGetCategoryNames(Parse) {
+export function asyncGetCategoryNames() {
   return (dispatch) => {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     let query = new Parse.Query('Categories')
     query.find({
       success(categories) {
@@ -31,8 +35,9 @@ export function asyncGetCategoryNames(Parse) {
 /*
  *  Set the chosen category and open up the modal
  */
-export function asyncHandleCategoryChoice(Parse, categoryName) {
+export function asyncHandleCategoryChoice(categoryName) {
   return (dispatch) => {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     var query = new Parse.Query('Categories')
     query.equalTo('name', categoryName)
     query.first({
@@ -63,7 +68,7 @@ export function asyncHandleCategoryChoice(Parse, categoryName) {
 /*
  *  Validate ranges, if everything looks good, start the round.
  */
-export function handleStart(push, path) {
+export function handleStart() {
   return (dispatch, getState) => {
     const { forms: { ranges }, category: { outcomeNames, discrete } } = getState()
 
@@ -89,17 +94,19 @@ export function handleStart(push, path) {
         return
       }
     }
-    push(path)
+    browserHistory.push('/round')
   }
 }
 
 /*
  *  If all values in the form are filled, unlock the category, and set the information on the current user
  */
-export function handleSurveySubmission(user) {
+export function handleSurveySubmission() {
   return (dispatch, getState) => {
     const { forms: { covariates }, category: { covariateNames, index, name } } = getState()
     var covariateValues = []
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+    var user = Parse.User.current()
 
     // Validation
     for (let covariateName of covariateNames) {
@@ -121,11 +128,12 @@ export function handleSurveySubmission(user) {
 /*
  *  Initialize the array of booleans that represent which categories are unlocked to the current user
  */
-export function setUnlockedCategories(categories, user) {
+export function setUnlockedCategories(categories) {
   return (dispatch) => {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     for (var category of categories) {
       var unlocked = false
-      for (var name of user.get('unlockedCategories')) {
+      for (var name of Parse.User.current().get('unlockedCategories')) {
         if (name === category.get('name')) {
           unlocked = true
         }
