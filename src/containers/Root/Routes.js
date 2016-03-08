@@ -12,10 +12,9 @@ import Survey from 'pages/Survey'
 import NotFound from 'pages/NotFound'
 
 export default function Routes() {
-  const App = ({ children }) => children
   return (
     <Router history={ browserHistory }>
-      <Route path="/" component={ App }>
+      <Route path="/">
         <IndexRoute component={ Landing } />
         <Route path="signup" component={ Signup } />
         <Route path="home" component={ Home } />
