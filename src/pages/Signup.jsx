@@ -7,8 +7,8 @@ export default class Signup extends React.Component {
   render() {
     return (
       <div>
-        <h1>{ 'Sign Up' }</h1>
-        <p>{ '(Will have survey before signup modal)' }</p>
+        <p>{ 'Progress Bar' }</p>
+        { this.props.children }
         <SignupModal />
       </div>
     )
