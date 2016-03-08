@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-const surveySelector = (state) => state.survey
+const surveySelector = (state) => state.forms.survey
 
 export default createSelector(
   surveySelector,

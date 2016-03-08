@@ -15,11 +15,9 @@ export default class SurveyPage1 extends React.Component {
   render() {
     return (
       <form>
-        
         <CheckField model="survey.race.americanIndianOrAlaskaNative">
-          <Input type="checkbox" checked={ this.props.race.americanIndianOrAlaskaNative } label="American Indian or Alaska Native" />
+          <Input type="checkbox" checked={ this.props.survey.race.americanIndianOrAlaskaNative } label="American Indian or Alaska Native" />
         </CheckField>
-        
         <button onClick={ this.props.onClick }>{ 'Continue' }</button>
       </form>
     )

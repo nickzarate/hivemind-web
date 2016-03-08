@@ -1,6 +1,6 @@
 import React from 'react'
 import reduxify from 'store/reduxify'
-import SurveyInstructions from 'components/SurveyInstructions'
+import SurveyInstructions from 'components/Survey/Instructions'
 
 class SurveyInstructionsContainer extends React.Component {
   handleClick = () => {

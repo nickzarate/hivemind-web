@@ -1,7 +1,7 @@
 import React from 'react'
 import reduxify from 'store/reduxify'
 import SurveyPage2 from 'components/Survey/Page2'
-import surveyPage1Selector from 'selectors/surveyPage1'
+import surveyPage1Selector from 'selectors/survey'
 
 class SurveyPage2Container extends React.Component {
   handleClick = () => this.props.push('/signup/3');
@@ -10,7 +10,7 @@ class SurveyPage2Container extends React.Component {
     return (
       <SurveyPage2
         onClick={ this.handleClick }
-        race={ this.props.race }
+        survey={ this.props.survey }
       />
     )
   }
