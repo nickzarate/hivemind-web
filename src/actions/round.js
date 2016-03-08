@@ -4,6 +4,9 @@ import { setBinValues, setBank, setAnswerSubmitted } from './answer'
 import { actions } from 'react-redux-form'
 import { rand } from 'toolbox/misc'
 import { createAction } from 'redux-actions'
+import Parse from 'parse'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
+import { browserHistory } from 'react-router'
 
 export const addAnswers = createAction(ADD_ANSWERS, answers => answers)
 export const addAnswerToRound = createAction(ADD_ANSWER_TO_ROUND, savedAnswer => savedAnswer)
@@ -18,18 +21,19 @@ export const setCurrentRound = createAction(SET_CURRENT_ROUND, currentRound => c
 /*
  *  Award the user points according to the correctness of their answer
  */
-export function asyncAwardPoints(user, worth) {
+export function asyncAwardPoints(worth) {
   return (dispatch, getState) => {
     const { answer: { binValues }, round : { correctAnswerIndices } } = getState()
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     //TODO: Calculate how many points are earned for answering correctly
     var winnings = 0
     for (let i = 0; i < worth.length; i++) {
       winnings += correctAnswerIndices[i] === -1 ? 0 : binValues[i][correctAnswerIndices[i]] * worth[i]
     }
-    let points = user.get('points')
+    let points = Parse.User.current().get('points')
     points += winnings
     dispatch(addWinnings(winnings))
-    user.save({ points: points })
+    Parse.User.current().save({ points: points })
   }
 }
 
@@ -38,8 +42,10 @@ export function asyncAwardPoints(user, worth) {
  *    answers: [],
  *    createdBy: currentUser
  */
-export function asyncCreateRound(Parse) {
+export function asyncCreateRound() {
   return (dispatch) => {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+
     //Create new Round
     let Round = Parse.Object.extend('Round')
     let newRound = new Round()
@@ -59,9 +65,10 @@ export function asyncCreateRound(Parse) {
  *  Save the current round with the new answer
  *  Submit the round if round is complete
  */
-export function asyncHandleSubmit(Parse, push) {
+export function asyncHandleSubmit() {
   return (dispatch, getState) => {
     const { answer, category, round, forms: { estimates }, question: { objectId } } = getState()
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
 
     // Create an array of all of the outcomes estimated by the user
     var estimatesArray = []
@@ -95,7 +102,7 @@ export function asyncHandleSubmit(Parse, push) {
     }).then(function() {
       if (round.currentQuestion >= category.questionsPerRound) {
         dispatch(resetCurrentQuestion())
-        push('/stats')
+        browserHistory.push('/stats')
       } else {
         dispatch(incrementCurrentQuestion())
       }
@@ -120,9 +127,10 @@ export function initializeQuestion(numBins, bank) {
 /*
  *  Pull a random question from Parse database and setState accordingly
  */
-export function pullQuestion(Parse, categoryName) {
+export function pullQuestion(categoryName) {
   return (dispatch, getState) => {
     const { answer: { submitted } } = getState()
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
 
     // If the question currently stored has not been submitted, do not pull a new question
     if (!submitted) {
