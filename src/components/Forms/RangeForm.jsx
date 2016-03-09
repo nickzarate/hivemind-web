@@ -5,7 +5,7 @@ import { makeNumber } from 'toolbox/parsers'
 export default class RangeForm extends React.Component {
   render() {
     return (
-      <Form>
+      <Form model="ranges">
         <Field
           model={ `ranges.${ this.props.outcomeName }.lower` }
           parser={ makeNumber }

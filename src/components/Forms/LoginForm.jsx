@@ -9,7 +9,7 @@ export default class LoginForm extends React.Component {
     return (
       <div>
         <Tooltip target={ this[this.props.tooltipTarget] } message={ this.props.tooltipMessage } />
-        <Form ref={ this.form } onSubmit={ this.props.onSubmit }>
+        <Form ref={ this.form } onSubmit={ this.props.onSubmit } model="login">
           <Field model="login.email">
             <input type="email" placeholder="Email" />
           </Field>

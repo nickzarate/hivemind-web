@@ -5,7 +5,7 @@ import { makeNumber } from 'toolbox/parsers'
 export default class EstimateForm extends React.Component {
   render() {
     return (
-      <Form>
+      <Form model="estimates">
         <Field
           model={ `estimates.${ this.props.outcomeName }` }
           parser={ makeNumber }

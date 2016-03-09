@@ -7,7 +7,7 @@ export default class SignupForm extends React.Component {
     return (
       <div>
         <Tooltip target={ this[this.props.tooltipTarget] } message={ this.props.tooltipMessage } />
-        <Form ref={ (ref) => this.form = ref } onSubmit={ this.props.onSubmit }>
+        <Form ref={ (ref) => this.form = ref } onSubmit={ this.props.onSubmit } model="signup">
           <Field model="signup.email" ref={ (ref) => this.email = ref }>
             <input
               type="email"
