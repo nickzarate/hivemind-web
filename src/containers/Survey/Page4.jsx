@@ -1,16 +1,16 @@
 import React from 'react'
 import reduxify from 'store/reduxify'
 import SurveyPage4 from 'components/Survey/Page4'
-import { submitPreSurvey } from 'actions/survey'
+import { submitSurvey } from 'actions/survey'
 import surveyPage1Selector from 'selectors/survey'
 
 class SurveyPage4Container extends React.Component {
-  handleClick = () => this.props.actions.submitPreSurvey('/signup/4');
-  
+  handleSubmit = () => this.props.actions.submitSurvey();
+
   render() {
     return (
       <SurveyPage4
-        onClick={ this.handleClick }
+        onSubmit={ this.handleSubmit }
         survey={ this.props.survey }
       />
     )
@@ -19,6 +19,6 @@ class SurveyPage4Container extends React.Component {
 
 export default reduxify({
   selector: surveyPage1Selector,
-  actions: { submitPreSurvey },
+  actions: { submitSurvey },
   container: SurveyPage4Container
 })
