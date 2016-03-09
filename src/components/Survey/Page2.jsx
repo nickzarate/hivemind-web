@@ -1,6 +1,5 @@
 import React from 'react'
-import { createFieldClass, controls } from 'react-redux-form'
-import { Link } from 'react-router'
+import { Form, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
 import { makeNumber } from 'toolbox/parser'
 
@@ -11,7 +10,7 @@ const InputField = createFieldClass({
 export default class SurveyPage2 extends React.Component {
   render() {
     return (
-      <form>
+      <Form onSubmit={ this.props.onSubmit } model="survey">
         <InputField model="survey.isLunchReducedPrice">
           <label>{ 'Have you ever received free or reduced price lunch where you attended school?' }</label>
           <Input type="radio" value="Yes" label="Yes" />
@@ -40,8 +39,8 @@ export default class SurveyPage2 extends React.Component {
           <label>{ 'How many years of work experience do you have overall (counting all time employed)?' }</label>
           <Input type="text" placeholder="Years" />
         </InputField>
-        <Link to="/signup/3"><button onClick={ this.props.onClick }>{ 'Continue' }</button></Link>
-      </form>
+        <button type="submit">{ 'Continue' }</button>
+      </Form>
     )
   }
 }
