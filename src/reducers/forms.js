@@ -1,16 +1,16 @@
 import initialFormsState from './initialFormsState'
-import { createModelReducer, createFormReducer } from 'react-redux-form'
+import { modelReducer, formReducer } from 'react-redux-form'
 import { combineReducers } from 'redux'
 
 export default combineReducers({
-  covariates: createModelReducer('covariates', initialFormsState.covariates),
-  covariatesForm: createFormReducer('covariates'),
-  estimates: createModelReducer('estimates', initialFormsState.estimates),
-  estimatesForm: createFormReducer('estimates'),
-  login: createModelReducer('login', initialFormsState.login),
-  loginForm: createFormReducer('login'),
-  ranges: createModelReducer('ranges', initialFormsState.ranges),
-  rangesForm: createFormReducer('ranges'),
-  signup: createModelReducer('signup', initialFormsState.signup),
-  signupForm: createFormReducer('signup')
+  covariates: modelReducer('covariates', initialFormsState.covariates),
+  covariatesForm: formReducer('covariates'),
+  estimates: modelReducer('estimates', initialFormsState.estimates),
+  estimatesForm: formReducer('estimates'),
+  login: modelReducer('login', initialFormsState.login),
+  loginForm: formReducer('login'),
+  ranges: modelReducer('ranges', initialFormsState.ranges),
+  rangesForm: formReducer('ranges'),
+  signup: modelReducer('signup', initialFormsState.signup),
+  signupForm: formReducer('signup')
 })

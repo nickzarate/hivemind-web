@@ -1,11 +1,11 @@
 import React from 'react'
-import { Field } from 'react-redux-form'
+import { Form, Field } from 'react-redux-form'
 import { makeNumber } from 'toolbox/parsers'
 
 export default class RangeForm extends React.Component {
   render() {
     return (
-      <form>
+      <Form model="ranges">
         <Field
           model={ `ranges.${ this.props.outcomeName }.lower` }
           parser={ makeNumber }
@@ -26,7 +26,7 @@ export default class RangeForm extends React.Component {
             value={ this.props.upperValue }
           />
         </Field>
-      </form>
+      </Form>
     )
   }
 }
