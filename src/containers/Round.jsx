@@ -1,6 +1,4 @@
 import React from 'react'
-import Parse from 'parse'
-import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import reduxify from 'store/reduxify'
 import { asyncCreateRound, asyncHandleSubmit, asyncAwardPoints,
   initializeQuestion, pullQuestion } from 'actions/round'
@@ -15,14 +13,13 @@ class Round extends React.Component {
 
   componentDidMount() {
     const { actions, bank, numBins } = this.props
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    actions.asyncCreateRound(Parse)
-    actions.pullQuestion(Parse, this.props.categoryName)
+    actions.asyncCreateRound()
+    actions.pullQuestion(this.props.categoryName)
     actions.initializeQuestion(numBins, bank)
   }
 
   handleSubmit() {
-    const { actions, push, categoryName, numBins, bank } = this.props
+    const { actions, categoryName, numBins, bank } = this.props
     // Validate estimates
     for (let outcomeName of this.props.outcomeNames) {
       if (isNaN(this.props.estimates[outcomeName])) {
@@ -31,10 +28,10 @@ class Round extends React.Component {
         return
       }
     }
-    actions.asyncHandleSubmit(Parse, push)
-    actions.asyncAwardPoints(Parse.User.current(), this.props.worth)
+    actions.asyncHandleSubmit()
+    actions.asyncAwardPoints(this.props.worth)
     actions.initializeQuestion(numBins, bank)
-    actions.pullQuestion(Parse, categoryName)
+    actions.pullQuestion(categoryName)
   }
 
   render() {

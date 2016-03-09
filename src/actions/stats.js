@@ -1,6 +1,8 @@
 import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES, SET_OUTCOME_INDEX,
   ADD_PHI, CLEAR_WINNINGS } from './constants'
 import { createAction } from 'redux-actions'
+import Parse from 'parse'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
 export const setData = createAction(SET_DATA, data => data)
 export const clearWinnings = createAction(CLEAR_WINNINGS)
@@ -27,7 +29,6 @@ export function asyncGetPhis() {
         covariates.push(answer.get('question').get('covariateValues'))
       }
 
-      // TODO: we need a different name than 'env.source'
       $.ajax({
         url: '/api/v1/get_phi',
         method: 'POST',
@@ -47,10 +48,11 @@ export function asyncGetPhis() {
  *  Get initial covariate data
  *  TODO: Call Parse and get initial user data about covariates
  */
-export function getCovariateData(user) {
+export function getCovariateData() {
   return (dispatch, getState) => {
     const { category: { name } } = getState()
-    var information = user.get('categoryInformation')
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+    var information = Parse.User.current().get('categoryInformation')
     var data = information[name]
     var covariateData = []
     for (var i = 0; i < data.length; i++) {

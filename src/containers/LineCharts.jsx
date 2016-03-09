@@ -1,6 +1,4 @@
 import React from 'react'
-import Parse from 'parse'
-import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import lineChartsSelector from 'selectors/lineCharts'
 import { asyncGetPhis, getData, getCovariateData,
   updateCovariateData, setOutcomeIndex, clearWinnings } from 'actions/stats'
@@ -15,12 +13,8 @@ class LineChartsContainer extends React.Component {
   }
 
   componentDidMount() {
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    if (!Parse.User.current()) {
-      this.props.push('/home')
-    }
     this.props.actions.asyncGetPhis()
-    this.props.actions.getCovariateData(Parse.User.current())
+    this.props.actions.getCovariateData()
     this.props.actions.getData()
   }
 

@@ -1,6 +1,4 @@
 import React from 'react'
-import Parse from 'parse'
-import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { asyncHandleCategoryChoice, asyncGetCategoryNames } from 'actions/home'
 import categoriesSelector from 'selectors/categories'
 import Categories from 'components/Categories'
@@ -8,11 +6,10 @@ import reduxify from 'store/reduxify'
 
 class CategoriesContainer extends React.Component {
   componentDidMount() {
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    this.props.actions.asyncGetCategoryNames(Parse)
+    this.props.actions.asyncGetCategoryNames()
   }
 
-  handleClick = (categoryName) => this.props.actions.asyncHandleCategoryChoice(Parse, categoryName);
+  handleClick = (categoryName) => this.props.actions.asyncHandleCategoryChoice(categoryName);
 
   render() {
     return (

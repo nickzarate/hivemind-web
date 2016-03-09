@@ -18,10 +18,9 @@ import SurveyPage3 from 'containers/Survey/Page3'
 import SurveyPage4 from 'containers/Survey/Page4'
 
 export default function Routes() {
-  const App = ({ children }) => children
   return (
     <Router history={ browserHistory }>
-      <Route path="/" component={ App }>
+      <Route path="/">
         <IndexRoute component={ Landing } />
         <Route path="signup" component={ Signup }>
           <IndexRoute component={ SurveyInstructions } />

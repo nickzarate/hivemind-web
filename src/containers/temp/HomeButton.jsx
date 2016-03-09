@@ -1,19 +1,10 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import { Link } from 'react-router'
 
-class HomeButton extends React.Component {
-  handleClick = () => {
-    this.props.push('/home')
-  };
-
+export default class HomeButton extends React.Component {
   render() {
     return (
-      <button onClick={ this.handleClick }>{ 'Go Home' }</button>
+      <Link to="/home"><button>{ 'Go Home' }</button></Link>
     )
   }
 }
-
-export default reduxify({
-  actions: {},
-  container: HomeButton
-})

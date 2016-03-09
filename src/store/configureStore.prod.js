@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { browserHistory } from 'react-router'
-import { syncHistory } from 'react-router-redux'
 import persistState from 'redux-localstorage'
 import thunk from 'redux-thunk'
 import reducers from 'reducers'
@@ -10,7 +9,7 @@ export default function configureStore(initialState) {
     reducers,
     initialState,
     compose(
-      applyMiddleware(thunk, syncHistory(browserHistory)),
+      applyMiddleware(thunk),
       persistState(['answer', 'category', 'question'])
     )
   )

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { routeReducer as routing } from 'react-router-redux' // REMEMBER
+import { routerReducer as routing } from 'react-router-redux' // REMEMBER
 import answer from './answer'
 import category from './category'
 import forms from './forms'

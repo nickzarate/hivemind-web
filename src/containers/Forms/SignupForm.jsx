@@ -1,6 +1,4 @@
 import React from 'react'
-import Parse from 'parse'
-import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import reduxify from 'store/reduxify'
 import SignupForm from 'components/Forms/SignupForm'
 import { actions } from 'react-redux-form'
@@ -9,10 +7,6 @@ import { setMessage, setTarget } from 'actions/tooltip'
 import signupFormSelector from 'selectors/forms/signup'
 
 class SignupFormContainer extends React.Component {
-  componentDidMount() {
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-  }
-
   componentWillUnmount() {
     this.props.actions.setMessage('')
     this.props.actions.setTarget('')
@@ -21,7 +15,7 @@ class SignupFormContainer extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.actions.asyncHandleSignup(Parse, this.props.push)
+    this.props.actions.asyncHandleSignup()
   };
 
   render() {
