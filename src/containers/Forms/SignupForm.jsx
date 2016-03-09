@@ -13,10 +13,7 @@ class SignupFormContainer extends React.Component {
     this.props.actions.reset('signup')
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    this.props.actions.asyncHandleSignup()
-  };
+  handleSubmit = () => this.props.actions.asyncHandleSignup();
 
   render() {
     return (
