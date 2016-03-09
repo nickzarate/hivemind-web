@@ -2,6 +2,7 @@ import React from 'react'
 import survey from 'assets/survey.json'
 import { Field, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
+import { Link } from 'react-router'
 
 // const RadioField = createFieldClass({
 //   'Input2': controls.text
@@ -18,7 +19,7 @@ export default class SurveyPage1 extends React.Component {
         <CheckField model="survey.race.americanIndianOrAlaskaNative">
           <Input type="checkbox" checked={ this.props.survey.race.americanIndianOrAlaskaNative } label="American Indian or Alaska Native" />
         </CheckField>
-        <button onClick={ this.props.onClick }>{ 'Continue' }</button>
+        <Link to="/signup/2"><button onClick={ this.props.onClick }>{ 'Continue' }</button></Link>
       </form>
     )
   }

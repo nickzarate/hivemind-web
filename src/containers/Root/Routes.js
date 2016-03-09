@@ -11,11 +11,13 @@ import Stats from 'pages/Stats'
 import NotFound from 'pages/NotFound'
 
 /* Containers */
-import SurveyInstructions from 'containers/Survey/Instructions'
 import SurveyPage1 from 'containers/Survey/Page1'
 import SurveyPage2 from 'containers/Survey/Page2'
 import SurveyPage3 from 'containers/Survey/Page3'
 import SurveyPage4 from 'containers/Survey/Page4'
+
+/* Components */
+import SurveyInstructions from 'components/Survey/Instructions'
 
 export default function Routes() {
   return (

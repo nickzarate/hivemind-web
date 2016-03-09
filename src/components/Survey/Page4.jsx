@@ -1,5 +1,6 @@
 import React from 'react'
 import { createFieldClass, controls } from 'react-redux-form'
+import { Link } from 'react-router'
 import { Input } from 'react-bootstrap'
 import { makeNumber } from 'toolbox/parser'
 

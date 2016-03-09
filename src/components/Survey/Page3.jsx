@@ -1,5 +1,6 @@
 import React from 'react'
 import { createFieldClass, controls } from 'react-redux-form'
+import { Link } from 'react-router'
 import { Input } from 'react-bootstrap'
 import { makeNumber } from 'toolbox/parser'
 
@@ -45,7 +46,7 @@ export default class SurveyPage3 extends React.Component {
           <Input type="radio" value="PhD, MD (Doctor), or JD (Lawyer) (3- to 6-year graduate degree)" label="PhD, MD (Doctor), or JD (Lawyer) (3- to 6-year graduate degree)" />
           <Input type="radio" value="Post-doctoral degree" label="Post-doctoral degree" />
         </InputField>
-        <button onClick={ this.props.onClick }>{ 'Continue' }</button>
+        <Link to="/signup/4"><button onClick={ this.props.onClick }>{ 'Continue' }</button></Link>
       </form>
     )
   }

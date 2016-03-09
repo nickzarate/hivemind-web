@@ -1,5 +1,6 @@
 import React from 'react'
 import { createFieldClass, controls } from 'react-redux-form'
+import { Link } from 'react-router'
 import { Input } from 'react-bootstrap'
 import { makeNumber } from 'toolbox/parser'
 
@@ -39,7 +40,7 @@ export default class SurveyPage2 extends React.Component {
           <label>{ 'How many years of work experience do you have overall (counting all time employed)?' }</label>
           <Input type="text" placeholder="Years" />
         </InputField>
-        <button onClick={ this.props.onClick }>{ 'Continue' }</button>
+        <Link to="/signup/3"><button onClick={ this.props.onClick }>{ 'Continue' }</button></Link>
       </form>
     )
   }
