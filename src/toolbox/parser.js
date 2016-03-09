@@ -4,5 +4,7 @@ export const toBool = (val) => {
     return true
   } else if (val === 'false') {
     return false
+  } else {
+    return val
   }
 }
