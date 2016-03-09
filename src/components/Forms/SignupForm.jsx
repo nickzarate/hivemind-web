@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field } from 'react-redux-form'
+import { Form, Field } from 'react-redux-form'
 import Tooltip from 'components/Lib/Tooltip'
 
 export default class SignupForm extends React.Component {
@@ -7,7 +7,7 @@ export default class SignupForm extends React.Component {
     return (
       <div>
         <Tooltip target={ this[this.props.tooltipTarget] } message={ this.props.tooltipMessage } />
-        <form ref={ (ref) => this.form = ref } onSubmit={ this.props.onSubmit }>
+        <Form ref={ (ref) => this.form = ref } onSubmit={ this.props.onSubmit }>
           <Field model="signup.email" ref={ (ref) => this.email = ref }>
             <input
               type="email"
@@ -27,7 +27,7 @@ export default class SignupForm extends React.Component {
             />
           </Field>
           <button type="submit">{ 'Sign Up' }</button>
-        </form>
+        </Form>
       </div>
     )
   }
