@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeNumber } from 'toolbox/parser'
+import { toNum } from 'toolbox/parser'
 import { Form, Field } from 'react-redux-form'
 import Tooltip from 'components/Lib/Tooltip'
 
@@ -15,7 +15,7 @@ export default class CategorySurveyForm extends React.Component {
               <Field
                 key={ index }
                 model={ `covariates.${ covariateName }` }
-                parser={ makeNumber }
+                parser={ toNum }
                 ref={ (ref) => this[covariateName] = ref }
               >
                 <input

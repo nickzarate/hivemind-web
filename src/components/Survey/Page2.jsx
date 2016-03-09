@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
-import { makeNumber } from 'toolbox/parser'
+import { toNum } from 'toolbox/parser'
 
 const InputField = createFieldClass({
   'Input': controls.text
@@ -27,15 +27,15 @@ export default class SurveyPage2 extends React.Component {
           <Input type="radio" value="Yes" label="Yes" />
           <Input type="radio" value="No" label="No" />
         </InputField>
-        <InputField model="survey.annualSalary" parser={ makeNumber }>
+        <InputField model="survey.annualSalary" parser={ toNum }>
           <label>{ 'What is your current annual salary, rounded to the nearest thousand (for example $25,325 would simply be $25,000)' }</label>
           <Input type="text" placeholder="Annual Salary" />
         </InputField>
-        <InputField model="survey.workHoursPerWeek" parser={ makeNumber }>
+        <InputField model="survey.workHoursPerWeek" parser={ toNum }>
           <label>{ 'About how many hours per week do you work?' }</label>
           <Input type="text" placeholder="Hours" />
         </InputField>
-        <InputField model="survey.yearsOfWorkExperienceOverall" parser={ makeNumber }>
+        <InputField model="survey.yearsOfWorkExperienceOverall" parser={ toNum }>
           <label>{ 'How many years of work experience do you have overall (counting all time employed)?' }</label>
           <Input type="text" placeholder="Years" />
         </InputField>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Field } from 'react-redux-form'
-import { makeNumber } from 'toolbox/parser'
+import { toNum } from 'toolbox/parser'
 
 export default class RangeForm extends React.Component {
   render() {
@@ -8,7 +8,7 @@ export default class RangeForm extends React.Component {
       <Form model="ranges">
         <Field
           model={ `ranges.${ this.props.outcomeName }.lower` }
-          parser={ makeNumber }
+          parser={ toNum }
         >
           <input
             type="number"
@@ -18,7 +18,7 @@ export default class RangeForm extends React.Component {
         </Field>
         <Field
           model={ `ranges.${ this.props.outcomeName }.upper` }
-          parser={ makeNumber }
+          parser={ toNum }
         >
           <input
             type="number"
