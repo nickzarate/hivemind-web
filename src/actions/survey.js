@@ -1,55 +1,91 @@
-import { SET_HOURLY_WAGES, SET_MONTHLY_EARNINGS } from './constants'
-import { createAction } from 'redux-actions'
+import { browserHistory } from 'react-router'
+// import { actions } from 'react-redux-form'
+import { showModal } from 'actions/modal'
+import Parse from 'parse'
+import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
-export const setHourlyWages = createAction(SET_HOURLY_WAGES, hourlyWages => hourlyWages)
-export const setMonthlyEarnings = createAction(SET_MONTHLY_EARNINGS, monthlyEarnings => monthlyEarnings)
-
-/*
- *  Submit the one time only pre-survey
- *  TODO: Make everything abstract
- */
-export function asyncSubmitSurvey(Parse, survey) {
-  return () => {
-    let surveyResponses = {
-      age: survey.age,
-      sex: survey.sex,
-      race: survey.race,
-      education: survey.education,
-      experience: survey.experience,
-      hourlyWages: survey.hourlyWages,
-      monthlyEarnings: survey.monthlyEarnings
+export function submitPage1() {
+  return (dispatch, getState) => {
+    const { forms: { surveyForm } } = getState()
+    // TODO: Check values of the survey form and set validity of surveyForm
+    if (surveyForm.valid) {
+      browserHistory.push('/signup/2')
     }
-    let user = Parse.User.current()
-    user.save({ characteristics: surveyResponses })
   }
 }
 
-/*
- *  Set the hourlyWages state if the new value is a valid estimate
- */
-export function handleHourlyWages(event) {
-  return (dispatch) => {
-    let hourlyWages = Number(event.target.value)
-    //TODO: More robust error checking?
-    //TODO: Dispatch error message if its an invalid value
-    if (!hourlyWages) {
-      return
+export function submitPage2() {
+  return (dispatch, getState) => {
+    const { forms: { surveyForm } } = getState()
+    // TODO: Check values of the survey form and set validity of surveyForm
+    // dispatch(actions.validateErrors('survey.isLunchReducedPrice', {
+    //   required: (val) => { console.log(val); return (typeof val === 'string' && val.length === 0) ? 'Must answer!' : false }
+    // }))
+    // dispatch(actions.validateErrors('survey.isStudent', {
+    //   required: (val) => { return typeof val === 'string' && 'Must answer!' }
+    // }))
+    // dispatch(actions.validateErrors('survey.isEmployed', {
+    //   required: (val) => typeof val === 'string' && 'Must answer!'
+    // }))
+    // dispatch(actions.validateErrors('survey.annualSalary', {
+    //   required: (val) => typeof val === 'string' && 'Must answer!'
+    // }))
+    // dispatch(actions.validateErrors('survey.workHoursPerWeek', {
+    //   required: (val) => typeof val === 'string' && 'Must answer!'
+    // }))
+    // dispatch(actions.validateErrors('survey.yearsOfWorkExperienceOverall', {
+    //   required: (val) => typeof val === 'string' && 'Must answer!'
+    // }))
+    if (surveyForm.valid) {
+      browserHistory.push('/signup/3')
     }
-    dispatch(setHourlyWages(hourlyWages))
   }
 }
 
-/*
- *  Set the monthlyEarnings state if the new value is a valid estimate
- */
-export function handleMonthlyEarnings(event) {
-  return (dispatch) => {
-    let monthlyEarnings = Number(event.target.value)
-    //TODO: More robust error checking?
-    //TODO: Dispatch error message if its an invalid value
-    if (!monthlyEarnings) {
-      return
+export function submitPage3() {
+  return (dispatch, getState) => {
+    const { forms: { surveyForm } } = getState()
+    // TODO: Check values of the survey form and set validity of surveyForm
+    // dispatch(actions.validateErrors('survey.yearsOfWorkExperienceInCurrentCareer', {
+    //   required: (val) => typeof val === 'string' && 'Must answer!'
+    // }))
+    // dispatch(actions.validateErrors('survey.yearsOfCompletedSchooling', {
+    //   required: (val) => typeof val === 'string' && 'Must answer!'
+    // }))
+    // dispatch(actions.validateErrors('survey.intendedYearsOfCompletedSchooling', {
+    //   required: (val) => typeof val === 'string' && 'Must answer!'
+    // }))
+    // dispatch(actions.validateErrors('survey.highestEducationDegree', {
+    //   required: (val) => val.length === 0 && 'Must answer!'
+    // }))
+    // dispatch(actions.validateErrors('survey.intendedHighestEducationDegree', {
+    //   required: (val) => val.length === 0 && 'Must answer!'
+    // }))
+    if (surveyForm.valid) {
+      browserHistory.push('/signup/4')
     }
-    dispatch(setMonthlyEarnings(monthlyEarnings))
+  }
+}
+
+export function submitSurvey() {
+  return (dispatch, getState) => {
+    const { forms: { surveyForm } } = getState()
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+    // TODO: Check values of the survey form and set validity of surveyForm
+    // dispatch(actions.validateErrors('survey.highSchoolGPA', {
+    //   required: (val) => typeof val === 'string' && 'Must answer!'
+    // }))
+    // dispatch(actions.validateErrors('survey.collegeGPA', {
+    //   required: (val) => typeof val === 'string' && 'Must answer!'
+    // }))
+    // dispatch(actions.validateErrors('survey.fathersEducation', {
+    //   required: (val) => val.length === 0 && 'Must answer!'
+    // }))
+    // dispatch(actions.validateErrors('survey.mothersEducation', {
+    //   required: (val) => val.length === 0 && 'Must answer!'
+    // }))
+    if (surveyForm.valid) {
+      dispatch(showModal(true))
+    }
   }
 }

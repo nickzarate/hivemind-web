@@ -7,7 +7,6 @@ import modal from './modal'
 import question from './question'
 import round from './round'
 import stats from './stats'
-import survey from './survey'
 import tooltip from './tooltip'
 
 export default combineReducers({
@@ -19,6 +18,5 @@ export default combineReducers({
   round,
   routing,
   stats,
-  survey,
   tooltip
 })

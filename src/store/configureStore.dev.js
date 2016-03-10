@@ -3,14 +3,19 @@ import thunk from 'redux-thunk'
 import reducers from 'reducers'
 import DevTools from 'containers/DevTools'
 import persistState from 'redux-localstorage'
+// import configSlicer from './configSlicer'
 
 export default function configureStore(initialState) {
+  // const localStorageConfig = {
+  //   slicer: configSlicer
+  // }
+
   const store = createStore(
     reducers,
     initialState,
     compose(
       applyMiddleware(thunk),
-      persistState(['answer', 'category', 'question']),
+      persistState(['answer', 'category', 'question']),//, localStorageConfig),
       DevTools.instrument()
     )
   )

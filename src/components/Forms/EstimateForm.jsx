@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Field } from 'react-redux-form'
-import { makeNumber } from 'toolbox/parsers'
+import { toNum } from 'toolbox/parser'
 
 export default class EstimateForm extends React.Component {
   render() {
@@ -8,7 +8,7 @@ export default class EstimateForm extends React.Component {
       <Form model="estimates">
         <Field
           model={ `estimates.${ this.props.outcomeName }` }
-          parser={ makeNumber }
+          parser={ toNum }
           ref={ (ref) => this.form = ref }
         >
           <input
