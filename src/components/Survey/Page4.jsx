@@ -7,6 +7,12 @@ const InputField = createFieldClass({
   'Input': controls.text
 })
 
+const CheckField = createFieldClass({
+  'Input': (props) => ({
+    onChange: () => { props.changeValue(props.val, props.checked) }
+  })
+})
+
 export default class SurveyPage4 extends React.Component {
   render() {
     return (
@@ -19,7 +25,7 @@ export default class SurveyPage4 extends React.Component {
           <label>{ 'What was your College GPA? (If you do not know, give your best guess)' }</label>
           <Input type="text" placeholder="College GPA" />
         </InputField>
-        <InputField model="survey.fathersEducation" parser={ toNum }>
+        <InputField model="survey.fathersEducation">
           <label>{ 'What is the highest level of education obtained by your father?' }</label>
           <Input type="radio" value="Less than a high school degree" label="Less than a high school degree" />
           <Input type="radio" value="High school degree" label="High school degree" />
@@ -29,7 +35,10 @@ export default class SurveyPage4 extends React.Component {
           <Input type="radio" value="PhD, MD (Doctor), or JD (Lawyer) (3- to 6-year graduate degree)" label="PhD, MD (Doctor), or JD (Lawyer) (3- to 6-year graduate degree)" />
           <Input type="radio" value="Post-doctoral degree" label="Post-doctoral degree" />
         </InputField>
-        <InputField model="survey.mothersEducation" parser={ toNum }>
+        <CheckField model="survey.fathersEducationIsGuess">
+          <Input changeValue={ this.props.changeValue } val="fathersEducationIsGuess" type="checkbox" checked={ this.props.survey.fathersEducationIsGuess } label="This is a guess" />
+        </CheckField>
+        <InputField model="survey.mothersEducation">
           <label>{ 'What is the highest level of education obtained by your mother?' }</label>
           <Input type="radio" value="Less than a high school degree" label="Less than a high school degree" />
           <Input type="radio" value="High school degree" label="High school degree" />
@@ -39,6 +48,9 @@ export default class SurveyPage4 extends React.Component {
           <Input type="radio" value="PhD, MD (Doctor), or JD (Lawyer) (3- to 6-year graduate degree)" label="PhD, MD (Doctor), or JD (Lawyer) (3- to 6-year graduate degree)" />
           <Input type="radio" value="Post-doctoral degree" label="Post-doctoral degree" />
         </InputField>
+        <CheckField model="survey.mothersEducationIsGuess">
+          <Input changeValue={ this.props.changeValue } val="mothersEducationIsGuess" type="checkbox" checked={ this.props.survey.mothersEducationIsGuess } label="This is a guess" />
+        </CheckField>
         <button type="submit">{ 'Continue' }</button>
       </Form>
     )
