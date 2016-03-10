@@ -1,126 +1,95 @@
 import React from 'react'
 import survey from 'assets/survey.json'
-import { Form, Field, createFieldClass, controls } from 'react-redux-form'
+import { Form, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
-
-// const RadioField = createFieldClass({
-//   'Input2': controls.text
-// })
+import { toBool } from 'toolbox/parser'
 
 const CheckField = createFieldClass({
-  'Input': controls.checkbox
+  'Input': (props) => ({
+    onChange: () => { props.changeValue(props.val, props.checked) }
+  })
+})
+
+const RadioField = createFieldClass({
+  'Input': controls.text
+})
+
+const SelectField = createFieldClass({
+  'Input': controls.select
 })
 
 export default class SurveyPage1 extends React.Component {
   render() {
+    const { changeValue, survey: { race } } = this.props
     return (
       <Form onSubmit={ this.props.onSubmit } model="survey">
-        <CheckField model="survey.race.americanIndianOrAlaskaNative">
-          <Input type="checkbox" checked={ this.props.survey.race.americanIndianOrAlaskaNative } label="American Indian or Alaska Native" />
+        <SelectField model="survey.stateOfResidence">
+          <Input type="select" label="What state do you live in?">
+            { survey.STATE_OPTIONS.map( (option) => ( <option key={ option }>{ option }</option> ) ) }
+          </Input>
+        </SelectField>
+        <RadioField model="survey.gender">
+          <label>{ 'Gender' }</label>
+          <Input type="radio" label="Male" value="Male" />
+          <Input type="radio" label="Female" value="Female" />
+        </RadioField>
+        <RadioField model="survey.hispanic">
+          <label>{ 'Are you of Hispanic, Latino, or Spanish origin?' }</label>
+          <Input type="radio" label="No" value="No" />
+          <Input type="radio" label="Yes, Mexican, Mexican-American, or Chicano" value="Yes, Mexican, Mexican-American, or Chicano" />
+          <Input type="radio" label="Yes, Puerto Rican" value="Yes, Puerto Rican" />
+          <Input type="radio" label="Yes, Cuban" value="Yes, Cuban" />
+          <Input type="radio" label="Yes, another Hispanic, Latino, or Spanish origin" value="Yes, another Hispanic, Latino, or Spanish origin" />
+        </RadioField>
+        <label>{ 'What is your race? Check all that apply' }</label>
+        <CheckField model="survey.race.white">
+          <Input changeValue={ changeValue } val="white" type="checkbox" checked={ race.white } label="White" />
         </CheckField>
+        <CheckField model="survey.race.blackOrAfricanAmerican">
+          <Input changeValue={ changeValue } val="blackOrAfricanAmerican" type="checkbox" checked={ race.blackOrAfricanAmerican } label="Black or African American" />
+        </CheckField>
+        <CheckField model="survey.race.americanIndianOrAlaskaNative">
+          <Input changeValue={ changeValue } val="americanIndianOrAlaskaNative" type="checkbox" checked={ race.americanIndianOrAlaskaNative } label="American Indian or Alaska Native" />
+        </CheckField>
+        <CheckField model="survey.race.asianIndian">
+          <Input changeValue={ changeValue } val="asianIndian" type="checkbox" checked={ race.asianIndian } label="Asian Indian" />
+        </CheckField>
+        <CheckField model="survey.race.chinese">
+          <Input changeValue={ changeValue } val="chinese" type="checkbox" checked={ race.chinese } label="Chinese" />
+        </CheckField>
+        <CheckField model="survey.race.filipino">
+          <Input changeValue={ changeValue } val="filipino" type="checkbox" checked={ race.filipino } label="Filipino" />
+        </CheckField>
+        <CheckField model="survey.race.japanese">
+          <Input changeValue={ changeValue } val="japanese" type="checkbox" checked={ race.japanese } label="Japanese" />
+        </CheckField>
+        <CheckField model="survey.race.korean">
+          <Input changeValue={ changeValue } val="korean" type="checkbox" checked={ race.korean } label="Korean" />
+        </CheckField>
+        <CheckField model="survey.race.vietnamese">
+          <Input changeValue={ changeValue } val="vietnamese" type="checkbox" checked={ race.vietnamese } label="Vietnamese" />
+        </CheckField>
+        <CheckField model="survey.race.otherAsian">
+          <Input changeValue={ changeValue } val="otherAsian" type="checkbox" checked={ race.otherAsian } label="Other Asian" />
+        </CheckField>
+        <CheckField model="survey.race.pacificIslander">
+          <Input changeValue={ changeValue } val="pacificIslander" type="checkbox" checked={ race.pacificIslander } label="Pacific Islander" />
+        </CheckField>
+        <RadioField model="survey.race.other">
+          <Input type="text" label="Other Race (Fill in)" placeholder="Other Race" />
+        </RadioField>
+        <RadioField model="survey.isBornInUS" parser={ toBool }>
+          <label>{ 'Were you born in the United States?' }</label>
+          <Input type="radio" label="Yes" value="true" />
+          <Input type="radio" label="No" value="false" />
+        </RadioField>
+        <RadioField model="survey.isEnglishPrimaryLanguage" parser={ toBool }>
+          <label>{ 'Is English the primary language spoken at home?' }</label>
+          <Input type="radio" label="Yes" value="true" />
+          <Input type="radio" label="No" value="false" />
+        </RadioField>
         <button type="submit">{ 'Continue' }</button>
       </Form>
     )
   }
 }
-
-// <Field model="survey.stateOfResidence">
-//           <label>{ 'What state do you live in?' }</label>
-//           <select>
-//             { survey.STATE_OPTIONS.map( (option) => ( <option key={ option }>{ option }</option> ) ) }
-//           </select>
-//         </Field>
-//         <RadioField model="survey.gender">
-//           <label>{ 'Gender' }</label>
-//           <label htmlFor="survey-gender-male">
-//             <Input name="gender" type="radio" value="Male" id="survey-gender-male" />
-//             { 'Male' }
-//           </label>
-//           <label htmlFor="survey-gender-female">
-//             <Input name="gender" type="radio" value="Female" id="survey-gender-female" />
-//             { 'Female' }
-//           </label>
-//           <label htmlFor="survey-gender-other">
-//             <Input name="gender" type="radio" value="Other" id="survey-gender-other" />
-//             { 'Other' }
-//           </label>
-//         </RadioField>
-//         <RadioField model="survey.hispanic">
-//           <label>{ 'Are you of Hispanic, Latino, or Spanish origin?' }</label>
-//           <label htmlFor="survey-hispanic-no">
-//             <Input name="hispanic" type="radio" value="No" id="survey-hispanic-no" />
-//             { 'No' }
-//           </label>
-//           <label htmlFor="survey-hispanic-mexican">
-//             <Input name="hispanic" type="radio" value="Mexican, Mexican American, or Chicano" id="survey-hispanic-mexican" />
-//             { 'Yes, Mexican, Mexican American, or Chicano' }
-//           </label>
-//           <label htmlFor="survey-hispanic-puerto">
-//             <Input name="hispanic" type="radio" value="Puerto Rican" id="survey-hispanic-puerto" />
-//             { 'Yes, Puerto Rican' }
-//           </label>
-//           <label htmlFor="survey-hispanic-cuban">
-//             <Input name="hispanic" type="radio" value="Cuban" id="survey-hispanic-cuban" />
-//             { 'Yes, Cuban' }
-//           </label>
-//           <label htmlFor="survey-hispanic-other">
-//             <Input name="hispanic" type="radio" value="Another Hispanic, Latino, or Spanish origin" id="survey-hispanic-other" />
-//             { 'Yes, another Hispanic, Latino, or Spanish origin' }
-//           </label>
-//         </RadioField>
-//         <label>{ 'What is your race? Check all that apply' }</label>
-//         <RadioField model="survey.race.white">
-//           <label htmlFor="survey-race-white">
-//             <Input name="race" type="checkbox" value="White" id="survey-race-white" />
-//             { 'White' }
-//           </label>
-//         </RadioField>
-//         <RadioField model="survey.race.blackOrAfricanAmerican">
-//           <Input name="race" label="Black or African American" type="checkbox" id="survey-race-black" />
-//         </RadioField>
-
-
-// <RadioField model="survey.race.other">
-//           <label htmlFor="survey-race-indian">
-//             <Input name="race" type="checkbox" value="Asian Indian" id="survey-race-indian" />
-//             { 'Asian Indian' }
-//           </label>
-//           <label htmlFor="survey-race-chinese">
-//             <Input name="race" type="checkbox" value="Chinese" id="survey-race-chinese" />
-//             { 'Chinese' }
-//           </label>
-//           <label htmlFor="survey-race-filipino">
-//             <Input name="race" type="checkbox" value="Filipino" id="survey-race-filipino" />
-//             { 'Filipino' }
-//           </label>
-//           <label htmlFor="survey-race-japanese">
-//             <Input name="race" type="checkbox" value="Japanese" id="survey-race-japanese" />
-//             { 'Japanese' }
-//           </label>
-//           <label htmlFor="survey-race-korean">
-//             <Input name="race" type="checkbox" value="Korean" id="survey-race-korean" />
-//             { 'Korean' }
-//           </label>
-//           <label htmlFor="survey-race-vietnamese">
-//             <Input name="race" type="checkbox" value="Vietnamese" id="survey-race-vietnamese" />
-//             { 'Vietnamese' }
-//           </label>
-//           <label htmlFor="survey-race-other-asian">
-//             <Input name="race" type="checkbox" value="Other Asian" id="survey-race-other-asian" />
-//             { 'Other Asian' }
-//           </label>
-//           <label htmlFor="survey-race-pacific">
-//             <Input name="race" type="checkbox" value="Pacific Islander" id="survey-race-pacific" />
-//             { 'Pacific Islander' }
-//           </label>
-//           <label htmlFor="survey-race-other">
-//             <Input name="race" type="checkbox" value="Other Race" id="survey-race-other" />
-//             { 'Other Race (Fill in)' }
-//           </label>
-//         </RadioField>
-
-// <InputField model="survey.isEnglishPrimaryLanguage">
-//           <label>{ 'Is English the primary language spoken at home?' }</label>
-//           <Input type="radio" value="Yes" label="Yes" />
-//           <Input type="radio" value="No" label="No" />
-//         </InputField>
