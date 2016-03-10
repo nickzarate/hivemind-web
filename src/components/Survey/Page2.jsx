@@ -17,6 +17,16 @@ export default class SurveyPage2 extends React.Component {
           <Input type="radio" value="false" label="No" />
           <Input type="radio" value="I don't know" label="I don't know" />
         </InputField>
+        <label>{ 'Birthdate' }</label>
+        <InputField model="survey.birthday.month" parser={ toNum }>
+          <Input type="text" placeholder="MM" />
+        </InputField>
+        <InputField model="survey.birthday.day" parser={ toNum }>
+          <Input type="text" placeholder="DD" />
+        </InputField>
+        <InputField model="survey.birthday.year" parser={ toNum }>
+          <Input type="text" placeholder="YYYY" />
+        </InputField>
         <InputField model="survey.isStudent" parser={ toBool }>
           <label>{ 'Are you currently a student?' }</label>
           <Input type="radio" value="true" label="Yes" />
