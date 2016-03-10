@@ -26,7 +26,7 @@ export function asyncLogin() {
  */
 export function asyncHandleSignup() {
   return (dispatch, getState) => {
-    const { forms: { signup } } = getState()
+    const { forms: { survey, signup } } = getState()
     let newUser = new Parse.User()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
 
@@ -62,9 +62,10 @@ export function asyncHandleSignup() {
     newUser.set('unlockedCategories', [])
     newUser.set('categoryInformation', {})
     newUser.set('points', 0)
+    newUser.set('characteristics', survey)
     newUser.signUp(null, {
       success() {
-        browserHistory.push('/survey')
+        browserHistory.push('/home')
       },
       error(user, error) {
         dispatch(setMessage('Error: ' + error.code + ' ' + error.message))
