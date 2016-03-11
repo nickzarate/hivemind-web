@@ -3,7 +3,8 @@
 var path = require("path");
 var webpack = require("webpack");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-var srcPath = path.join(__dirname, "src");
+var srcPath = path.resolve("src");
+var assetsPath = path.resolve("src/assets");
 
 module.exports = {
   resolve: {
@@ -34,10 +35,10 @@ module.exports = {
       "redux-thunk",
       "reselect"
     ],
-    "index": path.join(srcPath, "index.js")
+    "index": path.resolve(srcPath, "index.js")
   },
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.resolve("dist"),
     publicPath: "",
     filename: "js/[name]-[hash].js"
   },
@@ -47,21 +48,21 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
-        loader: "babel-loader"
+        loader: "babel"
       },
 
       // eslint-loader
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
-        loader: "eslint-loader"
+        loader: "eslint"
       },
 
       // Sass loader
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
-        loaders: ["style-loader", "css", "sass"]
+        include: path.resolve(assetsPath, "sass"),
+        loaders: ["style", "css", "sass"]
       },
 
       // Stylus loader
@@ -71,35 +72,34 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /\.useable\.css$/,
-        loader: "style-loader!css-loader"
+        loader: "style!css"
       },
 
       // required for bootstrap icons.
       //    the url-loader uses DataUrls.
       //    the file-loader emits files.
-      { test: /\.(woff|woff2)$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-      { test: /\.ttf$/, loader: "file-loader?prefix=font/" },
-      { test: /\.eot$/, loader: "file-loader?prefix=font/" },
-      { test: /\.svg$/, loader: "file-loader?prefix=font/" },
+      { test: /\.(woff|woff2|ttf|eot|svg)$/, loader: 'file' },
+      // { test: /\.(woff|woff2)$/, loader: "url?limit=10000&mimetype=application/font-woff" },
+      // { test: /\.ttf$/, loader: "file?prefix=font/" },
+      // { test: /\.eot$/, loader: "file?prefix=font/" },
+      // { test: /\.svg$/, loader: "file?prefix=font/" },
 
       // misc
-      { test: /\.json$/, loader: "json-loader" },
-      { test: /\.png$/, loader: "url-loader?limit=100000" },
-      { test: /\.jpg$/, loader: "file-loader" }
+      { test: /\.json$/, loader: "json" },
+      { test: /\.png$/, loader: "url?limit=100000" },
+      { test: /\.jpg$/, loader: "file" }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      favicon: path.join(srcPath, "assets/images/favicon.png"),
+      favicon: path.resolve(assetsPath, "images/favicon.png"),
       hash: true,
-      template: path.join(srcPath, "assets/index.html")
+      template: path.resolve(assetsPath, "index.html")
     }),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("production"),
       "__DEV__": false
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
       "$": "jquery",
       "jQuery": "jquery",
@@ -113,7 +113,17 @@ module.exports = {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
+      compress: {
+        sequences: true,
+        dead_code: true,
+        conditionals: true,
+        booleans: true,
+        unused: true,
+        if_return: true,
+        join_vars: true,
+        drop_console: true,
+        warnings: false
+      }
     })
   ]
 }
