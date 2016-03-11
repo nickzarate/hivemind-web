@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "npm run watch",
-    "deploy": "npm run build && gulp deploy && rm -rf dist",
+    "deploy": "npm run build && gulp deploy && rm -rf dist && rm -rf .publish",
     "watch": "webpack-dev-server --progress --colors --config webpack.config.dev.js",
     "build": "webpack --profile --progress --colors --config webpack.config.prod.js"
   },
