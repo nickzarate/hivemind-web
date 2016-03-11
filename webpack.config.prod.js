@@ -78,11 +78,11 @@ module.exports = {
       // required for bootstrap icons.
       //    the url-loader uses DataUrls.
       //    the file-loader emits files.
-      { test: /\.(woff|woff2|ttf|eot|svg)$/, loader: 'file' },
-      // { test: /\.(woff|woff2)$/, loader: "url?limit=10000&mimetype=application/font-woff" },
-      // { test: /\.ttf$/, loader: "file?prefix=font/" },
-      // { test: /\.eot$/, loader: "file?prefix=font/" },
-      // { test: /\.svg$/, loader: "file?prefix=font/" },
+      // { test: /\.(woff|woff2|ttf|eot|svg)$/, loader: 'file' },
+      { test: /\.(woff|woff2)$/, loader: "url?limit=10000&mimetype=application/font-woff" },
+      { test: /\.ttf$/, loader: "file?prefix=font/" },
+      { test: /\.eot$/, loader: "file?prefix=font/" },
+      { test: /\.svg$/, loader: "file?prefix=font/" },
 
       // misc
       { test: /\.json$/, loader: "json" },
