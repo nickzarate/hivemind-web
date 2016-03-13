@@ -1,1 +1,1 @@
-export const toNum = (val) => { if (val !== '') { return +val } else { return '' } }
+export const toNum = (val) => { if (val !== '' && !isNaN(val)) { return +val } else { return '' } }
