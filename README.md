@@ -16,7 +16,7 @@ This will run the webpack development server.
 
 Open `http://localhost:8080`.
 
-For API calls on the backend to work, follow instructions to set up and run [hivemind-analytics](https://github.com/nickzarate/hivemind-analytics) server.
+For API calls on the backend to work, follow instructions to set up and run [hivemind-analytics](https://github.com/nickzarate/hivemind-analytics) vagrant server.
 
 # Development
 
@@ -51,7 +51,7 @@ Deployment
 ```
 npm run deploy
 ```
-Continue deployment process on [hivemind-analytics](https://github.com/nickzarate/hivemind-analytics).
+Continue deployment process on [hivemind-analytics](https://github.com/nickzarate/hivemind-analytics#deployment).
 
 Hivemind-analytics repository is where final code is deployed to heroku. It contains the build branch of this repository as a git submodule. `npm run deploy` builds the production version of this code and pushes it to the build branch, then cleans up.
 
