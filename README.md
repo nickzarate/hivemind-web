@@ -9,18 +9,16 @@ $ npm install
 ```
 Run the app.
 ```
-$ npm run watch
+$ npm start
 ```
 
 This will run the webpack development server.
 
 Open `http://localhost:8080`.
 
+For API calls on the backend to work, follow instructions to set up and run [hivemind-analytics](https://github.com/nickzarate/hivemind-analytics) server.
+
 # Development
-Set the environment variable `NODE_ENV` to `development`. This will enable certain developer tools in the app.
-```
-$ export NODE_ENV=development
-```
 
 Make a new branch. Name your branch the name of your new intended feature, prefixed with your initials and a slash.
 ```
@@ -40,25 +38,22 @@ $ git commit -m "Implement my new WORKING sub-feature-2"
 $ git commit -m "Implement my new WORKING sub-feature-3"
 ```
 
-Test. jk, we don't have testing yet.
-
-```
-$ gulp test
-```
-
-Fix your mistakes. Test again.
-```
-$ gulp test
-```
+Testing coming soon...
 
 When finished, push to a NEW branch on github.
 ```
 $ git push -u origin nz/my-new-feature
 ```
-
 Make a pull request, tag someone in a comment or poke someone on slack for review. Merge and delete branch when done.
 
+Deployment
 
+```
+npm run deploy
+```
+Continue deployment process on [hivemind-analytics](https://github.com/nickzarate/hivemind-analytics).
+
+Hivemind-analytics repository is where final code is deployed to heroku. It contains the build branch of this repository as a git submodule. `npm run deploy` builds the production version of this code and pushes it to the build branch, then cleans up.
 
 
 # Dependencies
