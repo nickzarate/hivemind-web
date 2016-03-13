@@ -1,36 +1,52 @@
 import React from 'react'
 import survey from 'assets/survey.json'
-import { Form, createFieldClass, controls } from 'react-redux-form'
+import { Form, getField, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
-
 const TextField = createFieldClass({
   'Input': controls.text
 })
-
 const RadioField = createFieldClass({
   'Input': controls.radio
 })
-
 const SelectField = createFieldClass({
   'Input': controls.select
 })
 
 export default class SurveyPage1 extends React.Component {
+  constructor(props) {
+    super(props)
+    this.displayErrors = this.displayErrors.bind(this)
+  }
+
+  displayErrors(state) {
+    var errors = getField(this.props.surveyForm, state).errors
+    return Object.keys(errors).map(
+      (error, index) => (
+        <p key={ index }>{ errors[error] }</p>
+      )
+    )
+  }
+
   handleChange = (val) => { return () => this.props.onCheckChange(val) };
 
   render() {
     return (
       <Form onSubmit={ this.props.onSubmit } model="survey">
+
         <SelectField model="survey.stateOfResidence">
           <Input type="select" label="What state do you live in?">
             { survey.STATE_OPTIONS.map( (option) => ( <option key={ option }>{ option }</option> ) ) }
           </Input>
         </SelectField>
+        { this.displayErrors('stateOfResidence') }
+
         <RadioField model="survey.gender">
           <label>{ 'Gender' }</label>
           <Input type="radio" label="Male" value="Male" />
           <Input type="radio" label="Female" value="Female" />
         </RadioField>
+        { this.displayErrors('gender') }
+
         <RadioField model="survey.hispanic">
           <label>{ 'Are you of Hispanic, Latino, or Spanish origin?' }</label>
           <Input type="radio" label="No" value="No" />
@@ -39,6 +55,8 @@ export default class SurveyPage1 extends React.Component {
           <Input type="radio" label="Yes, Cuban" value="Yes, Cuban" />
           <Input type="radio" label="Yes, another Hispanic, Latino, or Spanish origin" value="Yes, another Hispanic, Latino, or Spanish origin" />
         </RadioField>
+        { this.displayErrors('hispanic') }
+
         <label>{ 'What is your race? Check all that apply' }</label>
         <Input onChange={ this.handleChange('white') } type="checkbox" label="White" />
         <Input onChange={ this.handleChange('blackOrAfricanAmerican') } type="checkbox" label="Black or African American" />
@@ -54,16 +72,21 @@ export default class SurveyPage1 extends React.Component {
         <TextField model="survey.race.other">
           <Input type="text" label="Other Race (Fill in)" placeholder="Other Race" />
         </TextField>
+
         <RadioField model="survey.isBornInUS">
           <label>{ 'Were you born in the United States?' }</label>
           <Input type="radio" label="Yes" value="Yes" />
           <Input type="radio" label="No" value="No" />
         </RadioField>
+        { this.displayErrors('isBornInUS') }
+
         <RadioField model="survey.isEnglishPrimaryLanguage">
           <label>{ 'Is English the primary language spoken at home?' }</label>
           <Input type="radio" label="Yes" value="Yes" />
           <Input type="radio" label="No" value="No" />
         </RadioField>
+        { this.displayErrors('isEnglishPrimaryLanguage') }
+
         <button type="submit">{ 'Continue' }</button>
       </Form>
     )
