@@ -46,7 +46,7 @@ $ git push -u origin nz/my-new-feature
 ```
 Make a pull request, tag someone in a comment or poke someone on slack for review. Merge and delete branch when done.
 
-Deployment
+#Deployment
 
 ```
 npm run deploy
@@ -57,6 +57,7 @@ Hivemind-analytics repository is where final code is deployed to heroku. It cont
 
 
 # Dependencies
+
 *Npm* manages the packages.
 
 The client is built with *webpack*.
