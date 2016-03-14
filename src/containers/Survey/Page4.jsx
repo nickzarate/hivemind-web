@@ -7,7 +7,7 @@ import { actions } from 'react-redux-form'
 
 class SurveyPage4Container extends React.Component {
   handleSubmit = () => this.props.actions.submitSurvey();
-  handleCheckChange = (val) => this.props.actions.change(`survey.${ val }`, !this.props.survey[val]);
+  handleCheckChange = (val) => this.props.actions.change(`forms.survey.${ val }`, !this.props.survey[val]);
 
   render() {
     return (

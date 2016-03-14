@@ -8,9 +8,6 @@ import question from './question'
 import round from './round'
 import stats from './stats'
 import tooltip from './tooltip'
-import initialFormsState from './initialFormsState'
-
-import { modelReducer, formReducer } from 'react-redux-form'
 
 export default combineReducers({
   answer,
@@ -21,7 +18,5 @@ export default combineReducers({
   round,
   routing,
   stats,
-  survey: modelReducer('survey', initialFormsState.survey),
-  surveyForm: formReducer('survey'),
   tooltip
 })

@@ -28,29 +28,29 @@ export default class SurveyPage3 extends React.Component {
   render() {
     const { survey } = this.props
     return (
-      <Form onSubmit={ this.props.onSubmit } model="survey">
+      <Form onSubmit={ this.props.onSubmit } model="forms.survey">
 
-        <TextField model="survey.yearsOfWorkExperienceInCurrentCareer" parser={ toNum }>
+        <TextField model="forms.survey.yearsOfWorkExperienceInCurrentCareer" parser={ toNum }>
           <label>{ 'How many years of work experience do you have in your current career?' }</label>
           <Input type="text" placeholder="Years" value={ survey.yearsOfWorkExperienceInCurrentCareer } />
         </TextField>
         { this.displayErrors('yearsOfWorkExperienceInCurrentCareer') }
 
-        <TextField model="survey.yearsOfCompletedSchooling" parser={ toNum }>
+        <TextField model="forms.survey.yearsOfCompletedSchooling" parser={ toNum }>
           <label>{ 'Current years of completed schooling' }</label>
           <Input type="text" placeholder="Years" value={ survey.yearsOfCompletedSchooling } />
           { 'As a reference see the following...' }
         </TextField>
         { this.displayErrors('yearsOfCompletedSchooling') }
 
-        <TextField model="survey.intendedYearsOfCompletedSchooling" parser={ toNum }>
+        <TextField model="forms.survey.intendedYearsOfCompletedSchooling" parser={ toNum }>
           <label>{ 'How many years of schooling do you INTEND to complete?' }</label>
           <Input type="text" placeholder="Years" value={ survey.intendedYearsOfCompletedSchooling } />
           { 'As a reference see the following...' }
         </TextField>
         { this.displayErrors('intendedYearsOfCompletedSchooling') }
 
-        <RadioField model="survey.highestEducationDegree">
+        <RadioField model="forms.survey.highestEducationDegree">
           <label>{ 'What is your highest earned degree in education?' }</label>
           <Input type="radio" value="Less than a high school degree" label="Less than a high school degree" active />
           <Input type="radio" value="High school degree" label="High school degree" />
@@ -62,7 +62,7 @@ export default class SurveyPage3 extends React.Component {
         </RadioField>
         { this.displayErrors('highestEducationDegree') }
 
-        <RadioField model="survey.intendedHighestEducationDegree">
+        <RadioField model="forms.survey.intendedHighestEducationDegree">
           <label>{ 'What is the highest degree you plan on earning?' }</label>
           <Input type="radio" value="Less than a high school degree" label="Less than a high school degree" active />
           <Input type="radio" value="High school degree" label="High school degree" />

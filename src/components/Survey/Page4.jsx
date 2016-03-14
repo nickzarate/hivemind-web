@@ -30,21 +30,21 @@ export default class SurveyPage4 extends React.Component {
   render() {
     const { survey } = this.props
     return (
-      <Form onSubmit={ this.props.onSubmit } model="survey">
+      <Form onSubmit={ this.props.onSubmit } model="forms.survey">
 
-        <TextField model="survey.highSchoolGPA" parser={ toNum }>
+        <TextField model="forms.survey.highSchoolGPA" parser={ toNum }>
           <label>{ 'What was your high school GPA? (If you do not know, give your best guess)' }</label>
           <Input type="text" placeholder="High School GPA" value={ survey.highSchoolGPA } />
         </TextField>
         { this.displayErrors('highSchoolGPA') }
 
-        <TextField model="survey.collegeGPA" parser={ toNum }>
+        <TextField model="forms.survey.collegeGPA" parser={ toNum }>
           <label>{ 'What was your College GPA? (If you do not know, give your best guess)' }</label>
           <Input type="text" placeholder="College GPA" value={ survey.collegeGPA } />
         </TextField>
         { this.displayErrors('collegeGPA') }
 
-        <RadioField model="survey.fathersEducation">
+        <RadioField model="forms.survey.fathersEducation">
           <label>{ 'What is the highest level of education obtained by your father?' }</label>
           <Input type="radio" value="Less than a high school degree" label="Less than a high school degree" active />
           <Input type="radio" value="High school degree" label="High school degree" />
@@ -57,7 +57,7 @@ export default class SurveyPage4 extends React.Component {
         { this.displayErrors('fathersEducation') }
         <Input onChange={ this.handleChange('fathersEducationIsGuess') } type="checkbox" label="This is a guess" checked={ survey.fathersEducationIsGuess } />
 
-        <RadioField model="survey.mothersEducation">
+        <RadioField model="forms.survey.mothersEducation">
           <label>{ 'What is the highest level of education obtained by your mother?' }</label>
           <Input type="radio" value="Less than a high school degree" label="Less than a high school degree" active />
           <Input type="radio" value="High school degree" label="High school degree" />

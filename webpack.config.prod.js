@@ -32,6 +32,7 @@ module.exports = {
       "redux",
       "redux-actions",
       "redux-localstorage",
+      "redux-localstorage-filter",
       "redux-thunk",
       "reselect"
     ],
