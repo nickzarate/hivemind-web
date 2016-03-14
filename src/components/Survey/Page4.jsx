@@ -68,7 +68,7 @@ export default class SurveyPage4 extends React.Component {
           <Input type="radio" value="Post-doctoral degree" label="Post-doctoral degree" />
         </RadioField>
         { this.displayErrors('mothersEducation') }
-        <Input onChange={ this.handleChange('mothersEducationIsGuess') } type="checkbox" label="This is a guess" checked={ mothersEducationIsGuess } />
+        <Input onChange={ this.handleChange('mothersEducationIsGuess') } type="checkbox" label="This is a guess" checked={ survey.mothersEducationIsGuess } />
 
         <button type="submit">{ 'Continue' }</button>
       </Form>

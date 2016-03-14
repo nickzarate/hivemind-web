@@ -30,12 +30,12 @@ export default class SurveyPage2 extends React.Component {
     return (
       <Form onSubmit={ this.props.onSubmit } model="survey">
 
-        <TextField model="survey.isLunchReducedPrice">
+        <RadioField model="survey.isLunchReducedPrice">
           <label>{ 'Have you ever received free or reduced price lunch where you attended school?' }</label>
           <Input type="radio" value="Yes" label="Yes" active />
           <Input type="radio" value="No" label="No" />
           <Input type="radio" value="I don't know" label="I don't know" />
-        </TextField>
+        </RadioField>
         { this.displayErrors('isLunchReducedPrice') }
 
         <label>{ 'Birthdate' }</label>
