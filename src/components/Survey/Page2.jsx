@@ -6,6 +6,9 @@ import { toNum } from 'toolbox/parser'
 const TextField = createFieldClass({
   'Input': controls.text
 })
+const RadioField = createFieldClass({
+  'Input': controls.radio
+})
 
 export default class SurveyPage2 extends React.Component {
   constructor(props) {
@@ -23,12 +26,13 @@ export default class SurveyPage2 extends React.Component {
   }
 
   render() {
+    const { survey } = this.props
     return (
       <Form onSubmit={ this.props.onSubmit } model="survey">
 
         <TextField model="survey.isLunchReducedPrice">
           <label>{ 'Have you ever received free or reduced price lunch where you attended school?' }</label>
-          <Input type="radio" value="Yes" label="Yes" />
+          <Input type="radio" value="Yes" label="Yes" active />
           <Input type="radio" value="No" label="No" />
           <Input type="radio" value="I don't know" label="I don't know" />
         </TextField>
@@ -36,32 +40,32 @@ export default class SurveyPage2 extends React.Component {
 
         <label>{ 'Birthdate' }</label>
         <TextField model="survey.birthdate.month" parser={ toNum }>
-          <Input type="text" placeholder="MM" />
+          <Input type="text" placeholder="MM" value={ survey.birthdate.month } />
         </TextField>
         { this.displayErrors('birthdate.month') }
 
         <TextField model="survey.birthdate.day" parser={ toNum }>
-          <Input type="text" placeholder="DD" />
+          <Input type="text" placeholder="DD" value={ survey.birthdate.day } />
         </TextField>
         { this.displayErrors('birthdate.day') }
 
         <TextField model="survey.birthdate.year" parser={ toNum }>
-          <Input type="text" placeholder="YYYY" />
+          <Input type="text" placeholder="YYYY" value={ survey.birthdate.year } />
         </TextField>
         { this.displayErrors('birthdate.year') }
 
-        <TextField model="survey.isStudent">
+        <RadioField model="survey.isStudent">
           <label>{ 'Are you currently a student?' }</label>
-          <Input type="radio" value="Yes" label="Yes" />
+          <Input type="radio" value="Yes" label="Yes" active />
           <Input type="radio" value="No" label="No" />
-        </TextField>
+        </RadioField>
         { this.displayErrors('isStudent') }
 
-        <TextField model="survey.isEmployed">
+        <RadioField model="survey.isEmployed">
           <label>{ 'Are you currently employed?' }</label>
-          <Input type="radio" value="Yes" label="Yes" />
+          <Input type="radio" value="Yes" label="Yes" active />
           <Input type="radio" value="No" label="No" />
-        </TextField>
+        </RadioField>
         { this.displayErrors('isEmployed') }
 
         <TextField model="survey.annualSalary" parser={ toNum }>
