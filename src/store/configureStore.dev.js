@@ -15,7 +15,7 @@ export default function configureStore(initialState) {
     initialState,
     compose(
       applyMiddleware(thunk),
-      persistState(['answer', 'category', 'question']),//, localStorageConfig),
+      persistState(['answer', 'category', 'question', 'survey']),//, localStorageConfig),
       DevTools.instrument()
     )
   )
