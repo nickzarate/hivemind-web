@@ -70,19 +70,19 @@ export default class SurveyPage2 extends React.Component {
 
         <TextField model="survey.annualSalary" parser={ toNum }>
           <label>{ 'What is your current annual salary, rounded to the nearest thousand (for example $25,325 would simply be $25,000)' }</label>
-          <Input type="text" placeholder="Annual Salary" />
+          <Input type="text" placeholder="Annual Salary" value={ survey.annualSalary } />
         </TextField>
         { this.displayErrors('annualSalary') }
 
         <TextField model="survey.workHoursPerWeek" parser={ toNum }>
           <label>{ 'About how many hours per week do you work?' }</label>
-          <Input type="text" placeholder="Hours" />
+          <Input type="text" placeholder="Hours" value={ survey.workHoursPerWeek } />
         </TextField>
         { this.displayErrors('workHoursPerWeek') }
 
         <TextField model="survey.yearsOfWorkExperienceOverall" parser={ toNum }>
           <label>{ 'How many years of work experience do you have overall (counting all time employed)?' }</label>
-          <Input type="text" placeholder="Years" />
+          <Input type="text" placeholder="Years" value={ survey.yearsOfWorkExperienceOverall } />
         </TextField>
         { this.displayErrors('yearsOfWorkExperienceOverall') }
 
