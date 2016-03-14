@@ -3,8 +3,11 @@ import { Form, getField, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
 import { toNum } from 'toolbox/parser'
 
-const InputField = createFieldClass({
+const TextField = createFieldClass({
   'Input': controls.text
+})
+const RadioField = createFieldClass({
+  'Input': controls.radio
 })
 
 export default class SurveyPage4 extends React.Component {
@@ -25,46 +28,47 @@ export default class SurveyPage4 extends React.Component {
   handleChange = (val) => { return () => this.props.onCheckChange(val) };
 
   render() {
+    const { survey } = this.props
     return (
       <Form onSubmit={ this.props.onSubmit } model="survey">
 
-        <InputField model="survey.highSchoolGPA" parser={ toNum }>
+        <TextField model="survey.highSchoolGPA" parser={ toNum }>
           <label>{ 'What was your high school GPA? (If you do not know, give your best guess)' }</label>
-          <Input type="text" placeholder="High School GPA" />
-        </InputField>
+          <Input type="text" placeholder="High School GPA" value={ survey.highSchoolGPA } />
+        </TextField>
         { this.displayErrors('highSchoolGPA') }
 
-        <InputField model="survey.collegeGPA" parser={ toNum }>
+        <TextField model="survey.collegeGPA" parser={ toNum }>
           <label>{ 'What was your College GPA? (If you do not know, give your best guess)' }</label>
-          <Input type="text" placeholder="College GPA" />
-        </InputField>
+          <Input type="text" placeholder="College GPA" value={ survey.collegeGPA } />
+        </TextField>
         { this.displayErrors('collegeGPA') }
 
-        <InputField model="survey.fathersEducation">
+        <RadioField model="survey.fathersEducation">
           <label>{ 'What is the highest level of education obtained by your father?' }</label>
-          <Input type="radio" value="Less than a high school degree" label="Less than a high school degree" />
+          <Input type="radio" value="Less than a high school degree" label="Less than a high school degree" active />
           <Input type="radio" value="High school degree" label="High school degree" />
           <Input type="radio" value="Associate’s degree or technical degree (2-year college degree)" label="Associate’s degree or technical degree (2-year college degree)" />
           <Input type="radio" value="Bachelor’s degree (4-year college degree)" label="Bachelor’s degree (4-year college degree)" />
           <Input type="radio" value="Master’s degree (2-year graduate degree)" label="Master’s degree (2-year graduate degree)" />
           <Input type="radio" value="PhD, MD (Doctor), or JD (Lawyer) (3- to 6-year graduate degree)" label="PhD, MD (Doctor), or JD (Lawyer) (3- to 6-year graduate degree)" />
           <Input type="radio" value="Post-doctoral degree" label="Post-doctoral degree" />
-        </InputField>
+        </RadioField>
         { this.displayErrors('fathersEducation') }
-        <Input onChange={ this.handleChange('fathersEducationIsGuess') } type="checkbox" label="This is a guess" />
+        <Input onChange={ this.handleChange('fathersEducationIsGuess') } type="checkbox" label="This is a guess" checked={ survey.fathersEducationIsGuess } />
 
-        <InputField model="survey.mothersEducation">
+        <RadioField model="survey.mothersEducation">
           <label>{ 'What is the highest level of education obtained by your mother?' }</label>
-          <Input type="radio" value="Less than a high school degree" label="Less than a high school degree" />
+          <Input type="radio" value="Less than a high school degree" label="Less than a high school degree" active />
           <Input type="radio" value="High school degree" label="High school degree" />
           <Input type="radio" value="Associate’s degree or technical degree (2-year college degree)" label="Associate’s degree or technical degree (2-year college degree)" />
           <Input type="radio" value="Bachelor’s degree (4-year college degree)" label="Bachelor’s degree (4-year college degree)" />
           <Input type="radio" value="Master’s degree (2-year graduate degree)" label="Master’s degree (2-year graduate degree)" />
           <Input type="radio" value="PhD, MD (Doctor), or JD (Lawyer) (3- to 6-year graduate degree)" label="PhD, MD (Doctor), or JD (Lawyer) (3- to 6-year graduate degree)" />
           <Input type="radio" value="Post-doctoral degree" label="Post-doctoral degree" />
-        </InputField>
+        </RadioField>
         { this.displayErrors('mothersEducation') }
-        <Input onChange={ this.handleChange('mothersEducationIsGuess') } type="checkbox" label="This is a guess" />
+        <Input onChange={ this.handleChange('mothersEducationIsGuess') } type="checkbox" label="This is a guess" checked={ mothersEducationIsGuess } />
 
         <button type="submit">{ 'Continue' }</button>
       </Form>
