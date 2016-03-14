@@ -36,10 +36,12 @@ export function submitPage2() {
       required: (val) => !val.length && 'Must answer!'
     }))
     dispatch(actions.validateErrors('survey.birthdate.day', {
-      required: (val) => typeof val === 'string' && 'Must answer!'
+      required: (val) => typeof val === 'string' && 'Must answer!',
+      validDay: (val) => val > 0 && val < 31 && 'Please enter a valid day!'
     }))
     dispatch(actions.validateErrors('survey.birthdate.month', {
-      required: (val) => typeof val === 'string' && 'Must answer!'
+      required: (val) => typeof val === 'string' && 'Must answer!',
+      validMonth: (val) => val > 0 && val < 12 && 'Please enter a valid month!'
     }))
     dispatch(actions.validateErrors('survey.birthdate.year', {
       required: (val) => typeof val === 'string' && 'Must answer!'
