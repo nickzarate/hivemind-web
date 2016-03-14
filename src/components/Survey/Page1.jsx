@@ -1,93 +1,93 @@
 import React from 'react'
 import survey from 'assets/survey.json'
-import { Form, createFieldClass, controls } from 'react-redux-form'
+import { Form, getField, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
-import { toBool } from 'toolbox/parser'
-
-const CheckField = createFieldClass({
-  'Input': (props) => ({
-    onChange: () => { props.changeValue(props.val, props.checked) }
-  })
-})
-
-const RadioField = createFieldClass({
+const TextField = createFieldClass({
   'Input': controls.text
 })
-
+const RadioField = createFieldClass({
+  'Input': controls.radio
+})
 const SelectField = createFieldClass({
   'Input': controls.select
 })
 
 export default class SurveyPage1 extends React.Component {
+  constructor(props) {
+    super(props)
+    this.displayErrors = this.displayErrors.bind(this)
+  }
+
+  displayErrors(state) {
+    var errors = getField(this.props.surveyForm, state).errors
+    return Object.keys(errors).map(
+      (error, index) => (
+        <p key={ index }>{ errors[error] }</p>
+      )
+    )
+  }
+
+  handleChange = (val) => { return () => this.props.onCheckChange(val) };
+
   render() {
-    const { changeValue, survey: { race } } = this.props
+    const { race } = this.props.survey
     return (
       <Form onSubmit={ this.props.onSubmit } model="survey">
+
         <SelectField model="survey.stateOfResidence">
-          <Input type="select" label="What state do you live in?">
-            { survey.STATE_OPTIONS.map( (option) => ( <option key={ option }>{ option }</option> ) ) }
+          <Input type="select" label="What state do you live in?" defaultValue={ race.stateOfResidence }>
+            { survey.STATE_OPTIONS.map( (option) => ( <option key={ option } value={ option }>{ option }</option> ) ) }
           </Input>
         </SelectField>
+        { this.displayErrors('stateOfResidence') }
+
         <RadioField model="survey.gender">
           <label>{ 'Gender' }</label>
-          <Input type="radio" label="Male" value="Male" />
+          <Input type="radio" label="Male" value="Male" active />
           <Input type="radio" label="Female" value="Female" />
         </RadioField>
+        { this.displayErrors('gender') }
+
         <RadioField model="survey.hispanic">
           <label>{ 'Are you of Hispanic, Latino, or Spanish origin?' }</label>
-          <Input type="radio" label="No" value="No" />
+          <Input type="radio" label="No" value="No" active />
           <Input type="radio" label="Yes, Mexican, Mexican-American, or Chicano" value="Yes, Mexican, Mexican-American, or Chicano" />
           <Input type="radio" label="Yes, Puerto Rican" value="Yes, Puerto Rican" />
           <Input type="radio" label="Yes, Cuban" value="Yes, Cuban" />
           <Input type="radio" label="Yes, another Hispanic, Latino, or Spanish origin" value="Yes, another Hispanic, Latino, or Spanish origin" />
         </RadioField>
+        { this.displayErrors('hispanic') }
+
         <label>{ 'What is your race? Check all that apply' }</label>
-        <CheckField model="survey.race.white">
-          <Input changeValue={ changeValue } val="white" type="checkbox" checked={ race.white } label="White" />
-        </CheckField>
-        <CheckField model="survey.race.blackOrAfricanAmerican">
-          <Input changeValue={ changeValue } val="blackOrAfricanAmerican" type="checkbox" checked={ race.blackOrAfricanAmerican } label="Black or African American" />
-        </CheckField>
-        <CheckField model="survey.race.americanIndianOrAlaskaNative">
-          <Input changeValue={ changeValue } val="americanIndianOrAlaskaNative" type="checkbox" checked={ race.americanIndianOrAlaskaNative } label="American Indian or Alaska Native" />
-        </CheckField>
-        <CheckField model="survey.race.asianIndian">
-          <Input changeValue={ changeValue } val="asianIndian" type="checkbox" checked={ race.asianIndian } label="Asian Indian" />
-        </CheckField>
-        <CheckField model="survey.race.chinese">
-          <Input changeValue={ changeValue } val="chinese" type="checkbox" checked={ race.chinese } label="Chinese" />
-        </CheckField>
-        <CheckField model="survey.race.filipino">
-          <Input changeValue={ changeValue } val="filipino" type="checkbox" checked={ race.filipino } label="Filipino" />
-        </CheckField>
-        <CheckField model="survey.race.japanese">
-          <Input changeValue={ changeValue } val="japanese" type="checkbox" checked={ race.japanese } label="Japanese" />
-        </CheckField>
-        <CheckField model="survey.race.korean">
-          <Input changeValue={ changeValue } val="korean" type="checkbox" checked={ race.korean } label="Korean" />
-        </CheckField>
-        <CheckField model="survey.race.vietnamese">
-          <Input changeValue={ changeValue } val="vietnamese" type="checkbox" checked={ race.vietnamese } label="Vietnamese" />
-        </CheckField>
-        <CheckField model="survey.race.otherAsian">
-          <Input changeValue={ changeValue } val="otherAsian" type="checkbox" checked={ race.otherAsian } label="Other Asian" />
-        </CheckField>
-        <CheckField model="survey.race.pacificIslander">
-          <Input changeValue={ changeValue } val="pacificIslander" type="checkbox" checked={ race.pacificIslander } label="Pacific Islander" />
-        </CheckField>
-        <RadioField model="survey.race.other">
-          <Input type="text" label="Other Race (Fill in)" placeholder="Other Race" />
-        </RadioField>
-        <RadioField model="survey.isBornInUS" parser={ toBool }>
+        <Input onChange={ this.handleChange('white') } type="checkbox" label="White" checked={ race.white } />
+        <Input onChange={ this.handleChange('blackOrAfricanAmerican') } type="checkbox" label="Black or African American" checked={ race.blackOrAfricanAmerican } />
+        <Input onChange={ this.handleChange('americanIndianOrAlaskaNative') } type="checkbox" label="American Indian or Alaska Native" checked={ race.americanIndianOrAlaskaNative } />
+        <Input onChange={ this.handleChange('asianIndian') } type="checkbox" label="Asian Indian" checked={ race.asianIndian } />
+        <Input onChange={ this.handleChange('chinese') } type="checkbox" label="Chinese" checked={ race.chinese } />
+        <Input onChange={ this.handleChange('filipino') } type="checkbox" label="Filipino" checked={ race.filipino } />
+        <Input onChange={ this.handleChange('japanese') } type="checkbox" label="Japanese" checked={ race.japanese } />
+        <Input onChange={ this.handleChange('korean') } type="checkbox" label="Korean" checked={ race.korean } />
+        <Input onChange={ this.handleChange('vietnamese') } type="checkbox" label="Vietnamese" checked={ race.vietnamese } />
+        <Input onChange={ this.handleChange('otherAsian') } type="checkbox" label="Other Asian" checked={ race.otherAsian } />
+        <Input onChange={ this.handleChange('pacificIslander') } type="checkbox" label="Pacific Islander" checked={ race.pacificIslander } />
+        <TextField model="survey.race.other">
+          <Input type="text" label="Other Race (Fill in)" placeholder="Other Race" value={ race.other } />
+        </TextField>
+
+        <RadioField model="survey.isBornInUS">
           <label>{ 'Were you born in the United States?' }</label>
-          <Input type="radio" label="Yes" value="true" />
-          <Input type="radio" label="No" value="false" />
+          <Input type="radio" label="Yes" value="Yes" active />
+          <Input type="radio" label="No" value="No" />
         </RadioField>
-        <RadioField model="survey.isEnglishPrimaryLanguage" parser={ toBool }>
+        { this.displayErrors('isBornInUS') }
+
+        <RadioField model="survey.isEnglishPrimaryLanguage">
           <label>{ 'Is English the primary language spoken at home?' }</label>
-          <Input type="radio" label="Yes" value="true" />
-          <Input type="radio" label="No" value="false" />
+          <Input type="radio" label="Yes" value="Yes" active />
+          <Input type="radio" label="No" value="No" />
         </RadioField>
+        { this.displayErrors('isEnglishPrimaryLanguage') }
+
         <button type="submit">{ 'Continue' }</button>
       </Form>
     )

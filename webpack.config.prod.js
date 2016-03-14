@@ -39,7 +39,7 @@ module.exports = {
   },
   output: {
     path: path.resolve("dist"),
-    publicPath: "",
+    publicPath: "/",
     filename: "js/[name]-[hash].js"
   },
   module: {

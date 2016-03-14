@@ -26,10 +26,10 @@ export default function Routes() {
         <IndexRoute component={ Landing } />
         <Route path="signup" component={ Signup }>
           <IndexRoute component={ SurveyInstructions } />
-          <Route path="/signup/1" component={ SurveyPage1 } />
-          <Route path="/signup/2" component={ SurveyPage2 } />
-          <Route path="/signup/3" component={ SurveyPage3 } />
-          <Route path="/signup/4" component={ SurveyPage4 } />
+          <Route path="1" component={ SurveyPage1 } />
+          <Route path="2" component={ SurveyPage2 } />
+          <Route path="3" component={ SurveyPage3 } />
+          <Route path="4" component={ SurveyPage4 } />
         </Route>
         <Route path="home" component={ Home } />
         <Route path="round" component={ Round }>

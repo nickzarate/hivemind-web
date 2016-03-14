@@ -9,7 +9,7 @@ export default function configureStore(initialState) {
     initialState,
     compose(
       applyMiddleware(thunk),
-      persistState(['answer', 'category', 'question'])
+      persistState(['answer', 'category', 'question', 'survey'])
     )
   )
 }
