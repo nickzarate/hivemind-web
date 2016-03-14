@@ -32,23 +32,23 @@ export default class SurveyPage1 extends React.Component {
   render() {
     const { race } = this.props.survey
     return (
-      <Form onSubmit={ this.props.onSubmit } model="survey">
+      <Form onSubmit={ this.props.onSubmit } model="forms.survey">
 
-        <SelectField model="survey.stateOfResidence">
+        <SelectField model="forms.survey.stateOfResidence">
           <Input type="select" label="What state do you live in?" defaultValue={ race.stateOfResidence }>
             { survey.STATE_OPTIONS.map( (option) => ( <option key={ option } value={ option }>{ option }</option> ) ) }
           </Input>
         </SelectField>
         { this.displayErrors('stateOfResidence') }
 
-        <RadioField model="survey.gender">
+        <RadioField model="forms.survey.gender">
           <label>{ 'Gender' }</label>
           <Input type="radio" label="Male" value="Male" active />
           <Input type="radio" label="Female" value="Female" />
         </RadioField>
         { this.displayErrors('gender') }
 
-        <RadioField model="survey.hispanic">
+        <RadioField model="forms.survey.hispanic">
           <label>{ 'Are you of Hispanic, Latino, or Spanish origin?' }</label>
           <Input type="radio" label="No" value="No" active />
           <Input type="radio" label="Yes, Mexican, Mexican-American, or Chicano" value="Yes, Mexican, Mexican-American, or Chicano" />
@@ -70,18 +70,18 @@ export default class SurveyPage1 extends React.Component {
         <Input onChange={ this.handleChange('vietnamese') } type="checkbox" label="Vietnamese" checked={ race.vietnamese } />
         <Input onChange={ this.handleChange('otherAsian') } type="checkbox" label="Other Asian" checked={ race.otherAsian } />
         <Input onChange={ this.handleChange('pacificIslander') } type="checkbox" label="Pacific Islander" checked={ race.pacificIslander } />
-        <TextField model="survey.race.other">
+        <TextField model="forms.survey.race.other">
           <Input type="text" label="Other Race (Fill in)" placeholder="Other Race" value={ race.other } />
         </TextField>
 
-        <RadioField model="survey.isBornInUS">
+        <RadioField model="forms.survey.isBornInUS">
           <label>{ 'Were you born in the United States?' }</label>
           <Input type="radio" label="Yes" value="Yes" active />
           <Input type="radio" label="No" value="No" />
         </RadioField>
         { this.displayErrors('isBornInUS') }
 
-        <RadioField model="survey.isEnglishPrimaryLanguage">
+        <RadioField model="forms.survey.isEnglishPrimaryLanguage">
           <label>{ 'Is English the primary language spoken at home?' }</label>
           <Input type="radio" label="Yes" value="Yes" active />
           <Input type="radio" label="No" value="No" />
