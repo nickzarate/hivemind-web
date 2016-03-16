@@ -1,10 +1,15 @@
+import 'babel-polyfill'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from 'reducers'
 import persistState, { mergePersistedState } from 'redux-localstorage'
 import adapter from 'redux-localstorage/lib/adapters/localStorage'
 import filter from 'redux-localstorage-filter'
+import createSagaMiddleware from 'redux-saga'
+import { watchLoginFlow } from 'sagas'
 import DevTools from 'containers/DevTools'
+
+const sagaMiddleware = createSagaMiddleware(watchLoginFlow)
 
 export default function configureStore() {
   const reducers = compose(
@@ -18,7 +23,7 @@ export default function configureStore() {
   const store = createStore(
     reducers,
     compose(
-      applyMiddleware(thunk),
+      applyMiddleware(thunk, sagaMiddleware),
       persistState(storage),
       DevTools.instrument()
     )
