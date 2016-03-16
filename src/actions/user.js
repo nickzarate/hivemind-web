@@ -4,31 +4,13 @@ import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
 
 /*
- *  Login the user and go to the home page
- */
-export function asyncLogin() {
-  return (dispatch, getState) => {
-    const { forms: { login } } = getState()
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    Parse.User.logIn(login.email, login.password, {
-      success() {
-        browserHistory.push('/home')
-      },
-      error(user, error) {
-        dispatch(setMessage('Error: ' + error.code + ' ' + error.message))
-      }
-    })
-  }
-}
-
-/*
  *  Sign up a new user with the given email and go to the home page
  */
 export function asyncHandleSignup() {
   return (dispatch, getState) => {
     const { forms: { survey, signup } } = getState()
-    let newUser = new Parse.User()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+    let newUser = new Parse.User()
 
     // Validation
     if (signup.email.length === 0) {
@@ -71,13 +53,5 @@ export function asyncHandleSignup() {
         dispatch(setMessage('Error: ' + error.code + ' ' + error.message))
       }
     })
-  }
-}
-
-export function logOut() {
-  return () => {
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    Parse.User.logOut()
-    browserHistory.push('/')
   }
 }
