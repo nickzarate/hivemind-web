@@ -1,9 +1,9 @@
 import React from 'react'
 import reduxify from 'store/reduxify'
-import { logoutAsync } from 'reducers/user'
+import { logout } from 'reducers/user'
 
 class LogoutButton extends React.Component {
-  handleClick = () => this.props.actions.logoutAsync();
+  handleClick = () => this.props.actions.logout();
 
   render() {
     return (
@@ -13,6 +13,6 @@ class LogoutButton extends React.Component {
 }
 
 export default reduxify({
-  actions: { logoutAsync },
+  actions: { logout },
   container: LogoutButton
 })

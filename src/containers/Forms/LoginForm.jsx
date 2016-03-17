@@ -1,7 +1,7 @@
 import React from 'react'
 import reduxify from 'store/reduxify'
 import LoginForm from 'components/Forms/LoginForm'
-import { loginAsync } from 'reducers/user'
+import { login } from 'reducers/user'
 import { setMessage, setTarget } from 'actions/tooltip'
 import { actions } from 'react-redux-form'
 import loginFormSelector from 'selectors/forms/login'
@@ -13,7 +13,7 @@ class LoginFormContainer extends React.Component {
     this.props.actions.reset('login')
   }
 
-  handleSubmit = () => this.props.actions.loginAsync(this.props.email, this.props.password);
+  handleSubmit = () => this.props.actions.login(this.props.email, this.props.password);
 
   render() {
     return (
@@ -28,6 +28,6 @@ class LoginFormContainer extends React.Component {
 
 export default reduxify({
   selector: loginFormSelector,
-  actions: { loginAsync, setMessage, setTarget, reset: actions.reset },
+  actions: { login, setMessage, setTarget, reset: actions.reset },
   container: LoginFormContainer
 })

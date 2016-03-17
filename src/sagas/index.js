@@ -11,7 +11,8 @@ export function* watchLoginFlow() {
     // LOG IN USER
     while (!Parse.User.current()) {
       browserHistory.push('/')
-      const action = yield take('LOGIN_ASYNC')
+      yield take('user/LOGIN')
+      const loginCredentials = select()
 
       try {
         yield call(Parse.User.logIn, action.payload.email, action.payload.password)
@@ -25,7 +26,8 @@ export function* watchLoginFlow() {
     if (window.location.pathname === '/') {
       browserHistory.push('/home')
     }
-    yield take('LOGOUT_ASYNC')
+    yield fork(watchRoundFlow)
+    yield take('user/LOGOUT')
     yield call(Parse.User.logOut)
   }
 }
