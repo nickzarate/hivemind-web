@@ -5,5 +5,6 @@ const LOGIN = 'user/LOGIN'
 const LOGOUT = 'user/LOGOUT'
 
 /* Actions */
-export const login = createAction(LOGIN, (email, password) => { return { email, password } })
+// Saga-only actions
+export const login = createAction(LOGIN, (email, password) => { email, password })
 export const logout = createAction(LOGOUT)

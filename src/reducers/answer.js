@@ -8,7 +8,7 @@ const SET_BIN_VALUES = 'answer/SET_BIN_VALUES'
 const SET_BANK = 'answer/SET_BANK'
 const SET_ANSWER_SUBMITTED = 'answer/SET_ANSWER_SUBMITTED'
 
-/* Action Creators */
+/* Actions */
 export const deposit = createAction(DEPOSIT, (binsIndex, index) => { binsIndex, index })
 export const setAnswerSubmitted = createAction(SET_ANSWER_SUBMITTED, (submitted) => { submitted })
 export const setBank = createAction(SET_BANK, (bank) => { bank })
