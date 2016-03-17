@@ -3,13 +3,13 @@ import reduxify from 'store/reduxify'
 import SignupForm from 'components/Forms/SignupForm'
 import { actions } from 'react-redux-form'
 import { asyncHandleSignup } from 'actions/user'
-import { setMessage, setTarget } from 'actions/tooltip'
+import { setTooltipMessage, setTooltipTarget } from 'actions/tooltip'
 import signupFormSelector from 'selectors/forms/signup'
 
 class SignupFormContainer extends React.Component {
   componentWillUnmount() {
-    this.props.actions.setMessage('')
-    this.props.actions.setTarget('')
+    this.props.actions.setTooltipMessage('')
+    this.props.actions.setTooltipTarget('')
     this.props.actions.reset('signup')
   }
 
@@ -28,6 +28,6 @@ class SignupFormContainer extends React.Component {
 
 export default reduxify({
   selector: signupFormSelector,
-  actions: { asyncHandleSignup, setMessage, setTarget, reset: actions.reset },
+  actions: { asyncHandleSignup, setTooltipMessage, setTooltipTarget, reset: actions.reset },
   container: SignupFormContainer
 })
