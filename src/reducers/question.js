@@ -2,10 +2,10 @@ import update from 'react-addons-update'
 import { createAction } from 'redux-actions'
 
 /* Action Types */
-const SET_QUESTION = 'question/SET_QUESTION'
+export const SET_QUESTION = 'question/SET_QUESTION'
 
 /* Actions */
-export const setQuestion = createAction(SET_QUESTION, currentQuestion => { currentQuestion })
+export const setQuestion = createAction(SET_QUESTION, currentQuestion => ({ currentQuestion }))
 
 /* Reducer */
 const initialState = {

@@ -2,10 +2,10 @@ import update from 'react-addons-update'
 import { createAction } from 'redux-actions'
 
 /* Action Types */
-const SHOW_MODAL = 'modal/SHOW_MODAL'
+export const SHOW_MODAL = 'modal/SHOW_MODAL'
 
 /* Actions */
-export const showModal = createAction(SHOW_MODAL, (showModal) => { showModal })
+export const showModal = createAction(SHOW_MODAL, (showModal) => ({ showModal }))
 
 /* Reducer */
 const initialState = {

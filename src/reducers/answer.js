@@ -2,18 +2,18 @@ import update from 'react-addons-update'
 import { createAction } from 'redux-actions'
 
 /* Action Types */
-const DEPOSIT = 'answer/DEPOSIT'
-const WITHDRAW = 'answer/WITHDRAW'
-const SET_BIN_VALUES = 'answer/SET_BIN_VALUES'
-const SET_BANK = 'answer/SET_BANK'
-const SET_ANSWER_SUBMITTED = 'answer/SET_ANSWER_SUBMITTED'
+export const DEPOSIT = 'answer/DEPOSIT'
+export const WITHDRAW = 'answer/WITHDRAW'
+export const SET_BIN_VALUES = 'answer/SET_BIN_VALUES'
+export const SET_BANK = 'answer/SET_BANK'
+export const SET_ANSWER_SUBMITTED = 'answer/SET_ANSWER_SUBMITTED'
 
 /* Actions */
-export const deposit = createAction(DEPOSIT, (binsIndex, index) => { binsIndex, index })
-export const setAnswerSubmitted = createAction(SET_ANSWER_SUBMITTED, (submitted) => { submitted })
-export const setBank = createAction(SET_BANK, (bank) => { bank })
-export const setBinValues = createAction(SET_BIN_VALUES, (binValues) => { binValues })
-export const withdraw = createAction(WITHDRAW, (bankIndex) => { bankIndex })
+export const deposit = createAction(DEPOSIT, (binsIndex, index) => ({ binsIndex, index }))
+export const setAnswerSubmitted = createAction(SET_ANSWER_SUBMITTED, (submitted) => ({ submitted }))
+export const setBank = createAction(SET_BANK, (bank) => ({ bank }))
+export const setBinValues = createAction(SET_BIN_VALUES, (binValues) => ({ binValues }))
+export const withdraw = createAction(WITHDRAW, (bankIndex) => ({ bankIndex }))
 
 /* Reducer */
 const initialState = {

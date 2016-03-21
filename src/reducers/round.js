@@ -1,42 +1,41 @@
 import update from 'react-addons-update'
 import { createAction } from 'redux-actions'
 
-
 /* Action Types */
-const ADD_ANSWERS = 'round/ADD_ANSWERS'
-const ADD_ANSWER_TO_ROUND = 'round/ADD_ANSWER_TO_ROUND'
-const ADD_OUTCOMES = 'round/ADD_OUTCOMES'
-const ADD_WINNINGS = 'round/ADD_WINNINGS'
-const CLEAR_WINNINGS = 'round/CLEAR_WINNINGS'
-const INCREMENT_CURRENT_QUESTION = 'round/INCREMENT_CURRENT_QUESTION'
-const RESET_CURRENT_QUESTION = 'round/RESET_CURRENT_QUESTION'
-const SET_CATEGORY_NAMES = 'round/SET_CATEGORY_NAMES'
-const SET_CORRECT_ANSWER_INDICES = 'round/SET_CORRECT_ANSWER_INDICES'
-const SET_CURRENT_ROUND = 'round/SET_CURRENT_ROUND'
-const SET_RANGE = 'round/SET_RANGE'
-const SET_RANGES = 'round/SET_RANGES'
-const SET_UNLOCKED = 'round/SET_UNLOCKED'
+export const ADD_ANSWERS = 'round/ADD_ANSWERS'
+export const ADD_ANSWER_TO_ROUND = 'round/ADD_ANSWER_TO_ROUND'
+export const ADD_OUTCOMES = 'round/ADD_OUTCOMES'
+export const ADD_WINNINGS = 'round/ADD_WINNINGS'
+export const CLEAR_WINNINGS = 'round/CLEAR_WINNINGS'
+export const INCREMENT_CURRENT_QUESTION = 'round/INCREMENT_CURRENT_QUESTION'
+export const RESET_CURRENT_QUESTION = 'round/RESET_CURRENT_QUESTION'
+export const SET_CATEGORY_NAMES = 'round/SET_CATEGORY_NAMES'
+export const SET_CORRECT_ANSWER_INDICES = 'round/SET_CORRECT_ANSWER_INDICES'
+export const SET_CURRENT_ROUND = 'round/SET_CURRENT_ROUND'
+export const SET_RANGE = 'round/SET_RANGE'
+export const SET_RANGES = 'round/SET_RANGES'
+export const SET_UNLOCKED = 'round/SET_UNLOCKED'
 // Saga-only action-types
-const CHOOSE_CATEGORY = 'round/CHOOSE_CATEGORY'
-
+export const CHOOSE_CATEGORY = 'round/CHOOSE_CATEGORY'
+export const GET_CATEGORY_NAMES = 'round/GET_CATEGORY_NAMES'
 
 /* Actions */
-export const addAnswers = createAction(ADD_ANSWERS, (answers) => { answers })
-export const addAnswerToRound = createAction(ADD_ANSWER_TO_ROUND, (answer) => { answer })
-export const addOutcomes = createAction(ADD_OUTCOMES, (outcomes) => { outcomes })
-export const addWinnings = createAction(ADD_WINNINGS, (winnings) => { winnings })
+export const addAnswers = createAction(ADD_ANSWERS, (answers) => ({ answers }))
+export const addAnswerToRound = createAction(ADD_ANSWER_TO_ROUND, (answer) => ({ answer }))
+export const addOutcomes = createAction(ADD_OUTCOMES, (outcomes) => ({ outcomes }))
+export const addWinnings = createAction(ADD_WINNINGS, (winnings) => ({ winnings }))
 export const clearWinnings = createAction(CLEAR_WINNINGS)
 export const incrementCurrentQuestion = createAction(INCREMENT_CURRENT_QUESTION)
 export const resetCurrentQuestion = createAction(RESET_CURRENT_QUESTION)
-export const setCategoryNames = createAction(SET_CATEGORY_NAMES, (categoryNames) => { categoryNames })
-export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, (correctAnswerIndices) => { correctAnswerIndices })
-export const setCurrentRound = createAction(SET_CURRENT_ROUND, (currentRound) => { currentRound })
-export const setRange = createAction(SET_RANGE, (range, index) => { range, index })
-export const setRanges = createAction(SET_RANGES, (ranges) => { ranges })
-export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => { unlocked, index })
+export const setCategoryNames = createAction(SET_CATEGORY_NAMES, (categoryNames) => ({ categoryNames }))
+export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, (correctAnswerIndices) => ({ correctAnswerIndices }))
+export const setCurrentRound = createAction(SET_CURRENT_ROUND, (currentRound) => ({ currentRound }))
+export const setRange = createAction(SET_RANGE, (range, index) => ({ range, index }))
+export const setRanges = createAction(SET_RANGES, (ranges) => ({ ranges }))
+export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => ({ unlocked, index }))
 // Saga-only actions
-export const chooseCategory = createAction(CHOOSE_CATEGORY, (categoryName) => { categoryName })
-
+export const chooseCategory = createAction(CHOOSE_CATEGORY, (categoryName) => ({ categoryName }))
+export const getCategoryNames = createAction(GET_CATEGORY_NAMES)
 
 /* Reducer */
 const initialState = {

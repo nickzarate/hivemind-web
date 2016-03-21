@@ -2,10 +2,10 @@ import update from 'react-addons-update'
 import { createAction } from 'redux-actions'
 
 /* Action Types */
-const SET_CATEGORY = 'category/SET_CATEGORY'
+export const SET_CATEGORY = 'category/SET_CATEGORY'
 
 /* Actions */
-export const setCategory = createAction(SET_CATEGORY, (category) => { category })
+export const setCategory = createAction(SET_CATEGORY, (category) => ({ category }))
 
 /* Reducer */
 const initialState = {

@@ -2,22 +2,22 @@ import update from 'react-addons-update'
 import { createAction } from 'redux-actions'
 
 /* Action Types */
-const ADD_PHI = 'stats/ADD_PHI'
-const SET_COVARIATE_DATA = 'stats/SET_COVARIATE_DATA'
-const SET_DATA = 'stats/SET_DATA'
-const SET_OUTCOMES = 'stats/SET_OUTCOMES'
-const SET_OUTCOME_INDEX = 'stats/SET_OUTCOME_INDEX'
-const SET_PHI = 'stats/SET_PHI'
-const SET_SERIES = 'stats/SET_SERIES'
+export const ADD_PHI = 'stats/ADD_PHI'
+export const SET_COVARIATE_DATA = 'stats/SET_COVARIATE_DATA'
+export const SET_DATA = 'stats/SET_DATA'
+export const SET_OUTCOMES = 'stats/SET_OUTCOMES'
+export const SET_OUTCOME_INDEX = 'stats/SET_OUTCOME_INDEX'
+export const SET_PHI = 'stats/SET_PHI'
+export const SET_SERIES = 'stats/SET_SERIES'
 
 /* Actions */
-export const addPhi = createAction(ADD_PHI, (phi) => { phi })
-export const setCovariateData = createAction(SET_COVARIATE_DATA, (covariateData) => { covariateData })
-export const setData = createAction(SET_DATA, (data) => { data })
-export const setOutcomes = createAction(SET_OUTCOMES, (outcomes) => { outcomes })
-export const setOutcomeIndex = createAction(SET_OUTCOME_INDEX, (outcomeIndex) => { outcomeIndex })
-export const setPhi = createAction(SET_PHI, (phi) => { phi })
-export const setSeries = createAction(SET_SERIES, (index, data) => { index, data })
+export const addPhi = createAction(ADD_PHI, (phi) => ({ phi }))
+export const setCovariateData = createAction(SET_COVARIATE_DATA, (covariateData) => ({ covariateData }))
+export const setData = createAction(SET_DATA, (data) => ({ data }))
+export const setOutcomes = createAction(SET_OUTCOMES, (outcomes) => ({ outcomes }))
+export const setOutcomeIndex = createAction(SET_OUTCOME_INDEX, (outcomeIndex) => ({ outcomeIndex }))
+export const setPhi = createAction(SET_PHI, (phi) => ({ phi }))
+export const setSeries = createAction(SET_SERIES, (index, data) => ({ index, data }))
 
 /* Reducer */
 const initialState = {
