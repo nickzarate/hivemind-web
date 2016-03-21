@@ -2,7 +2,7 @@ import React from 'react'
 import reduxify from 'store/reduxify'
 import CategorySurveyForm from 'components/Forms/CategorySurveyForm'
 import { actions } from 'react-redux-form'
-import { resetTooltip } from 'actions/tooltip'
+import { resetTooltip } from 'reducers/tooltip'
 import categorySurveyFormSelector from 'selectors/forms/categorySurvey'
 
 class CategorySurveyFormContainer extends React.Component {

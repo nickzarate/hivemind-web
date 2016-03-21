@@ -1,5 +1,5 @@
 import React from 'react'
-import { asyncHandleCategoryChoice, asyncGetCategoryNames } from 'actions/home'
+import { chooseCategory, getCategoryNames } from 'reducers/round'
 import categoriesSelector from 'selectors/categories'
 import Categories from 'components/Categories'
 import reduxify from 'store/reduxify'

@@ -1,8 +1,8 @@
 import React from 'react'
 import reduxify from 'store/reduxify'
 import QuestionBody from 'components/QuestionBody'
-import { resetTooltip } from 'actions/tooltip'
-import { showModal } from 'actions/modal'
+import { resetTooltip } from 'reducers/tooltip'
+import { showModal } from 'reducers/modal'
 import estimatesSelector from 'selectors/forms/estimates'
 
 class QuestionBodyContainer extends React.Component {

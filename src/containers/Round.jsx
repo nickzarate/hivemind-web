@@ -2,7 +2,7 @@ import React from 'react'
 import reduxify from 'store/reduxify'
 import { asyncCreateRound, asyncHandleSubmit, asyncAwardPoints,
   initializeQuestion, pullQuestion } from 'actions/round'
-import { setTooltipMessage, setTooltipTarget } from 'actions/tooltip'
+import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
 import roundSelector from 'selectors/round'
 
 class Round extends React.Component {

@@ -1,7 +1,7 @@
 import React from 'react'
 import reduxify from 'store/reduxify'
 import LoginModal from 'components/LoginModal'
-import { showModal } from 'actions/modal'
+import { showModal } from 'reducers/modal'
 import loginModalSelector from 'selectors/loginModal'
 
 class LoginModalContainer extends React.Component {

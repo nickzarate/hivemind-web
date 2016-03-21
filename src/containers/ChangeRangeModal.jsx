@@ -1,7 +1,7 @@
 import React from 'react'
 import reduxify from 'store/reduxify'
 import ChangeRangeModal from 'components/ChangeRangeModal'
-import { showModal } from 'actions/modal'
+import { showModal } from 'reducers/modal'
 import changeRangeModalSelector from 'selectors/changeRangeModal'
 
 class ChangeRangeModalContainer extends React.Component {

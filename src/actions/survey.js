@@ -1,6 +1,6 @@
 import { browserHistory } from 'react-router'
 import { actions } from 'react-redux-form'
-import { showModal } from 'actions/modal'
+import { showModal } from 'reducers/modal'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 

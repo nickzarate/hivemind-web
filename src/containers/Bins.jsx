@@ -1,6 +1,6 @@
 import React from 'react'
 import { handleDeposit } from 'actions/answer'
-import { setCorrectAnswerIndices } from 'actions/round'
+import { setCorrectAnswerIndices } from 'reducers/round'
 import binsSelector from 'selectors/bins'
 import Bins from 'components/Bins'
 import reduxify from 'store/reduxify'

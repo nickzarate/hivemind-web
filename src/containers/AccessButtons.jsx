@@ -1,5 +1,5 @@
 import React from 'react'
-import { showModal } from 'actions/modal'
+import { showModal } from 'reducers/modal'
 import AccessButtons from 'components/AccessButtons'
 import reduxify from 'store/reduxify'
 

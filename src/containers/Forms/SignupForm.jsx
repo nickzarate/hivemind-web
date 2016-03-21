@@ -3,7 +3,7 @@ import reduxify from 'store/reduxify'
 import SignupForm from 'components/Forms/SignupForm'
 import { actions } from 'react-redux-form'
 import { asyncHandleSignup } from 'actions/user'
-import { setTooltipMessage, setTooltipTarget } from 'actions/tooltip'
+import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
 import signupFormSelector from 'selectors/forms/signup'
 
 class SignupFormContainer extends React.Component {

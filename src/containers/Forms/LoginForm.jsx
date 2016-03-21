@@ -2,7 +2,7 @@ import React from 'react'
 import reduxify from 'store/reduxify'
 import LoginForm from 'components/Forms/LoginForm'
 import { login } from 'reducers/user'
-import { setTooltipMessage, setTooltipTarget } from 'actions/tooltip'
+import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
 import { actions } from 'react-redux-form'
 import loginFormSelector from 'selectors/forms/login'
 

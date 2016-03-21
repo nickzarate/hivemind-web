@@ -1,8 +1,8 @@
 import React from 'react'
 import reduxify from 'store/reduxify'
 import RangeModal from 'components/RangeModal'
-import { handleSurveySubmission, handleStart } from 'actions/home'
-import { showModal } from 'actions/modal'
+import { handleSurveySubmission, handleStart } from 'reducers/round'
+import { showModal } from 'reducers/modal'
 import rangeModalSelector from 'selectors/rangeModal'
 
 class RangeModalContainer extends React.Component {

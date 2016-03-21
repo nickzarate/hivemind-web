@@ -1,5 +1,5 @@
 import React from 'react'
-import { showModal } from 'actions/modal'
+import { showModal } from 'reducers/modal'
 import signupModalSelector from 'selectors/signupModal'
 import SignupModal from 'components/SignupModal'
 import reduxify from 'store/reduxify'
