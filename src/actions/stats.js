@@ -29,16 +29,20 @@ export function asyncGetPhis() {
         covariates.push(answer.get('question').get('covariateValues'))
       }
 
-      $.ajax({
-        url: '/api/v1/get_phi',
+      fetch('/api/v1/get_phi', {
         method: 'POST',
-        data: JSON.stringify({
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
           covariates: covariates,
           p: predictions
-        }),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: (response) => dispatch(addPhi(response.phi))
+        })
+      }).then(function(response) {
+        return response.json()
+      }).then(function(res) {
+        dispatch(addPhi(res.phi))
       })
     }
   }
