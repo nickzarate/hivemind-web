@@ -4,14 +4,14 @@ import { createAction } from 'redux-actions'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 
-export const setData = createAction(SET_DATA, data => data)
+export const setData = createAction(SET_DATA, (data) => ({ data }))
 export const clearWinnings = createAction(CLEAR_WINNINGS)
-export const setCovariateData = createAction(SET_COVARIATE_DATA, covariateData => covariateData)
-export const setPhi = createAction(SET_PHI, phi => phi)
-export const setSeries = createAction(SET_SERIES, (index, data) => { return { index, data } })
-export const setOutcomes = createAction(SET_OUTCOMES, outcomes => outcomes)
-export const setOutcomeIndex = createAction(SET_OUTCOME_INDEX, outcomeIndex => outcomeIndex)
-export const addPhi = createAction(ADD_PHI, phi => phi)
+export const setCovariateData = createAction(SET_COVARIATE_DATA, (covariateData) => ({ covariateData }))
+export const setPhi = createAction(SET_PHI, (phi) => ({ phi }))
+export const setSeries = createAction(SET_SERIES, (index, data) => ({ index, data }))
+export const setOutcomes = createAction(SET_OUTCOMES, (outcomes) => ({ outcomes }))
+export const setOutcomeIndex = createAction(SET_OUTCOME_INDEX, (outcomeIndex) => ({ outcomeIndex }))
+export const addPhi = createAction(ADD_PHI, (phi) => ({ phi }))
 
 /*
  *  Call Python server and get Phi given the info in the current state.

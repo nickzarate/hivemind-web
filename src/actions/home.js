@@ -6,11 +6,11 @@ import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
 
-export const setCategoryNames = createAction(SET_CATEGORY_NAMES, categoryNames => categoryNames)
-export const setCategory = createAction(SET_CATEGORY, category => category)
-export const setRange = createAction(SET_RANGE, (range, index) => { return { range, index } })
-export const setRanges = createAction(SET_RANGES, ranges => ranges)
-export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => { return { unlocked, index } })
+export const setCategoryNames = createAction(SET_CATEGORY_NAMES, (categoryNames) => ({ categoryNames }))
+export const setCategory = createAction(SET_CATEGORY, (category) => ({ category }))
+export const setRange = createAction(SET_RANGE, (range, index) => ({ range, index }))
+export const setRanges = createAction(SET_RANGES, (ranges) => ({ ranges }))
+export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => ({ unlocked, index }))
 
 /*
  *  Make a query to Parse to check how many categories are currently up
