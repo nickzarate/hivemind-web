@@ -8,7 +8,7 @@ const initialState = {
 export default function modal(state = initialState, action) {
   switch (action.type) {
   case SHOW_MODAL:
-    return update(state, {showModal: {$set: action.payload}})
+    return update(state, {showModal: {$set: action.payload.showModal}})
   default:
     return state
   }

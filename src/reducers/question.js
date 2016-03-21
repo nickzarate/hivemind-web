@@ -10,7 +10,7 @@ const initialState = {
 export default function question(state = initialState, action) {
   switch (action.type) {
   case SET_QUESTION:
-    return update(state, {$set: action.payload})
+    return update(state, {$set: action.payload.question})
   default:
     return state
   }

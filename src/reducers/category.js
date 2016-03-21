@@ -21,7 +21,7 @@ const initialState = {
 export default function category(state = initialState, action) {
   switch (action.type) {
   case SET_CATEGORY:
-    return update(state, {$set: action.payload})
+    return update(state, {$set: action.payload.category})
   default:
     return state
   }

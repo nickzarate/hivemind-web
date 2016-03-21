@@ -12,13 +12,13 @@ export default function answer(state = initialState, action) {
   case DEPOSIT:
     return update(state, {binValues: {[action.payload.binsIndex]: {[action.payload.index]: {$apply: (value) => value + 1}}}})
   case SET_ANSWER_SUBMITTED:
-    return update(state, {submitted: {$set: action.payload}})
+    return update(state, {submitted: {$set: action.payload.submitted}})
   case SET_BANK:
-    return update(state, {bank: {$set: action.payload}})
+    return update(state, {bank: {$set: action.payload.bank}})
   case SET_BIN_VALUES:
-    return update(state, {binValues: {$set: action.payload}})
+    return update(state, {binValues: {$set: action.payload.binValues}})
   case WITHDRAW:
-    return update(state, {bank: {[action.payload]: {$apply: (bank) => bank - 1}}})
+    return update(state, {bank: {[action.payload.bankIndex]: {$apply: (bank) => bank - 1}}})
   default:
     return state
   }
