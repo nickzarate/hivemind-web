@@ -1,69 +1,69 @@
 import { SET_CATEGORY_NAMES, SET_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
-import { showModal } from 'actions/modal'
-import { setTooltipMessage, setTooltipTarget } from 'actions/tooltip'
+import { showModal } from 'reducers/modal'
+import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
 import { createAction } from 'redux-actions'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
 
-export const setCategoryNames = createAction(SET_CATEGORY_NAMES, categoryNames => categoryNames)
-export const setCategory = createAction(SET_CATEGORY, category => category)
-export const setRange = createAction(SET_RANGE, (range, index) => { range, index })
-export const setRanges = createAction(SET_RANGES, ranges => ranges)
-export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => { unlocked, index })
+// export const setCategoryNames = createAction(SET_CATEGORY_NAMES, categoryNames => categoryNames)
+// export const setCategory = createAction(SET_CATEGORY, category => category)
+// export const setRange = createAction(SET_RANGE, (range, index) => { range, index })
+// export const setRanges = createAction(SET_RANGES, ranges => ranges)
+// export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => { unlocked, index })
 
 /*
  *  Make a query to Parse to check how many categories are currently up
  */
-export function asyncGetCategoryNames() {
-  return (dispatch) => {
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    let query = new Parse.Query('Categories')
-    query.find({
-      success(categories) {
-        var categoryNames = []
-        for (var category of categories) {
-          categoryNames.push(category.get('name'))
-        }
-        dispatch(setCategoryNames(categoryNames))
-        dispatch(setUnlockedCategories(categories, Parse.User.current()))
-      }
-    })
-  }
-}
+// export function asyncGetCategoryNames() {
+//   return (dispatch) => {
+//     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+//     let query = new Parse.Query('Categories')
+//     query.find({
+//       success(categories) {
+//         var categoryNames = []
+//         for (var category of categories) {
+//           categoryNames.push(category.get('name'))
+//         }
+//         dispatch(setCategoryNames(categoryNames))
+//         dispatch(setUnlockedCategories(categories, Parse.User.current()))
+//       }
+//     })
+//   }
+// }
 
 /*
  *  Set the chosen category and open up the modal
  */
-export function asyncHandleCategoryChoice(categoryName) {
-  return (dispatch) => {
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    var query = new Parse.Query('Categories')
-    query.equalTo('name', categoryName)
-    query.first({
-      success(category) {
-        var selectedCategory = {
-          categorySurveyInstructions: category.get('categorySurveyInstructions'),
-          covariateNames: category.get('covariateNames'),
-          covariateRanges: category.get('covariateRanges'),
-          discrete: category.get('discrete'),
-          index: category.get('index'),
-          instructions: category.get('instructions'),
-          name: category.get('name'),
-          numBins: category.get('numBins'),
-          outcomeNames: category.get('outcomeNames'),
-          outcomeRanges: category.get('outcomeRanges'),
-          pointsPerToken: category.get('pointsPerToken'),
-          questionInstructions: category.get('questionInstructions'),
-          questionsPerRound: category.get('questionsPerRound'),
-          tokens: category.get('tokens')
-        }
-        dispatch(setCategory(selectedCategory))
-        dispatch(showModal(true))
-      }
-    })
-  }
-}
+// export function asyncHandleCategoryChoice(categoryName) {
+//   return (dispatch) => {
+//     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+//     var query = new Parse.Query('Categories')
+//     query.equalTo('name', categoryName)
+//     query.first({
+//       success(category) {
+//         var selectedCategory = {
+//           categorySurveyInstructions: category.get('categorySurveyInstructions'),
+//           covariateNames: category.get('covariateNames'),
+//           covariateRanges: category.get('covariateRanges'),
+//           discrete: category.get('discrete'),
+//           index: category.get('index'),
+//           instructions: category.get('instructions'),
+//           name: category.get('name'),
+//           numBins: category.get('numBins'),
+//           outcomeNames: category.get('outcomeNames'),
+//           outcomeRanges: category.get('outcomeRanges'),
+//           pointsPerToken: category.get('pointsPerToken'),
+//           questionInstructions: category.get('questionInstructions'),
+//           questionsPerRound: category.get('questionsPerRound'),
+//           tokens: category.get('tokens')
+//         }
+//         dispatch(setCategory(selectedCategory))
+//         dispatch(showModal(true))
+//       }
+//     })
+//   }
+// }
 
 /*
  *  Validate ranges, if everything looks good, start the round.
