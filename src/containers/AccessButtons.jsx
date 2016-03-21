@@ -1,7 +1,7 @@
 import React from 'react'
 import { showModal } from 'actions/modal'
 import AccessButtons from 'components/AccessButtons'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 
 class AccessButtonsContainer extends React.Component {
   handleLogin = () => this.props.actions.showModal(true);
@@ -15,7 +15,6 @@ class AccessButtonsContainer extends React.Component {
   }
 }
 
-export default reduxify({
-  actions: { showModal },
-  container: AccessButtonsContainer
-})
+export default connect({
+  actions: { showModal }
+})(AccessButtonsContainer)

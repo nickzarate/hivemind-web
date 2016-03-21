@@ -3,7 +3,7 @@ import { handleDeposit } from 'actions/answer'
 import { setCorrectAnswerIndices } from 'actions/round'
 import binsSelector from 'selectors/bins'
 import Bins from 'components/Bins'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 
 class BinsContainer extends React.Component {
   static defaultProps = {
@@ -33,8 +33,7 @@ class BinsContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: binsSelector,
-  actions: { handleDeposit, setCorrectAnswerIndices },
-  container: BinsContainer
-})
+  actions: { handleDeposit, setCorrectAnswerIndices }
+})(BinsContainer)

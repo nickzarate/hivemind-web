@@ -2,7 +2,7 @@ import React from 'react'
 import { showModal } from 'actions/modal'
 import signupModalSelector from 'selectors/signupModal'
 import SignupModal from 'components/SignupModal'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 
 class SignupModalContainer extends React.Component {
   componentWillUnmount() {
@@ -21,8 +21,7 @@ class SignupModalContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: signupModalSelector,
-  actions: { showModal },
-  container: SignupModalContainer
-})
+  actions: { showModal }
+})(SignupModalContainer)

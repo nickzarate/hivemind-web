@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import CategorySurveyForm from 'components/Forms/CategorySurveyForm'
 import { actions } from 'react-redux-form'
 import { resetTooltip } from 'actions/tooltip'
@@ -23,8 +23,7 @@ class CategorySurveyFormContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: categorySurveyFormSelector,
-  actions: { resetTooltip, reset: actions.reset },
-  container: CategorySurveyFormContainer
-})
+  actions: { resetTooltip, reset: actions.reset }
+})(CategorySurveyFormContainer)

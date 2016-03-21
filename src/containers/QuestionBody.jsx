@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import QuestionBody from 'components/QuestionBody'
 import { resetTooltip } from 'actions/tooltip'
 import { showModal } from 'actions/modal'
@@ -23,8 +23,7 @@ class QuestionBodyContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: estimatesSelector,
-  actions: { resetTooltip, showModal },
-  container: QuestionBodyContainer
-})
+  actions: { resetTooltip, showModal }
+})(QuestionBodyContainer)

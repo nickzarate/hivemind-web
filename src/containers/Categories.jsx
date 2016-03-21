@@ -2,7 +2,7 @@ import React from 'react'
 import { asyncHandleCategoryChoice, asyncGetCategoryNames } from 'actions/home'
 import categoriesSelector from 'selectors/categories'
 import Categories from 'components/Categories'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 
 class CategoriesContainer extends React.Component {
   componentDidMount() {
@@ -21,8 +21,7 @@ class CategoriesContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: categoriesSelector,
-  actions: { asyncHandleCategoryChoice, asyncGetCategoryNames },
-  container: CategoriesContainer
-})
+  actions: { asyncHandleCategoryChoice, asyncGetCategoryNames }
+})(CategoriesContainer)

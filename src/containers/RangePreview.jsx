@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import RangePreview from 'components/RangePreview'
 import { initializeQuestion } from 'actions/round'
 import rangePreviewSelector from 'selectors/rangePreview'
@@ -21,8 +21,7 @@ class RangePreviewContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: rangePreviewSelector,
-  actions: { initializeQuestion },
-  container: RangePreviewContainer
-})
+  actions: { initializeQuestion }
+})(RangePreviewContainer)
