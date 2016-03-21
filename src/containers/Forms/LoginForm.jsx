@@ -4,7 +4,7 @@ import LoginForm from 'components/Forms/LoginForm'
 import { login } from 'reducers/user'
 import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
 import { actions } from 'react-redux-form'
-import loginFormSelector from 'selectors/forms/login'
+import tooltipSelector from 'selectors/tooltip'
 
 class LoginFormContainer extends React.Component {
   componentWillUnmount() {
@@ -13,7 +13,7 @@ class LoginFormContainer extends React.Component {
     this.props.actions.reset('login')
   }
 
-  handleSubmit = () => this.props.actions.login(this.props.email, this.props.password);
+  handleSubmit = () => this.props.actions.login();
 
   render() {
     return (
@@ -27,7 +27,7 @@ class LoginFormContainer extends React.Component {
 }
 
 export default reduxify({
-  selector: loginFormSelector,
+  selector: tooltipSelector,
   actions: { login, setTooltipMessage, setTooltipTarget, reset: actions.reset },
   container: LoginFormContainer
 })

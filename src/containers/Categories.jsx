@@ -6,10 +6,10 @@ import reduxify from 'store/reduxify'
 
 class CategoriesContainer extends React.Component {
   componentDidMount() {
-    this.props.actions.asyncGetCategoryNames()
+    this.props.actions.getCategoryNames()
   }
 
-  handleClick = (categoryName) => this.props.actions.asyncHandleCategoryChoice(categoryName);
+  handleClick = (categoryName) => this.props.actions.chooseCategory(categoryName);
 
   render() {
     return (
@@ -23,6 +23,6 @@ class CategoriesContainer extends React.Component {
 
 export default reduxify({
   selector: categoriesSelector,
-  actions: { asyncHandleCategoryChoice, asyncGetCategoryNames },
+  actions: { chooseCategory, getCategoryNames },
   container: CategoriesContainer
 })
