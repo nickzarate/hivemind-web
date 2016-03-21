@@ -14,11 +14,9 @@ import { connect as rrConnect } from 'react-redux'
  */
 export default function connect({ state, selector, actions }) {
   /* the container will subscribe to Redux store updates */
-  if (state) {
-    var mapStateToProps = (STATE) => selector ?
-      { [state]: selector(STATE) }
-    : { [state]: STATE[state] }
-  }
+  var mapStateToProps = (STATE) => state
+  ? { [state]: STATE[state] }
+  : selector
 
   /* the container will be provided actions */
   if (actions) {
