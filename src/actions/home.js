@@ -1,6 +1,6 @@
 import { SET_CATEGORY_NAMES, SET_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
 import { showModal } from 'actions/modal'
-import { setMessage, setTarget } from 'actions/tooltip'
+import { setTooltipMessage, setTooltipTarget } from 'actions/tooltip'
 import { createAction } from 'redux-actions'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
@@ -75,22 +75,22 @@ export function handleStart() {
     // Validation
     for (let i = 0; i < outcomeNames.length; i++) {
       if (!discrete[i] && !ranges[outcomeNames[i]]) {
-        dispatch(setMessage('All fields must be filled in.'))
-        dispatch(setTarget(outcomeNames[i]))
+        dispatch(setTooltipMessage('All fields must be filled in.'))
+        dispatch(setTooltipTarget(outcomeNames[i]))
         return
       }
     }
     for (let outcomeName in ranges) {
       if (isNaN(ranges[outcomeName].lower) || isNaN(ranges[outcomeName].upper)) {
-        dispatch(setMessage('All fields must be filled in.'))
-        dispatch(setTarget(outcomeName))
+        dispatch(setTooltipMessage('All fields must be filled in.'))
+        dispatch(setTooltipTarget(outcomeName))
         return
       }
     }
     for (let outcomeName in ranges) {
       if (ranges[outcomeName].lower >= ranges[outcomeName].upper) {
-        dispatch(setMessage(outcomeName + ' range has a smaller upper bound than lower bound, try again.'))
-        dispatch(setTarget(outcomeName))
+        dispatch(setTooltipMessage(outcomeName + ' range has a smaller upper bound than lower bound, try again.'))
+        dispatch(setTooltipTarget(outcomeName))
         return
       }
     }
@@ -111,8 +111,8 @@ export function handleSurveySubmission() {
     // Validation
     for (let covariateName of covariateNames) {
       if (isNaN(covariates[covariateName])) {
-        dispatch(setMessage('All fields must be filled in.'))
-        dispatch(setTarget(covariateName))
+        dispatch(setTooltipMessage('All fields must be filled in.'))
+        dispatch(setTooltipTarget(covariateName))
         return
       }
       covariateValues.push(covariates[covariateName])

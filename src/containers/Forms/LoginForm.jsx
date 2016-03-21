@@ -2,14 +2,14 @@ import React from 'react'
 import connect from 'store/connect'
 import LoginForm from 'components/Forms/LoginForm'
 import { asyncLogin } from 'actions/user'
-import { setMessage, setTarget } from 'actions/tooltip'
+import { setTooltipMessage, setTooltipTarget } from 'actions/tooltip'
 import { actions } from 'react-redux-form'
 import loginFormSelector from 'selectors/forms/login'
 
 class LoginFormContainer extends React.Component {
   componentWillUnmount() {
-    this.props.actions.setMessage('')
-    this.props.actions.setTarget('')
+    this.props.actions.setTooltipMessage('')
+    this.props.actions.setTooltipTarget('')
     this.props.actions.reset('login')
   }
 
@@ -28,5 +28,5 @@ class LoginFormContainer extends React.Component {
 
 export default connect({
   selector: loginFormSelector,
-  actions: { asyncLogin, setMessage, setTarget, reset: actions.reset }
+  actions: { asyncLogin, setTooltipMessage, setTooltipTarget, reset: actions.reset }
 })(LoginFormContainer)

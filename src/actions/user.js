@@ -1,4 +1,4 @@
-import { setMessage, setTarget } from './tooltip'
+import { setTooltipMessage, setTooltipTarget } from './tooltip'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
@@ -15,7 +15,7 @@ export function asyncLogin() {
         browserHistory.push('/home')
       },
       error(user, error) {
-        dispatch(setMessage('Error: ' + error.code + ' ' + error.message))
+        dispatch(setTooltipMessage('Error: ' + error.code + ' ' + error.message))
       }
     })
   }
@@ -32,27 +32,27 @@ export function asyncHandleSignup() {
 
     // Validation
     if (signup.email.length === 0) {
-      dispatch(setMessage('All fields must be filled.'))
-      dispatch(setTarget('email'))
+      dispatch(setTooltipMessage('All fields must be filled.'))
+      dispatch(setTooltipTarget('email'))
       return
     }
     else if (signup.password.length === 0) {
-      dispatch(setMessage('All fields must be filled.'))
-      dispatch(setTarget('password'))
+      dispatch(setTooltipMessage('All fields must be filled.'))
+      dispatch(setTooltipTarget('password'))
       return
     }
     else if (signup.passwordConfirm.length === 0) {
-      dispatch(setMessage('All fields must be filled.'))
-      dispatch(setTarget('passwordConfirm'))
+      dispatch(setTooltipMessage('All fields must be filled.'))
+      dispatch(setTooltipTarget('passwordConfirm'))
       return
     }
     else if (signup.password.length < 6) {
-      dispatch(setMessage('Password must be at least 6 characters long.'))
-      dispatch(setTarget('password'))
+      dispatch(setTooltipMessage('Password must be at least 6 characters long.'))
+      dispatch(setTooltipTarget('password'))
       return
     } else if (signup.password !== signup.passwordConfirm) {
-      dispatch(setMessage('Passwords do not match, try again.'))
-      dispatch(setTarget('passwordConfirm'))
+      dispatch(setTooltipMessage('Passwords do not match, try again.'))
+      dispatch(setTooltipTarget('passwordConfirm'))
       return
     }
 
@@ -68,7 +68,7 @@ export function asyncHandleSignup() {
         browserHistory.push('/home')
       },
       error(user, error) {
-        dispatch(setMessage('Error: ' + error.code + ' ' + error.message))
+        dispatch(setTooltipMessage('Error: ' + error.code + ' ' + error.message))
       }
     })
   }
