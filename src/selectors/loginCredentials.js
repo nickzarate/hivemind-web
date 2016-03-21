@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
-/* Selectors */
-const loginCredentials = (state) => state.forms.login
+export const loginCredentials = (state) => state.forms.login
+
 export const getLoginCredentials = createSelector(
   loginCredentials,
   (login) => {
