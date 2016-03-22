@@ -11,6 +11,7 @@ module.exports = {
   devtool: "#source-map",
   devServer: {
     historyApiFallback: true,
+    hot: true,
     proxy: {
       "/api/*": "http://localhost:5000"
     },
@@ -21,7 +22,11 @@ module.exports = {
     extensions: ["", ".js", ".jsx"],
     modulesDirectories: ["node_modules", "src"]
   },
-  entry: path.resolve(srcPath, "index"),
+  entry: [
+    "webpack-dev-server/client?http://localhost:8080/",
+    "webpack/hot/dev-server",
+    path.resolve(srcPath, "index")
+  ],
   output: {
     filename: "[name].js",
     path: path.resolve("dist"),
@@ -79,6 +84,8 @@ module.exports = {
     new webpack.DefinePlugin({
       "__DEV__": true
     }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
       "$": "jquery",
       "jQuery": "jquery",
