@@ -3,6 +3,7 @@ import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES, SET_OU
 import { createAction } from 'redux-actions'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
+import { post } from 'actions/http'
 
 export const setData = createAction(SET_DATA, (data) => ({ data }))
 export const clearWinnings = createAction(CLEAR_WINNINGS)
@@ -11,7 +12,7 @@ export const setPhi = createAction(SET_PHI, (phi) => ({ phi }))
 export const setSeries = createAction(SET_SERIES, (index, data) => ({ index, data }))
 export const setOutcomes = createAction(SET_OUTCOMES, (outcomes) => ({ outcomes }))
 export const setOutcomeIndex = createAction(SET_OUTCOME_INDEX, (outcomeIndex) => ({ outcomeIndex }))
-export const addPhi = createAction(ADD_PHI, (phi) => ({ phi }))
+export const addPhi = createAction(ADD_PHI, (res) => ({ phi: res.phi }))
 
 /*
  *  Call Python server and get Phi given the info in the current state.
@@ -28,22 +29,7 @@ export function asyncGetPhis() {
         predictions.push(answer.get('estimates')[i])
         covariates.push(answer.get('question').get('covariateValues'))
       }
-
-      fetch('/api/v1/get_phi', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          covariates: covariates,
-          p: predictions
-        })
-      }).then(function(response) {
-        return response.json()
-      }).then(function(res) {
-        dispatch(addPhi(res.phi))
-      })
+      dispatch(post('/api/v1/get_phi', { covariates, predictions }, addPhi))
     }
   }
 }
