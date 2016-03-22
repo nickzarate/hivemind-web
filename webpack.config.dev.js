@@ -15,7 +15,9 @@ module.exports = {
     proxy: {
       "/api/*": "http://localhost:5000"
     },
-    inline: true
+    stats: {
+      chunks: false
+    }
   },
   resolve: {
     root: srcPath,
@@ -30,8 +32,10 @@ module.exports = {
   output: {
     filename: "[name].js",
     path: path.resolve("dist"),
-    pathInfo: true,
-    publicPath: "/"
+    pathinfo: true,
+    publicPath: "/",
+    // sourceMapFilename must be named 'index' for sourcemapping to work. fucking stupid.
+    sourceMapFilename: "index.js.map"
   },
   module: {
     loaders: [
@@ -86,6 +90,9 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.ProgressPlugin(function(percentage, message) {
+      process.stderr.write(message + "\r");
+    }),
     new webpack.ProvidePlugin({
       "$": "jquery",
       "jQuery": "jquery",

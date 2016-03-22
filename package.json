@@ -6,15 +6,15 @@
   "scripts": {
     "start": "npm run watch",
     "deploy": "npm run build && gulp deploy && rm -rf dist && rm -rf .publish",
-    "watch": "webpack-dev-server --progress --colors --config webpack.config.dev.js",
-    "build": "webpack --profile --progress --colors --config webpack.config.prod.js"
+    "watch": "webpack-dev-server --colors --config webpack.config.dev.js",
+    "build": "webpack --profile --colors --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nickzarate/hivemind-web.git"
   },
   "author": "Nick Zarate",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/nickzarate/hivemind-web/issues"
   },
@@ -63,6 +63,7 @@
     "html-webpack-plugin": "^2.8.1",
     "json-loader": "^0.5.4",
     "node-sass": "^3.4.2",
+    "redbox-react": "^1.2.2",
     "redux-devtools": "^3.1.1",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.4",

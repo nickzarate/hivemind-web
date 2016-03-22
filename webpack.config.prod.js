@@ -101,6 +101,9 @@ module.exports = {
       "process.env.NODE_ENV": JSON.stringify("production"),
       "__DEV__": false
     }),
+    new webpack.ProgressPlugin(function(percentage, message) {
+      process.stderr.write(message + "\r");
+    }),
     new webpack.ProvidePlugin({
       "$": "jquery",
       "jQuery": "jquery",
