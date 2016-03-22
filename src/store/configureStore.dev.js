@@ -4,6 +4,7 @@ import rootReducer from 'reducers'
 import persistState, { mergePersistedState } from 'redux-localstorage'
 import adapter from 'redux-localstorage/lib/adapters/localStorage'
 import filter from 'redux-localstorage-filter'
+import promiseMiddleware from 'redux-promise-middleware'
 import DevTools from 'containers/DevTools'
 
 export default function configureStore() {
@@ -18,7 +19,7 @@ export default function configureStore() {
   const store = createStore(
     reducers,
     compose(
-      applyMiddleware(thunk),
+      applyMiddleware(promiseMiddleware(), thunk),
       persistState(storage),
       DevTools.instrument()
     )
