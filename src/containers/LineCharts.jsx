@@ -3,7 +3,7 @@ import lineChartsSelector from 'selectors/lineCharts'
 import { asyncGetPhis, getData, getCovariateData,
   updateCovariateData, setOutcomeIndex, clearWinnings } from 'actions/stats'
 import LineCharts from 'components/LineCharts'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 
 class LineChartsContainer extends React.Component {
   constructor(props) {
@@ -51,9 +51,8 @@ class LineChartsContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: lineChartsSelector,
   actions: { asyncGetPhis, getData, getCovariateData,
-    updateCovariateData, setOutcomeIndex, clearWinnings },
-  container: LineChartsContainer
-})
+    updateCovariateData, setOutcomeIndex, clearWinnings }
+})(LineChartsContainer)

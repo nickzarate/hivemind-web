@@ -80,9 +80,6 @@ module.exports = {
       "__DEV__": true
     }),
     new webpack.ProvidePlugin({
-      "$": "jquery",
-      "jQuery": "jquery",
-      "window.jQuery": "jquery",
       "fetch": "isomorphic-fetch"
     })
   ]

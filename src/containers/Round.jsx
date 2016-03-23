@@ -1,8 +1,8 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import { asyncCreateRound, asyncHandleSubmit, asyncAwardPoints,
   initializeQuestion, pullQuestion } from 'actions/round'
-import { setMessage, setTarget } from 'actions/tooltip'
+import { setTooltipMessage, setTooltipTarget } from 'actions/tooltip'
 import roundSelector from 'selectors/round'
 
 class Round extends React.Component {
@@ -23,8 +23,8 @@ class Round extends React.Component {
     // Validate estimates
     for (let outcomeName of this.props.outcomeNames) {
       if (isNaN(this.props.estimates[outcomeName])) {
-        this.props.actions.setMessage('Make a guess!')
-        this.props.actions.setTarget(outcomeName)
+        this.props.actions.setTooltipMessage('Make a guess!')
+        this.props.actions.setTooltipTarget(outcomeName)
         return
       }
     }
@@ -44,9 +44,8 @@ class Round extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: roundSelector,
   actions: { asyncHandleSubmit, asyncAwardPoints, asyncCreateRound,
-    pullQuestion, initializeQuestion, setMessage, setTarget },
-  container: Round
-})
+    pullQuestion, initializeQuestion, setTooltipMessage, setTooltipTarget }
+})(Round)

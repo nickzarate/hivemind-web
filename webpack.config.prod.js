@@ -16,7 +16,6 @@ module.exports = {
     common: [
       "chartist",
       "isomorphic-fetch",
-      "jquery",
       "parse",
       "parse-react",
       "rc-slider",
@@ -102,9 +101,6 @@ module.exports = {
       "__DEV__": false
     }),
     new webpack.ProvidePlugin({
-      "$": "jquery",
-      "jQuery": "jquery",
-      "window.jQuery": "jquery",
       "fetch": "isomorphic-fetch"
     }),
     new webpack.optimize.CommonsChunkPlugin({

@@ -8,15 +8,15 @@ import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
 
-export const addAnswers = createAction(ADD_ANSWERS, answers => answers)
-export const addAnswerToRound = createAction(ADD_ANSWER_TO_ROUND, savedAnswer => savedAnswer)
-export const addOutcomes = createAction(ADD_OUTCOMES, outcomes => outcomes)
-export const addWinnings = createAction(ADD_WINNINGS, winnings => winnings)
+export const addAnswers = createAction(ADD_ANSWERS, (answers) => ({ answers }))
+export const addAnswerToRound = createAction(ADD_ANSWER_TO_ROUND, (answer) => ({ answer }))
+export const addOutcomes = createAction(ADD_OUTCOMES, (outcomes) => ({ outcomes }))
+export const addWinnings = createAction(ADD_WINNINGS, (winnings) => ({ winnings }))
 export const incrementCurrentQuestion = createAction(INCREMENT_CURRENT_QUESTION)
 export const resetCurrentQuestion = createAction(RESET_CURRENT_QUESTION)
-export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, correctAnswerIndices => correctAnswerIndices)
-export const setQuestion = createAction(SET_QUESTION, currentQuestion => currentQuestion)
-export const setCurrentRound = createAction(SET_CURRENT_ROUND, currentRound => currentRound)
+export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, (correctAnswerIndices) => ({ correctAnswerIndices }))
+export const setQuestion = createAction(SET_QUESTION, (question) => ({ question }))
+export const setCurrentRound = createAction(SET_CURRENT_ROUND, (currentRound) => ({ currentRound }))
 
 /*
  *  Award the user points according to the correctness of their answer

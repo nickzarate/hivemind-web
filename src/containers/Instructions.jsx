@@ -1,7 +1,7 @@
 import React from 'react'
 import instructionsSelector from 'selectors/instructions'
 import Instructions from 'components/Instructions'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 
 class InstructionsContainer extends React.Component {
   render() {
@@ -15,7 +15,6 @@ class InstructionsContainer extends React.Component {
   }
 }
 
-export default reduxify({
-  selector: instructionsSelector,
-  container: InstructionsContainer
-})
+export default connect({
+  selector: instructionsSelector
+})(InstructionsContainer)

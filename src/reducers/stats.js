@@ -12,17 +12,17 @@ const initialState = {
 export default function stats(state = initialState, action) {
   switch (action.type) {
   case ADD_PHI:
-    return update(state, {phi: {$push: [action.payload]}})
+    return update(state, {phi: {$push: [action.payload.phi]}})
   case SET_COVARIATE_DATA:
-    return update(state, {covariateData: {$set: action.payload}})
+    return update(state, {covariateData: {$set: action.payload.covariateData}})
   case SET_DATA:
-    return update(state, {data: {$set: action.payload}})
+    return update(state, {data: {$set: action.payload.data}})
   case SET_OUTCOMES:
-    return update(state, {outcomes: {$set: action.payload}})
+    return update(state, {outcomes: {$set: action.payload.outcomes}})
   case SET_OUTCOME_INDEX:
-    return update(state, {outcomeIndex: {$set: action.payload}})
+    return update(state, {outcomeIndex: {$set: action.payload.outcomeIndex}})
   case SET_PHI:
-    return update(state, {phi: {$set: action.payload}})
+    return update(state, {phi: {$set: action.payload.phi}})
   case SET_SERIES:
     return update(state, {data: {$splice: [[action.payload.index, 1, action.payload.data]]}})
   default:

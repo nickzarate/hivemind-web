@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import SurveyPage1 from 'components/Survey/Page1'
 import { submitPage1 } from 'actions/survey'
 import surveySelector from 'selectors/survey'
@@ -21,8 +21,7 @@ class SurveyPage1Container extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: surveySelector,
-  actions: { submitPage1, change: actions.change },
-  container: SurveyPage1Container
-})
+  actions: { submitPage1, change: actions.change }
+})(SurveyPage1Container)
