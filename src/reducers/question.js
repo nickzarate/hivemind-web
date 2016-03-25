@@ -4,7 +4,7 @@ import update from 'react-addons-update'
 const initialState = {
   covariateValues: [],
   objectId: '',
-  outcomes: []
+  outcomeValues: []
 }
 
 export default function question(state = initialState, action) {

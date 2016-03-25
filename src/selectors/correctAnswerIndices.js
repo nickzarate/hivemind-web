@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 const categorySelector = (state) => state.category
 const rangesSelector = (state) => state.forms.ranges
-const outcomesSelector = (state) => state.question.outcomes
+const outcomeValuesSelector = (state) => state.question.outcomeValues
 
 function getContinuousAnswerIndex(numBins, range, outcome) {
   let binValues = []
@@ -25,7 +25,7 @@ function getContinuousAnswerIndex(numBins, range, outcome) {
   }
 }
 
-function getCorrectAnswerIndices(category, ranges, outcomes) {
+function getCorrectAnswerIndices(category, ranges, outcomeValues) {
   let correctAnswerIndices = []
   for (let i = 0; i < category.outcomeRanges.length; i++) {
     var outcomeName = category.outcomeNames[i]
@@ -39,7 +39,9 @@ function getCorrectAnswerIndices(category, ranges, outcomes) {
       {
         range = [ranges[outcomeName].lower, ranges[outcomeName].upper]
       }
-      correctAnswerIndices.push(getContinuousAnswerIndex(category.numBins[i], range, outcomes[i]))
+      correctAnswerIndices.push(getContinuousAnswerIndex(category.numBins[i], range, outcomeValues[i]))
+    } else {
+      correctAnswerIndices(outcomeValues[i] ? 0 : 1)
     }
   }
   return correctAnswerIndices
@@ -48,10 +50,10 @@ function getCorrectAnswerIndices(category, ranges, outcomes) {
 export default createSelector(
   categorySelector,
   rangesSelector,
-  outcomesSelector,
-  (category, ranges, outcomes) => {
+  outcomeValuesSelector,
+  (category, ranges, outcomeValues) => {
     return {
-      correctAnswerIndices: getCorrectAnswerIndices(category, ranges, outcomes)
+      correctAnswerIndices: getCorrectAnswerIndices(category, ranges, outcomeValues)
     }
   }
 )
