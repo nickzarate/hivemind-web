@@ -1,33 +1,28 @@
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+// #root {
+//   padding: 20px;
+//   background-color: $main-blue;
+//   min-height: 100vh;
+// }
 
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
-@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/grid";
+// h1 {
+//   color: $dark-blue;
+// }
 
-$main-blue: #76B5F0;
-$main-yellow: #DDB14A;
-$light-blue: #A8E2FF;
-$light-yellow: #F6E78F;
-$dark-blue: #13304C;
+// button {
+//   @extend .btn;
+//   @extend .btn-primary;
+//   // background-color: $dark-blue;
+//   color: white;
+// }
 
-#root {
-  padding: 20px;
-  background-color: $main-blue;
-  min-height: 100vh;
-}
+// button + a {
+//   margin-left: 10px;
+// }
 
-h1 {
-  color: $dark-blue;
-}
+// input {
+//   @extend .form-control;
+// }
 
-button {
-  @extend .btn;
-  @extend .btn-default;
-}
-
-input {
-  @extend .form-control;
-}
-
-form {
-  @extend .form-inline;
-}
+// form {
+//   @extend .form-inline;
+// }

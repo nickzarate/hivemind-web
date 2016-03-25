@@ -24,6 +24,7 @@ module.exports = {
   },
   entry: {
     common: [
+      'bootstrap-loader',
       "chartist",
       "isomorphic-fetch",
       "jquery",
@@ -79,14 +80,14 @@ module.exports = {
       {
         test: /\.scss$/,
         include: path.join(srcPath, "assets/sass"),
-        loaders: ['style-loader', 'css', 'sass']
+        loaders: ['style-loader', 'css?modules', 'postcss', 'sass', 'sass-resources']
       },
 
       // required to write "require('./style.css')"
       {
         test: /\.css$/,
         exclude: /\.useable\.css$/,
-        loader: "style-loader!css-loader"
+        loader: "style-loader!css?modules!postcss"
       },
 
       // required for bootstrap icons.
@@ -103,6 +104,10 @@ module.exports = {
       { test: /\.jpg$/, loader: "file-loader" }
     ]
   },
+  sassResources: path.join(srcPath, "assets/sass/resources.scss"),
+  postcss: [
+    require('autoprefixer')
+  ],
   plugins: [
     new HtmlWebpackPlugin({
       favicon: path.join(srcPath, "assets/images/favicon.png"),
@@ -128,3 +133,15 @@ module.exports = {
     })
   ]
 }
+
+// {
+//   test: /\app.scss$/,
+//   include: path.join(srcPath, "assets/sass"),
+//   loaders: ['style-loader', 'css', 'sass']
+// },
+// {
+//   test: /\.scss$/,
+//   include: path.join(srcPath, "assets/sass"),
+//   loaders: ['style-loader', 'css?modules', 'sass'],
+//   exclude: /\app.scss$/
+// },

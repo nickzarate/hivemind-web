@@ -5,6 +5,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import Routes from './Routes'
 import configureStore from 'store/configureStore'
 import DevTools from 'containers/DevTools'
+import 'assets/sass/app.scss';
 
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
