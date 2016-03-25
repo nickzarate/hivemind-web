@@ -129,7 +129,7 @@ export function initializeQuestion(numBins, bank) {
  */
 export function pullQuestion(categoryName) {
   return (dispatch, getState) => {
-    const { answer: { submitted } } = getState()
+    const { answer: { submitted }, category: { outcomesToDisplay, covariatesToDisplay } } = getState()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
 
     // If the question currently stored has not been submitted, do not pull a new question
@@ -145,10 +145,20 @@ export function pullQuestion(categoryName) {
     query.equalTo('observationId', observationId)
     //Pull question and set state
     query.first().then(function(question) {
+      var covariateValues = []
+      var outcomeValues = []
+      for (let index of covariatesToDisplay) {
+        covariateValues.push(question.get('covariateValues')[index])
+      }
+      for (let index of outcomesToDisplay) {
+        outcomeValues.push(question.get('outcomeValues')[index])
+      }
       var selectedQuestion = {
-        covariateValues: question.get('covariateValues'),
+        covariateValues,
+        // covariateValues: question.get('covariateValues'),
         objectId: question.id,
-        outcomes: question.get('outcomes')
+        outcomeValues
+        // outcomes: question.get('outcomes')
       }
       dispatch(setAnswerSubmitted(false))
       dispatch(setQuestion(selectedQuestion))
