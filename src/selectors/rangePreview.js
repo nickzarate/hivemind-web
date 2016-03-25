@@ -11,7 +11,7 @@ export default createSelector(
       outcomeNames: category.outcomeNames,
       numBins: category.numBins,
       bank: category.tokens,
-      discrete: category.discrete,
+      outcomeDataTypes: category.outcomeDataTypes,
       tooltipMessage: tooltip.message,
       tooltipTarget: tooltip.target
     }

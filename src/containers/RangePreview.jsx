@@ -13,7 +13,7 @@ class RangePreviewContainer extends React.Component {
     return (
       <RangePreview
         outcomeNames={ this.props.outcomeNames }
-        discrete={ this.props.discrete }
+        outcomeDataTypes={ this.props.outcomeDataTypes }
         tooltipMessage={ this.props.tooltipMessage }
         tooltipTarget={ this.props.tooltipTarget }
       />

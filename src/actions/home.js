@@ -101,11 +101,11 @@ export function asyncHandleCategoryChoice(categoryName) {
  */
 export function handleStart() {
   return (dispatch, getState) => {
-    const { forms: { ranges }, category: { outcomeNames, discrete } } = getState()
+    const { forms: { ranges }, category: { outcomeNames, outcomeDataTypes } } = getState()
 
     // Validation
     for (let i = 0; i < outcomeNames.length; i++) {
-      if (!discrete[i] && !ranges[outcomeNames[i]]) {
+      if (outcomeDataTypes[i].type === 'continuous' && !ranges[outcomeNames[i]]) {
         dispatch(setTooltipMessage('All fields must be filled in.'))
         dispatch(setTooltipTarget(outcomeNames[i]))
         return

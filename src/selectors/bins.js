@@ -36,9 +36,9 @@ function getBinTexts(category, ranges) {
   var bins = []
   for (var i = 0; i < category.outcomeRanges.length; i++) {
     var outcomeName = category.outcomeNames[i]
-    if (category.discrete[i]) {
+    if (category.outcomeDataTypes[i].type === 'discrete') {
       bins.push(getDiscreteBinText(category.outcomeRanges[i]))
-    } else {
+    } else if (category.outcomeDataTypes[i].type === 'continuous') {
       var range = [0,0]
 
       if ( ranges[outcomeName]

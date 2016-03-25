@@ -29,9 +29,9 @@ function getCorrectAnswerIndices(category, ranges, outcomes) {
   let correctAnswerIndices = []
   for (let i = 0; i < category.outcomeRanges.length; i++) {
     var outcomeName = category.outcomeNames[i]
-    if (category.discrete[i]) {
-      correctAnswerIndices.push(outcomes[i] - category.outcomeRanges[i][0])
-    } else {
+    if (category.outcomeDataTypes[i].type === 'discrete') {
+      correctAnswerIndices.push(outcomeValues[i] - category.outcomeRanges[i][0])
+    } else if (category.outcomeDataTypes[i].type === 'continuous') {
       var range = [0,0]
       if ( ranges[outcomeName]
            && ranges[outcomeName].lower >= 0
