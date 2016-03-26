@@ -73,7 +73,7 @@ export function asyncHandleSubmit() {
     // Create an array of all of the outcomes estimated by the user
     var estimatesArray = []
     for (let outcome of category.outcomeNames) {
-      estimatesArray.push(estimates[outcome])
+      estimatesArray.push(typeof estimates[outcome] === 'string' ? Number(estimates[outcome]) : estimates[outcome])
     }
     dispatch(actions.reset('forms.estimates'))
 

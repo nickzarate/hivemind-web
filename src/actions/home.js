@@ -151,7 +151,7 @@ export function handleSurveySubmission() {
         dispatch(setTooltipTarget(covariateName))
         return
       }
-      covariateValues.push(covariates[covariateName])
+      covariateValues.push(typeof covariates[covariateName] === 'string' ? Number(covariates[covariateName]) : covariates[covariateName])
     }
 
     dispatch(setUnlocked(true, index))
