@@ -9,7 +9,6 @@ class InstructionsContainer extends React.Component {
       <Instructions
         covariateValues={ this.props.covariateValues }
         covariateNames={ this.props.covariateNames }
-        instructions={ this.props.instructions }
       />
     )
   }
