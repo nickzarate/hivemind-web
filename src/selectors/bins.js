@@ -27,7 +27,7 @@ function getContinuousBinText(numBins, range) {
 function getDiscreteBinText(range) {
   let binText = []
   for (let i = range[0]; i <= range[1]; i++) {
-    binText.push(i)
+    binText.push(`${ i }`)
   }
   return binText
 }
@@ -37,10 +37,14 @@ function getBinTexts(category, ranges) {
   for (var i = 0; i < category.outcomeRanges.length; i++) {
     var outcomeName = category.outcomeNames[i]
     if (category.outcomeDataTypes[i].type === 'discrete') {
-      bins.push(getDiscreteBinText(category.outcomeRanges[i]))
+      if (category.outcomeDataTypes[i].valueLabels) {
+        bins.push(category.outcomeDataTypes[i].valueLabels)
+      } else {
+        bins.push(getDiscreteBinText(category.outcomeRanges[i]))
+      }
     } else if (category.outcomeDataTypes[i].type === 'continuous') {
+      // Calculate the range
       var range = [0,0]
-
       if ( ranges[outcomeName]
            && ranges[outcomeName].lower >= 0
            && ranges[outcomeName].upper > 0 )
@@ -49,6 +53,12 @@ function getBinTexts(category, ranges) {
       }
 
       bins.push(getContinuousBinText(category.numBins[i], range))
+    } else if (category.outcomeDataTypes[i].type === 'boolean') {
+      if (category.outcomeDataTypes[i].valueLabels) {
+        bins.push(category.outcomeDataTypes[i].valueLabels)
+      } else {
+        bins.push(['1','0'])
+      }
     }
   }
   return bins.length ? bins : [[]]
