@@ -41,7 +41,7 @@ function getCorrectAnswerIndices(category, ranges, outcomeValues) {
       }
       correctAnswerIndices.push(getContinuousAnswerIndex(category.numBins[i], range, outcomeValues[i]))
     } else {
-      correctAnswerIndices(outcomeValues[i] ? 0 : 1)
+      correctAnswerIndices.push(outcomeValues[i] ? 0 : 1)
     }
   }
   return correctAnswerIndices
