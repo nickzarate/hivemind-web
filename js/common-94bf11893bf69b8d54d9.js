@@ -3,31 +3,31 @@ webpackJsonp([2],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(238);
-	__webpack_require__(585);
-	__webpack_require__(268);
-	__webpack_require__(67);
-	__webpack_require__(708);
-	__webpack_require__(334);
+	__webpack_require__(250);
+	__webpack_require__(281);
+	__webpack_require__(68);
+	__webpack_require__(729);
+	__webpack_require__(346);
 	__webpack_require__(1);
-	__webpack_require__(57);
-	__webpack_require__(40);
-	__webpack_require__(352);
+	__webpack_require__(59);
+	__webpack_require__(32);
+	__webpack_require__(364);
 	__webpack_require__(12);
-	__webpack_require__(205);
+	__webpack_require__(217);
 	__webpack_require__(14);
-	__webpack_require__(41);
-	__webpack_require__(206);
-	__webpack_require__(85);
-	__webpack_require__(73);
-	__webpack_require__(402);
-	__webpack_require__(403);
+	__webpack_require__(42);
+	__webpack_require__(218);
+	__webpack_require__(89);
+	__webpack_require__(74);
+	__webpack_require__(416);
+	__webpack_require__(414);
+	__webpack_require__(417);
 	module.exports = __webpack_require__(15);
 
 
 /***/ },
 
-/***/ 34:
+/***/ 36:
 /***/ function(module, exports) {
 
 	/*
@@ -96,7 +96,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 39:
+/***/ 41:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -126,7 +126,7 @@ webpackJsonp([2],{
 	if (typeof Parse === 'undefined') {
 	  if (true) {
 	    try {
-	      module.exports = __webpack_require__(67);
+	      module.exports = __webpack_require__(68);
 	    } catch (e) {
 	      throw new Error('Failed to require Parse module. You need the Parse SDK' + ' installed to use Parse + React');
 	    }
@@ -134,12 +134,22 @@ webpackJsonp([2],{
 	    throw new Error('Cannot initialize Parse + React: Parse is not defined.');
 	  }
 	} else {
+	  if (Parse.CoreManager) {
+	    var version = Parse.CoreManager.get('VERSION') || '';
+	    if (version.substr(0, 2) === 'js') {
+	      version = version.substr(2); // Remove 'js'
+	    }
+	    var minor = version.substr(0, 3);
+	    if (minor > '1.6') {
+	      throw new Error('Parse + React is only compatible with Parse 1.6.*');
+	    }
+	  }
 	  module.exports = Parse;
 	}
 
 /***/ },
 
-/***/ 136:
+/***/ 141:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*
@@ -170,9 +180,9 @@ webpackJsonp([2],{
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	var flatten = __webpack_require__(192);
-	var Id = __webpack_require__(34);
-	var queryHash = __webpack_require__(191).queryHash;
+	var flatten = __webpack_require__(204);
+	var Id = __webpack_require__(36);
+	var queryHash = __webpack_require__(203).queryHash;
 
 	/**
 	 * ObjectStore is a local cache for Parse Objects. It stores the last known
@@ -572,11 +582,11 @@ webpackJsonp([2],{
 	  module.exports._rawMutations = pendingMutations;
 	}
 	// TODO: this should really be FlattenedObjectData
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(56)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)))
 
 /***/ },
 
-/***/ 137:
+/***/ 142:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -613,7 +623,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 190:
+/***/ 202:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -647,10 +657,10 @@ webpackJsonp([2],{
 
 	'use strict';
 
-	var flatten = __webpack_require__(192);
-	var Id = __webpack_require__(34);
-	var ObjectStore = __webpack_require__(136);
-	var Parse = __webpack_require__(39);
+	var flatten = __webpack_require__(204);
+	var Id = __webpack_require__(36);
+	var ObjectStore = __webpack_require__(141);
+	var Parse = __webpack_require__(41);
 
 	var currentUser = {
 	  subscribers: {},
@@ -734,7 +744,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 191:
+/***/ 203:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*
@@ -772,9 +782,9 @@ webpackJsonp([2],{
 	 */
 	'use strict';
 
-	var equalObjects = __webpack_require__(717);
-	var Id = __webpack_require__(34);
-	var Parse = __webpack_require__(39);
+	var equalObjects = __webpack_require__(738);
+	var Id = __webpack_require__(36);
+	var Parse = __webpack_require__(41);
 
 	function flattenOrQueries(where) {
 	  if (!where.hasOwnProperty('$or')) {
@@ -881,7 +891,6 @@ webpackJsonp([2],{
 	  _function: while (_again) {
 	    var object = _x,
 	        query = _x2;
-	    className = field = undefined;
 	    _again = false;
 
 	    if (query instanceof Parse.Query) {
@@ -892,6 +901,7 @@ webpackJsonp([2],{
 	      _x = object;
 	      _x2 = query._where;
 	      _again = true;
+	      className = undefined;
 	      continue _function;
 	    }
 	    for (var field in query) {
@@ -1063,11 +1073,11 @@ webpackJsonp([2],{
 	}
 
 	module.exports = QueryTools;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(56)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)))
 
 /***/ },
 
-/***/ 192:
+/***/ 204:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -1094,9 +1104,9 @@ webpackJsonp([2],{
 
 	'use strict';
 
-	var Id = __webpack_require__(34);
-	var Parse = __webpack_require__(39);
-	var warning = __webpack_require__(137);
+	var Id = __webpack_require__(36);
+	var Parse = __webpack_require__(41);
+	var warning = __webpack_require__(142);
 
 	function mappedFlatten(el) {
 	  if (el instanceof Parse.Object) {
@@ -1152,7 +1162,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 321:
+/***/ 332:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -1192,7 +1202,7 @@ webpackJsonp([2],{
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var Id = __webpack_require__(34);
+	var Id = __webpack_require__(36);
 
 	var Delta = (function () {
 	  function Delta(id, data, options) {
@@ -1248,7 +1258,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 322:
+/***/ 333:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -1279,11 +1289,11 @@ webpackJsonp([2],{
 	 * Patches for the Parse JS SDK
 	 */
 
-	var flatten = __webpack_require__(192);
-	var Id = __webpack_require__(34);
-	var LocalSubscriptions = __webpack_require__(190);
-	var Parse = __webpack_require__(39);
-	var SubscriptionManager = __webpack_require__(323);
+	var flatten = __webpack_require__(204);
+	var Id = __webpack_require__(36);
+	var LocalSubscriptions = __webpack_require__(202);
+	var Parse = __webpack_require__(41);
+	var SubscriptionManager = __webpack_require__(334);
 
 	var oldSignUp = Parse.User.prototype.signUp;
 	var oldLogIn = Parse.User.prototype.logIn;
@@ -1389,7 +1399,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 323:
+/***/ 334:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*
@@ -1418,12 +1428,12 @@ webpackJsonp([2],{
 	// Mapping of query hashes to subscriptions
 	'use strict';
 
-	var Id = __webpack_require__(34);
-	var ObjectStore = __webpack_require__(136);
-	var QueryTools = __webpack_require__(191);
+	var Id = __webpack_require__(36);
+	var ObjectStore = __webpack_require__(141);
+	var QueryTools = __webpack_require__(203);
 	var keysFromHash = QueryTools.keysFromHash;
 	var queryHash = QueryTools.queryHash;
-	var Subscription = __webpack_require__(715);
+	var Subscription = __webpack_require__(736);
 
 	var subscriptions = {};
 	// Tree of the attributes queries depend on, leading to their hashes
@@ -1549,32 +1559,19 @@ webpackJsonp([2],{
 	}
 
 	module.exports = SubscriptionManager;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(56)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)))
 
 /***/ },
 
-/***/ 585:
+/***/ 729:
 /***/ function(module, exports, __webpack_require__) {
 
-	// the whatwg-fetch polyfill installs the fetch() function
-	// on the global object (window or self)
-	//
-	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(928);
-	module.exports = self.fetch.bind(self);
+	module.exports = __webpack_require__(735);
 
 
 /***/ },
 
-/***/ 708:
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(714);
-
-
-/***/ },
-
-/***/ 709:
+/***/ 730:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -1602,8 +1599,8 @@ webpackJsonp([2],{
 
 	'use strict';
 
-	var Parse = __webpack_require__(39);
-	var warning = __webpack_require__(137);
+	var Parse = __webpack_require__(41);
+	var warning = __webpack_require__(142);
 
 	var Mixin = {
 	  /**
@@ -1738,7 +1735,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 710:
+/***/ 731:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -1770,13 +1767,13 @@ webpackJsonp([2],{
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var Delta = __webpack_require__(321);
-	var Id = __webpack_require__(34);
-	var MutationBatch = __webpack_require__(711);
-	var Parse = __webpack_require__(39);
-	var UpdateChannel = __webpack_require__(716);
+	var Delta = __webpack_require__(332);
+	var Id = __webpack_require__(36);
+	var MutationBatch = __webpack_require__(732);
+	var Parse = __webpack_require__(41);
+	var UpdateChannel = __webpack_require__(737);
 
-	var warning = __webpack_require__(137);
+	var warning = __webpack_require__(142);
 
 	/**
 	 * A Mutation is a generator for local and server-side data changes. It
@@ -2039,7 +2036,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 711:
+/***/ 732:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2071,7 +2068,7 @@ webpackJsonp([2],{
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var Parse = __webpack_require__(39);
+	var Parse = __webpack_require__(41);
 
 	var MutationBatch = (function () {
 	  function MutationBatch() {
@@ -2155,7 +2152,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 712:
+/***/ 733:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*
@@ -2186,8 +2183,8 @@ webpackJsonp([2],{
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	var Id = __webpack_require__(34);
-	var Parse = __webpack_require__(39);
+	var Id = __webpack_require__(36);
+	var Parse = __webpack_require__(41);
 
 	var toString = Object.prototype.toString;
 	// Special version of Parse._encode to handle our unique representations of
@@ -2370,11 +2367,11 @@ webpackJsonp([2],{
 	if (typeof process !== 'undefined' && ("production") === 'test') {
 	  module.exports.encode = encode;
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(56)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)))
 
 /***/ },
 
-/***/ 713:
+/***/ 734:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2407,15 +2404,15 @@ webpackJsonp([2],{
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Parse = __webpack_require__(39);
-	var ParsePatches = __webpack_require__(322);
-	var warning = __webpack_require__(137);
+	var Parse = __webpack_require__(41);
+	var ParsePatches = __webpack_require__(333);
+	var warning = __webpack_require__(142);
 
 	/**
 	 * Provide observability and query-specific functionality on a subclass of
@@ -2427,10 +2424,14 @@ webpackJsonp([2],{
 	  return (function (_React$Component) {
 	    _inherits(ParseComponent, _React$Component);
 
-	    function ParseComponent(props) {
+	    function ParseComponent() {
 	      _classCallCheck(this, ParseComponent);
 
-	      _get(Object.getPrototypeOf(ParseComponent.prototype), 'constructor', this).call(this, props);
+	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	        args[_key] = arguments[_key];
+	      }
+
+	      _get(Object.getPrototypeOf(ParseComponent.prototype), 'constructor', this).apply(this, args);
 	      this._subscriptions = {};
 	      this.data = {};
 
@@ -2578,7 +2579,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 714:
+/***/ 735:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2605,22 +2606,22 @@ webpackJsonp([2],{
 
 	'use strict';
 
-	var LocalSubscriptions = __webpack_require__(190);
-	var ParsePatches = __webpack_require__(322);
+	var LocalSubscriptions = __webpack_require__(202);
+	var ParsePatches = __webpack_require__(333);
 
 	// Apply patches to the Parse JS SDK
 	ParsePatches.applyPatches();
 
 	module.exports = {
-	  Component: __webpack_require__(713),
+	  Component: __webpack_require__(734),
 	  currentUser: LocalSubscriptions.currentUser,
-	  Mixin: __webpack_require__(709),
-	  Mutation: __webpack_require__(710)
+	  Mixin: __webpack_require__(730),
+	  Mutation: __webpack_require__(731)
 	};
 
 /***/ },
 
-/***/ 715:
+/***/ 736:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*
@@ -2656,8 +2657,8 @@ webpackJsonp([2],{
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var Id = __webpack_require__(34);
-	var ObjectStore = __webpack_require__(136);
+	var Id = __webpack_require__(36);
+	var ObjectStore = __webpack_require__(141);
 
 	/**
 	 * A Subscription represents the relationship between components and the results
@@ -2887,11 +2888,11 @@ webpackJsonp([2],{
 	}
 
 	module.exports = Subscription;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(56)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)))
 
 /***/ },
 
-/***/ 716:
+/***/ 737:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2923,14 +2924,14 @@ webpackJsonp([2],{
 	  value: true
 	});
 	exports.issueMutation = issueMutation;
-	var Delta = __webpack_require__(321);
-	var Id = __webpack_require__(34);
-	var LocalSubscriptions = __webpack_require__(190);
-	var MutationExecutor = __webpack_require__(712);
-	var ObjectStore = __webpack_require__(136);
-	var Parse = __webpack_require__(39);
-	var QueryTools = __webpack_require__(191);
-	var SubscriptionManager = __webpack_require__(323);
+	var Delta = __webpack_require__(332);
+	var Id = __webpack_require__(36);
+	var LocalSubscriptions = __webpack_require__(202);
+	var MutationExecutor = __webpack_require__(733);
+	var ObjectStore = __webpack_require__(141);
+	var Parse = __webpack_require__(41);
+	var QueryTools = __webpack_require__(203);
+	var SubscriptionManager = __webpack_require__(334);
 
 	var localCount = 0;
 
@@ -3071,7 +3072,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 717:
+/***/ 738:
 /***/ function(module, exports) {
 
 	/*
@@ -3146,402 +3147,6 @@ webpackJsonp([2],{
 	}
 
 	module.exports = equalObjects;
-
-/***/ },
-
-/***/ 928:
-/***/ function(module, exports) {
-
-	(function(self) {
-	  'use strict';
-
-	  if (self.fetch) {
-	    return
-	  }
-
-	  function normalizeName(name) {
-	    if (typeof name !== 'string') {
-	      name = String(name)
-	    }
-	    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
-	      throw new TypeError('Invalid character in header field name')
-	    }
-	    return name.toLowerCase()
-	  }
-
-	  function normalizeValue(value) {
-	    if (typeof value !== 'string') {
-	      value = String(value)
-	    }
-	    return value
-	  }
-
-	  function Headers(headers) {
-	    this.map = {}
-
-	    if (headers instanceof Headers) {
-	      headers.forEach(function(value, name) {
-	        this.append(name, value)
-	      }, this)
-
-	    } else if (headers) {
-	      Object.getOwnPropertyNames(headers).forEach(function(name) {
-	        this.append(name, headers[name])
-	      }, this)
-	    }
-	  }
-
-	  Headers.prototype.append = function(name, value) {
-	    name = normalizeName(name)
-	    value = normalizeValue(value)
-	    var list = this.map[name]
-	    if (!list) {
-	      list = []
-	      this.map[name] = list
-	    }
-	    list.push(value)
-	  }
-
-	  Headers.prototype['delete'] = function(name) {
-	    delete this.map[normalizeName(name)]
-	  }
-
-	  Headers.prototype.get = function(name) {
-	    var values = this.map[normalizeName(name)]
-	    return values ? values[0] : null
-	  }
-
-	  Headers.prototype.getAll = function(name) {
-	    return this.map[normalizeName(name)] || []
-	  }
-
-	  Headers.prototype.has = function(name) {
-	    return this.map.hasOwnProperty(normalizeName(name))
-	  }
-
-	  Headers.prototype.set = function(name, value) {
-	    this.map[normalizeName(name)] = [normalizeValue(value)]
-	  }
-
-	  Headers.prototype.forEach = function(callback, thisArg) {
-	    Object.getOwnPropertyNames(this.map).forEach(function(name) {
-	      this.map[name].forEach(function(value) {
-	        callback.call(thisArg, value, name, this)
-	      }, this)
-	    }, this)
-	  }
-
-	  function consumed(body) {
-	    if (body.bodyUsed) {
-	      return Promise.reject(new TypeError('Already read'))
-	    }
-	    body.bodyUsed = true
-	  }
-
-	  function fileReaderReady(reader) {
-	    return new Promise(function(resolve, reject) {
-	      reader.onload = function() {
-	        resolve(reader.result)
-	      }
-	      reader.onerror = function() {
-	        reject(reader.error)
-	      }
-	    })
-	  }
-
-	  function readBlobAsArrayBuffer(blob) {
-	    var reader = new FileReader()
-	    reader.readAsArrayBuffer(blob)
-	    return fileReaderReady(reader)
-	  }
-
-	  function readBlobAsText(blob) {
-	    var reader = new FileReader()
-	    reader.readAsText(blob)
-	    return fileReaderReady(reader)
-	  }
-
-	  var support = {
-	    blob: 'FileReader' in self && 'Blob' in self && (function() {
-	      try {
-	        new Blob();
-	        return true
-	      } catch(e) {
-	        return false
-	      }
-	    })(),
-	    formData: 'FormData' in self,
-	    arrayBuffer: 'ArrayBuffer' in self
-	  }
-
-	  function Body() {
-	    this.bodyUsed = false
-
-
-	    this._initBody = function(body) {
-	      this._bodyInit = body
-	      if (typeof body === 'string') {
-	        this._bodyText = body
-	      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
-	        this._bodyBlob = body
-	      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
-	        this._bodyFormData = body
-	      } else if (!body) {
-	        this._bodyText = ''
-	      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
-	        // Only support ArrayBuffers for POST method.
-	        // Receiving ArrayBuffers happens via Blobs, instead.
-	      } else {
-	        throw new Error('unsupported BodyInit type')
-	      }
-
-	      if (!this.headers.get('content-type')) {
-	        if (typeof body === 'string') {
-	          this.headers.set('content-type', 'text/plain;charset=UTF-8')
-	        } else if (this._bodyBlob && this._bodyBlob.type) {
-	          this.headers.set('content-type', this._bodyBlob.type)
-	        }
-	      }
-	    }
-
-	    if (support.blob) {
-	      this.blob = function() {
-	        var rejected = consumed(this)
-	        if (rejected) {
-	          return rejected
-	        }
-
-	        if (this._bodyBlob) {
-	          return Promise.resolve(this._bodyBlob)
-	        } else if (this._bodyFormData) {
-	          throw new Error('could not read FormData body as blob')
-	        } else {
-	          return Promise.resolve(new Blob([this._bodyText]))
-	        }
-	      }
-
-	      this.arrayBuffer = function() {
-	        return this.blob().then(readBlobAsArrayBuffer)
-	      }
-
-	      this.text = function() {
-	        var rejected = consumed(this)
-	        if (rejected) {
-	          return rejected
-	        }
-
-	        if (this._bodyBlob) {
-	          return readBlobAsText(this._bodyBlob)
-	        } else if (this._bodyFormData) {
-	          throw new Error('could not read FormData body as text')
-	        } else {
-	          return Promise.resolve(this._bodyText)
-	        }
-	      }
-	    } else {
-	      this.text = function() {
-	        var rejected = consumed(this)
-	        return rejected ? rejected : Promise.resolve(this._bodyText)
-	      }
-	    }
-
-	    if (support.formData) {
-	      this.formData = function() {
-	        return this.text().then(decode)
-	      }
-	    }
-
-	    this.json = function() {
-	      return this.text().then(JSON.parse)
-	    }
-
-	    return this
-	  }
-
-	  // HTTP methods whose capitalization should be normalized
-	  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
-
-	  function normalizeMethod(method) {
-	    var upcased = method.toUpperCase()
-	    return (methods.indexOf(upcased) > -1) ? upcased : method
-	  }
-
-	  function Request(input, options) {
-	    options = options || {}
-	    var body = options.body
-	    if (Request.prototype.isPrototypeOf(input)) {
-	      if (input.bodyUsed) {
-	        throw new TypeError('Already read')
-	      }
-	      this.url = input.url
-	      this.credentials = input.credentials
-	      if (!options.headers) {
-	        this.headers = new Headers(input.headers)
-	      }
-	      this.method = input.method
-	      this.mode = input.mode
-	      if (!body) {
-	        body = input._bodyInit
-	        input.bodyUsed = true
-	      }
-	    } else {
-	      this.url = input
-	    }
-
-	    this.credentials = options.credentials || this.credentials || 'omit'
-	    if (options.headers || !this.headers) {
-	      this.headers = new Headers(options.headers)
-	    }
-	    this.method = normalizeMethod(options.method || this.method || 'GET')
-	    this.mode = options.mode || this.mode || null
-	    this.referrer = null
-
-	    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
-	      throw new TypeError('Body not allowed for GET or HEAD requests')
-	    }
-	    this._initBody(body)
-	  }
-
-	  Request.prototype.clone = function() {
-	    return new Request(this)
-	  }
-
-	  function decode(body) {
-	    var form = new FormData()
-	    body.trim().split('&').forEach(function(bytes) {
-	      if (bytes) {
-	        var split = bytes.split('=')
-	        var name = split.shift().replace(/\+/g, ' ')
-	        var value = split.join('=').replace(/\+/g, ' ')
-	        form.append(decodeURIComponent(name), decodeURIComponent(value))
-	      }
-	    })
-	    return form
-	  }
-
-	  function headers(xhr) {
-	    var head = new Headers()
-	    var pairs = xhr.getAllResponseHeaders().trim().split('\n')
-	    pairs.forEach(function(header) {
-	      var split = header.trim().split(':')
-	      var key = split.shift().trim()
-	      var value = split.join(':').trim()
-	      head.append(key, value)
-	    })
-	    return head
-	  }
-
-	  Body.call(Request.prototype)
-
-	  function Response(bodyInit, options) {
-	    if (!options) {
-	      options = {}
-	    }
-
-	    this.type = 'default'
-	    this.status = options.status
-	    this.ok = this.status >= 200 && this.status < 300
-	    this.statusText = options.statusText
-	    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
-	    this.url = options.url || ''
-	    this._initBody(bodyInit)
-	  }
-
-	  Body.call(Response.prototype)
-
-	  Response.prototype.clone = function() {
-	    return new Response(this._bodyInit, {
-	      status: this.status,
-	      statusText: this.statusText,
-	      headers: new Headers(this.headers),
-	      url: this.url
-	    })
-	  }
-
-	  Response.error = function() {
-	    var response = new Response(null, {status: 0, statusText: ''})
-	    response.type = 'error'
-	    return response
-	  }
-
-	  var redirectStatuses = [301, 302, 303, 307, 308]
-
-	  Response.redirect = function(url, status) {
-	    if (redirectStatuses.indexOf(status) === -1) {
-	      throw new RangeError('Invalid status code')
-	    }
-
-	    return new Response(null, {status: status, headers: {location: url}})
-	  }
-
-	  self.Headers = Headers;
-	  self.Request = Request;
-	  self.Response = Response;
-
-	  self.fetch = function(input, init) {
-	    return new Promise(function(resolve, reject) {
-	      var request
-	      if (Request.prototype.isPrototypeOf(input) && !init) {
-	        request = input
-	      } else {
-	        request = new Request(input, init)
-	      }
-
-	      var xhr = new XMLHttpRequest()
-
-	      function responseURL() {
-	        if ('responseURL' in xhr) {
-	          return xhr.responseURL
-	        }
-
-	        // Avoid security warnings on getResponseHeader when not allowed by CORS
-	        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
-	          return xhr.getResponseHeader('X-Request-URL')
-	        }
-
-	        return;
-	      }
-
-	      xhr.onload = function() {
-	        var status = (xhr.status === 1223) ? 204 : xhr.status
-	        if (status < 100 || status > 599) {
-	          reject(new TypeError('Network request failed'))
-	          return
-	        }
-	        var options = {
-	          status: status,
-	          statusText: xhr.statusText,
-	          headers: headers(xhr),
-	          url: responseURL()
-	        }
-	        var body = 'response' in xhr ? xhr.response : xhr.responseText;
-	        resolve(new Response(body, options))
-	      }
-
-	      xhr.onerror = function() {
-	        reject(new TypeError('Network request failed'))
-	      }
-
-	      xhr.open(request.method, request.url, true)
-
-	      if (request.credentials === 'include') {
-	        xhr.withCredentials = true
-	      }
-
-	      if ('responseType' in xhr && support.blob) {
-	        xhr.responseType = 'blob'
-	      }
-
-	      request.headers.forEach(function(value, name) {
-	        xhr.setRequestHeader(name, value)
-	      })
-
-	      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
-	    })
-	  }
-	  self.fetch.polyfill = true
-	})(typeof self !== 'undefined' ? self : this);
-
 
 /***/ }
 
