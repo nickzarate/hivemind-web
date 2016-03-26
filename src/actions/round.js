@@ -75,7 +75,7 @@ export function asyncHandleSubmit() {
     for (let outcome of category.outcomeNames) {
       estimatesArray.push(estimates[outcome])
     }
-    dispatch(actions.reset('estimates'))
+    dispatch(actions.reset('forms.estimates'))
 
     // Save token distribution and outcomes
     dispatch(addAnswers(answer.binValues))
