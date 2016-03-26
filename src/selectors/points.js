@@ -16,8 +16,10 @@ export default createSelector(
 function getWorth(outcomeDataTypes, pointsPerToken, outcomeRanges, outcomeNames, ranges) {
   var worth = []
   for (var i = 0; i < pointsPerToken.length; i++) {
-    var temp = outcomeDataTypes[i].type === 'discrete' ? pointsPerToken[i] : 0
-
+    var temp = 0
+    if (outcomeDataTypes[i].type === 'discrete' || outcomeDataTypes[i].type === 'boolean') {
+      temp = pointsPerToken[i]
+    }
     if ( outcomeDataTypes[i].type === 'continuous'
          && ranges[outcomeNames[i]]
          && ranges[outcomeNames[i]].lower >= 0
@@ -28,7 +30,6 @@ function getWorth(outcomeDataTypes, pointsPerToken, outcomeRanges, outcomeNames,
       temp += pointsPerToken[i]
       temp *= estimatedRange === 0 ? 0 : (actualRange / estimatedRange)
     }
-
     worth.push(Math.floor(temp))
   }
   return worth
