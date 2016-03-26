@@ -133,15 +133,3 @@ module.exports = {
     })
   ]
 }
-
-// {
-//   test: /\app.scss$/,
-//   include: path.join(srcPath, "assets/sass"),
-//   loaders: ['style-loader', 'css', 'sass']
-// },
-// {
-//   test: /\.scss$/,
-//   include: path.join(srcPath, "assets/sass"),
-//   loaders: ['style-loader', 'css?modules', 'sass'],
-//   exclude: /\app.scss$/
-// },
