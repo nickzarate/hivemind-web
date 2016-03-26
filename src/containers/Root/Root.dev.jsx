@@ -6,7 +6,6 @@ import DevTools from 'containers/DevTools'
 import styles from 'assets/sass/app.scss'
 
 
-<<<<<<< HEAD
 export default function Root({ store, history }) {
   return (
     <Provider store={ store }>
@@ -17,13 +16,3 @@ export default function Root({ store, history }) {
     </Provider>
   )
 }
-=======
-export default (
-  <Provider store={ store }>
-    <div className={ styles.app }>
-      <Routes history={ history } />
-      <DevTools />
-    </div>
-  </Provider>
-)
->>>>>>> 6996b470c6ab294138a23025d24bb899bd41bf65

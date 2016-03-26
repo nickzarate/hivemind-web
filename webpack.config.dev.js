@@ -24,48 +24,12 @@ module.exports = {
     extensions: ["", ".js", ".jsx"],
     modulesDirectories: ["node_modules", "src"]
   },
-<<<<<<< d16d2649b24677f934c1622248d3624f58911cc2
   entry: [
+    "bootstrap-loader",
     "webpack-dev-server/client?http://localhost:8080/",
     "webpack/hot/dev-server",
     path.resolve(srcPath, "index")
   ],
-=======
-  entry: {
-    common: [
-      'bootstrap-loader',
-      "chartist",
-      "isomorphic-fetch",
-      "jquery",
-      "parse",
-      "parse-react",
-      "rc-slider",
-      "react",
-      "react-addons-update",
-      "react-bootstrap",
-      "react-chartist",
-      "react-dom",
-      "react-redux",
-      "react-redux-form",
-      "react-router",
-      "react-router-redux",
-      "redbox-react",
-      "redux",
-      "redux-actions",
-      "redux-devtools",
-      "redux-devtools-dock-monitor",
-      "redux-devtools-log-monitor",
-      "redux-localstorage",
-      "redux-thunk",
-      "reselect"
-    ],
-    index: [
-      "eventsource-polyfill",
-      "webpack-hot-middleware/client",
-      path.join(srcPath, "index.js")
-    ]
-  },
->>>>>>> Got css modules, postcss, and bootstrap to work together.
   output: {
     filename: "[name].js",
     path: path.resolve("dist"),
@@ -137,3 +101,38 @@ module.exports = {
     })
   ]
 }
+
+// entry: {
+//   common: [
+//     'bootstrap-loader',
+//     "chartist",
+//     "isomorphic-fetch",
+//     "jquery",
+//     "parse",
+//     "parse-react",
+//     "rc-slider",
+//     "react",
+//     "react-addons-update",
+//     "react-bootstrap",
+//     "react-chartist",
+//     "react-dom",
+//     "react-redux",
+//     "react-redux-form",
+//     "react-router",
+//     "react-router-redux",
+//     "redbox-react",
+//     "redux",
+//     "redux-actions",
+//     "redux-devtools",
+//     "redux-devtools-dock-monitor",
+//     "redux-devtools-log-monitor",
+//     "redux-localstorage",
+//     "redux-thunk",
+//     "reselect"
+//   ],
+//   index: [
+//     "eventsource-polyfill",
+//     "webpack-hot-middleware/client",
+//     path.join(srcPath, "index.js")
+//   ]
+// },
