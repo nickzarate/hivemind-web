@@ -9,7 +9,7 @@ export default class RangePreview extends React.Component {
       (outcomeName, index) => (
         <li key={ index }>
           { outcomeName }
-          { !this.props.discrete[index] &&
+          { this.props.outcomeDataTypes[index].type === 'continuous' &&
             <RangeForm
               outcomeName={ outcomeName }
               ref={ (ref) => this[outcomeName] = ref }

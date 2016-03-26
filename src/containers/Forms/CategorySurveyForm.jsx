@@ -15,7 +15,9 @@ class CategorySurveyFormContainer extends React.Component {
     return (
       <CategorySurveyForm
         instructions={ this.props.instructions }
-        covariateNames={ this.props.covariateNames }
+        allCovariateNames={ this.props.allCovariateNames }
+        allCovariateDataTypes={ this.props.allCovariateDataTypes }
+        allCovariateRanges={ this.props.allCovariateRanges }
         tooltipMessage={ this.props.tooltipMessage }
         tooltipTarget={ this.props.tooltipTarget }
       />

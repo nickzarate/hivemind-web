@@ -5,9 +5,9 @@ import { toNum } from 'toolbox/parser'
 export default class EstimateForm extends React.Component {
   render() {
     return (
-      <Form model="estimates">
+      <Form model="forms.estimates">
         <Field
-          model={ `estimates.${ this.props.outcomeName }` }
+          model={ `forms.estimates.${ this.props.outcomeName }` }
           parser={ toNum }
           ref={ (ref) => this.form = ref }
         >

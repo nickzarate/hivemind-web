@@ -17,7 +17,6 @@ export default class Instructions extends React.Component {
         <ul>
           { this.renderCovariates() }
         </ul>
-        <p>{ this.props.instructions }</p>
       </div>
     )
   }

@@ -42,21 +42,57 @@ export function asyncHandleCategoryChoice(categoryName) {
     query.equalTo('name', categoryName)
     query.first({
       success(category) {
+
+        // Select only the covariates and the outcomes that the 'client' desires.
+        var covariateDataTypes = []
+        var covariateNames = []
+        var covariateRanges = []
+        var outcomeDataTypes = []
+        var numBins = []
+        var outcomeNames = []
+        var outcomeRanges = []
+        var pointsPerToken = []
+        var questionInstructions = []
+        var tokens = []
+        var covariatesToDisplay = category.get('covariatesToDisplay')
+        var outcomesToDisplay = category.get('outcomesToDisplay')
+
+        for (let index of covariatesToDisplay) {
+          covariateDataTypes.push(category.get('covariateDataTypes')[index])
+          covariateNames.push(category.get('covariateNames')[index])
+          covariateRanges.push(category.get('covariateRanges')[index])
+        }
+        for (let index of outcomesToDisplay) {
+          outcomeDataTypes.push(category.get('outcomeDataTypes')[index])
+          numBins.push(category.get('numBins')[index])
+          outcomeNames.push(category.get('outcomeNames')[index])
+          outcomeRanges.push(category.get('outcomeRanges')[index])
+          pointsPerToken.push(category.get('pointsPerToken')[index])
+          questionInstructions.push(category.get('questionInstructions')[index])
+          tokens.push(category.get('tokens')[index])
+        }
+
         var selectedCategory = {
+          allCovariateDataTypes: category.get('covariateDataTypes'),
+          allCovariateNames: category.get('covariateNames'),
+          allCovariateRanges: category.get('covariateRanges'),
           categorySurveyInstructions: category.get('categorySurveyInstructions'),
-          covariateNames: category.get('covariateNames'),
-          covariateRanges: category.get('covariateRanges'),
-          discrete: category.get('discrete'),
+          covariateDataTypes,
+          covariateNames,
+          covariateRanges,
+          covariatesToDisplay,
           index: category.get('index'),
-          instructions: category.get('instructions'),
           name: category.get('name'),
-          numBins: category.get('numBins'),
-          outcomeNames: category.get('outcomeNames'),
-          outcomeRanges: category.get('outcomeRanges'),
-          pointsPerToken: category.get('pointsPerToken'),
-          questionInstructions: category.get('questionInstructions'),
+          numBins,
+          outcomeDataTypes,
+          outcomeNames,
+          outcomeRanges,
+          outcomesToDisplay,
+          pointsPerToken,
+          questionInstructions,
           questionsPerRound: category.get('questionsPerRound'),
-          tokens: category.get('tokens')
+          roundInstructions: category.get('roundInstructions'),
+          tokens
         }
         dispatch(setCategory(selectedCategory))
         dispatch(showModal(true))
@@ -70,11 +106,11 @@ export function asyncHandleCategoryChoice(categoryName) {
  */
 export function handleStart() {
   return (dispatch, getState) => {
-    const { forms: { ranges }, category: { outcomeNames, discrete } } = getState()
+    const { forms: { ranges }, category: { outcomeNames, outcomeDataTypes } } = getState()
 
     // Validation
     for (let i = 0; i < outcomeNames.length; i++) {
-      if (!discrete[i] && !ranges[outcomeNames[i]]) {
+      if (outcomeDataTypes[i].type === 'continuous' && !ranges[outcomeNames[i]]) {
         dispatch(setTooltipMessage('All fields must be filled in.'))
         dispatch(setTooltipTarget(outcomeNames[i]))
         return

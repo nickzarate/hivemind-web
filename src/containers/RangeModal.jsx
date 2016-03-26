@@ -22,6 +22,7 @@ class RangeModalContainer extends React.Component {
         onSubmit={ this.handleSubmit }
         onHide={ this.handleHide }
         unlocked={ this.props.unlocked }
+        roundInstructions={ this.props.roundInstructions }
       />
     )
   }
