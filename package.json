@@ -65,12 +65,10 @@
     "html-webpack-plugin": "^2.8.1",
     "json-loader": "^0.5.4",
     "node-sass": "^3.4.2",
-<<<<<<< d16d2649b24677f934c1622248d3624f58911cc2
     "redbox-react": "^1.2.2",
     "redux-devtools": "^3.1.1",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.4",
-=======
     "postcss-loader": "^0.8.2",
     "postcss-mixins": "^4.0.1",
     "postcss-scss": "^0.1.7",
@@ -81,7 +79,6 @@
     "redux-devtools-log-monitor": "^1.0.4",
     "resolve-url-loader": "^1.4.3",
     "rimraf": "^2.5.1",
->>>>>>> Got css modules, postcss, and bootstrap to work together.
     "sass-loader": "^3.1.2",
     "sass-resources-loader": "^1.0.2",
     "style-loader": "^0.13.0",

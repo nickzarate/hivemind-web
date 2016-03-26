@@ -1,28 +1,5 @@
-// #root {
-//   padding: 20px;
-//   background-color: $main-blue;
-//   min-height: 100vh;
-// }
-
-// h1 {
-//   color: $dark-blue;
-// }
-
-// button {
-//   @extend .btn;
-//   @extend .btn-primary;
-//   // background-color: $dark-blue;
-//   color: white;
-// }
-
-// button + a {
-//   margin-left: 10px;
-// }
-
-// input {
-//   @extend .form-control;
-// }
-
-// form {
-//   @extend .form-inline;
-// }
+.app {
+  padding: 20px;
+  background-color: $main-blue;
+  min-height: 100vh;
+}
