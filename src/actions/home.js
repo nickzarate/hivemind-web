@@ -44,6 +44,7 @@ export function asyncHandleCategoryChoice(categoryName) {
       success(category) {
 
         // Select only the covariates and the outcomes that the 'client' desires.
+        var covariateDataTypes = []
         var covariateNames = []
         var covariateRanges = []
         var outcomeDataTypes = []
@@ -57,6 +58,7 @@ export function asyncHandleCategoryChoice(categoryName) {
         var outcomesToDisplay = category.get('outcomesToDisplay')
 
         for (let index of covariatesToDisplay) {
+          covariateDataTypes.push(category.get('covariateDataTypes')[index])
           covariateNames.push(category.get('covariateNames')[index])
           covariateRanges.push(category.get('covariateRanges')[index])
         }
@@ -71,8 +73,11 @@ export function asyncHandleCategoryChoice(categoryName) {
         }
 
         var selectedCategory = {
+          allCovariateDataTypes: category.get('covariateDataTypes'),
           allCovariateNames: category.get('covariateNames'),
+          allCovariateRanges: category.get('covariateRanges'),
           categorySurveyInstructions: category.get('categorySurveyInstructions'),
+          covariateDataTypes,
           covariateNames,
           covariateRanges,
           covariatesToDisplay,
