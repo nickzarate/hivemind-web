@@ -16,11 +16,9 @@ export default class Bins extends React.Component {
   renderBins() {
     return this.props.binText.map(
       (text, index) => (
-        <li key={ index }>
-          <button onClick={ this.handleClick(index) }>
-            { text }{ this.binValue(index) }
-          </button>
-        </li>
+        <button key={ index } onClick={ this.handleClick(index) }>
+          { text }{ this.binValue(index) }
+        </button>
       )
     )
   }
@@ -30,9 +28,7 @@ export default class Bins extends React.Component {
       <div>
         <p>{ 'Bank: ' }{ this.props.bank }</p>
         <p>{ 'Worth: ' }{ this.props.worth }</p>
-        <ul>
-          { this.renderBins() }
-        </ul>
+        { this.renderBins() }
       </div>
     )
   }

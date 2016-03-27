@@ -1,9 +1,9 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import QuestionBody from 'components/QuestionBody'
 import { resetTooltip } from 'reducers/tooltip'
 import { showModal } from 'reducers/modal'
-import estimatesSelector from 'selectors/forms/estimates'
+import estimatesFormSelector from 'selectors/forms/estimates'
 
 class QuestionBodyContainer extends React.Component {
   handleHide = () => this.props.actions.resetTooltip();
@@ -18,13 +18,14 @@ class QuestionBodyContainer extends React.Component {
         tooltipTarget={ this.props.tooltipTarget }
         onHide={ this.handleHide }
         onClick={ this.handleClick }
+        questionInstructions={ this.props.questionInstructions }
+        outcomeDataTypes={ this.props.outcomeDataTypes }
       />
     )
   }
 }
 
-export default reduxify({
-  selector: estimatesSelector,
-  actions: { resetTooltip, showModal },
-  container: QuestionBodyContainer
-})
+export default connect({
+  selector: estimatesFormSelector,
+  actions: { resetTooltip, showModal }
+})(QuestionBodyContainer)

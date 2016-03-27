@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 const categorySelector = (state) => state.category
 const rangesSelector = (state) => state.forms.ranges
-const outcomesSelector = (state) => state.question.outcomes
+const outcomeValuesSelector = (state) => state.question.outcomeValues
 
 function getContinuousAnswerIndex(numBins, range, outcome) {
   let binValues = []
@@ -25,21 +25,20 @@ function getContinuousAnswerIndex(numBins, range, outcome) {
   }
 }
 
-function getCorrectAnswerIndices(category, ranges, outcomes) {
+function getCorrectAnswerIndices(category, ranges, outcomeValues) {
   let correctAnswerIndices = []
   for (let i = 0; i < category.outcomeRanges.length; i++) {
-    var outcomeName = category.outcomeNames[i]
-    if (category.discrete[i]) {
-      correctAnswerIndices.push(outcomes[i] - category.outcomeRanges[i][0])
-    } else {
-      var range = [0,0]
-      if ( ranges[outcomeName]
-           && ranges[outcomeName].lower >= 0
-           && ranges[outcomeName].upper > 0 )
-      {
+    let outcomeName = category.outcomeNames[i]
+    if (category.outcomeDataTypes[i].type === 'discrete') {
+      correctAnswerIndices.push(outcomeValues[i] - category.outcomeRanges[i][0])
+    } else if (category.outcomeDataTypes[i].type === 'continuous') {
+      let range = [0,0]
+      if ( ranges[outcomeName] && ranges[outcomeName].lower >= 0 && ranges[outcomeName].upper > 0 ) {
         range = [ranges[outcomeName].lower, ranges[outcomeName].upper]
       }
-      correctAnswerIndices.push(getContinuousAnswerIndex(category.numBins[i], range, outcomes[i]))
+      correctAnswerIndices.push(getContinuousAnswerIndex(category.numBins[i], range, outcomeValues[i]))
+    } else {
+      correctAnswerIndices.push(outcomeValues[i] ? 0 : 1)
     }
   }
   return correctAnswerIndices
@@ -48,10 +47,10 @@ function getCorrectAnswerIndices(category, ranges, outcomes) {
 export default createSelector(
   categorySelector,
   rangesSelector,
-  outcomesSelector,
-  (category, ranges, outcomes) => {
+  outcomeValuesSelector,
+  (category, ranges, outcomeValues) => {
     return {
-      correctAnswerIndices: getCorrectAnswerIndices(category, ranges, outcomes)
+      correctAnswerIndices: getCorrectAnswerIndices(category, ranges, outcomeValues)
     }
   }
 )

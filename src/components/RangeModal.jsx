@@ -11,7 +11,7 @@ export default class RangeModal extends React.Component {
     return (
       <Modal show={ this.props.show } onHide={ this.props.onHide }>
         <Modal.Header closeButton>
-          { this.props.unlocked ? 'Instructions' : 'Unlock Category' }
+          { this.props.unlocked ? this.props.roundInstructions : 'Unlock Category' }
         </Modal.Header>
         <Modal.Body>
           { this.props.unlocked ? <RangePreview /> : <CategorySurveyForm /> }

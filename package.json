@@ -6,15 +6,15 @@
   "scripts": {
     "start": "npm run watch",
     "deploy": "npm run build && gulp deploy && rm -rf dist && rm -rf .publish",
-    "watch": "webpack-dev-server --progress --colors --config webpack.config.dev.js",
-    "build": "webpack --profile --progress --colors --config webpack.config.prod.js"
+    "watch": "webpack-dev-server --colors --config webpack.config.dev.js",
+    "build": "webpack --profile --colors --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nickzarate/hivemind-web.git"
   },
   "author": "Nick Zarate",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/nickzarate/hivemind-web/issues"
   },
@@ -23,7 +23,6 @@
     "chartist": "^0.9.5",
     "es6-promise": "^3.1.2",
     "isomorphic-fetch": "^2.2.1",
-    "jquery": "^2.2.0",
     "parse": "^1.6.13",
     "parse-react": "^0.5.0",
     "rc-slider": "^3.3.1",
@@ -40,6 +39,7 @@
     "redux-actions": "^0.9.1",
     "redux-localstorage": "^1.0.0-rc4",
     "redux-localstorage-filter": "^0.1.1",
+    "redux-promise-middleware": "^2.3.3",
     "redux-saga": "^0.9.4",
     "redux-thunk": "^1.0.3",
     "reselect": "^2.0.2"
@@ -64,6 +64,7 @@
     "html-webpack-plugin": "^2.8.1",
     "json-loader": "^0.5.4",
     "node-sass": "^3.4.2",
+    "redbox-react": "^1.2.2",
     "redux-devtools": "^3.1.1",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.4",

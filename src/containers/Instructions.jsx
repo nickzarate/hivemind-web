@@ -1,7 +1,7 @@
 import React from 'react'
 import instructionsSelector from 'selectors/instructions'
 import Instructions from 'components/Instructions'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 
 class InstructionsContainer extends React.Component {
   render() {
@@ -9,13 +9,11 @@ class InstructionsContainer extends React.Component {
       <Instructions
         covariateValues={ this.props.covariateValues }
         covariateNames={ this.props.covariateNames }
-        instructions={ this.props.instructions }
       />
     )
   }
 }
 
-export default reduxify({
-  selector: instructionsSelector,
-  container: InstructionsContainer
-})
+export default connect({
+  selector: instructionsSelector
+})(InstructionsContainer)

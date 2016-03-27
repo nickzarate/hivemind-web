@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import { logout } from 'reducers/user'
 
 class LogoutButton extends React.Component {
@@ -12,7 +12,6 @@ class LogoutButton extends React.Component {
   }
 }
 
-export default reduxify({
-  actions: { logout },
-  container: LogoutButton
-})
+export default connect({
+  actions: { logout }
+})(LogoutButton)

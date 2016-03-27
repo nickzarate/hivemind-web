@@ -11,12 +11,12 @@ export const setQuestion = createAction(SET_QUESTION, currentQuestion => ({ curr
 const initialState = {
   covariateValues: [],
   objectId: '',
-  outcomes: []
+  outcomeValues: []
 }
 export default function question(state = initialState, action) {
   switch (action.type) {
   case SET_QUESTION:
-    return update(state, {$set: action.payload.currentQuestion})
+    return update(state, {$set: action.payload.question})
   default:
     return state
   }

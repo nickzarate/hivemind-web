@@ -16,7 +16,6 @@ module.exports = {
     common: [
       "chartist",
       "isomorphic-fetch",
-      "jquery",
       "parse",
       "parse-react",
       "rc-slider",
@@ -102,10 +101,10 @@ module.exports = {
       "process.env.NODE_ENV": JSON.stringify("production"),
       "__DEV__": false
     }),
+    new webpack.ProgressPlugin(function(percentage, message) {
+      process.stderr.write(message + "\r");
+    }),
     new webpack.ProvidePlugin({
-      "$": "jquery",
-      "jQuery": "jquery",
-      "window.jQuery": "jquery",
       "fetch": "isomorphic-fetch"
     }),
     new webpack.optimize.CommonsChunkPlugin({

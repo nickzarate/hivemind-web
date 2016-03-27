@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import RangeModal from 'components/RangeModal'
 import { handleSurveySubmission, handleStart } from 'reducers/round'
 import { showModal } from 'reducers/modal'
@@ -22,13 +22,13 @@ class RangeModalContainer extends React.Component {
         onSubmit={ this.handleSubmit }
         onHide={ this.handleHide }
         unlocked={ this.props.unlocked }
+        roundInstructions={ this.props.roundInstructions }
       />
     )
   }
 }
 
-export default reduxify({
+export default connect({
   selector: rangeModalSelector,
-  actions: { showModal, handleSurveySubmission, handleStart },
-  container: RangeModalContainer
-})
+  actions: { showModal, handleSurveySubmission, handleStart }
+})(RangeModalContainer)

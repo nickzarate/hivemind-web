@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import ChangeRangeModal from 'components/ChangeRangeModal'
 import { showModal } from 'reducers/modal'
 import changeRangeModalSelector from 'selectors/changeRangeModal'
@@ -21,8 +21,7 @@ class ChangeRangeModalContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: changeRangeModalSelector,
-  actions: { showModal },
-  container: ChangeRangeModalContainer
-})
+  actions: { showModal }
+})(ChangeRangeModalContainer)

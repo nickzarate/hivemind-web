@@ -1,30 +1,45 @@
 import React from 'react'
-import { toNum } from 'toolbox/parser'
-import { Form, Field } from 'react-redux-form'
+import { Form } from 'react-redux-form'
 import Tooltip from 'components/Lib/Tooltip'
+import RadioField from 'components/RadioField'
+import NumberField from 'components/NumberField'
 
 export default class CategorySurveyForm extends React.Component {
+  renderFields() {
+    const { allCovariateNames, allCovariateDataTypes } = this.props
+    return allCovariateNames.map(
+      (covariateName, index) => {
+        switch(allCovariateDataTypes[index].type) {
+        case 'continuous':
+          return (
+            <NumberField
+              key={ index }
+              variableName={ covariateName }
+              model={ `forms.covariates.${ covariateName }` }
+            />
+          )
+        default:
+          return (
+            <RadioField
+              key={ index }
+              labels={ allCovariateDataTypes[index].labels }
+              values={ allCovariateDataTypes[index].values }
+              variableName={ covariateName }
+              model={ `forms.covariates.${ covariateName }` }
+            />
+          )
+        }
+      }
+    )
+  }
+
   render() {
     return (
       <div>
-        { this.props.instructions }
+        { this.props.categorySurveyInstructions }
         <Tooltip message={ this.props.tooltipMessage } target={ this[this.props.tooltipTarget] } />
-        <Form ref={ (ref) => this.form = ref } model="covariates">
-          { this.props.covariateNames.map(
-            (covariateName, index) => (
-              <Field
-                key={ index }
-                model={ `covariates.${ covariateName }` }
-                parser={ toNum }
-                ref={ (ref) => this[covariateName] = ref }
-              >
-                <input
-                  type="number"
-                  placeholder={ covariateName }
-                />
-              </Field>
-            )
-          ) }
+        <Form ref={ (ref) => this.form = ref } model="forms.covariates">
+          { this.renderFields() }
         </Form>
       </div>
     )

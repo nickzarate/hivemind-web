@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import LoginModal from 'components/LoginModal'
 import { showModal } from 'reducers/modal'
 import loginModalSelector from 'selectors/loginModal'
@@ -23,8 +23,7 @@ class LoginModalContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: loginModalSelector,
-  actions: { showModal },
-  container: LoginModalContainer
-})
+  actions: { showModal }
+})(LoginModalContainer)

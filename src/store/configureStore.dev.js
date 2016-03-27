@@ -7,6 +7,7 @@ import adapter from 'redux-localstorage/lib/adapters/localStorage'
 import filter from 'redux-localstorage-filter'
 import createSagaMiddleware from 'redux-saga'
 import { watchLoginFlow, watchChooseCategory, watchGetCategoryNames } from 'sagas'
+import promiseMiddleware from 'redux-promise-middleware'
 import DevTools from 'containers/DevTools'
 
 const sagaMiddleware = createSagaMiddleware(watchLoginFlow, watchChooseCategory, watchGetCategoryNames)
@@ -23,17 +24,18 @@ export default function configureStore() {
   const store = createStore(
     reducers,
     compose(
-      applyMiddleware(thunk, sagaMiddleware),
+      applyMiddleware(promiseMiddleware(), thunk, sagaMiddleware),
       persistState(storage),
       DevTools.instrument()
     )
   )
 
   // Enable Webpack hot module replacement for reducers
-  // if (module.hot)
-  //   module.hot.accept('reducers', () =>
-  //     store.replaceReducer(require('reducers').default)
-  //   )
+  if (module.hot) {
+    module.hot.accept('reducers', () =>
+      store.replaceReducer(require('reducers').default)
+    )
+  }
 
   return store
 }

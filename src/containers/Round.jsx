@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import { asyncCreateRound, asyncHandleSubmit, asyncAwardPoints,
   initializeQuestion, pullQuestion } from 'actions/round'
 import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
@@ -44,9 +44,8 @@ class Round extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: roundSelector,
   actions: { asyncHandleSubmit, asyncAwardPoints, asyncCreateRound,
-    pullQuestion, initializeQuestion, setTooltipMessage, setTooltipTarget },
-  container: Round
-})
+    pullQuestion, initializeQuestion, setTooltipMessage, setTooltipTarget }
+})(Round)

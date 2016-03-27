@@ -12,7 +12,7 @@ const initialState = {
   categorySurveyInstructions: '',
   covariateNames: [],
   covariateRanges: [],
-  discrete: [],
+  outcomeDataTypes: [],
   index: 0,
   instructions: '',
   name: '',

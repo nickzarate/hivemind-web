@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import RangeForm from 'components/Forms/RangeForm'
 import { resetTooltip } from 'reducers/tooltip'
 import rangeFormSelector from 'selectors/forms/range'
@@ -21,8 +21,7 @@ class RangeFormContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: rangeFormSelector,
-  actions: { resetTooltip },
-  container: RangeFormContainer
-})
+  actions: { resetTooltip }
+})(RangeFormContainer)

@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import LoginForm from 'components/Forms/LoginForm'
 import { login } from 'reducers/user'
 import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
@@ -26,8 +26,7 @@ class LoginFormContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: tooltipSelector,
-  actions: { login, setTooltipMessage, setTooltipTarget, reset: actions.reset },
-  container: LoginFormContainer
-})
+  actions: { login, setTooltipMessage, setTooltipTarget, reset: actions.reset }
+})(LoginFormContainer)

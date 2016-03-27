@@ -3,15 +3,16 @@ import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES, SET_OU
 import { createAction } from 'redux-actions'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
+import { post } from 'actions/http'
 
-export const setData = createAction(SET_DATA, data => data)
+export const setData = createAction(SET_DATA, (data) => ({ data }))
 export const clearWinnings = createAction(CLEAR_WINNINGS)
-export const setCovariateData = createAction(SET_COVARIATE_DATA, covariateData => covariateData)
-export const setPhi = createAction(SET_PHI, phi => phi)
-export const setSeries = createAction(SET_SERIES, (index, data) => { return { index, data } })
-export const setOutcomes = createAction(SET_OUTCOMES, outcomes => outcomes)
-export const setOutcomeIndex = createAction(SET_OUTCOME_INDEX, outcomeIndex => outcomeIndex)
-export const addPhi = createAction(ADD_PHI, phi => phi)
+export const setCovariateData = createAction(SET_COVARIATE_DATA, (covariateData) => ({ covariateData }))
+export const setPhi = createAction(SET_PHI, (phi) => ({ phi }))
+export const setSeries = createAction(SET_SERIES, (index, data) => ({ index, data }))
+export const setOutcomes = createAction(SET_OUTCOMES, (outcomes) => ({ outcomes }))
+export const setOutcomeIndex = createAction(SET_OUTCOME_INDEX, (outcomeIndex) => ({ outcomeIndex }))
+export const addPhi = createAction(ADD_PHI, (res) => ({ phi: res.phi }))
 
 /*
  *  Call Python server and get Phi given the info in the current state.
@@ -22,24 +23,12 @@ export function asyncGetPhis() {
     let estimates = round.currentRound ? round.currentRound.get('answers')[0].get('estimates') : []
     for (let i = 0; i < estimates.length; i++) {
       // Get covariates and predictions from the latest round to analyze and get phi
-      let predictions = []
-      let covariates = []
+      let predictions = [], covariates = []
       for (let answer of round.currentRound.get('answers')) {
         predictions.push(answer.get('estimates')[i])
         covariates.push(answer.get('question').get('covariateValues'))
       }
-
-      $.ajax({
-        url: '/api/v1/get_phi',
-        method: 'POST',
-        data: JSON.stringify({
-          covariates: covariates,
-          p: predictions
-        }),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: (response) => dispatch(addPhi(response.phi))
-      })
+      dispatch(post('/api/v1/get_phi', { covariates, predictions }, addPhi))
     }
   }
 }
@@ -52,12 +41,12 @@ export function getCovariateData() {
   return (dispatch, getState) => {
     const { category: { name } } = getState()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    var information = Parse.User.current().get('categoryInformation')
-    var data = information[name]
-    var covariateData = []
-    for (var i = 0; i < data.length; i++) {
-      var item = []
-      for (var j = 0; j < data.length; j++) {
+    let information = Parse.User.current().get('categoryInformation')
+    let data = information[name]
+    let covariateData = []
+    for (let i = 0; i < data.length; i++) {
+      let item = []
+      for (let j = 0; j < data.length; j++) {
         if (j !== i) {
           item.push(data[j])
         }

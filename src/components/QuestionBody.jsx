@@ -2,23 +2,33 @@ import React from 'react'
 import Bins from 'containers/Bins'
 import EstimateForm from './Forms/EstimateForm'
 import Tooltip from 'components/Lib/Tooltip'
+import { Form } from 'react-redux-form'
+import RadioField from 'components/RadioField'
 
 export default class QuestionBody extends React.Component {
-  renderBody() {
-    return this.props.outcomeNames.map(
-      (outcomeName, index) => (
-        <li key={ index }>
-          <EstimateForm
-            outcomeName={ outcomeName }
-            estimates={ this.props.estimates }
-            ref={ (ref) => this[outcomeName] = ref }
-          />
-          <Bins
-            binsIndex={ index }
-          />
-        </li>
+  renderOutcome(outcomeName, index) {
+    const { outcomeDataTypes } = this.props
+    switch(outcomeDataTypes[index].type) {
+    case 'continuous':
+      return (
+        <EstimateForm
+          outcomeName={ outcomeName }
+          estimates={ this.props.estimates }
+          ref={ (ref) => this[outcomeName] = ref }
+        />
       )
-    )
+    default:
+      return (
+        <Form model="forms.estimates" ref={ (ref) => this[outcomeName] = ref }>
+          <RadioField
+            labels={ outcomeDataTypes[index].labels }
+            values={ outcomeDataTypes[index].values }
+            model={ `forms.estimates.${ outcomeName }` }
+            variableName={ outcomeName }
+          />
+        </Form>
+      )
+    }
   }
 
   render() {
@@ -32,7 +42,17 @@ export default class QuestionBody extends React.Component {
           placement="right"
         />
         <ul>
-          { this.renderBody() }
+          { this.props.outcomeNames.map(
+            (outcomeName, index) => (
+              <li key={ index }>
+                <p>{ this.props.questionInstructions[index] }</p>
+                { this.renderOutcome(outcomeName, index) }
+                <Bins
+                  binsIndex={ index }
+                />
+              </li>
+            )
+          ) }
         </ul>
         <button onClick={ this.props.onClick }>{ 'Change Ranges' }</button>
       </div>

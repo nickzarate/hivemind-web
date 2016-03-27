@@ -4,6 +4,24 @@ import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
 
 /*
+ *  Login the user and go to the home page
+ */
+// export function asyncLogin() {
+//   return (dispatch, getState) => {
+//     const { forms: { login } } = getState()
+//     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+//     Parse.User.logIn(login.email, login.password, {
+//       success() {
+//         browserHistory.push('/home')
+//       },
+//       error(user, error) {
+//         dispatch(setTooltipMessage('Error: ' + error.code + ' ' + error.message))
+//       }
+//     })
+//   }
+// }
+
+/*
  *  Sign up a new user with the given email and go to the home page
  */
 export function asyncHandleSignup() {

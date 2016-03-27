@@ -1,5 +1,5 @@
 import React from 'react'
-import reduxify from 'store/reduxify'
+import connect from 'store/connect'
 import SignupForm from 'components/Forms/SignupForm'
 import { actions } from 'react-redux-form'
 import { asyncHandleSignup } from 'actions/user'
@@ -26,8 +26,7 @@ class SignupFormContainer extends React.Component {
   }
 }
 
-export default reduxify({
+export default connect({
   selector: signupFormSelector,
-  actions: { asyncHandleSignup, setTooltipMessage, setTooltipTarget, reset: actions.reset },
-  container: SignupFormContainer
-})
+  actions: { asyncHandleSignup, setTooltipMessage, setTooltipTarget, reset: actions.reset }
+})(SignupFormContainer)
