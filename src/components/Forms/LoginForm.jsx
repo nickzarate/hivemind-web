@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Field } from 'react-redux-form'
 import Tooltip from 'components/Lib/Tooltip'
+import { SubmitButton } from 'components/Lib/Buttons'
 
 export default class LoginForm extends React.Component {
   form = (ref) => this.form = ref;
@@ -16,7 +17,7 @@ export default class LoginForm extends React.Component {
           <Field model="login.password">
             <input type="password" placeholder="Password" />
           </Field>
-          <button type="submit">{ 'Log In' }</button>
+          <SubmitButton>{ 'Log In' }</SubmitButton>
         </Form>
       </div>
     )
