@@ -11,7 +11,6 @@ export default class LoginModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <SignupForm />
-          <button>Test</button>
         </Modal.Body>
       </Modal>
     )

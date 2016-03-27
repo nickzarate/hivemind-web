@@ -7,7 +7,7 @@ export default class Bins extends React.Component {
   render() {
     return (
       <div>
-        <button className="btn btn-primary" onClick={ this.props.onLogin }>{ 'Log In' }</button>
+        <button onClick={ this.props.onLogin }>{ 'Log In' }</button>
         <Link to={ '/signup' }><button>{ 'Sign Up' }</button></Link>
         <button onClick={ this.handleClick }>{ 'Clear Cache' }</button>
       </div>
