@@ -21,8 +21,8 @@ export function asyncGetCategoryNames() {
     let query = new Parse.Query('Categories')
     query.find({
       success(categories) {
-        var categoryNames = []
-        for (var category of categories) {
+        let categoryNames = []
+        for (let category of categories) {
           categoryNames.push(category.get('name'))
         }
         dispatch(setCategoryNames(categoryNames))
@@ -38,24 +38,16 @@ export function asyncGetCategoryNames() {
 export function asyncHandleCategoryChoice(categoryName) {
   return (dispatch) => {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    var query = new Parse.Query('Categories')
+    let query = new Parse.Query('Categories')
     query.equalTo('name', categoryName)
     query.first({
       success(category) {
 
         // Select only the covariates and the outcomes that the 'client' desires.
-        var covariateDataTypes = []
-        var covariateNames = []
-        var covariateRanges = []
-        var outcomeDataTypes = []
-        var numBins = []
-        var outcomeNames = []
-        var outcomeRanges = []
-        var pointsPerToken = []
-        var questionInstructions = []
-        var tokens = []
-        var covariatesToDisplay = category.get('covariatesToDisplay')
-        var outcomesToDisplay = category.get('outcomesToDisplay')
+        let covariateDataTypes = [], covariateNames = [], covariateRanges = [],
+          outcomeDataTypes = [], numBins = [], outcomeNames = [], outcomeRanges = [],
+          pointsPerToken = [], questionInstructions = [], tokens = [],
+          covariatesToDisplay = category.get('covariatesToDisplay'), outcomesToDisplay = category.get('outcomesToDisplay')
 
         for (let index of covariatesToDisplay) {
           covariateDataTypes.push(category.get('covariateDataTypes')[index])
@@ -72,10 +64,9 @@ export function asyncHandleCategoryChoice(categoryName) {
           tokens.push(category.get('tokens')[index])
         }
 
-        var selectedCategory = {
+        let selectedCategory = {
           allCovariateDataTypes: category.get('covariateDataTypes'),
           allCovariateNames: category.get('covariateNames'),
-          allCovariateRanges: category.get('covariateRanges'),
           categorySurveyInstructions: category.get('categorySurveyInstructions'),
           covariateDataTypes,
           covariateNames,
@@ -140,9 +131,9 @@ export function handleStart() {
 export function handleSurveySubmission() {
   return (dispatch, getState) => {
     const { forms: { covariates }, category: { covariateNames, index, name } } = getState()
-    var covariateValues = []
+    let covariateValues = []
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    var user = Parse.User.current()
+    let user = Parse.User.current()
 
     // Validation
     for (let covariateName of covariateNames) {
@@ -167,9 +158,9 @@ export function handleSurveySubmission() {
 export function setUnlockedCategories(categories) {
   return (dispatch) => {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    for (var category of categories) {
-      var unlocked = false
-      for (var name of Parse.User.current().get('unlockedCategories')) {
+    for (let category of categories) {
+      let unlocked = false
+      for (let name of Parse.User.current().get('unlockedCategories')) {
         if (name === category.get('name')) {
           unlocked = true
         }

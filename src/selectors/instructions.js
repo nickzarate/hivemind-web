@@ -4,7 +4,7 @@ const categorySelector = (state) => state.category
 const covariateValuesSelector = (state) => state.question.covariateValues
 
 function getCovariateValues(values, covariateDataTypes) {
-  var covariateValues = []
+  let covariateValues = []
   for (let i = 0; i < covariateDataTypes.length; i++) {
     covariateValues.push(covariateDataTypes[i].labels ? covariateDataTypes[i].labels[values[i]] : values[i])
   }

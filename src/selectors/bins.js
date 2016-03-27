@@ -8,8 +8,7 @@ const bankSelector = (state) => state.answer.bank
 const rangesSelector = (state) => state.forms.ranges
 
 function getContinuousBinText(numBins, range) {
-  let binValues = []
-  let binText = []
+  let binValues = [], binText = []
   let difference = range[1] - range[0]
   let step = difference / numBins
   step = Math.floor(step + 0.5)
@@ -25,13 +24,13 @@ function getContinuousBinText(numBins, range) {
 }
 
 function getBinTexts(category, ranges) {
-  var bins = []
-  for (var i = 0; i < category.outcomeRanges.length; i++) {
-    var outcomeName = category.outcomeNames[i]
-    var dataType = category.outcomeDataTypes[i]
+  let bins = []
+  for (let i = 0; i < category.outcomeRanges.length; i++) {
+    let outcomeName = category.outcomeNames[i]
+    let dataType = category.outcomeDataTypes[i]
     if (dataType.type === 'continuous') {
       // Calculate the range
-      var range = [0,0]
+      let range = [0,0]
       if ( ranges[outcomeName] && ranges[outcomeName].lower >= 0 && ranges[outcomeName].upper > 0 ) {
         range = [ranges[outcomeName].lower, ranges[outcomeName].upper]
       }

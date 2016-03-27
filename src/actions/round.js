@@ -26,7 +26,7 @@ export function asyncAwardPoints(worth) {
     const { answer: { binValues }, round : { correctAnswerIndices } } = getState()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     //TODO: Calculate how many points are earned for answering correctly
-    var winnings = 0
+    let winnings = 0
     for (let i = 0; i < worth.length; i++) {
       winnings += correctAnswerIndices[i] === -1 ? 0 : binValues[i][correctAnswerIndices[i]] * worth[i]
     }
@@ -71,7 +71,7 @@ export function asyncHandleSubmit() {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
 
     // Create an array of all of the outcomes estimated by the user
-    var estimatesArray = []
+    let estimatesArray = []
     for (let outcome of category.outcomeNames) {
       estimatesArray.push(typeof estimates[outcome] === 'string' ? Number(estimates[outcome]) : estimates[outcome])
     }
@@ -82,21 +82,21 @@ export function asyncHandleSubmit() {
     dispatch(addOutcomes(answer.outcomes))
 
     // Create query for the question that the user answered
-    var Questions = Parse.Object.extend('Questions')
-    var query = new Parse.Query(Questions)
+    let Questions = Parse.Object.extend('Questions')
+    let query = new Parse.Query(Questions)
 
     dispatch(setAnswerSubmitted(true))
     query.get(objectId).then(function(question) {
       // Create new answer to save to a round
-      var Answer = Parse.Object.extend('Answer')
-      var newAnswer = new Answer()
+      let Answer = Parse.Object.extend('Answer')
+      let newAnswer = new Answer()
       return newAnswer.save({
         question: question,
         binValues: answer.binValues,
         estimates: estimatesArray
       })
     }).then(function(savedAnswer) {
-      var answers = round.currentRound.get('answers')
+      let answers = round.currentRound.get('answers')
       answers.push(savedAnswer)
       return round.currentRound.save({ answers: answers })
     }).then(function() {
@@ -131,7 +131,6 @@ export function pullQuestion(categoryName) {
   return (dispatch, getState) => {
     const { answer: { submitted }, category: { outcomesToDisplay, covariatesToDisplay } } = getState()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-
     // If the question currently stored has not been submitted, do not pull a new question
     if (!submitted) {
       return
@@ -145,20 +144,17 @@ export function pullQuestion(categoryName) {
     query.equalTo('observationId', observationId)
     //Pull question and set state
     query.first().then(function(question) {
-      var covariateValues = []
-      var outcomeValues = []
+      let covariateValues = [], outcomeValues = []
       for (let index of covariatesToDisplay) {
         covariateValues.push(question.get('covariateValues')[index])
       }
       for (let index of outcomesToDisplay) {
         outcomeValues.push(question.get('outcomeValues')[index])
       }
-      var selectedQuestion = {
+      let selectedQuestion = {
         covariateValues,
-        // covariateValues: question.get('covariateValues'),
         objectId: question.id,
         outcomeValues
-        // outcomes: question.get('outcomes')
       }
       dispatch(setAnswerSubmitted(false))
       dispatch(setQuestion(selectedQuestion))

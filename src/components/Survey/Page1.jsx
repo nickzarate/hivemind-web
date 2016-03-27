@@ -19,7 +19,7 @@ export default class SurveyPage1 extends React.Component {
   }
 
   displayErrors(state) {
-    var errors = getField(this.props.surveyForm, state).errors
+    let errors = getField(this.props.surveyForm, state).errors
     return Object.keys(errors).map(
       (error, index) => (
         <p key={ index }>{ errors[error] }</p>

@@ -28,11 +28,11 @@ function getContinuousAnswerIndex(numBins, range, outcome) {
 function getCorrectAnswerIndices(category, ranges, outcomeValues) {
   let correctAnswerIndices = []
   for (let i = 0; i < category.outcomeRanges.length; i++) {
-    var outcomeName = category.outcomeNames[i]
+    let outcomeName = category.outcomeNames[i]
     if (category.outcomeDataTypes[i].type === 'discrete') {
       correctAnswerIndices.push(outcomeValues[i] - category.outcomeRanges[i][0])
     } else if (category.outcomeDataTypes[i].type === 'continuous') {
-      var range = [0,0]
+      let range = [0,0]
       if ( ranges[outcomeName] && ranges[outcomeName].lower >= 0 && ranges[outcomeName].upper > 0 ) {
         range = [ranges[outcomeName].lower, ranges[outcomeName].upper]
       }

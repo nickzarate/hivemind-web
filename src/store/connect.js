@@ -13,7 +13,7 @@ import { connect as rrConnect } from 'react-redux'
  */
 export default function connect({ state, selector, actions }) {
   /* the container will subscribe to Redux store updates */
-  var mapStateToProps = (STATE) => state ? { [state]: STATE[state] } : {}
+  let mapStateToProps = (STATE) => state ? { [state]: STATE[state] } : {}
 
   /* the container will be provided actions */
   if (actions) {
