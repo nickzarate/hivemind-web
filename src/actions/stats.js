@@ -23,8 +23,7 @@ export function asyncGetPhis() {
     let estimates = round.currentRound ? round.currentRound.get('answers')[0].get('estimates') : []
     for (let i = 0; i < estimates.length; i++) {
       // Get covariates and predictions from the latest round to analyze and get phi
-      let predictions = []
-      let covariates = []
+      let predictions = [], covariates = []
       for (let answer of round.currentRound.get('answers')) {
         predictions.push(answer.get('estimates')[i])
         covariates.push(answer.get('question').get('covariateValues'))
@@ -42,12 +41,12 @@ export function getCovariateData() {
   return (dispatch, getState) => {
     const { category: { name } } = getState()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    var information = Parse.User.current().get('categoryInformation')
-    var data = information[name]
-    var covariateData = []
-    for (var i = 0; i < data.length; i++) {
-      var item = []
-      for (var j = 0; j < data.length; j++) {
+    let information = Parse.User.current().get('categoryInformation')
+    let data = information[name]
+    let covariateData = []
+    for (let i = 0; i < data.length; i++) {
+      let item = []
+      for (let j = 0; j < data.length; j++) {
         if (j !== i) {
           item.push(data[j])
         }
