@@ -20,7 +20,6 @@ class QuestionBodyContainer extends React.Component {
         onClick={ this.handleClick }
         questionInstructions={ this.props.questionInstructions }
         outcomeDataTypes={ this.props.outcomeDataTypes }
-        outcomeRanges={ this.props.outcomeRanges }
       />
     )
   }

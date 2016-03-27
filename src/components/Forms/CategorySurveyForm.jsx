@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form } from 'react-redux-form'
 import Tooltip from 'components/Lib/Tooltip'
-import RadioField from './RadioField'
-import NumberField from './NumberField'
+import RadioField from 'components/RadioField'
+import NumberField from 'components/NumberField'
 
 export default class CategorySurveyForm extends React.Component {
   renderFields() {

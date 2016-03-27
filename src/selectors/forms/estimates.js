@@ -12,7 +12,6 @@ export default createSelector(
     return {
       outcomeNames: category.outcomeNames,
       outcomeDataTypes: category.outcomeDataTypes,
-      outcomeRanges: category.outcomeRanges,
       estimates,
       questionInstructions: category.questionInstructions,
       tooltipMessage: tooltip.message,

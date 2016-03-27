@@ -3,7 +3,7 @@ import Bins from 'containers/Bins'
 import EstimateForm from './Forms/EstimateForm'
 import Tooltip from 'components/Lib/Tooltip'
 import { Form } from 'react-redux-form'
-import RadioField from 'components/Forms/RadioField'
+import RadioField from 'components/RadioField'
 
 export default class QuestionBody extends React.Component {
   renderOutcome(outcomeName, index) {
