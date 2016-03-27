@@ -24,41 +24,20 @@ function getContinuousBinText(numBins, range) {
   return binText
 }
 
-function getDiscreteBinText(range) {
-  let binText = []
-  for (let i = range[0]; i <= range[1]; i++) {
-    binText.push(`${ i }`)
-  }
-  return binText
-}
-
 function getBinTexts(category, ranges) {
   var bins = []
   for (var i = 0; i < category.outcomeRanges.length; i++) {
     var outcomeName = category.outcomeNames[i]
-    if (category.outcomeDataTypes[i].type === 'discrete') {
-      if (category.outcomeDataTypes[i].valueLabels) {
-        bins.push(category.outcomeDataTypes[i].valueLabels)
-      } else {
-        bins.push(getDiscreteBinText(category.outcomeRanges[i]))
-      }
-    } else if (category.outcomeDataTypes[i].type === 'continuous') {
+    var dataType = category.outcomeDataTypes[i]
+    if (dataType.type === 'continuous') {
       // Calculate the range
       var range = [0,0]
-      if ( ranges[outcomeName]
-           && ranges[outcomeName].lower >= 0
-           && ranges[outcomeName].upper > 0 )
-      {
+      if ( ranges[outcomeName] && ranges[outcomeName].lower >= 0 && ranges[outcomeName].upper > 0 ) {
         range = [ranges[outcomeName].lower, ranges[outcomeName].upper]
       }
-
       bins.push(getContinuousBinText(category.numBins[i], range))
-    } else if (category.outcomeDataTypes[i].type === 'boolean') {
-      if (category.outcomeDataTypes[i].valueLabels) {
-        bins.push(category.outcomeDataTypes[i].valueLabels)
-      } else {
-        bins.push(['1','0'])
-      }
+    } else {
+      bins.push(dataType.labels ? dataType.labels : dataType.values)
     }
   }
   return bins.length ? bins : [[]]
