@@ -33,10 +33,7 @@ function getCorrectAnswerIndices(category, ranges, outcomeValues) {
       correctAnswerIndices.push(outcomeValues[i] - category.outcomeRanges[i][0])
     } else if (category.outcomeDataTypes[i].type === 'continuous') {
       var range = [0,0]
-      if ( ranges[outcomeName]
-           && ranges[outcomeName].lower >= 0
-           && ranges[outcomeName].upper > 0 )
-      {
+      if ( ranges[outcomeName] && ranges[outcomeName].lower >= 0 && ranges[outcomeName].upper > 0 ) {
         range = [ranges[outcomeName].lower, ranges[outcomeName].upper]
       }
       correctAnswerIndices.push(getContinuousAnswerIndex(category.numBins[i], range, outcomeValues[i]))

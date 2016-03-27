@@ -8,10 +8,9 @@ export default createSelector(
   tooltipSelector,
   (category, tooltip) => {
     return {
-      instructions: category.categorySurveyInstructions,
+      categorySurveyInstructions: category.categorySurveyInstructions,
       allCovariateDataTypes: category.allCovariateDataTypes,
       allCovariateNames: category.allCovariateNames,
-      allCovariateRanges: category.allCovariateRanges,
       tooltipMessage: tooltip.message,
       tooltipTarget: tooltip.target
     }
