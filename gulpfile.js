@@ -2,7 +2,6 @@
 
 var gitSubtree = require("gulp-gh-pages");
 var gulp = require("gulp");
-var gutil = require("gulp-util");
 
 /* Deploy to production branch */
 gulp.task("deploy", ["git:deploy"]);
