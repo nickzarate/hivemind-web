@@ -1,35 +1,15 @@
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
-import { take, call, put, select, cps } from 'redux-saga/effects'
+import { take, call, put, select } from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 
 import { setTooltipMessage } from 'reducers/tooltip'
 import { getLoginCredentials } from 'selectors/loginCredentials'
 import { LOGIN, LOGOUT } from 'reducers/user'
-import { setCategory } from 'reducers/category'
-import { showModal } from 'reducers/modal'
-import { setCategoryNames, CHOOSE_CATEGORY, GET_CATEGORY_NAMES } from 'reducers/round'
-
-// function* login(action) {
-//   if (Parse.User.current()) {
-//     return
-//   }
-//   yield call(Parse.logIn, action.payload.email, action.payload.password)
-// }
-
-// function* logout() {
-//   yield call(Parse.logOut)
-// }
-
-// export function* altWatchLoginFlow() {
-//   Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-//   // while (true) { // eslint-disable-line no-constant-condition
-//   yield* takeLatest(LOGIN, login)
-//   yield* takeLatest(LOGOUT, logout)
-//   // }
-// }
-
+// import { setCategory } from 'reducers/category'
+// import { showModal } from 'reducers/modal'
+import { CHOOSE_CATEGORY } from 'reducers/round'
 
 export function* watchLoginFlow() {
   Parse.initialize(APP_ID, JAVASCRIPT_KEY)

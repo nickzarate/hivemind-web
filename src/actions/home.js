@@ -123,32 +123,32 @@ export function handleStart() {
   }
 }
 
-/*
- *  If all values in the form are filled, unlock the category, and set the information on the current user
- */
-export function handleSurveySubmission() {
-  return (dispatch, getState) => {
-    const { forms: { covariates }, category: { covariateNames, index, name } } = getState()
-    let covariateValues = []
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    let user = Parse.User.current()
+// /*
+//  *  If all values in the form are filled, unlock the category, and set the information on the current user
+//  */
+// export function handleSurveySubmission() {
+//   return (dispatch, getState) => {
+//     const { forms: { covariates }, category: { covariateNames, index, name } } = getState()
+//     let covariateValues = []
+//     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+//     let user = Parse.User.current()
 
-    // Validation
-    for (let covariateName of covariateNames) {
-      if (isNaN(covariates[covariateName])) {
-        dispatch(setTooltipMessage('All fields must be filled in.'))
-        dispatch(setTooltipTarget(covariateName))
-        return
-      }
-      covariateValues.push(typeof covariates[covariateName] === 'string' ? Number(covariates[covariateName]) : covariates[covariateName])
-    }
+//     // Validation
+//     for (let covariateName of covariateNames) {
+//       if (isNaN(covariates[covariateName])) {
+//         dispatch(setTooltipMessage('All fields must be filled in.'))
+//         dispatch(setTooltipTarget(covariateName))
+//         return
+//       }
+//       covariateValues.push(typeof covariates[covariateName] === 'string' ? Number(covariates[covariateName]) : covariates[covariateName])
+//     }
 
-    dispatch(setUnlocked(true, index))
-    let information = { [name]: covariateValues }
-    user.add('unlockedCategories', name)
-    user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
-  }
-}
+//     dispatch(setUnlocked(true, index))
+//     let information = { [name]: covariateValues }
+//     user.add('unlockedCategories', name)
+//     user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
+//   }
+// }
 
 /*
  *  Initialize the array of booleans that represent which categories are unlocked to the current user
