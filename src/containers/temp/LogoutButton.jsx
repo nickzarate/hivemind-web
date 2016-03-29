@@ -3,14 +3,12 @@ import connect from 'store/connect'
 import { logout } from 'reducers/user'
 
 class LogoutButton extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick() {
-    this.props.actions.logout()
-  }
+  handleClick() { this.props.actions.logOut() }
 
   render() {
     return (

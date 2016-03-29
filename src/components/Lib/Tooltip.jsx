@@ -3,19 +3,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 export default class Tooltip extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.handleHide = this.handleHide.bind(this)
     this.getTarget = this.getTarget.bind(this)
   }
-
-  handleHide() {
-    this.props.onHide()
-  }
-
-  getTarget() {
-    ReactDOM.findDOMNode(this.props.target)
-  }
+  handleHide() { this.props.onHide() }
+  getTarget() { ReactDOM.findDOMNode(this.props.target) }
 
   renderTooltip() {
     let rootClose = this.props.onHide ? true : false

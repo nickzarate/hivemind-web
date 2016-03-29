@@ -5,8 +5,8 @@ import { showModal } from 'reducers/modal'
 import loginModalSelector from 'selectors/loginModal'
 
 class LoginModalContainer extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.handleHide = this.handleHide.bind(this)
   }
 
@@ -14,9 +14,7 @@ class LoginModalContainer extends React.Component {
     this.props.actions.showModal(false)
   }
 
-  handleHide() {
-    this.props.actions.showModal(false)
-  }
+  handleHide() { this.props.actions.showModal(false) }
 
   render() {
     return (

@@ -6,19 +6,14 @@ import surveySelector from 'selectors/survey'
 import { actions } from 'react-redux-form'
 
 class SurveyPage1Container extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCheckChange = this.handleCheckChange.bind(this)
   }
 
-  handleSubmit() {
-    this.props.actions.submitPage1()
-  }
-
-  handleCheckChange (val) {
-    this.props.actions.change(`forms.survey.race.${ val }`, !this.props.survey.race[val])
-  }
+  handleSubmit() { this.props.actions.submitPage1() }
+  handleCheckChange(val) { this.props.actions.change(`forms.survey.race.${ val }`, !this.props.survey.race[val]) }
 
   render() {
     return (

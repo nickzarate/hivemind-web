@@ -13,8 +13,8 @@ const SelectField = createFieldClass({
 })
 
 export default class SurveyPage1 extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.displayErrors = this.displayErrors.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -28,9 +28,7 @@ export default class SurveyPage1 extends React.Component {
     )
   }
 
-  handleChange(val) {
-    return () => this.props.onCheckChange(val)
-  }
+  handleChange(val) { return () => this.props.onCheckChange(val) }
 
   render() {
     const { race } = this.props.survey

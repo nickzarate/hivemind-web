@@ -7,8 +7,8 @@ import { actions } from 'react-redux-form'
 import tooltipSelector from 'selectors/tooltip'
 
 class LoginFormContainer extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -18,9 +18,7 @@ class LoginFormContainer extends React.Component {
     this.props.actions.reset('login')
   }
 
-  handleSubmit() {
-    this.props.actions.login()
-  }
+  handleSubmit() { this.props.actions.login() }
 
   render() {
     return (

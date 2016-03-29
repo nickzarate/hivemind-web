@@ -5,8 +5,8 @@ import SignupModal from 'components/SignupModal'
 import connect from 'store/connect'
 
 class SignupModalContainer extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.handleHide = this.handleHide.bind(this)
   }
 
@@ -14,9 +14,7 @@ class SignupModalContainer extends React.Component {
     this.props.actions.showModal(false)
   }
 
-  handleHide() {
-    this.props.actions.showModal(false)
-  }
+  handleHide() { this.props.actions.showModal(false) }
 
   render() {
     return (

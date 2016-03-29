@@ -13,6 +13,7 @@ module.exports = {
   },
   "plugins": [
     "ava",
+    "promise",
     "react"
   ],
   "globals": {
@@ -26,6 +27,9 @@ module.exports = {
   },
   "rules": {
     "no-console": 1,
+    "promise/param-names": 2,
+    "promise/always-return": 1,
+    "promise/catch-or-return": 1,
     "react/prop-types": 0
   }
 };

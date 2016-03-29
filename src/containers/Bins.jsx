@@ -6,8 +6,8 @@ import Bins from 'components/Bins'
 import connect from 'store/connect'
 
 class BinsContainer extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -15,9 +15,7 @@ class BinsContainer extends React.Component {
     this.props.actions.setCorrectAnswerIndices(nextProps.correctAnswerIndices)
   }
 
-  handleClick(index) {
-    this.props.actions.handleDeposit(this.props.binsIndex, index)
-  }
+  handleClick(index) { this.props.actions.handleDeposit(this.props.binsIndex, index) }
 
   render() {
     const { binTexts, binsIndex } = this.props
