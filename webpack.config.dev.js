@@ -25,6 +25,7 @@ module.exports = {
     modulesDirectories: ["node_modules", "src"]
   },
   entry: [
+    "bootstrap-loader",
     "webpack-dev-server/client?http://localhost:8080/",
     "webpack/hot/dev-server",
     path.resolve(srcPath, "index")
@@ -52,15 +53,15 @@ module.exports = {
       // Sass loader
       {
         test: /\.scss$/,
-        include: path.resolve(assetsPath, "sass"),
-        loaders: ['style', 'css', 'sass']
+        include: path.join(srcPath, "assets/sass"),
+        loaders: ['style-loader', 'css?modules', 'postcss', 'sass', 'sass-resources']
       },
 
       // required to write "require('./style.css')"
       {
         test: /\.css$/,
         exclude: /\.useable\.css$/,
-        loader: "style!css"
+        loader: "style-loader!css?modules!postcss"
       },
 
       // required for bootstrap icons.
@@ -78,6 +79,10 @@ module.exports = {
       { test: /\.jpg$/, loader: "file" }
     ]
   },
+  sassResources: path.join(srcPath, "assets/sass/resources.scss"),
+  postcss: [
+    require('autoprefixer')
+  ],
   plugins: [
     new HtmlWebpackPlugin({
       favicon: path.resolve(assetsPath, "images/favicon.png"),
@@ -96,3 +101,38 @@ module.exports = {
     })
   ]
 }
+
+// entry: {
+//   common: [
+//     'bootstrap-loader',
+//     "chartist",
+//     "isomorphic-fetch",
+//     "jquery",
+//     "parse",
+//     "parse-react",
+//     "rc-slider",
+//     "react",
+//     "react-addons-update",
+//     "react-bootstrap",
+//     "react-chartist",
+//     "react-dom",
+//     "react-redux",
+//     "react-redux-form",
+//     "react-router",
+//     "react-router-redux",
+//     "redbox-react",
+//     "redux",
+//     "redux-actions",
+//     "redux-devtools",
+//     "redux-devtools-dock-monitor",
+//     "redux-devtools-log-monitor",
+//     "redux-localstorage",
+//     "redux-thunk",
+//     "reselect"
+//   ],
+//   index: [
+//     "eventsource-polyfill",
+//     "webpack-hot-middleware/client",
+//     path.join(srcPath, "index.js")
+//   ]
+// },
