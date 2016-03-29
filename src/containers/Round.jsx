@@ -12,32 +12,24 @@ class Round extends React.Component {
   }
 
   componentDidMount() {
-    const { actions, bank, numBins } = this.props
+    const { actions } = this.props
     actions.asyncCreateRound()
     actions.pullQuestion(this.props.categoryName)
-    actions.initializeQuestion(numBins, bank)
+    // actions.initializeQuestion(numBins, bank)
   }
 
   handleSubmit() {
-    const { actions, categoryName, numBins, bank } = this.props
-    // Validate estimates
-    for (let outcomeName of this.props.outcomeNames) {
-      if (isNaN(this.props.estimates[outcomeName])) {
-        this.props.actions.setTooltipMessage('Make a guess!')
-        this.props.actions.setTooltipTarget(outcomeName)
-        return
-      }
-    }
-    actions.asyncHandleSubmit()
-    actions.asyncAwardPoints(this.props.worth)
-    actions.initializeQuestion(numBins, bank)
+    const { actions, categoryName } = this.props
+    actions.asyncHandleSubmit(this.props.worth)
+    // actions.asyncAwardPoints(this.props.worth)
+    // actions.initializeQuestion(numBins, bank)
     actions.pullQuestion(categoryName)
   }
 
   render() {
     return (
       <div>
-        { React.cloneElement(this.props.children) }
+        { this.props.children }
         <button onClick={ this.handleSubmit }>{ 'Submit Question' }</button>
       </div>
     )

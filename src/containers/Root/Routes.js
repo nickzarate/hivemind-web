@@ -31,7 +31,7 @@ export default (
     </Route>
     <Route path="home" component={ Home } />
     <Route path="round" component={ Round }>
-      <IndexRoute component={ Question } />
+      <Route path="question" component={ Question } />
     </Route>
     <Route path="stats" component={ Stats } />
     <Route path="*" component={ NotFound } />

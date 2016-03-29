@@ -65,10 +65,19 @@ export function asyncCreateRound() {
  *  Save the current round with the new answer
  *  Submit the round if round is complete
  */
-export function asyncHandleSubmit() {
+export function asyncHandleSubmit(worth) {
   return (dispatch, getState) => {
     const { answer, category, round, forms: { estimates }, question: { objectId } } = getState()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+
+    // Validate estimates
+    for (let outcomeName of category.outcomeNames) {
+      if (isNaN(this.props.estimates[outcomeName])) {
+        this.props.actions.setTooltipMessage('Make a guess!')
+        this.props.actions.setTooltipTarget(outcomeName)
+        return
+      }
+    }
 
     // Create an array of all of the outcomes estimated by the user
     let estimatesArray = []
@@ -80,6 +89,7 @@ export function asyncHandleSubmit() {
     // Save token distribution and outcomes
     dispatch(addAnswers(answer.binValues))
     dispatch(addOutcomes(answer.outcomes))
+    dispatch(asyncAwardPoints(worth))
 
     // Create query for the question that the user answered
     let Questions = Parse.Object.extend('Questions')
@@ -158,6 +168,7 @@ export function pullQuestion(categoryName) {
       }
       dispatch(setAnswerSubmitted(false))
       dispatch(setQuestion(selectedQuestion))
+      browserHistory.push('/round/question')
     })
   }
 }
