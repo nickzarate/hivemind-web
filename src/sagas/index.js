@@ -32,7 +32,6 @@ export function* watchLoginFlow() {
     if (window.location.pathname === '/') {
       browserHistory.push('/home')
     }
-    console.log(Parse.User.logOut())
     yield take(LOGOUT)
     yield call(Parse.User.logOut)
   }
@@ -45,78 +44,74 @@ export function* watchChooseCategory() {
 function* chooseCategory(action) {
   var query = new Parse.Query('Categories')
   query.equalTo('name', action.payload.categoryName)
-  const category = yield call(query.first)
-  var selectedCategory = {
-    categorySurveyInstructions: category.get('categorySurveyInstructions'),
-    covariateNames: category.get('covariateNames'),
-    covariateRanges: category.get('covariateRanges'),
-    discrete: category.get('discrete'),
-    index: category.get('index'),
-    instructions: category.get('instructions'),
-    name: category.get('name'),
-    numBins: category.get('numBins'),
-    outcomeNames: category.get('outcomeNames'),
-    outcomeRanges: category.get('outcomeRanges'),
-    pointsPerToken: category.get('pointsPerToken'),
-    questionInstructions: category.get('questionInstructions'),
-    questionsPerRound: category.get('questionsPerRound'),
-    tokens: category.get('tokens')
-  }
-  yield put(setCategory(selectedCategory))
-  yield put(showModal(true))
-}
-
-
-export function* watchGetCategoryNames() {
-  yield* takeLatest(GET_CATEGORY_NAMES, getCategoryNames)
-}
-function* getCategoryNames() {
-  Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-  var query = new Parse.Query('Categories')
-
-  console.log(query)
-  console.log(query.find)
+  console.log('before query first')
+  console.log(query.first().then)
+  var promise = query.first().then
+  let category
   try {
-    var categories = yield cps(query.find)//({ success(categories) { return categories }})
+    category = yield call(promise)
   } catch(err) {
     console.log(err)
   }
-  console.log(categories)
-  // try {
-  //   categories = yield call(getCategories, query)
-  // } catch(err) {
-  //   console.log(err)
-  // }
-  console.log('after get categories')
-  console.log(categories)
-  var categoryNames = []
-  for (var category of categories) {
-    console.log('in for')
-    categoryNames.push(category.get('name'))
+  console.log(category)
+  // query.first({
+  //   success(category) {
+  //     console.log('something') // eslint-disable-line
+  //     // Select only the covariates and the outcomes that the 'client' desires.
+  //     let covariateDataTypes = [], covariateNames = [], covariateRanges = [],
+  //       outcomeDataTypes = [], numBins = [], outcomeNames = [], outcomeRanges = [],
+  //       pointsPerToken = [], questionInstructions = [], tokens = [],
+  //       covariatesToDisplay = category.get('covariatesToDisplay'), outcomesToDisplay = category.get('outcomesToDisplay')
 
-    // Iterate through all unlocked categories of the user,
-    // and if category[i] is listed in there, unlock that index.
-    var unlock = false
-    for (var name of Parse.User.current().get('unlockedCategories')) {
-      if (name === category.get('name')) {
-        unlock = true
-      }
-    }
-    yield put(setUnlocked(unlock, category.get('index')))
-  }
-  yield put(setCategoryNames(categoryNames))
-}
-function* getCategories(query) {
-  yield call(query.find)
-  //   ({
-  //   success(categories) {
-  //     console.log(categories)
-  //     return categories
-  //   },
-  //   error(error) {
-  //     return 'Error: ' + error.message
+  //     for (let index of covariatesToDisplay) {
+  //       covariateDataTypes.push(category.get('covariateDataTypes')[index])
+  //       covariateNames.push(category.get('covariateNames')[index])
+  //       covariateRanges.push(category.get('covariateRanges')[index])
+  //     }
+  //     for (let index of outcomesToDisplay) {
+  //       outcomeDataTypes.push(category.get('outcomeDataTypes')[index])
+  //       numBins.push(category.get('numBins')[index])
+  //       outcomeNames.push(category.get('outcomeNames')[index])
+  //       outcomeRanges.push(category.get('outcomeRanges')[index])
+  //       pointsPerToken.push(category.get('pointsPerToken')[index])
+  //       questionInstructions.push(category.get('questionInstructions')[index])
+  //       tokens.push(category.get('tokens')[index])
+  //     }
+
+  //     let selectedCategory = { // eslint-disable-line
+  //       allCovariateDataTypes: category.get('covariateDataTypes'),
+  //       allCovariateNames: category.get('covariateNames'),
+  //       categorySurveyInstructions: category.get('categorySurveyInstructions'),
+  //       covariateDataTypes,
+  //       covariateNames,
+  //       covariateRanges,
+  //       covariatesToDisplay,
+  //       index: category.get('index'),
+  //       name: category.get('name'),
+  //       numBins,
+  //       outcomeDataTypes,
+  //       outcomeNames,
+  //       outcomeRanges,
+  //       outcomesToDisplay,
+  //       pointsPerToken,
+  //       questionInstructions,
+  //       questionsPerRound: category.get('questionsPerRound'),
+  //       roundInstructions: category.get('roundInstructions'),
+  //       tokens
+  //     }
+
+  //     // yield put(setCategory(selectedCategory))
+  //     // yield put(showModal(true))
   //   }
   // })
+  console.log('after query try')
+  // console.log('before query try') // eslint-disable-line no-console
+  // try {
+  //   category = yield call(query.first())
+  // } catch(err) {
+  //   console.log(err) // eslint-disable-line no-console
+  // }
+  // console.log('after query try') // eslint-disable-line no-console
 }
 
 // export function* watchGetCategoryNames() {
@@ -160,9 +155,9 @@ function* getCategories(query) {
 // export function setUnlockedCategories(categories) {
 //   return (dispatch) => {
 //     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-//     for (var category of categories) {
-//       var unlocked = false
-//       for (var name of Parse.User.current().get('unlockedCategories')) {
+//     for (let category of categories) {
+//       let unlocked = false
+//       for (let name of Parse.User.current().get('unlockedCategories')) {
 //         if (name === category.get('name')) {
 //           unlocked = true
 //         }
