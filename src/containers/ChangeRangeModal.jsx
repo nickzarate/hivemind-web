@@ -5,11 +5,16 @@ import { showModal } from 'actions/modal'
 import changeRangeModalSelector from 'selectors/changeRangeModal'
 
 class ChangeRangeModalContainer extends React.Component {
+  constructor() {
+    super()
+    this.handleHide = this.handleHide.bind(this)
+  }
+
   componentWillUnmount() {
     this.props.actions.showModal(false)
   }
 
-  handleHide = () => this.props.actions.showModal(false);
+  handleHide() { this.props.actions.showModal(false) }
 
   render() {
     return (
