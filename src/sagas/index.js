@@ -1,15 +1,16 @@
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
-import { take, call, put, select } from 'redux-saga/effects'
+import { take, call, put, select, apply } from 'redux-saga/effects'
 import { takeLatest } from 'redux-saga'
 
 import { setTooltipMessage } from 'reducers/tooltip'
 import { getLoginCredentials } from 'selectors/loginCredentials'
 import { LOGIN, LOGOUT } from 'reducers/user'
-// import { setCategory } from 'reducers/category'
-// import { showModal } from 'reducers/modal'
+import { setCategory } from 'reducers/category'
+import { showModal } from 'reducers/modal'
 import { CHOOSE_CATEGORY } from 'reducers/round'
+
 
 export function* watchLoginFlow() {
   Parse.initialize(APP_ID, JAVASCRIPT_KEY)
@@ -44,74 +45,52 @@ export function* watchChooseCategory() {
 function* chooseCategory(action) {
   var query = new Parse.Query('Categories')
   query.equalTo('name', action.payload.categoryName)
-  console.log('before query first')
-  console.log(query.first().then)
-  var promise = query.first().then
-  let category
-  try {
-    category = yield call(promise)
-  } catch(err) {
-    console.log(err)
+  const category = yield apply(query, query.first)
+  // Select only the covariates and the outcomes that the 'client' desires.
+  let covariateDataTypes = [], covariateNames = [], covariateRanges = [],
+    outcomeDataTypes = [], numBins = [], outcomeNames = [], outcomeRanges = [],
+    pointsPerToken = [], questionInstructions = [], tokens = [],
+    covariatesToDisplay = category.get('covariatesToDisplay'), outcomesToDisplay = category.get('outcomesToDisplay')
+
+  for (let index of covariatesToDisplay) {
+    covariateDataTypes.push(category.get('covariateDataTypes')[index])
+    covariateNames.push(category.get('covariateNames')[index])
+    covariateRanges.push(category.get('covariateRanges')[index])
   }
-  console.log(category)
-  // query.first({
-  //   success(category) {
-  //     console.log('something') // eslint-disable-line
-  //     // Select only the covariates and the outcomes that the 'client' desires.
-  //     let covariateDataTypes = [], covariateNames = [], covariateRanges = [],
-  //       outcomeDataTypes = [], numBins = [], outcomeNames = [], outcomeRanges = [],
-  //       pointsPerToken = [], questionInstructions = [], tokens = [],
-  //       covariatesToDisplay = category.get('covariatesToDisplay'), outcomesToDisplay = category.get('outcomesToDisplay')
+  for (let index of outcomesToDisplay) {
+    outcomeDataTypes.push(category.get('outcomeDataTypes')[index])
+    numBins.push(category.get('numBins')[index])
+    outcomeNames.push(category.get('outcomeNames')[index])
+    outcomeRanges.push(category.get('outcomeRanges')[index])
+    pointsPerToken.push(category.get('pointsPerToken')[index])
+    questionInstructions.push(category.get('questionInstructions')[index])
+    tokens.push(category.get('tokens')[index])
+  }
 
-  //     for (let index of covariatesToDisplay) {
-  //       covariateDataTypes.push(category.get('covariateDataTypes')[index])
-  //       covariateNames.push(category.get('covariateNames')[index])
-  //       covariateRanges.push(category.get('covariateRanges')[index])
-  //     }
-  //     for (let index of outcomesToDisplay) {
-  //       outcomeDataTypes.push(category.get('outcomeDataTypes')[index])
-  //       numBins.push(category.get('numBins')[index])
-  //       outcomeNames.push(category.get('outcomeNames')[index])
-  //       outcomeRanges.push(category.get('outcomeRanges')[index])
-  //       pointsPerToken.push(category.get('pointsPerToken')[index])
-  //       questionInstructions.push(category.get('questionInstructions')[index])
-  //       tokens.push(category.get('tokens')[index])
-  //     }
+  let selectedCategory = {
+    allCovariateDataTypes: category.get('covariateDataTypes'),
+    allCovariateNames: category.get('covariateNames'),
+    categorySurveyInstructions: category.get('categorySurveyInstructions'),
+    covariateDataTypes,
+    covariateNames,
+    covariateRanges,
+    covariatesToDisplay,
+    index: category.get('index'),
+    name: category.get('name'),
+    numBins,
+    outcomeDataTypes,
+    outcomeNames,
+    outcomeRanges,
+    outcomesToDisplay,
+    pointsPerToken,
+    questionInstructions,
+    questionsPerRound: category.get('questionsPerRound'),
+    roundInstructions: category.get('roundInstructions'),
+    tokens
+  }
 
-  //     let selectedCategory = { // eslint-disable-line
-  //       allCovariateDataTypes: category.get('covariateDataTypes'),
-  //       allCovariateNames: category.get('covariateNames'),
-  //       categorySurveyInstructions: category.get('categorySurveyInstructions'),
-  //       covariateDataTypes,
-  //       covariateNames,
-  //       covariateRanges,
-  //       covariatesToDisplay,
-  //       index: category.get('index'),
-  //       name: category.get('name'),
-  //       numBins,
-  //       outcomeDataTypes,
-  //       outcomeNames,
-  //       outcomeRanges,
-  //       outcomesToDisplay,
-  //       pointsPerToken,
-  //       questionInstructions,
-  //       questionsPerRound: category.get('questionsPerRound'),
-  //       roundInstructions: category.get('roundInstructions'),
-  //       tokens
-  //     }
-
-  //     // yield put(setCategory(selectedCategory))
-  //     // yield put(showModal(true))
-  //   }
-  // })
-  console.log('after query try')
-  // console.log('before query try') // eslint-disable-line no-console
-  // try {
-  //   category = yield call(query.first())
-  // } catch(err) {
-  //   console.log(err) // eslint-disable-line no-console
-  // }
-  // console.log('after query try') // eslint-disable-line no-console
+  yield put(setCategory(selectedCategory))
+  yield put(showModal(true))
 }
 
 // export function* watchGetCategoryNames() {
