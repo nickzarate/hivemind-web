@@ -1,3 +1,4 @@
+import { setCategoryNames, setUnlocked } from 'reducers/round'
 import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
@@ -12,22 +13,22 @@ import { browserHistory } from 'react-router'
 /*
  *  Make a query to Parse to check how many categories are currently up
  */
-// export function asyncGetCategoryNames() {
-//   return (dispatch) => {
-//     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-//     let query = new Parse.Query('Categories')
-//     query.find({
-//       success(categories) {
-//         let categoryNames = []
-//         for (let category of categories) {
-//           categoryNames.push(category.get('name'))
-//         }
-//         dispatch(setCategoryNames(categoryNames))
-//         dispatch(setUnlockedCategories(categories, Parse.User.current()))
-//       }
-//     })
-//   }
-// }
+export function asyncGetCategoryNames() {
+  return (dispatch) => {
+    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+    let query = new Parse.Query('Categories')
+    query.find({
+      success(categories) {
+        let categoryNames = []
+        for (let category of categories) {
+          categoryNames.push(category.get('name'))
+        }
+        dispatch(setCategoryNames(categoryNames))
+        dispatch(setUnlockedCategories(categories, Parse.User.current()))
+      }
+    })
+  }
+}
 
 /*
  *  Set the chosen category and open up the modal

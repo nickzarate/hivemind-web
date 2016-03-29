@@ -6,11 +6,11 @@ import persistState, { mergePersistedState } from 'redux-localstorage'
 import adapter from 'redux-localstorage/lib/adapters/localStorage'
 import filter from 'redux-localstorage-filter'
 import createSagaMiddleware from 'redux-saga'
-import { watchLoginFlow, watchChooseCategory, watchGetCategoryNames } from 'sagas'
+import { watchLoginFlow, watchChooseCategory } from 'sagas'
 import promiseMiddleware from 'redux-promise-middleware'
 import DevTools from 'containers/DevTools'
 
-const sagaMiddleware = createSagaMiddleware(watchLoginFlow, watchChooseCategory, watchGetCategoryNames)
+const sagaMiddleware = createSagaMiddleware(watchLoginFlow, watchChooseCategory)
 
 export default function configureStore() {
   const reducers = compose(

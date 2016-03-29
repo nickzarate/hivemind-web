@@ -139,6 +139,43 @@ function* getCategories(query) {
   // })
 }
 
+// export function* watchGetCategoryNames() {
+//   yield* takeLatest(GET_CATEGORY_NAMES, getCategoryNames)
+// }
+// function* getCategoryNames() {
+//   Parse.initialize(APP_ID, JAVASCRIPT_KEY)
+  // let query = new Parse.Query('Categories')
+
+  // try {
+  //   let categories = yield cps(query.find)//({ success(categories) { return categories }})
+  // } catch(err) {
+  //   console.log(err)
+  // }
+  // console.log(categories)
+  // // try {
+  // //   categories = yield call(getCategories, query)
+  // // } catch(err) {
+  // //   console.log(err)
+  // // }
+  // console.log('after get categories')
+  // console.log(categories)
+  // let categoryNames = []
+  // for (let category of categories) {
+  //   console.log('in for')
+  //   categoryNames.push(category.get('name'))
+
+  //   // Iterate through all unlocked categories of the user,
+  //   // and if category[i] is listed in there, unlock that index.
+  //   let unlock = false
+  //   for (let name of Parse.User.current().get('unlockedCategories')) {
+  //     if (name === category.get('name')) {
+  //       unlock = true
+  //     }
+  //   }
+  //   yield put(setUnlocked(unlock, category.get('index')))
+  // }
+  // yield put(setCategoryNames(categoryNames))
+// }
 
 // export function setUnlockedCategories(categories) {
 //   return (dispatch) => {
