@@ -6,8 +6,14 @@ import { showModal } from 'actions/modal'
 import estimatesFormSelector from 'selectors/forms/estimates'
 
 class QuestionBodyContainer extends React.Component {
-  handleHide = () => this.props.actions.resetTooltip();
-  handleClick = () => this.props.actions.showModal(true);
+  constructor() {
+    super()
+    this.handleHide = this.handleHide.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleHide() { this.props.actions.resetTooltip() }
+  handleClick() { this.props.actions.showModal(true) }
 
   render() {
     return (

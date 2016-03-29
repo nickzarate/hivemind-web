@@ -7,13 +7,20 @@ import { actions } from 'react-redux-form'
 import loginFormSelector from 'selectors/forms/login'
 
 class LoginFormContainer extends React.Component {
+  constructor() {
+    super()
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
   componentWillUnmount() {
     this.props.actions.setTooltipMessage('')
     this.props.actions.setTooltipTarget('')
     this.props.actions.reset('login')
   }
 
-  handleSubmit = () => this.props.actions.asyncLogin();
+  handleSubmit() {
+    this.props.actions.asyncLogin()
+  }
 
   render() {
     return (
