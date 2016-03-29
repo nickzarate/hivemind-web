@@ -16,6 +16,7 @@ export default class SurveyPage1 extends React.Component {
   constructor(props) {
     super(props)
     this.displayErrors = this.displayErrors.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   displayErrors(state) {
@@ -27,7 +28,9 @@ export default class SurveyPage1 extends React.Component {
     )
   }
 
-  handleChange = (val) => { return () => this.props.onCheckChange(val) };
+  handleChange(val) {
+    return () => this.props.onCheckChange(val)
+  }
 
   render() {
     const { race } = this.props.survey

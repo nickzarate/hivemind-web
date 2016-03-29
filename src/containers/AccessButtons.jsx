@@ -4,7 +4,14 @@ import AccessButtons from 'components/AccessButtons'
 import connect from 'store/connect'
 
 class AccessButtonsContainer extends React.Component {
-  handleLogin = () => this.props.actions.showModal(true);
+  constructor(props) {
+    super(props)
+    this.handleLogin = this.handleLogin.bind(this)
+  }
+
+  handleLogin() {
+    this.props.actions.showModal(true)
+  }
 
   render() {
     return (

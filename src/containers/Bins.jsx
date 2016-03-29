@@ -6,16 +6,18 @@ import Bins from 'components/Bins'
 import connect from 'store/connect'
 
 class BinsContainer extends React.Component {
-  static defaultProps = {
-    binsIndex: 0,
-    presentational: false
-  };
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
 
   componentWillReceiveProps(nextProps) {
     this.props.actions.setCorrectAnswerIndices(nextProps.correctAnswerIndices)
   }
 
-  handleClick = (index) => this.props.actions.handleDeposit(this.props.binsIndex, index);
+  handleClick(index) {
+    this.props.actions.handleDeposit(this.props.binsIndex, index)
+  }
 
   render() {
     const { binTexts, binsIndex } = this.props
@@ -31,6 +33,11 @@ class BinsContainer extends React.Component {
       />
     )
   }
+}
+
+BinsContainer.defaultProps = {
+  binsIndex: 0,
+  presentational: false
 }
 
 export default connect({

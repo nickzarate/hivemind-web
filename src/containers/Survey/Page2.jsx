@@ -5,7 +5,14 @@ import { submitPage2 } from 'actions/survey'
 import surveySelector from 'selectors/survey'
 
 class SurveyPage2Container extends React.Component {
-  handleSubmit = () => this.props.actions.submitPage2();
+  constructor(props) {
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit() {
+    this.props.actions.submitPage2()
+  }
 
   render() {
     return (

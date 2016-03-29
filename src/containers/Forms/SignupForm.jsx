@@ -7,13 +7,20 @@ import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
 import signupFormSelector from 'selectors/forms/signup'
 
 class SignupFormContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
   componentWillUnmount() {
     this.props.actions.setTooltipMessage('')
     this.props.actions.setTooltipTarget('')
     this.props.actions.reset('signup')
   }
 
-  handleSubmit = () => this.props.actions.asyncHandleSignup();
+  handleSubmit() {
+    this.props.actions.asyncHandleSignup()
+  }
 
   render() {
     return (

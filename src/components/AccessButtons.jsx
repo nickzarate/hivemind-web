@@ -2,7 +2,14 @@ import React from 'react'
 import { Link } from 'react-router'
 
 export default class Bins extends React.Component {
-  handleClick = () => window.localStorage.clear();
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    window.localStorage.clear()
+  }
 
   render() {
     return (

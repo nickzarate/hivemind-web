@@ -2,7 +2,6 @@ import React from 'react'
 import { Form, getField, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
 import { toNum } from 'toolbox/parser'
-
 const TextField = createFieldClass({
   'Input': controls.text
 })
@@ -14,6 +13,7 @@ export default class SurveyPage4 extends React.Component {
   constructor(props) {
     super(props)
     this.displayErrors = this.displayErrors.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   displayErrors(state) {
@@ -25,7 +25,9 @@ export default class SurveyPage4 extends React.Component {
     )
   }
 
-  handleChange = (val) => { return () => this.props.onCheckChange(val) };
+  handleChange(val) {
+    return () => this.props.onCheckChange(val)
+  }
 
   render() {
     const { survey } = this.props

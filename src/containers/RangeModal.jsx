@@ -6,13 +6,28 @@ import { showModal } from 'reducers/modal'
 import rangeModalSelector from 'selectors/rangeModal'
 
 class RangeModalContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleHide = this.handleHide.bind(this)
+    this.handleStart = this.handleStart.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
   componentWillUnmount() {
     this.props.actions.showModal(false)
   }
 
-  handleHide = () => this.props.actions.showModal(false);
-  handleStart = () => this.props.actions.handleStart();
-  handleSubmit = () => this.props.actions.handleSurveySubmission();
+  handleHide() {
+    this.props.actions.showModal(false)
+  }
+
+  handleStart() {
+    this.props.actions.handleStart()
+  }
+
+  handleSubmit() {
+    this.props.actions.handleSurveySubmission()
+  }
 
   render() {
     return (

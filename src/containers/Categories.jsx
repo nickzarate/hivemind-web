@@ -1,15 +1,23 @@
 import React from 'react'
-import { chooseCategory, getCategoryNames } from 'reducers/round'
+import { chooseCategory } from 'reducers/round'
+import { asyncGetCategoryNames } from 'actions/home'
 import categoriesSelector from 'selectors/categories'
 import Categories from 'components/Categories'
 import connect from 'store/connect'
 
 class CategoriesContainer extends React.Component {
-  componentDidMount() {
-    this.props.actions.getCategoryNames()
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick = (categoryName) => this.props.actions.chooseCategory(categoryName);
+  componentDidMount() {
+    this.props.actions.asyncGetCategoryNames()
+  }
+
+  handleClick(categoryName) {
+    this.props.actions.chooseCategory(categoryName)
+  }
 
   render() {
     return (
@@ -23,5 +31,5 @@ class CategoriesContainer extends React.Component {
 
 export default connect({
   selector: categoriesSelector,
-  actions: { chooseCategory, getCategoryNames }
+  actions: { chooseCategory, asyncGetCategoryNames }
 })(CategoriesContainer)
