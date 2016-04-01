@@ -8,7 +8,7 @@ export default class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="LoginForm" >
         <Tooltip target={ this[this.props.tooltipTarget] } message={ this.props.tooltipMessage } />
         <Form ref={ this.form } onSubmit={ this.props.onSubmit } model="login">
           <Field model="login.email">

@@ -88,7 +88,7 @@ export default class SurveyPage1 extends React.Component {
         </RadioField>
         { this.displayErrors('isEnglishPrimaryLanguage') }
 
-        <button type="submit">{ 'Continue' }</button>
+        <SubmitButton>{ 'Continue' }</SubmitButton>
       </Form>
     )
   }

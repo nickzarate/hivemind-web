@@ -1,11 +1,12 @@
 import React from 'react'
 import { Form, Field } from 'react-redux-form'
 import Tooltip from 'components/Lib/Tooltip'
+import { SubmitButton } from 'components/Lib/Buttons'
 
 export default class SignupForm extends React.Component {
   render() {
     return (
-      <div>
+      <div id="SignupForm">
         <Tooltip target={ this[this.props.tooltipTarget] } message={ this.props.tooltipMessage } />
         <Form ref={ (ref) => this.form = ref } onSubmit={ this.props.onSubmit } model="signup">
           <Field model="signup.email" ref={ (ref) => this.email = ref }>
@@ -26,7 +27,7 @@ export default class SignupForm extends React.Component {
               placeholder="Confirm Password"
             />
           </Field>
-          <button type="submit">{ 'Sign Up' }</button>
+          <SubmitButton>{ 'Sign Up' }</SubmitButton>
         </Form>
       </div>
     )
