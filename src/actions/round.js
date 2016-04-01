@@ -128,17 +128,13 @@ export function initializeQuestion(numBins, bank) {
 /*
  *  Pull a random question from Parse database and setState accordingly
  */
-export function pullQuestion(categoryName) {
+export function fetchQuestion(categoryName) {
   return (dispatch, getState) => {
-    const { answer: { submitted }, category: { outcomesToDisplay, covariatesToDisplay } } = getState()
+    const { category: { outcomesToDisplay, covariatesToDisplay, numObservations } } = getState()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    // If the question currently stored has not been submitted, do not pull a new question
-    if (!submitted) {
-      return
-    }
 
     //Create query for random question
-    let observationId = rand(1, 3010)
+    let observationId = rand(1, numObservations)
     let Question = Parse.Object.extend('Questions')
     let query = new Parse.Query(Question)
     query.equalTo('type', categoryName)
@@ -157,9 +153,8 @@ export function pullQuestion(categoryName) {
         objectId: question.id,
         outcomeValues
       }
-      dispatch(setAnswerSubmitted(false))
       dispatch(setQuestion(selectedQuestion))
-      browserHistory.push('/round/question')
+      browserHistory.push('/round/question/' + question.id)
     })
   }
 }
