@@ -1,22 +1,13 @@
-import { INCREMENT_CURRENT_QUESTION, ADD_ANSWER_TO_ROUND, SET_CURRENT_ROUND, SET_CORRECT_ANSWER_INDICES,
-  ADD_ANSWERS, RESET_CURRENT_QUESTION, ADD_OUTCOMES, SET_QUESTION, ADD_WINNINGS } from './constants'
-import { setBinValues, setBank, setAnswerSubmitted } from './answer'
+import { addWinnings, setCurrentRound, addAnswers, addOutcomes,
+  resetCurrentQuestion, incrementCurrentQuestion } from 'reducers/round'
+import { setBank, setBinValues } from 'reducers/answer'
+import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
+import { setQuestion } from 'reducers/question'
 import { actions } from 'react-redux-form'
 import { rand } from 'toolbox/misc'
-import { createAction } from 'redux-actions'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
-
-export const addAnswers = createAction(ADD_ANSWERS, (answers) => ({ answers }))
-export const addAnswerToRound = createAction(ADD_ANSWER_TO_ROUND, (answer) => ({ answer }))
-export const addOutcomes = createAction(ADD_OUTCOMES, (outcomes) => ({ outcomes }))
-export const addWinnings = createAction(ADD_WINNINGS, (winnings) => ({ winnings }))
-export const incrementCurrentQuestion = createAction(INCREMENT_CURRENT_QUESTION)
-export const resetCurrentQuestion = createAction(RESET_CURRENT_QUESTION)
-export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, (correctAnswerIndices) => ({ correctAnswerIndices }))
-export const setQuestion = createAction(SET_QUESTION, (question) => ({ question }))
-export const setCurrentRound = createAction(SET_CURRENT_ROUND, (currentRound) => ({ currentRound }))
 
 /*
  *  Award the user points according to the correctness of their answer
@@ -42,7 +33,7 @@ export function asyncAwardPoints(worth) {
  *    answers: [],
  *    createdBy: currentUser
  */
-export function asyncCreateRound() {
+export function saveRound() {
   return (dispatch) => {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
 
@@ -72,9 +63,9 @@ export function asyncHandleSubmit(worth) {
 
     // Validate estimates
     for (let outcomeName of category.outcomeNames) {
-      if (isNaN(this.props.estimates[outcomeName])) {
-        this.props.actions.setTooltipMessage('Make a guess!')
-        this.props.actions.setTooltipTarget(outcomeName)
+      if (isNaN(estimates[outcomeName])) {
+        dispatch(setTooltipMessage('Make a guess!'))
+        dispatch(setTooltipTarget(outcomeName))
         return
       }
     }
@@ -95,7 +86,6 @@ export function asyncHandleSubmit(worth) {
     let Questions = Parse.Object.extend('Questions')
     let query = new Parse.Query(Questions)
 
-    dispatch(setAnswerSubmitted(true))
     query.get(objectId).then(function(question) {
       // Create new answer to save to a round
       let Answer = Parse.Object.extend('Answer')
@@ -115,6 +105,7 @@ export function asyncHandleSubmit(worth) {
         browserHistory.push('/stats')
       } else {
         dispatch(incrementCurrentQuestion())
+        dispatch(fetchQuestion(category.name))
       }
     })
   }
