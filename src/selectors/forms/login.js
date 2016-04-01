@@ -7,7 +7,7 @@ export default createSelector(
   (tooltip) => {
     return {
       tooltipMessage: tooltip.message,
-      tooltipTarget: tooltip.target === '' ? 'form' : target
+      tooltipTarget: tooltip.target === '' ? 'form' : tooltip.target
     }
   }
 )

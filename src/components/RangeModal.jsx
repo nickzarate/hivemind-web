@@ -4,8 +4,12 @@ import RangePreview from 'containers/RangePreview'
 import CategorySurveyForm from 'containers/Forms/CategorySurveyForm'
 
 export default class RangeModal extends React.Component {
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-  handleClick = () => this.props.unlocked ? this.props.onStart() : this.props.onSubmit();
+  handleClick() { this.props.unlocked ? this.props.onStart() : this.props.onSubmit() }
 
   render() {
     return (
