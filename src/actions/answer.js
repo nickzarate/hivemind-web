@@ -1,11 +1,4 @@
-import { WITHDRAW, DEPOSIT, SET_BIN_VALUES, SET_BANK, SET_ANSWER_SUBMITTED } from './constants'
-import { createAction } from 'redux-actions'
-
-export const deposit = createAction(DEPOSIT, (binsIndex, index) => ({ binsIndex, index }))
-export const setAnswerSubmitted = createAction(SET_ANSWER_SUBMITTED, (submitted) => ({ submitted }))
-export const setBank = createAction(SET_BANK, (bank) => ({ bank }))
-export const setBinValues = createAction(SET_BIN_VALUES, (binValues) => ({ binValues }))
-export const withdraw = createAction(WITHDRAW, (bankIndex) => ({ bankIndex }))
+import { withdraw, deposit } from 'reducers/answer'
 
 /*
  *  If any cubes left, distribute one to the specified index
