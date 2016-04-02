@@ -31,3 +31,6 @@ dist
 
 # gulp-gh-pages
 .publish
+
+# exuberant tags
+tags

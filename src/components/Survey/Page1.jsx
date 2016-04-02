@@ -2,6 +2,7 @@ import React from 'react'
 import survey from 'assets/survey.json'
 import { Form, getField, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
+import { SubmitButton } from 'components/Lib/Buttons'
 const TextField = createFieldClass({
   'Input': controls.text
 })
