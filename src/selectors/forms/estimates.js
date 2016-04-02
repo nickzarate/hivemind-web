@@ -10,9 +10,9 @@ export default createSelector(
   tooltipSelector,
   (category, estimates, tooltip) => {
     return {
+      estimates,
       outcomeNames: category.outcomeNames,
       outcomeDataTypes: category.outcomeDataTypes,
-      estimates,
       questionInstructions: category.questionInstructions,
       tooltipMessage: tooltip.message,
       tooltipTarget: tooltip.target
