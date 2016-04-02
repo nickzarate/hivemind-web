@@ -13,11 +13,7 @@ class QuestionBodyContainer extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.actions.initializeQuestion(this.props.numBins, this.props.bank)
-  }
-
-  componentDidUnmount() {
-    // this.props.actions.reset('forms.estimates')
+    this.props.actions.initializeQuestion(this.props.numBins, this.props.bank)
   }
 
   handleHide() { this.props.actions.resetTooltip() }
