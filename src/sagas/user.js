@@ -3,7 +3,7 @@ import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
 import { take, call, put, select, fork } from 'redux-saga/effects'
 import { setTooltipMessage } from 'reducers/tooltip'
-import { getLoginCredentials } from 'selectors/loginCredentials'
+import getLoginCredentials from 'selectors/sagas/loginCredentials'
 import { LOGIN, LOGOUT } from 'reducers/user'
 
 
