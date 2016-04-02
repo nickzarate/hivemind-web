@@ -1,8 +1,7 @@
 import React from 'react'
 import connect from 'store/connect'
-import { asyncCreateRound, asyncHandleSubmit, asyncAwardPoints,
-  initializeQuestion, pullQuestion } from 'actions/round'
-import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
+import { saveRound, asyncHandleSubmit, fetchQuestion, initializeQuestion } from 'actions/round'
+import { actions } from 'react-redux-form'
 import roundSelector from 'selectors/round'
 
 class Round extends React.Component {
@@ -13,17 +12,14 @@ class Round extends React.Component {
 
   componentDidMount() {
     const { actions } = this.props
-    actions.asyncCreateRound()
-    actions.pullQuestion(this.props.categoryName)
-    // actions.initializeQuestion(numBins, bank)
+    actions.saveRound()
+    actions.fetchQuestion(this.props.categoryName)
   }
 
   handleSubmit() {
-    const { actions, categoryName } = this.props
-    actions.asyncHandleSubmit(this.props.worth)
-    // actions.asyncAwardPoints(this.props.worth)
-    // actions.initializeQuestion(numBins, bank)
-    actions.pullQuestion(categoryName)
+    this.props.actions.asyncHandleSubmit(this.props.worth)
+    this.props.actions.reset('forms.estimates')
+    this.props.actions.initializeQuestion(this.props.numBins, this.props.bank)
   }
 
   render() {
@@ -38,6 +34,5 @@ class Round extends React.Component {
 
 export default connect({
   selector: roundSelector,
-  actions: { asyncHandleSubmit, asyncAwardPoints, asyncCreateRound,
-    pullQuestion, initializeQuestion, setTooltipMessage, setTooltipTarget }
+  actions: { asyncHandleSubmit, saveRound, fetchQuestion, reset: actions.reset, initializeQuestion }
 })(Round)
