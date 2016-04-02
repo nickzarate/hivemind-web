@@ -42,7 +42,12 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
-        loader: "babel"
+        loader: "babel",
+        query: {
+          cacheDirectory: true,
+          presets: ['es2015'],
+          plugins: ['transform-object-rest-spread']
+        }
       },
       // eslint-loader
       {
