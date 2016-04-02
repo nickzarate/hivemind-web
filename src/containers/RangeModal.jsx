@@ -1,7 +1,8 @@
 import React from 'react'
 import connect from 'store/connect'
 import RangeModal from 'components/RangeModal'
-import { handleSurveySubmission, handleStart } from 'reducers/round'
+import { handleStart } from 'actions/home'
+import { handleSurveySubmission } from 'actions/home'
 import { showModal } from 'reducers/modal'
 import rangeModalSelector from 'selectors/rangeModal'
 
