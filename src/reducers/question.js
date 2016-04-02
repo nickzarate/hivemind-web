@@ -5,7 +5,7 @@ import { createAction } from 'redux-actions'
 export const SET_QUESTION = 'question/SET_QUESTION'
 
 /* Actions */
-export const setQuestion = createAction(SET_QUESTION, currentQuestion => ({ currentQuestion }))
+export const setQuestion = createAction(SET_QUESTION, (question) => ({ question }))
 
 /* Reducer */
 const initialState = {
