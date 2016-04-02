@@ -6,11 +6,11 @@ export default class Categories extends React.Component {
   }
 
   renderCategories() {
-    return this.props.categoryNames.map(
-      (categoryName) => (
-        <li key={ categoryName }>
-          <button onClick={ this.handleClick(categoryName) }>
-            { 'New ' }{ categoryName }{ ' round' }
+    return this.props.categories.map(
+      (category) => (
+        <li key={ category.name }>
+          <button onClick={ this.handleClick(category.name) }>
+            { 'New ' }{ category.name }{ ' round' }
           </button>
         </li>
       )
