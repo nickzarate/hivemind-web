@@ -2,18 +2,26 @@ import { createSelector } from 'reselect'
 
 const showModalSelector = (state) => state.modal.showModal
 const categorySelector = (state) => state.category
-const unlockedSelector = (state) => state.round.unlocked
+const categoriesSelector = (state) => state.round.categories
 const roundInstructionsSelector = (state) => state.category.roundInstructions
+
+function getUnlocked(category, categories) {
+  for (let cat of categories) {
+    if (cat.name === category.name) {
+      return cat.unlocked
+    }
+  }
+}
 
 export default createSelector(
   showModalSelector,
   categorySelector,
-  unlockedSelector,
+  categoriesSelector,
   roundInstructionsSelector,
-  (showModal, category, unlocked, roundInstructions) => {
+  (showModal, category, categories, roundInstructions) => {
     return {
       showModal,
-      unlocked: unlocked[category.index],
+      unlocked: getUnlocked(category, categories),
       roundInstructions
     }
   }

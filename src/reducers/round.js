@@ -12,6 +12,7 @@ export const RESET_CURRENT_QUESTION = 'round/RESET_CURRENT_QUESTION'
 export const SET_CATEGORIES = 'round/SET_CATEGORIES'
 export const SET_CORRECT_ANSWER_INDICES = 'round/SET_CORRECT_ANSWER_INDICES'
 export const SET_CURRENT_ROUND = 'round/SET_CURRENT_ROUND'
+export const SET_UNLOCKED = 'round/SET_UNLOCKED'
 // Saga-only action-types
 export const SUBMIT_QUESTION = 'round/SUBMIT_QUESTION'
 export const FETCH_QUESTIONS = 'round/FETCH_QUESTIONS'
@@ -27,6 +28,7 @@ export const resetCurrentQuestion = createAction(RESET_CURRENT_QUESTION)
 export const setCategories = createAction(SET_CATEGORIES, (categories) => ({ categories }))
 export const setCorrectAnswerIndices = createAction(SET_CORRECT_ANSWER_INDICES, (correctAnswerIndices) => ({ correctAnswerIndices }))
 export const setCurrentRound = createAction(SET_CURRENT_ROUND, (currentRound) => ({ currentRound }))
+export const setUnlocked = createAction(SET_UNLOCKED, (index) => ({ index }))
 // Saga-only actions
 export const submitQuestion = createAction(SUBMIT_QUESTION)
 export const fetchQuestions = createAction(FETCH_QUESTIONS)
@@ -74,6 +76,8 @@ export default function round(state = initialState, action) {
     return update(state, {correctAnswerIndices: {$set: action.payload.correctAnswerIndices}})
   case SET_CURRENT_ROUND:
     return update(state, {currentRound: {$set: action.payload.currentRound}})
+  case SET_UNLOCKED:
+    return update(state, {categories: {[action.payload.index]: {unlocked: {$set: true}}}})
   default:
     return state
   }

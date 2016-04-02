@@ -139,7 +139,7 @@ export function handleSurveySubmission() {
       covariateValues.push(typeof covariates[covariateName] === 'string' ? Number(covariates[covariateName]) : covariates[covariateName])
     }
 
-    dispatch(setUnlocked(true, index))
+    dispatch(setUnlocked(index))
     let information = { [name]: covariateValues }
     user.add('unlockedCategories', name)
     user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
