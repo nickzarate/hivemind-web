@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
 
-/* SELECTOR */
 const tooltipSelector = (state) => state.tooltip
-export const getTooltip = createSelector(
+
+export default createSelector(
   tooltipSelector,
   (tooltip) => {
     return {
