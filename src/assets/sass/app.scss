@@ -1,5 +1,27 @@
+@mixin title-gradient {
+  background: $main-blue;
+  background: radial-gradient($main-blue, $main-blue 15%, $main-grey);
+}
+
 .app {
+  @include title-gradient;
   padding: 20px;
-  background-color: $main-blue;
   min-height: 100vh;
+  color: white;
+}
+
+.btnHive {
+  background-color: $hive-orange;
+  border-color: $hive-yellow;
+  color: white;
+}
+
+.flexJustify {
+  display: flex;
+  justify-content: center;
+}
+
+.flexGrow {
+  flex: 1;
+  margin: 6px;
 }

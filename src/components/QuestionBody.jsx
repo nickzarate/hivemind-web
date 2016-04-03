@@ -4,6 +4,7 @@ import EstimateForm from './Forms/EstimateForm'
 import Tooltip from 'components/Lib/Tooltip'
 import { Form } from 'react-redux-form'
 import RadioField from 'components/RadioField'
+import { Button } from 'components/Lib/Buttons'
 
 export default class QuestionBody extends React.Component {
   renderOutcome(outcomeName, index) {
@@ -54,7 +55,7 @@ export default class QuestionBody extends React.Component {
             )
           ) }
         </ul>
-        <button onClick={ this.props.onClick }>{ 'Change Ranges' }</button>
+        <Button onClick={ this.props.onClick }>{ 'Change Ranges' }</Button>
       </div>
     )
   }

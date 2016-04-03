@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { LinkButton } from 'components/Lib/Buttons'
 
 export default class SurveyInstructions extends React.Component {
   render() {
@@ -7,7 +7,7 @@ export default class SurveyInstructions extends React.Component {
       <div>
         <p>{ '(Description of the survey, why we are taking a preliminary survey)' }</p>
         <p>{ 'IRB approval?' }</p>
-        <Link to="/signup/1"><button onClick={ this.props.onClick }>{ 'Continue' }</button></Link>
+        <LinkButton to="/signup/1" onClick={ this.props.onClick }>{ 'Continue' }</LinkButton>
       </div>
     )
   }

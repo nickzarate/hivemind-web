@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, getField, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
 import { toNum } from 'toolbox/parser'
+import { SubmitButton } from 'components/Lib/Buttons'
 
 const TextField = createFieldClass({
   'Input': controls.text
@@ -74,7 +75,7 @@ export default class SurveyPage3 extends React.Component {
         </RadioField>
         { this.displayErrors('intendedHighestEducationDegree') }
 
-        <button type="submit">{ 'Continue' }</button>
+        <SubmitButton>{ 'Continue' }</SubmitButton>
       </Form>
     )
   }
