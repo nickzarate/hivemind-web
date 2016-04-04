@@ -12,10 +12,6 @@ class QuestionBodyContainer extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidMount() {
-    this.props.actions.initializeQuestion(this.props.numBins, this.props.bank)
-  }
-
   handleHide() { this.props.actions.resetTooltip() }
   handleClick() { this.props.actions.showModal(true) }
 

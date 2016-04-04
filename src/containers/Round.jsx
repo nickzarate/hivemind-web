@@ -14,11 +14,11 @@ class Round extends React.Component {
     const { actions } = this.props
     actions.saveRound()
     actions.fetchQuestion(this.props.categoryName)
+    this.props.actions.initializeQuestion(this.props.numBins, this.props.bank)
   }
 
   handleSubmit() {
     this.props.actions.asyncHandleSubmit(this.props.worth)
-    this.props.actions.reset('forms.estimates')
     this.props.actions.initializeQuestion(this.props.numBins, this.props.bank)
   }
 
