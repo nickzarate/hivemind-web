@@ -1,4 +1,5 @@
 import React from 'react'
+import { Logo, BrandSubtitle } from 'components/Lib/Branding.jsx'
 
 /* Containers */
 import AccessButtons from 'containers/AccessButtons'
@@ -9,9 +10,9 @@ export default class Landing extends React.Component {
   render() {
     return (
       <div>
-        <div className="span12"><img className="center-block" src={ require('assets/images/logo.png') } /></div> 
-        <h1 className="logo">{ 'Welcome to HiveMind!' }</h1>
-        <p>{ '(Some description and picture here)' }</p>
+        <Logo />
+        <BrandSubtitle />
+        <div>&nbsp;</div>
         <AccessButtons />
         <LoginModal />
       </div>
