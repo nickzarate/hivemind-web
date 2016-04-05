@@ -58,7 +58,7 @@ module.exports = {
       // Sass loader
       {
         test: /\.scss$/,
-        include: path.join(srcPath, "assets/sass"),
+        include: path.resolve(assetsPath, "sass"),
         loaders: ['style-loader', 'css?modules', 'postcss', 'sass', 'sass-resources']
       },
 
@@ -84,7 +84,7 @@ module.exports = {
       { test: /\.jpg$/, loader: "file" }
     ]
   },
-  sassResources: path.join(srcPath, "assets/sass/resources.scss"),
+  sassResources: path.resolve(assetsPath, "sass/resources.scss"),
   postcss: [
     require('autoprefixer')
   ],
@@ -106,38 +106,3 @@ module.exports = {
     })
   ]
 }
-
-// entry: {
-//   common: [
-//     'bootstrap-loader',
-//     "chartist",
-//     "isomorphic-fetch",
-//     "jquery",
-//     "parse",
-//     "parse-react",
-//     "rc-slider",
-//     "react",
-//     "react-addons-update",
-//     "react-bootstrap",
-//     "react-chartist",
-//     "react-dom",
-//     "react-redux",
-//     "react-redux-form",
-//     "react-router",
-//     "react-router-redux",
-//     "redbox-react",
-//     "redux",
-//     "redux-actions",
-//     "redux-devtools",
-//     "redux-devtools-dock-monitor",
-//     "redux-devtools-log-monitor",
-//     "redux-localstorage",
-//     "redux-thunk",
-//     "reselect"
-//   ],
-//   index: [
-//     "eventsource-polyfill",
-//     "webpack-hot-middleware/client",
-//     path.join(srcPath, "index.js")
-//   ]
-// },
