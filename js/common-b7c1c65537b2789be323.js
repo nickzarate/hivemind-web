@@ -3,31 +3,31 @@ webpackJsonp([2],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(250);
-	__webpack_require__(281);
-	__webpack_require__(68);
-	__webpack_require__(729);
-	__webpack_require__(346);
+	__webpack_require__(256);
+	__webpack_require__(258);
+	__webpack_require__(64);
+	__webpack_require__(536);
+	__webpack_require__(286);
 	__webpack_require__(1);
-	__webpack_require__(59);
-	__webpack_require__(32);
-	__webpack_require__(364);
-	__webpack_require__(12);
-	__webpack_require__(217);
-	__webpack_require__(14);
-	__webpack_require__(42);
-	__webpack_require__(218);
-	__webpack_require__(89);
-	__webpack_require__(74);
-	__webpack_require__(416);
-	__webpack_require__(414);
-	__webpack_require__(417);
-	module.exports = __webpack_require__(15);
+	__webpack_require__(56);
+	__webpack_require__(35);
+	__webpack_require__(349);
+	__webpack_require__(13);
+	__webpack_require__(222);
+	__webpack_require__(15);
+	__webpack_require__(36);
+	__webpack_require__(223);
+	__webpack_require__(91);
+	__webpack_require__(77);
+	__webpack_require__(439);
+	__webpack_require__(437);
+	__webpack_require__(440);
+	module.exports = __webpack_require__(16);
 
 
 /***/ },
 
-/***/ 36:
+/***/ 34:
 /***/ function(module, exports) {
 
 	/*
@@ -96,7 +96,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 41:
+/***/ 39:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -126,7 +126,7 @@ webpackJsonp([2],{
 	if (typeof Parse === 'undefined') {
 	  if (true) {
 	    try {
-	      module.exports = __webpack_require__(68);
+	      module.exports = __webpack_require__(64);
 	    } catch (e) {
 	      throw new Error('Failed to require Parse module. You need the Parse SDK' + ' installed to use Parse + React');
 	    }
@@ -149,7 +149,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 141:
+/***/ 117:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*
@@ -180,9 +180,9 @@ webpackJsonp([2],{
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	var flatten = __webpack_require__(204);
-	var Id = __webpack_require__(36);
-	var queryHash = __webpack_require__(203).queryHash;
+	var flatten = __webpack_require__(167);
+	var Id = __webpack_require__(34);
+	var queryHash = __webpack_require__(166).queryHash;
 
 	/**
 	 * ObjectStore is a local cache for Parse Objects. It stores the last known
@@ -582,11 +582,11 @@ webpackJsonp([2],{
 	  module.exports._rawMutations = pendingMutations;
 	}
 	// TODO: this should really be FlattenedObjectData
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(63)))
 
 /***/ },
 
-/***/ 142:
+/***/ 118:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -623,7 +623,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 202:
+/***/ 165:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -657,10 +657,10 @@ webpackJsonp([2],{
 
 	'use strict';
 
-	var flatten = __webpack_require__(204);
-	var Id = __webpack_require__(36);
-	var ObjectStore = __webpack_require__(141);
-	var Parse = __webpack_require__(41);
+	var flatten = __webpack_require__(167);
+	var Id = __webpack_require__(34);
+	var ObjectStore = __webpack_require__(117);
+	var Parse = __webpack_require__(39);
 
 	var currentUser = {
 	  subscribers: {},
@@ -744,7 +744,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 203:
+/***/ 166:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*
@@ -782,9 +782,9 @@ webpackJsonp([2],{
 	 */
 	'use strict';
 
-	var equalObjects = __webpack_require__(738);
-	var Id = __webpack_require__(36);
-	var Parse = __webpack_require__(41);
+	var equalObjects = __webpack_require__(545);
+	var Id = __webpack_require__(34);
+	var Parse = __webpack_require__(39);
 
 	function flattenOrQueries(where) {
 	  if (!where.hasOwnProperty('$or')) {
@@ -1073,11 +1073,11 @@ webpackJsonp([2],{
 	}
 
 	module.exports = QueryTools;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(63)))
 
 /***/ },
 
-/***/ 204:
+/***/ 167:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -1104,9 +1104,9 @@ webpackJsonp([2],{
 
 	'use strict';
 
-	var Id = __webpack_require__(36);
-	var Parse = __webpack_require__(41);
-	var warning = __webpack_require__(142);
+	var Id = __webpack_require__(34);
+	var Parse = __webpack_require__(39);
+	var warning = __webpack_require__(118);
 
 	function mappedFlatten(el) {
 	  if (el instanceof Parse.Object) {
@@ -1162,7 +1162,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 332:
+/***/ 259:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -1202,7 +1202,7 @@ webpackJsonp([2],{
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var Id = __webpack_require__(36);
+	var Id = __webpack_require__(34);
 
 	var Delta = (function () {
 	  function Delta(id, data, options) {
@@ -1258,7 +1258,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 333:
+/***/ 260:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -1289,11 +1289,11 @@ webpackJsonp([2],{
 	 * Patches for the Parse JS SDK
 	 */
 
-	var flatten = __webpack_require__(204);
-	var Id = __webpack_require__(36);
-	var LocalSubscriptions = __webpack_require__(202);
-	var Parse = __webpack_require__(41);
-	var SubscriptionManager = __webpack_require__(334);
+	var flatten = __webpack_require__(167);
+	var Id = __webpack_require__(34);
+	var LocalSubscriptions = __webpack_require__(165);
+	var Parse = __webpack_require__(39);
+	var SubscriptionManager = __webpack_require__(261);
 
 	var oldSignUp = Parse.User.prototype.signUp;
 	var oldLogIn = Parse.User.prototype.logIn;
@@ -1399,7 +1399,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 334:
+/***/ 261:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*
@@ -1428,12 +1428,12 @@ webpackJsonp([2],{
 	// Mapping of query hashes to subscriptions
 	'use strict';
 
-	var Id = __webpack_require__(36);
-	var ObjectStore = __webpack_require__(141);
-	var QueryTools = __webpack_require__(203);
+	var Id = __webpack_require__(34);
+	var ObjectStore = __webpack_require__(117);
+	var QueryTools = __webpack_require__(166);
 	var keysFromHash = QueryTools.keysFromHash;
 	var queryHash = QueryTools.queryHash;
-	var Subscription = __webpack_require__(736);
+	var Subscription = __webpack_require__(543);
 
 	var subscriptions = {};
 	// Tree of the attributes queries depend on, leading to their hashes
@@ -1559,19 +1559,19 @@ webpackJsonp([2],{
 	}
 
 	module.exports = SubscriptionManager;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(63)))
 
 /***/ },
 
-/***/ 729:
+/***/ 536:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(735);
+	module.exports = __webpack_require__(542);
 
 
 /***/ },
 
-/***/ 730:
+/***/ 537:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -1599,8 +1599,8 @@ webpackJsonp([2],{
 
 	'use strict';
 
-	var Parse = __webpack_require__(41);
-	var warning = __webpack_require__(142);
+	var Parse = __webpack_require__(39);
+	var warning = __webpack_require__(118);
 
 	var Mixin = {
 	  /**
@@ -1735,7 +1735,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 731:
+/***/ 538:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -1767,13 +1767,13 @@ webpackJsonp([2],{
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var Delta = __webpack_require__(332);
-	var Id = __webpack_require__(36);
-	var MutationBatch = __webpack_require__(732);
-	var Parse = __webpack_require__(41);
-	var UpdateChannel = __webpack_require__(737);
+	var Delta = __webpack_require__(259);
+	var Id = __webpack_require__(34);
+	var MutationBatch = __webpack_require__(539);
+	var Parse = __webpack_require__(39);
+	var UpdateChannel = __webpack_require__(544);
 
-	var warning = __webpack_require__(142);
+	var warning = __webpack_require__(118);
 
 	/**
 	 * A Mutation is a generator for local and server-side data changes. It
@@ -2036,7 +2036,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 732:
+/***/ 539:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2068,7 +2068,7 @@ webpackJsonp([2],{
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var Parse = __webpack_require__(41);
+	var Parse = __webpack_require__(39);
 
 	var MutationBatch = (function () {
 	  function MutationBatch() {
@@ -2152,7 +2152,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 733:
+/***/ 540:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*
@@ -2183,8 +2183,8 @@ webpackJsonp([2],{
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	var Id = __webpack_require__(36);
-	var Parse = __webpack_require__(41);
+	var Id = __webpack_require__(34);
+	var Parse = __webpack_require__(39);
 
 	var toString = Object.prototype.toString;
 	// Special version of Parse._encode to handle our unique representations of
@@ -2367,11 +2367,11 @@ webpackJsonp([2],{
 	if (typeof process !== 'undefined' && ("production") === 'test') {
 	  module.exports.encode = encode;
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(63)))
 
 /***/ },
 
-/***/ 734:
+/***/ 541:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2410,9 +2410,9 @@ webpackJsonp([2],{
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Parse = __webpack_require__(41);
-	var ParsePatches = __webpack_require__(333);
-	var warning = __webpack_require__(142);
+	var Parse = __webpack_require__(39);
+	var ParsePatches = __webpack_require__(260);
+	var warning = __webpack_require__(118);
 
 	/**
 	 * Provide observability and query-specific functionality on a subclass of
@@ -2579,7 +2579,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 735:
+/***/ 542:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2606,22 +2606,22 @@ webpackJsonp([2],{
 
 	'use strict';
 
-	var LocalSubscriptions = __webpack_require__(202);
-	var ParsePatches = __webpack_require__(333);
+	var LocalSubscriptions = __webpack_require__(165);
+	var ParsePatches = __webpack_require__(260);
 
 	// Apply patches to the Parse JS SDK
 	ParsePatches.applyPatches();
 
 	module.exports = {
-	  Component: __webpack_require__(734),
+	  Component: __webpack_require__(541),
 	  currentUser: LocalSubscriptions.currentUser,
-	  Mixin: __webpack_require__(730),
-	  Mutation: __webpack_require__(731)
+	  Mixin: __webpack_require__(537),
+	  Mutation: __webpack_require__(538)
 	};
 
 /***/ },
 
-/***/ 736:
+/***/ 543:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*
@@ -2657,8 +2657,8 @@ webpackJsonp([2],{
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var Id = __webpack_require__(36);
-	var ObjectStore = __webpack_require__(141);
+	var Id = __webpack_require__(34);
+	var ObjectStore = __webpack_require__(117);
 
 	/**
 	 * A Subscription represents the relationship between components and the results
@@ -2888,11 +2888,11 @@ webpackJsonp([2],{
 	}
 
 	module.exports = Subscription;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(63)))
 
 /***/ },
 
-/***/ 737:
+/***/ 544:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2924,14 +2924,14 @@ webpackJsonp([2],{
 	  value: true
 	});
 	exports.issueMutation = issueMutation;
-	var Delta = __webpack_require__(332);
-	var Id = __webpack_require__(36);
-	var LocalSubscriptions = __webpack_require__(202);
-	var MutationExecutor = __webpack_require__(733);
-	var ObjectStore = __webpack_require__(141);
-	var Parse = __webpack_require__(41);
-	var QueryTools = __webpack_require__(203);
-	var SubscriptionManager = __webpack_require__(334);
+	var Delta = __webpack_require__(259);
+	var Id = __webpack_require__(34);
+	var LocalSubscriptions = __webpack_require__(165);
+	var MutationExecutor = __webpack_require__(540);
+	var ObjectStore = __webpack_require__(117);
+	var Parse = __webpack_require__(39);
+	var QueryTools = __webpack_require__(166);
+	var SubscriptionManager = __webpack_require__(261);
 
 	var localCount = 0;
 
@@ -3072,7 +3072,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 738:
+/***/ 545:
 /***/ function(module, exports) {
 
 	/*
