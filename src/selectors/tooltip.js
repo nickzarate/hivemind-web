@@ -1,13 +1,5 @@
-import { createSelector } from 'reselect'
+import { createStructuredSelector } from 'reselect'
 
-const tooltipSelector = (state) => state.tooltip
-
-export default createSelector(
-  tooltipSelector,
-  (tooltip) => {
-    return {
-      tooltipMessage: tooltip.message,
-      tooltipTarget: tooltip.target === '' ? 'form' : tooltip.target
-    }
-  }
-)
+export default createStructuredSelector({
+  tooltip: (state) => state.tooltip
+})
