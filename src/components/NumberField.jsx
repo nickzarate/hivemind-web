@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'react-redux-form'
-import { toNum } from 'toolbox/parser'
+import { toNum } from 'utilities/parser'
 
 export default class NumberField extends React.Component {
   render() {

@@ -5,7 +5,7 @@
 // import { SUBMIT_QUESTION, FETCH_QUESTIONS } from 'reducers/round'
 // import submitQuestionSelector from 'selectors/submitQuestion'
 // import fetchQuestionsSelector from 'selectors/sagas/fetchQuestions'
-// import { rand } from 'toolbox/misc'
+// import { rand } from 'utilities/misc'
 
 
 // export default function* fireRoundSagas() {

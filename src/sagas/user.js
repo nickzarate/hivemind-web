@@ -2,7 +2,7 @@ import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
 import { take, call, put, select, fork } from 'redux-saga/effects'
-import { setTooltipMessage } from 'reducers/tooltip'
+import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
 import getLoginCredentials from 'selectors/sagas/loginCredentials'
 import { LOGIN, LOGOUT } from 'reducers/user'
 
@@ -25,6 +25,7 @@ function* watchLoginFlow() {
         browserHistory.push('/home')
       } catch(error) {
         yield put(setTooltipMessage('Error: ' + error.code + ' ' + error.message))
+        yield put(setTooltipTarget('form'))
       }
     }
 

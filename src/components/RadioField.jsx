@@ -7,24 +7,22 @@ const Field = createFieldClass({
 
 export default class RadioField extends React.Component {
   render() {
-    const { model, variableName, values, labels } = this.props
+    const { model, displayName, values, labels } = this.props
     return (
       <Field
         model={ model }
-        ref={ (ref) => this[variableName] = ref }
+        ref={ (ref) => this.form = ref }
       >
-        <label>{ variableName }</label>
-        { values.map(
-          (value, index) => (
-            <Input
-              key={ index }
-              type="radio"
-              value={ value }
-              label={ labels ? labels[index] : value }
-              active
-            />
-          )
-        ) }
+        <label>{ displayName }</label>
+        { values.map((value, index) => (
+          <Input
+            key={ index }
+            type="radio"
+            value={ value }
+            label={ labels ? labels[index] : value }
+            active
+          />
+        )) }
       </Field>
     )
   }

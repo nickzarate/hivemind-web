@@ -10,19 +10,13 @@ export const setCategory = createAction(SET_CATEGORY, (category) => ({ category 
 /* Reducer */
 const initialState = {
   categorySurveyInstructions: '',
-  covariateNames: [],
-  covariateRanges: [],
-  outcomeDataTypes: [],
+  covariates: [],
   index: 0,
-  instructions: '',
   name: '',
-  numBins: [],
-  outcomeNames: [],
-  outcomeRanges: [],
-  pointsPerToken: [],
-  questionInstructions: [],
+  numObservations: 0,
+  outcomes: [],
   questionsPerRound: 0,
-  tokens: []
+  roundInstructions: ''
 }
 export default function category(state = initialState, action) {
   switch (action.type) {

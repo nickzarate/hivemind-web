@@ -1,10 +1,9 @@
-import { addWinnings, setCurrentRound, addAnswers, addOutcomes,
-  resetCurrentQuestion, incrementCurrentQuestion } from 'reducers/round'
-import { setBank, setBinValues } from 'reducers/answer'
+import { addWinnings, setCurrentRound, resetCurrentQuestion, incrementCurrentQuestion } from 'reducers/round'
 import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
 import { setQuestion } from 'reducers/question'
+import { resetAnswers } from 'actions/answers'
 import { actions } from 'react-redux-form'
-import { rand } from 'toolbox/misc'
+import { rand } from 'utilities/misc'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
@@ -12,19 +11,16 @@ import { browserHistory } from 'react-router'
 /*
  *  Award the user points according to the correctness of their answer
  */
-export function asyncAwardPoints(worth) {
-  return (dispatch, getState) => {
-    const { answer: { binValues }, round : { correctAnswerIndices } } = getState()
+export function asyncAwardPoints(answers) {
+  return (dispatch) => {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     //TODO: Calculate how many points are earned for answering correctly
     let winnings = 0
-    for (let i = 0; i < worth.length; i++) {
-      winnings += correctAnswerIndices[i] === -1 ? 0 : binValues[i][correctAnswerIndices[i]] * worth[i]
+    for (let answer of answers) {
+      winnings += answer.correctAnswerIndex === -1 ? 0 : answer.binValues[answer.correctAnswerIndex] * answer.points
     }
-    let points = Parse.User.current().get('points')
-    points += winnings
     dispatch(addWinnings(winnings))
-    Parse.User.current().save({ points: points })
+    Parse.User.current().save({ points: Parse.User.current().get('points') + winnings })
   }
 }
 
@@ -34,7 +30,8 @@ export function asyncAwardPoints(worth) {
  *    createdBy: currentUser
  */
 export function saveRound() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { category } = getState()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
 
     //Create new Round
@@ -44,7 +41,8 @@ export function saveRound() {
     //Save Round and set currentRound state
     newRound.save({
       answers: [],
-      createdBy: Parse.User.current()
+      createdBy: Parse.User.current(),
+      categoryName: category.name
     }).then(function(savedRound) {
       dispatch(setCurrentRound(savedRound))
     })
@@ -56,102 +54,81 @@ export function saveRound() {
  *  Save the current round with the new answer
  *  Submit the round if round is complete
  */
-export function asyncHandleSubmit(worth) {
+export function asyncHandleSubmit(answers) {
   return (dispatch, getState) => {
-    const { answer, category, round, forms: { estimates }, question: { objectId } } = getState()
+    const { category, round, forms: { estimates }, question: { objectId } } = getState()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
 
     // Validate estimates
-    for (let outcomeName of category.outcomeNames) {
-      if (isNaN(estimates[outcomeName])) {
+    for (let outcome of category.outcomes) {
+      if (isNaN(estimates[outcome.variableName])) {
         dispatch(setTooltipMessage('Make a guess!'))
-        dispatch(setTooltipTarget(outcomeName))
+        dispatch(setTooltipTarget(outcome.variableName))
+        console.log('NO SUBMISSION')
         return
       }
     }
 
-    // Create an array of all of the outcomes estimated by the user
-    let estimatesArray = []
-    for (let outcome of category.outcomeNames) {
-      estimatesArray.push(typeof estimates[outcome] === 'string' ? Number(estimates[outcome]) : estimates[outcome])
+    // Award points to the user based on answers
+    dispatch(asyncAwardPoints(answers))
+
+    let outcomeAnswers = []
+    for (let i = 0; i < answers.length; i++) {
+      let estimate = estimates[category.outcomes[i].variableName]
+      estimate = typeof estimate === 'string' ? Number(estimate) : estimate
+      outcomeAnswers.push({
+        estimate,
+        name: category.outcomes[i].variableName,
+        binValues: answers[i].binValues
+      })
     }
     dispatch(actions.reset('forms.estimates'))
-
-    // Save token distribution and outcomes
-    dispatch(addAnswers(answer.binValues))
-    dispatch(addOutcomes(answer.outcomes))
-    dispatch(asyncAwardPoints(worth))
+    dispatch(resetAnswers())
 
     // Create query for the question that the user answered
-    let Questions = Parse.Object.extend('Questions')
-    let query = new Parse.Query(Questions)
+    let Answer = Parse.Object.extend('Answer')
+    let newAnswer = new Answer()
 
-    query.get(objectId).then(function(question) {
-      // Create new answer to save to a round
-      let Answer = Parse.Object.extend('Answer')
-      let newAnswer = new Answer()
-      return newAnswer.save({
-        question: question,
-        binValues: answer.binValues,
-        estimates: estimatesArray
-      })
+    newAnswer.save({
+      questionId: objectId, outcomeAnswers
     }).then(function(savedAnswer) {
       let answers = round.currentRound.get('answers')
       answers.push(savedAnswer)
-      return round.currentRound.save({ answers: answers })
+      return round.currentRound.save({ answers })
     }).then(function() {
       if (round.currentQuestion >= category.questionsPerRound) {
         dispatch(resetCurrentQuestion())
         browserHistory.push('/stats')
       } else {
         dispatch(incrementCurrentQuestion())
-        dispatch(fetchQuestion(category.name))
+        dispatch(fetchQuestion())
       }
     })
   }
 }
 
 /*
- *  Initialize the values in question
- */
-export function initializeQuestion(numBins, bank) {
-  return (dispatch) => {
-    let binValues = []
-    for (let num of numBins) {
-      binValues.push(Array(num).fill(0))
-    }
-    dispatch(setBank(bank))
-    dispatch(setBinValues(binValues))
-  }
-}
-
-/*
  *  Pull a random question from Parse database and setState accordingly
  */
-export function fetchQuestion(categoryName) {
+export function fetchQuestion() {
   return (dispatch, getState) => {
-    const { category: { outcomesToDisplay, covariatesToDisplay, numObservations } } = getState()
+    const { category: { name, covariates, outcomes, numObservations } } = getState()
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
 
-    //Create query for random question
+    // Create query for random question
     let observationId = rand(1, numObservations)
-    let Question = Parse.Object.extend('Questions')
+    let Question = Parse.Object.extend(name)
     let query = new Parse.Query(Question)
-    query.equalTo('type', categoryName)
     query.equalTo('observationId', observationId)
-    //Pull question and set state
+
+    // Fetch question and set state
     query.first().then(function(question) {
-      let covariateValues = [], outcomeValues = []
-      for (let index of covariatesToDisplay) {
-        covariateValues.push(question.get('covariateValues')[index])
+      let selectedQuestion = { objectId: question.id }
+      for (let covariate of covariates) {
+        Object.assign(selectedQuestion, { [covariate.variableName]: question.get(covariate.variableName) })
       }
-      for (let index of outcomesToDisplay) {
-        outcomeValues.push(question.get('outcomeValues')[index])
-      }
-      let selectedQuestion = {
-        covariateValues,
-        objectId: question.id,
-        outcomeValues
+      for (let outcome of outcomes) {
+        Object.assign(selectedQuestion, { [outcome.variableName]: question.get(outcome.variableName) })
       }
       dispatch(setQuestion(selectedQuestion))
       browserHistory.push('/round/question/' + question.id)

@@ -2,7 +2,7 @@ import React from 'react'
 import connect from 'store/connect'
 import ChangeRangeModal from 'components/ChangeRangeModal'
 import { showModal } from 'reducers/modal'
-import changeRangeModalSelector from 'selectors/changeRangeModal'
+import modalSelector from 'selectors/modal'
 
 class ChangeRangeModalContainer extends React.Component {
   constructor() {
@@ -14,7 +14,9 @@ class ChangeRangeModalContainer extends React.Component {
     this.props.actions.showModal(false)
   }
 
-  handleHide() { this.props.actions.showModal(false) }
+  handleHide() {
+    this.props.actions.showModal(false)
+  }
 
   render() {
     return (
@@ -27,6 +29,6 @@ class ChangeRangeModalContainer extends React.Component {
 }
 
 export default connect({
-  selector: changeRangeModalSelector,
+  selector: modalSelector,
   actions: { showModal }
 })(ChangeRangeModalContainer)

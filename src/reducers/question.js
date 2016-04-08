@@ -9,9 +9,7 @@ export const setQuestion = createAction(SET_QUESTION, (question) => ({ question 
 
 /* Reducer */
 const initialState = {
-  covariateValues: [],
-  objectId: '',
-  outcomeValues: []
+  objectId: ''
 }
 export default function question(state = initialState, action) {
   switch (action.type) {

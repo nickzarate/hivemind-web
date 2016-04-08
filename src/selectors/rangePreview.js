@@ -1,19 +1,8 @@
-import { createSelector } from 'reselect'
+import { createStructuredSelector } from 'reselect'
+import getAnswers from 'selectors/answers'
 
-const categorySelector = (state) => state.category
-const tooltipSelector = (state) => state.tooltip
-
-export default createSelector(
-  categorySelector,
-  tooltipSelector,
-  (category, tooltip) => {
-    return {
-      outcomeNames: category.outcomeNames,
-      numBins: category.numBins,
-      bank: category.tokens,
-      outcomeDataTypes: category.outcomeDataTypes,
-      tooltipMessage: tooltip.message,
-      tooltipTarget: tooltip.target
-    }
-  }
-)
+export default createStructuredSelector({
+  outcomes: (state) => state.category.outcomes,
+  tooltip: (state) => state.tooltip,
+  answers: getAnswers
+})

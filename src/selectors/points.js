@@ -3,34 +3,29 @@ import { createSelector } from 'reselect'
 const categorySelector = (state) => state.category
 const rangesSelector = (state) => state.forms.ranges
 
+function getPoints(category, ranges) {
+  let points = []
+  for (let outcome of category.outcomes) {
+    let temp = 0
+    if (outcome.valueType !== 'continuous') {
+      temp = outcome.pointsPerToken
+    } else if (
+      ranges[outcome.variableName]
+      && ranges[outcome.variableName].lower >= 0
+      && ranges[outcome.variableName].upper > 0
+    ) {
+      let estimatedRange = ranges[outcome.variableName].upper - ranges[outcome.variableName].lower
+      let actualRange = outcome.range[1] - outcome.range[0]
+      temp += outcome.pointsPerToken
+      temp *= estimatedRange === 0 ? 0 : (actualRange / estimatedRange)
+    }
+    points.push(Math.floor(temp))
+  }
+  return points
+}
+
 export default createSelector(
   categorySelector,
   rangesSelector,
-  (category, ranges) => {
-    return {
-      worth: getWorth(category.outcomeDataTypes, category.pointsPerToken, category.outcomeRanges, category.outcomeNames, ranges)
-    }
-  }
+  (category, ranges) => getPoints(category, ranges)
 )
-
-function getWorth(outcomeDataTypes, pointsPerToken, outcomeRanges, outcomeNames, ranges) {
-  let worth = []
-  for (let i = 0; i < pointsPerToken.length; i++) {
-    let temp = 0
-    if (outcomeDataTypes[i].type === 'discrete' || outcomeDataTypes[i].type === 'boolean') {
-      temp = pointsPerToken[i]
-    }
-    if ( outcomeDataTypes[i].type === 'continuous'
-         && ranges[outcomeNames[i]]
-         && ranges[outcomeNames[i]].lower >= 0
-         && ranges[outcomeNames[i]].upper > 0 )
-    {
-      let estimatedRange = ranges[outcomeNames[i]].upper - ranges[outcomeNames[i]].lower
-      let actualRange = outcomeRanges[i][1] - outcomeRanges[i][0]
-      temp += pointsPerToken[i]
-      temp *= estimatedRange === 0 ? 0 : (actualRange / estimatedRange)
-    }
-    worth.push(Math.floor(temp))
-  }
-  return worth
-}

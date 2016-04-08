@@ -51,6 +51,7 @@ export function asyncHandleSignup() {
       },
       error(user, error) {
         dispatch(setTooltipMessage('Error: ' + error.code + ' ' + error.message))
+        dispatch(setTooltipTarget('form'))
       }
     })
   }

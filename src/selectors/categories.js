@@ -1,10 +1,5 @@
-import { createSelector } from 'reselect'
+import { createStructuredSelector } from 'reselect'
 
-const categoriesSelector = (state) => state.round.categories
-
-export default createSelector(
-  categoriesSelector,
-  (categories) => ({
-    categories
-  })
-)
+export default createStructuredSelector({
+  categories: (state) => state.round.categories
+})

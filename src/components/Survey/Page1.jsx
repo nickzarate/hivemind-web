@@ -28,7 +28,9 @@ export default class SurveyPage1 extends React.Component {
     )
   }
 
-  handleChange(val) { return () => this.props.onCheckChange(val) }
+  handleChange(val) {
+    return () => this.props.onCheckChange(val)
+  }
 
   render() {
     const { race } = this.props.survey
@@ -37,7 +39,7 @@ export default class SurveyPage1 extends React.Component {
 
         <SelectField model="forms.survey.stateOfResidence">
           <Input type="select" label="What state do you live in?" defaultValue={ race.stateOfResidence }>
-            { survey.STATE_OPTIONS.map( (option) => ( <option key={ option } value={ option }>{ option }</option> ) ) }
+            { survey.STATE_OPTIONS.map((option) => ( <option key={ option } value={ option }>{ option }</option> )) }
           </Input>
         </SelectField>
         { this.displayErrors('stateOfResidence') }

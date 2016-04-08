@@ -1,10 +1,12 @@
 import { fork } from 'redux-saga/effects'
 
 import fireUserSagas from 'sagas/user'
+// import fireHomeSagas from 'sagas/home'
 // import fireRoundSagas from 'sagas/round'
 
 export default function* fireSagas() {
   yield fork(fireUserSagas)
+  // yield fork(fireHomeSagas)
   // yield fork(fireRoundSagas)
 }
 

@@ -2,13 +2,13 @@ import { createSelector } from 'reselect'
 
 const categorySelector = (state) => state.category
 const rangesSelector = (state) => state.forms.ranges
-const outcomeValuesSelector = (state) => state.question.outcomeValues
+const questionSelector = (state) => state.question
 
-function getContinuousAnswerIndex(numBins, range, outcome) {
+function getContinuousAnswerIndex(numBins, range, outcomeValue) {
   let binValues = []
   let difference = range[1] - range[0]
   //If correct answer index is not within the specified range, return -1
-  if (outcome < range[0] || outcome > range[1]) {
+  if (outcomeValue < range[0] || outcomeValue > range[1]) {
     return -1
   }
   //Find the correct answer index within the given range
@@ -18,27 +18,31 @@ function getContinuousAnswerIndex(numBins, range, outcome) {
   for (let i = 0; i < numBins; i++) {
     let lastValue = binValues[binValues.length - 1]
     let nextValue = lastValue + step
-    if (outcome >= lastValue && outcome <= nextValue) {
+    if (outcomeValue >= lastValue && outcomeValue <= nextValue) {
       return i
     }
     binValues.push(nextValue)
   }
 }
 
-function getCorrectAnswerIndices(category, ranges, outcomeValues) {
+function getCorrectAnswerIndices(category, ranges, question) {
   let correctAnswerIndices = []
-  for (let i = 0; i < category.outcomeRanges.length; i++) {
-    let outcomeName = category.outcomeNames[i]
-    if (category.outcomeDataTypes[i].type === 'discrete') {
-      correctAnswerIndices.push(outcomeValues[i] - category.outcomeRanges[i][0])
-    } else if (category.outcomeDataTypes[i].type === 'continuous') {
+  for (let outcome of category.outcomes) {
+    const { variableName } = outcome
+    if (outcome.valueType === 'categorical') {
+      correctAnswerIndices.push(question[variableName] - outcome.range[0])
+    } else if (outcome.valueType === 'continuous') {
       let range = [0,0]
-      if ( ranges[outcomeName] && ranges[outcomeName].lower >= 0 && ranges[outcomeName].upper > 0 ) {
-        range = [ranges[outcomeName].lower, ranges[outcomeName].upper]
+      if (
+        ranges[variableName]
+        && ranges[variableName].lower >= 0
+        && ranges[variableName].upper > 0
+      ) {
+        range = [ranges[variableName].lower, ranges[variableName].upper]
       }
-      correctAnswerIndices.push(getContinuousAnswerIndex(category.numBins[i], range, outcomeValues[i]))
+      correctAnswerIndices.push(getContinuousAnswerIndex(outcome.numBins, range, question[variableName]))
     } else {
-      correctAnswerIndices.push(outcomeValues[i] ? 0 : 1)
+      correctAnswerIndices.push(question[variableName] ? 0 : 1)
     }
   }
   return correctAnswerIndices
@@ -47,10 +51,6 @@ function getCorrectAnswerIndices(category, ranges, outcomeValues) {
 export default createSelector(
   categorySelector,
   rangesSelector,
-  outcomeValuesSelector,
-  (category, ranges, outcomeValues) => {
-    return {
-      correctAnswerIndices: getCorrectAnswerIndices(category, ranges, outcomeValues)
-    }
-  }
+  questionSelector,
+  (category, ranges, question) => getCorrectAnswerIndices(category, ranges, question)
 )

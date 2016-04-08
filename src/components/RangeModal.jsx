@@ -9,7 +9,9 @@ export default class RangeModal extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick() { this.props.unlocked ? this.props.onStart() : this.props.onSubmit() }
+  handleClick() {
+    this.props.unlocked ? this.props.onStart() : this.props.onSubmit()
+  }
 
   render() {
     return (

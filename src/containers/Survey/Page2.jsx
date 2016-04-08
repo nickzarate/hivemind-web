@@ -10,7 +10,9 @@ class SurveyPage2Container extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit() { this.props.actions.submitPage2() }
+  handleSubmit() {
+    this.props.actions.submitPage2()
+  }
 
   render() {
     return (

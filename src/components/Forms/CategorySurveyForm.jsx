@@ -34,10 +34,11 @@ export default class CategorySurveyForm extends React.Component {
   }
 
   render() {
+    const { tooltip } = this.props
     return (
       <div>
         { this.props.categorySurveyInstructions }
-        <Tooltip message={ this.props.tooltipMessage } target={ this[this.props.tooltipTarget] } />
+        <Tooltip target={ this[tooltip.target] } message={ tooltip.message } />
         <Form ref={ (ref) => this.form = ref } model="forms.covariates">
           { this.renderFields() }
         </Form>

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { routerReducer as routing } from 'react-router-redux' // REMEMBER
-import answer from './answer'
+import answers from './answers'
 import category from './category'
 import forms from './forms'
 import modal from './modal'
@@ -10,7 +10,7 @@ import stats from './stats'
 import tooltip from './tooltip'
 
 export default combineReducers({
-  answer,
+  answers,
   category,
   forms,
   modal,

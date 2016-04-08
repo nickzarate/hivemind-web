@@ -1,13 +1,6 @@
-import { createSelector } from 'reselect'
+import { createStructuredSelector } from 'reselect'
 
-export const loginCredentials = (state) => state.forms.login
-
-export default createSelector(
-  loginCredentials,
-  (login) => {
-    return {
-      email: login.email,
-      password: login.password
-    }
-  }
-)
+export default createStructuredSelector({
+  email: (state) => state.forms.login.email,
+  password: (state) => state.forms.login.password
+})

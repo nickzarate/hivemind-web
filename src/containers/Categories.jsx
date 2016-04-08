@@ -14,7 +14,9 @@ class CategoriesContainer extends React.Component {
     this.props.actions.fetchCategories()
   }
 
-  handleClick(categoryName) { this.props.actions.fetchCategory(categoryName) }
+  handleClick(categoryName) {
+    this.props.actions.fetchCategory(categoryName)
+  }
 
   render() {
     return (

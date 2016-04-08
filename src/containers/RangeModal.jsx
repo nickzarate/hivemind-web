@@ -18,9 +18,17 @@ class RangeModalContainer extends React.Component {
     this.props.actions.showModal(false)
   }
 
-  handleHide() { this.props.actions.showModal(false) }
-  handleStart() { this.props.actions.handleStart() }
-  handleSubmit() { this.props.actions.handleSurveySubmission() }
+  handleHide() {
+    this.props.actions.showModal(false)
+  }
+
+  handleStart() {
+    this.props.actions.handleStart()
+  }
+
+  handleSubmit() {
+    this.props.actions.handleSurveySubmission()
+  }
 
   render() {
     return (

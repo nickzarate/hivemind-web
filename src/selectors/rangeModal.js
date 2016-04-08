@@ -6,9 +6,9 @@ const categoriesSelector = (state) => state.round.categories
 const roundInstructionsSelector = (state) => state.category.roundInstructions
 
 function getUnlocked(category, categories) {
-  for (let cat of categories) {
-    if (cat.name === category.name) {
-      return cat.unlocked
+  for (let i = 0; i < categories.length; i++) {
+    if (categories[i].name === category.name) {
+      return categories[i].unlocked
     }
   }
 }

@@ -1,4 +1,4 @@
-import { POST } from 'actions/constants'
+import { POST } from 'reducers/actionTypes'
 
 /*
  *  Thunk that sends a generic POST request to the Flask Server.

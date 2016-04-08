@@ -5,12 +5,7 @@ import connect from 'store/connect'
 
 class InstructionsContainer extends React.Component {
   render() {
-    return (
-      <Instructions
-        covariateValues={ this.props.covariateValues }
-        covariateNames={ this.props.covariateNames }
-      />
-    )
+    return <Instructions covariates={ this.props.covariates } />
   }
 }
 

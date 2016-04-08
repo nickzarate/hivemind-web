@@ -1,27 +1,21 @@
 import React from 'react'
 import connect from 'store/connect'
 import RangeForm from 'components/Forms/RangeForm'
-import { resetTooltip } from 'reducers/tooltip'
 import rangeFormSelector from 'selectors/forms/range'
 
 class RangeFormContainer extends React.Component {
-  componentWillUnmount() {
-    this.props.actions.resetTooltip()
-  }
-
   render() {
-    const { ranges, outcomeName } = this.props
+    const { ranges, variableName } = this.props
     return (
       <RangeForm
-        lowerValue={ ranges[outcomeName] ? ranges[outcomeName].lower : '' }
-        upperValue={ ranges[outcomeName] ? ranges[outcomeName].upper : '' }
-        outcomeName={ outcomeName }
+        lowerValue={ ranges[variableName] ? ranges[variableName].lower : '' }
+        upperValue={ ranges[variableName] ? ranges[variableName].upper : '' }
+        variableName={ variableName }
       />
     )
   }
 }
 
 export default connect({
-  selector: rangeFormSelector,
-  actions: { resetTooltip }
+  selector: rangeFormSelector
 })(RangeFormContainer)
