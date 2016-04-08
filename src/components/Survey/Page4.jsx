@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, getField, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
-import { toNum } from 'utilities/parser'
+import { toNum } from 'utils/parser'
 const TextField = createFieldClass({
   'Input': controls.text
 })
