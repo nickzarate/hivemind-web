@@ -13,6 +13,6 @@ export default class Signup extends React.Component {
         { this.props.children }
         <SignupModal />
       </div>
-    );
+    )
   }
 }
