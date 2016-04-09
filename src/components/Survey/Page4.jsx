@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, getField, createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
 import { toNum } from 'toolbox/parser'
+import { SubmitButton } from 'components/Lib/Buttons'
 
 const TextField = createFieldClass({
   'Input': controls.text
@@ -71,7 +72,7 @@ export default class SurveyPage4 extends React.Component {
         { this.displayErrors('mothersEducation') }
         <Input onChange={ this.handleChange('mothersEducationIsGuess') } type="checkbox" label="This is a guess" checked={ survey.mothersEducationIsGuess } />
 
-        <button type="submit">{ 'Continue' }</button>
+        <SubmitButton>{ 'Continue' }</SubmitButton>
       </Form>
     )
   }

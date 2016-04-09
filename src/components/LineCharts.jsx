@@ -2,6 +2,7 @@ import React from 'react'
 import LineChart from 'react-chartist'
 import 'chartist/dist/chartist.min.css'
 import Sliders from './Sliders'
+import { Button } from 'components/Lib/Buttons'
 
 export default class Graph extends React.Component {
   renderCharts() {
@@ -37,7 +38,7 @@ export default class Graph extends React.Component {
     if (this.props.outcomeNames.length > 1) {
       return this.props.outcomeNames.map(
         (outcomeName, index) => (
-          <button key={ index } onClick={ this.props.onClick(index) }>{ outcomeName }</button>
+          <Button key={ index } onClick={ this.props.onClick(index) }>{ outcomeName }</Button>
         )
       )
     }

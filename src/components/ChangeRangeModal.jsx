@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
 import RangePreview from 'containers/RangePreview'
+import { Button } from 'components/Lib/Buttons'
 
 export default class RangeModal extends React.Component {
   render() {
@@ -10,7 +11,7 @@ export default class RangeModal extends React.Component {
           <RangePreview />
         </Modal.Header>
         <Modal.Footer>
-          <button onClick={ this.props.onHide }>{ 'Set Ranges' }</button>
+          <Button onClick={ this.props.onHide }>{ 'Set Ranges' }</Button>
         </Modal.Footer>
       </Modal>
     )

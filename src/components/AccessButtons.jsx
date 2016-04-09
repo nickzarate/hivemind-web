@@ -1,5 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Button, LinkButton } from 'components/Lib/Buttons'
+import classNames from 'classnames'
+import styles from 'assets/sass/app.scss'
 
 export default class Bins extends React.Component {
   constructor() {
@@ -11,10 +13,10 @@ export default class Bins extends React.Component {
 
   render() {
     return (
-      <div>
-        <button onClick={ this.props.onLogin }>{ 'Log In' }</button>
-        <Link to={ '/signup' }><button>{ 'Sign Up' }</button></Link>
-        <button onClick={ this.handleClick }>{ 'Clear Cache' }</button>
+      <div className={ classNames('row', styles.flexJustify) } >
+        <Button className={ styles.flexGrow } onClick={ this.props.onLogin }>{ 'Log In' }</Button>
+        <LinkButton className={ styles.flexGrow } to={ '/signup' }>{ 'Sign Up' }</LinkButton>
+        <Button className={ styles.flexGrow } onClick={ this.handleClick }>{ 'Clear Cache' }</Button>
       </div>
     )
   }

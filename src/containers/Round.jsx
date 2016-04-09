@@ -4,6 +4,7 @@ import { asyncCreateRound, asyncHandleSubmit, asyncAwardPoints,
   initializeQuestion, pullQuestion } from 'actions/round'
 import { setTooltipMessage, setTooltipTarget } from 'actions/tooltip'
 import roundSelector from 'selectors/round'
+import { Button } from 'components/Lib/Buttons'
 
 class Round extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class Round extends React.Component {
     return (
       <div>
         { React.cloneElement(this.props.children) }
-        <button onClick={ this.handleSubmit }>{ 'Submit Question' }</button>
+        <Button onClick={ this.handleSubmit }>{ 'Submit Question' }</Button>
       </div>
     )
   }

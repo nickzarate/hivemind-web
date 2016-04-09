@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'components/Lib/Buttons'
 
 export default class Bins extends React.Component {
   handleClick(index) {
@@ -16,9 +17,9 @@ export default class Bins extends React.Component {
   renderBins() {
     return this.props.binText.map(
       (text, index) => (
-        <button key={ index } onClick={ this.handleClick(index) }>
+        <Button key={ index } onClick={ this.handleClick(index) }>
           { text }{ this.binValue(index) }
-        </button>
+        </Button>
       )
     )
   }
