@@ -1,6 +1,7 @@
 import React from 'react'
 import { createFieldClass, controls } from 'react-redux-form'
 import { Input } from 'react-bootstrap'
+Input.displayName = 'Input'
 const Field = createFieldClass({
   'Input': controls.radio
 })
