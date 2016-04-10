@@ -25,6 +25,7 @@ module.exports = {
     modulesDirectories: ["node_modules", "src"]
   },
   entry: [
+    "bootstrap-loader",
     "webpack-dev-server/client?http://localhost:8080/",
     "webpack/hot/dev-server",
     path.resolve(srcPath, "index")
@@ -41,7 +42,12 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
-        loader: "babel"
+        loader: "babel",
+        query: {
+          cacheDirectory: true,
+          presets: ['es2015'],
+          plugins: ['transform-object-rest-spread']
+        }
       },
       // eslint-loader
       {
@@ -53,14 +59,14 @@ module.exports = {
       {
         test: /\.scss$/,
         include: path.resolve(assetsPath, "sass"),
-        loaders: ['style', 'css', 'sass']
+        loaders: ['style-loader', 'css?modules', 'postcss', 'sass', 'sass-resources']
       },
 
       // required to write "require('./style.css')"
       {
         test: /\.css$/,
         exclude: /\.useable\.css$/,
-        loader: "style!css"
+        loader: "style-loader!css?modules!postcss"
       },
 
       // required for bootstrap icons.
@@ -78,6 +84,10 @@ module.exports = {
       { test: /\.jpg$/, loader: "file" }
     ]
   },
+  sassResources: path.resolve(assetsPath, "sass/resources.scss"),
+  postcss: [
+    require('autoprefixer')
+  ],
   plugins: [
     new HtmlWebpackPlugin({
       favicon: path.resolve(assetsPath, "images/favicon.png"),

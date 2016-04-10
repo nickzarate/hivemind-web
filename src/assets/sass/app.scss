@@ -1,33 +1,27 @@
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@mixin title-gradient {
+  background: $main-blue;
+  background: radial-gradient($main-blue, $main-blue 15%, $main-grey);
+}
 
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
-@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/grid";
-
-$main-blue: #76B5F0;
-$main-yellow: #DDB14A;
-$light-blue: #A8E2FF;
-$light-yellow: #F6E78F;
-$dark-blue: #13304C;
-
-#root {
+.app {
+  @include title-gradient;
   padding: 20px;
-  background-color: $main-blue;
   min-height: 100vh;
+  color: white;
 }
 
-h1 {
-  color: $dark-blue;
+.btnHive {
+  background-color: $hive-orange;
+  border-color: $hive-yellow;
+  color: white;
 }
 
-button {
-  @extend .btn;
-  @extend .btn-default;
+.flexJustify {
+  display: flex;
+  justify-content: center;
 }
 
-input {
-  @extend .form-control;
-}
-
-form {
-  @extend .form-inline;
+.flexGrow {
+  flex: 1;
+  margin: 6px;
 }

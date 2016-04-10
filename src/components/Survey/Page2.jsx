@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, getField, createFieldClass, controls } from 'react-redux-form'
 import { toNum } from 'utils/parser'
 import { Input } from 'react-bootstrap'
+import { SubmitButton } from 'components/Lib/Buttons'
 Input.displayName = 'Input'
 const TextField = createFieldClass({
   'Input': controls.text
@@ -86,7 +87,7 @@ export default class SurveyPage2 extends React.Component {
         </TextField>
         { this.displayErrors('yearsOfWorkExperienceOverall') }
 
-        <button type="submit">{ 'Continue' }</button>
+        <SubmitButton>{ 'Continue' }</SubmitButton>
       </Form>
     )
   }

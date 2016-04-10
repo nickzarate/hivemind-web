@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'components/Lib/Buttons'
 
 export default class Categories extends React.Component {
   handleClick(categoryName) {
@@ -9,9 +10,9 @@ export default class Categories extends React.Component {
     return this.props.categories.map(
       (category) => (
         <li key={ category.name }>
-          <button onClick={ this.handleClick(category.name) }>
+          <Button onClick={ this.handleClick(category.name) }>
             { 'New ' }{ category.name }{ ' round' }
-          </button>
+          </Button>
         </li>
       )
     )
