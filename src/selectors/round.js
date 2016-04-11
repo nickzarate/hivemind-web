@@ -1,21 +1,22 @@
 import { createSelector } from 'reselect'
-import worthSelector from './points'
+import getPoints from 'selectors/points'
+import getCorrectAnswerIndices from 'selectors/correctAnswerIndices'
 
-const categorySelector = (state) => state.category
-const estimatesSelector = (state) => state.forms.estimates
+const getAnswers = (state) => state.answers
 
 export default createSelector(
-  categorySelector,
-  estimatesSelector,
-  worthSelector,
-  (category, estimates, worth) => {
-    return {
-      categoryName: category.name,
-      bank: category.tokens,
-      numBins: category.numBins,
-      outcomeNames: category.outcomeNames,
-      estimates,
-      worth: worth.worth
+  getAnswers,
+  getPoints,
+  getCorrectAnswerIndices,
+  (answers, points, correctAnswerIndices) => {
+    let realAnswers = []
+    for (let i = 0; i < correctAnswerIndices.length; i++) {
+      realAnswers.push({
+        binValues: answers[i].binValues,
+        points: points[i],
+        correctAnswerIndex: correctAnswerIndices[i]
+      })
     }
+    return { answers: realAnswers }
   }
 )

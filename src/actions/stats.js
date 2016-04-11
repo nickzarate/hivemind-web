@@ -1,32 +1,24 @@
-import { SET_PHI, SET_DATA, SET_COVARIATE_DATA, SET_SERIES, SET_OUTCOMES, SET_OUTCOME_INDEX,
-  ADD_PHI, CLEAR_WINNINGS } from './constants'
-import { createAction } from 'redux-actions'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { post } from 'actions/http'
-
-export const setData = createAction(SET_DATA, (data) => ({ data }))
-export const clearWinnings = createAction(CLEAR_WINNINGS)
-export const setCovariateData = createAction(SET_COVARIATE_DATA, (covariateData) => ({ covariateData }))
-export const setPhi = createAction(SET_PHI, (phi) => ({ phi }))
-export const setSeries = createAction(SET_SERIES, (index, data) => ({ index, data }))
-export const setOutcomes = createAction(SET_OUTCOMES, (outcomes) => ({ outcomes }))
-export const setOutcomeIndex = createAction(SET_OUTCOME_INDEX, (outcomeIndex) => ({ outcomeIndex }))
-export const addPhi = createAction(ADD_PHI, (res) => ({ phi: res.phi }))
+import { addPhi, setCovariateData, setData, setSeries } from 'reducers/stats'
 
 /*
  *  Call Python server and get Phi given the info in the current state.
  */
 export function asyncGetPhis() {
   return (dispatch, getState) => {
-    const { round } = getState()
-    let estimates = round.currentRound ? round.currentRound.get('answers')[0].get('estimates') : []
-    for (let i = 0; i < estimates.length; i++) {
+    const { round, category } = getState()
+    let outcomeLength = round.currentRound ? category.outcomes.length : 0
+    // let outcomeLength = round.currentRound ? round.currentRound.get('answers')[0].outcomeAnswers.length : 0
+    for (let i = 0; i < outcomeLength; i++) {
       // Get covariates and predictions from the latest round to analyze and get phi
       let predictions = [], covariates = []
       for (let answer of round.currentRound.get('answers')) {
-        predictions.push(answer.get('estimates')[i])
-        covariates.push(answer.get('question').get('covariateValues'))
+        predictions.push(answer.get('outcomeAnswers')[i].estimate)
+        for (let outcome of category.outcomes) {
+          covariates.push(answer.get('question').get(outcome.variableName))
+        }
       }
       dispatch(post('/api/v1/get_phi', { covariates, predictions }, addPhi))
     }
@@ -63,8 +55,11 @@ export function getCovariateData() {
  */
 export function getData() {
   return (dispatch, getState) => {
-    const { category: { covariateRanges } } = getState()
-    let labels = covariateRanges
+    const { category: { covariates } } = getState()
+    let labels = []
+    for (let covariate of covariates) {
+      labels.push(covariate.range)
+    }
     for (let label of labels) {
       let range = label[1] - label[0]
       let numXAxisValues = 10
@@ -97,7 +92,11 @@ export function getData() {
  */
 export function updateChart(chartIndex) {
   return (dispatch, getState) => {
-    const { stats, category: { covariateRanges } } = getState()
+    const { stats, category: { covariates } } = getState()
+    let covariateRanges = []
+    for (let covariate of covariates) {
+      covariateRanges.push(covariate.range)
+    }
 
     //Create array of betas and array of covariate values to multiply together
     let betas = stats.phi[stats.outcomeIndex].slice(1)

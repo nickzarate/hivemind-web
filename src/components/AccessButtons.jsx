@@ -3,13 +3,15 @@ import { Button, LinkButton } from 'components/Lib/Buttons'
 import classNames from 'classnames'
 import styles from 'assets/sass/app.scss'
 
-export default class Bins extends React.Component {
+export default class AccessButtons extends React.Component {
   constructor() {
     super()
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick() { window.localStorage.clear() }
+  handleClick() {
+    window.localStorage.clear()
+  }
 
   render() {
     return (

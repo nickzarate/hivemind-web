@@ -1,8 +1,9 @@
 import React from 'react'
 import connect from 'store/connect'
 import RangeModal from 'components/RangeModal'
-import { handleSurveySubmission, handleStart } from 'actions/home'
-import { showModal } from 'actions/modal'
+import { handleStart } from 'actions/home'
+import { handleSurveySubmission } from 'actions/home'
+import { showModal } from 'reducers/modal'
 import rangeModalSelector from 'selectors/rangeModal'
 
 class RangeModalContainer extends React.Component {
@@ -17,9 +18,17 @@ class RangeModalContainer extends React.Component {
     this.props.actions.showModal(false)
   }
 
-  handleHide() { this.props.actions.showModal(false) }
-  handleStart() { this.props.actions.handleStart() }
-  handleSubmit() { this.props.actions.handleSurveySubmission() }
+  handleHide() {
+    this.props.actions.showModal(false)
+  }
+
+  handleStart() {
+    this.props.actions.handleStart()
+  }
+
+  handleSubmit() {
+    this.props.actions.handleSurveySubmission()
+  }
 
   render() {
     return (

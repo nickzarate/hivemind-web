@@ -32,6 +32,7 @@ module.exports = {
       "redux-actions",
       "redux-localstorage",
       "redux-localstorage-filter",
+      "redux-saga",
       "redux-thunk",
       "reselect"
     ],
@@ -120,19 +121,19 @@ module.exports = {
       filename: "js/[name]-[hash].js"
     }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin()
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     sequences: true,
-    //     dead_code: true,
-    //     conditionals: true,
-    //     booleans: true,
-    //     unused: true,
-    //     if_return: true,
-    //     join_vars: true,
-    //     drop_console: true,
-    //     warnings: false
-    //   }
-    // })
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        sequences: true,
+        dead_code: true,
+        conditionals: true,
+        booleans: true,
+        unused: true,
+        if_return: true,
+        join_vars: true,
+        drop_console: true,
+        warnings: false
+      }
+    })
   ]
 }

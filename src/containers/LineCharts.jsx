@@ -1,7 +1,7 @@
 import React from 'react'
 import lineChartsSelector from 'selectors/lineCharts'
-import { asyncGetPhis, getData, getCovariateData,
-  updateCovariateData, setOutcomeIndex, clearWinnings } from 'actions/stats'
+import { asyncGetPhis, getData, getCovariateData, updateCovariateData } from 'actions/stats'
+import { setOutcomeIndex, clearWinnings } from 'reducers/stats'
 import LineCharts from 'components/LineCharts'
 import connect from 'store/connect'
 

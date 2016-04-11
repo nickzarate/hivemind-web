@@ -1,8 +1,8 @@
 import React from 'react'
 import connect from 'store/connect'
 import LoginModal from 'components/LoginModal'
-import { showModal } from 'actions/modal'
-import loginModalSelector from 'selectors/loginModal'
+import { showModal } from 'reducers/modal'
+import modalSelector from 'selectors/modal'
 
 class LoginModalContainer extends React.Component {
   constructor() {
@@ -14,7 +14,9 @@ class LoginModalContainer extends React.Component {
     this.props.actions.showModal(false)
   }
 
-  handleHide() { this.props.actions.showModal(false) }
+  handleHide() {
+    this.props.actions.showModal(false)
+  }
 
   render() {
     return (
@@ -27,6 +29,6 @@ class LoginModalContainer extends React.Component {
 }
 
 export default connect({
-  selector: loginModalSelector,
+  selector: modalSelector,
   actions: { showModal }
 })(LoginModalContainer)

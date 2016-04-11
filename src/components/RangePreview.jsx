@@ -1,36 +1,33 @@
 import React from 'react'
-import Bins from 'containers/Bins'
 import RangeForm from 'containers/Forms/RangeForm'
 import Tooltip from 'components/Lib/Tooltip'
+import { Button } from 'components/Lib/Buttons'
 
 export default class RangePreview extends React.Component {
-  renderPreview() {
-    return this.props.outcomeNames.map(
-      (outcomeName, index) => (
-        <li key={ index }>
-          { outcomeName }
-          { this.props.outcomeDataTypes[index].type === 'continuous' &&
-            <RangeForm
-              outcomeName={ outcomeName }
-              ref={ (ref) => this[outcomeName] = ref }
-            />
-          }
-
-          <Bins
-            binsIndex={ index }
-            presentational
-          />
-        </li>
-      )
-    )
-  }
-
   render() {
+    const { tooltip } = this.props
     return (
       <div>
-        <Tooltip target={ this[this.props.tooltipTarget] } message={ this.props.tooltipMessage } />
+        <Tooltip target={ this[tooltip.target] } message={ tooltip.message } />
         <ul>
-          { this.renderPreview() }
+          { this.props.outcomes.map((outcome, index) => (
+            <li key={ index }>
+              { outcome.displayName }
+              { outcome.valueType === 'continuous' &&
+                <RangeForm
+                  variableName={ outcome.variableName }
+                  ref={ (ref) => this[outcome.variableName] = ref }
+                />
+              }
+              <p>{ 'Tokens: ' }{ this.props.answers[index].tokens }</p>
+              <p>{ 'Points: ' }{ this.props.answers[index].points }</p>
+              { this.props.answers[index].binText.map((text, index) => (
+                <Button key={ index }>
+                  { text }
+                </Button>
+              )) }
+            </li>
+          )) }
         </ul>
       </div>
     )

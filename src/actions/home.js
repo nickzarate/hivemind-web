@@ -1,93 +1,66 @@
-import { SET_CATEGORY_NAMES, SET_CATEGORY, SET_RANGE, SET_RANGES, SET_UNLOCKED } from './constants'
-import { showModal } from 'actions/modal'
-import { setTooltipMessage, setTooltipTarget } from 'actions/tooltip'
-import { createAction } from 'redux-actions'
+import { setUnlocked } from 'reducers/round'
+import { setTooltipMessage, setTooltipTarget } from 'reducers/tooltip'
+import { setCategories } from 'reducers/round'
+import { showModal } from 'reducers/modal'
+import { setCategory } from 'reducers/category'
 import Parse from 'parse'
 import { APP_ID, JAVASCRIPT_KEY } from 'KEYCHAIN'
 import { browserHistory } from 'react-router'
+import { resetAnswers } from 'actions/answers'
 
-export const setCategoryNames = createAction(SET_CATEGORY_NAMES, (categoryNames) => ({ categoryNames }))
-export const setCategory = createAction(SET_CATEGORY, (category) => ({ category }))
-export const setRange = createAction(SET_RANGE, (range, index) => ({ range, index }))
-export const setRanges = createAction(SET_RANGES, (ranges) => ({ ranges }))
-export const setUnlocked = createAction(SET_UNLOCKED, (unlocked, index) => ({ unlocked, index }))
-
-/*
- *  Make a query to Parse to check how many categories are currently up
- */
-export function asyncGetCategoryNames() {
+export function fetchCategories() {
   return (dispatch) => {
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     let query = new Parse.Query('Categories')
-    query.find({
-      success(categories) {
-        let categoryNames = []
-        for (let category of categories) {
-          categoryNames.push(category.get('name'))
-        }
-        dispatch(setCategoryNames(categoryNames))
-        dispatch(setUnlockedCategories(categories, Parse.User.current()))
+    let trimmedCategories = []
+    query.find().then(function(categories) {
+      for (const category of categories) {
+        // Check to see if the user has unlocked the category, if so, set it as being unlocked
+        // let unlocked = false
+        // for (let name of Parse.User.current().get('unlockedCategories')) {
+        //   if (name === category.get('tempName')) {
+        //     unlocked = true
+        //   }
+        // }
+        trimmedCategories.push({
+          name: category.get('tempName'),
+          unlocked: true
+        })
       }
+      dispatch(setCategories(trimmedCategories))
     })
   }
 }
 
-/*
- *  Set the chosen category and open up the modal
- */
-export function asyncHandleCategoryChoice(categoryName) {
+export function fetchCategory(categoryName) {
   return (dispatch) => {
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    let query = new Parse.Query('Categories')
-    query.equalTo('name', categoryName)
-    query.first({
-      success(category) {
+    var query = new Parse.Query('Categories')
+    query.equalTo('tempName', categoryName)
+    query.first().then(function(category) {
+      // Select only the covariates and the outcomes that the 'client' desires.
+      let covariates = [], outcomes = []
 
-        // Select only the covariates and the outcomes that the 'client' desires.
-        let covariateDataTypes = [], covariateNames = [], covariateRanges = [],
-          outcomeDataTypes = [], numBins = [], outcomeNames = [], outcomeRanges = [],
-          pointsPerToken = [], questionInstructions = [], tokens = [],
-          covariatesToDisplay = category.get('covariatesToDisplay'), outcomesToDisplay = category.get('outcomesToDisplay')
-
-        for (let index of covariatesToDisplay) {
-          covariateDataTypes.push(category.get('covariateDataTypes')[index])
-          covariateNames.push(category.get('covariateNames')[index])
-          covariateRanges.push(category.get('covariateRanges')[index])
+      for (let variable of category.get('variables')) {
+        if (variable.variableType === 'covariate' && variable.display) {
+          covariates.push(variable)
+        } else if (variable.variableType === 'outcome' && variable.display) {
+          outcomes.push(variable)
         }
-        for (let index of outcomesToDisplay) {
-          outcomeDataTypes.push(category.get('outcomeDataTypes')[index])
-          numBins.push(category.get('numBins')[index])
-          outcomeNames.push(category.get('outcomeNames')[index])
-          outcomeRanges.push(category.get('outcomeRanges')[index])
-          pointsPerToken.push(category.get('pointsPerToken')[index])
-          questionInstructions.push(category.get('questionInstructions')[index])
-          tokens.push(category.get('tokens')[index])
-        }
-
-        let selectedCategory = {
-          allCovariateDataTypes: category.get('covariateDataTypes'),
-          allCovariateNames: category.get('covariateNames'),
-          categorySurveyInstructions: category.get('categorySurveyInstructions'),
-          covariateDataTypes,
-          covariateNames,
-          covariateRanges,
-          covariatesToDisplay,
-          index: category.get('index'),
-          name: category.get('name'),
-          numBins,
-          outcomeDataTypes,
-          outcomeNames,
-          outcomeRanges,
-          outcomesToDisplay,
-          pointsPerToken,
-          questionInstructions,
-          questionsPerRound: category.get('questionsPerRound'),
-          roundInstructions: category.get('roundInstructions'),
-          tokens
-        }
-        dispatch(setCategory(selectedCategory))
-        dispatch(showModal(true))
       }
+
+      let selectedCategory = {
+        categorySurveyInstructions: category.get('categorySurveyInstructions'),
+        covariates,
+        index: category.get('index'),
+        name: category.get('tempName'),
+        numObservations: category.get('numObservations'),
+        outcomes,
+        questionsPerRound: category.get('questionsPerRound'),
+        roundInstructions: category.get('roundInstructions')
+      }
+      dispatch(setCategory(selectedCategory))
+      dispatch(resetAnswers())
+      dispatch(showModal(true))
     })
   }
 }
@@ -97,13 +70,13 @@ export function asyncHandleCategoryChoice(categoryName) {
  */
 export function handleStart() {
   return (dispatch, getState) => {
-    const { forms: { ranges }, category: { outcomeNames, outcomeDataTypes } } = getState()
+    const { forms: { ranges }, category: { outcomes } } = getState()
 
     // Validation
-    for (let i = 0; i < outcomeNames.length; i++) {
-      if (outcomeDataTypes[i].type === 'continuous' && !ranges[outcomeNames[i]]) {
+    for (let i = 0; i < outcomes.length; i++) {
+      if (outcomes[i].valueType === 'continuous' && !ranges[outcomes[i].variableName]) {
         dispatch(setTooltipMessage('All fields must be filled in.'))
-        dispatch(setTooltipTarget(outcomeNames[i]))
+        dispatch(setTooltipTarget(outcomes[i].variableName))
         return
       }
     }
@@ -130,42 +103,28 @@ export function handleStart() {
  */
 export function handleSurveySubmission() {
   return (dispatch, getState) => {
-    const { forms: { covariates }, category: { covariateNames, index, name } } = getState()
+    const { forms: { covariates }, category } = getState()
     let covariateValues = []
     Parse.initialize(APP_ID, JAVASCRIPT_KEY)
     let user = Parse.User.current()
 
     // Validation
-    for (let covariateName of covariateNames) {
-      if (isNaN(covariates[covariateName])) {
+    for (let covariate of category.covariates) {
+      if (isNaN(covariates[covariate.variableName])) {
         dispatch(setTooltipMessage('All fields must be filled in.'))
-        dispatch(setTooltipTarget(covariateName))
+        dispatch(setTooltipTarget(covariate.variableName))
         return
       }
-      covariateValues.push(typeof covariates[covariateName] === 'string' ? Number(covariates[covariateName]) : covariates[covariateName])
+      covariateValues.push(
+        typeof covariates[covariate.variableName] === 'string'
+        ? Number(covariates[covariate.variableName])
+        : covariates[covariate.variableName]
+      )
     }
 
-    dispatch(setUnlocked(true, index))
-    let information = { [name]: covariateValues }
-    user.add('unlockedCategories', name)
+    dispatch(setUnlocked(category.index))
+    let information = { [category.name]: covariateValues }
+    user.add('unlockedCategories', category.name)
     user.save({ categoryInformation: Object.assign(user.get('categoryInformation'), information) })
-  }
-}
-
-/*
- *  Initialize the array of booleans that represent which categories are unlocked to the current user
- */
-export function setUnlockedCategories(categories) {
-  return (dispatch) => {
-    Parse.initialize(APP_ID, JAVASCRIPT_KEY)
-    for (let category of categories) {
-      let unlocked = false
-      for (let name of Parse.User.current().get('unlockedCategories')) {
-        if (name === category.get('name')) {
-          unlocked = true
-        }
-      }
-      dispatch(setUnlocked(unlocked, category.get('index')))
-    }
   }
 }

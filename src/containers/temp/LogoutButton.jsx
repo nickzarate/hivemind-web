@@ -1,6 +1,6 @@
 import React from 'react'
 import connect from 'store/connect'
-import { logOut } from 'actions/user'
+import { logout } from 'reducers/user'
 import { Button } from 'components/Lib/Buttons'
 
 class LogoutButton extends React.Component {
@@ -9,7 +9,9 @@ class LogoutButton extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick() { this.props.actions.logOut() }
+  handleClick() {
+    this.props.actions.logout()
+  }
 
   render() {
     return (
@@ -21,5 +23,5 @@ class LogoutButton extends React.Component {
 }
 
 export default connect({
-  actions: { logOut }
+  actions: { logout }
 })(LogoutButton)

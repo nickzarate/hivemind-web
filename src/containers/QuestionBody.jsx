@@ -1,31 +1,41 @@
 import React from 'react'
 import connect from 'store/connect'
 import QuestionBody from 'components/QuestionBody'
-import { resetTooltip } from 'actions/tooltip'
-import { showModal } from 'actions/modal'
+import { resetTooltip } from 'reducers/tooltip'
+import { showModal } from 'reducers/modal'
+import { useToken } from 'actions/answers'
 import estimatesFormSelector from 'selectors/forms/estimates'
 
 class QuestionBodyContainer extends React.Component {
   constructor() {
     super()
     this.handleHide = this.handleHide.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleShowRange = this.handleShowRange.bind(this)
+    this.handleBinClick = this.handleBinClick.bind(this)
   }
 
-  handleHide() { this.props.actions.resetTooltip() }
-  handleClick() { this.props.actions.showModal(true) }
+  handleHide() {
+    this.props.actions.resetTooltip()
+  }
+
+  handleShowRange() {
+    this.props.actions.showModal(true)
+  }
+
+  handleBinClick(index, i) {
+    this.props.actions.useToken(index, i)
+  }
 
   render() {
     return (
       <QuestionBody
-        outcomeNames={ this.props.outcomeNames }
+        outcomes={ this.props.outcomes }
         estimates={ this.props.estimates }
-        tooltipMessage={ this.props.tooltipMessage }
-        tooltipTarget={ this.props.tooltipTarget }
+        tooltip={ this.props.tooltip }
         onHide={ this.handleHide }
-        onClick={ this.handleClick }
-        questionInstructions={ this.props.questionInstructions }
-        outcomeDataTypes={ this.props.outcomeDataTypes }
+        onShowRange={ this.handleShowRange }
+        onBinClick={ this.handleBinClick }
+        answers={ this.props.answers }
       />
     )
   }
@@ -33,5 +43,5 @@ class QuestionBodyContainer extends React.Component {
 
 export default connect({
   selector: estimatesFormSelector,
-  actions: { resetTooltip, showModal }
+  actions: { resetTooltip, showModal, useToken }
 })(QuestionBodyContainer)

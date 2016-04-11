@@ -1,9 +1,9 @@
 import React from 'react'
 import { Form, getField, createFieldClass, controls } from 'react-redux-form'
+import { toNum } from 'utils/parser'
 import { Input } from 'react-bootstrap'
-import { toNum } from 'toolbox/parser'
 import { SubmitButton } from 'components/Lib/Buttons'
-
+Input.displayName = 'Input'
 const TextField = createFieldClass({
   'Input': controls.text
 })
@@ -12,8 +12,8 @@ const RadioField = createFieldClass({
 })
 
 export default class SurveyPage4 extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.displayErrors = this.displayErrors.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -27,7 +27,9 @@ export default class SurveyPage4 extends React.Component {
     )
   }
 
-  handleChange(val) { return () => this.props.onCheckChange(val) }
+  handleChange(val) {
+    return () => this.props.onCheckChange(val)
+  }
 
   render() {
     const { survey } = this.props

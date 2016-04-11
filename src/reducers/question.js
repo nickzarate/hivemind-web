@@ -1,12 +1,16 @@
-import { SET_QUESTION } from 'actions/constants'
 import update from 'react-addons-update'
+import { createAction } from 'redux-actions'
 
+/* Action Types */
+export const SET_QUESTION = 'question/SET_QUESTION'
+
+/* Actions */
+export const setQuestion = createAction(SET_QUESTION, (question) => ({ question }))
+
+/* Reducer */
 const initialState = {
-  covariateValues: [],
-  objectId: '',
-  outcomeValues: []
+  objectId: ''
 }
-
 export default function question(state = initialState, action) {
   switch (action.type) {
   case SET_QUESTION:

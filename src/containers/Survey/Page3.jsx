@@ -10,7 +10,9 @@ class SurveyPage3Container extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit() { this.props.actions.submitPage3() }
+  handleSubmit() {
+    this.props.actions.submitPage3()
+  }
 
   render() {
     return (

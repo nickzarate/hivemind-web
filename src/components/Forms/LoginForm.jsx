@@ -5,9 +5,10 @@ import { SubmitButton } from 'components/Lib/Buttons'
 
 export default class LoginForm extends React.Component {
   render() {
+    const { tooltip } = this.props
     return (
       <div className="LoginForm" >
-        <Tooltip target={ this[this.props.tooltipTarget] } message={ this.props.tooltipMessage } />
+        <Tooltip target={ this[tooltip.target] } message={ tooltip.message } />
         <Form ref={ (ref) => this.form = ref } onSubmit={ this.props.onSubmit } model="login">
           <Field model="login.email">
             <input type="email" placeholder="Email" />

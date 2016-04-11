@@ -1,6 +1,6 @@
 import React from 'react'
-import { showModal } from 'actions/modal'
-import signupModalSelector from 'selectors/signupModal'
+import { showModal } from 'reducers/modal'
+import modalSelector from 'selectors/modal'
 import SignupModal from 'components/SignupModal'
 import connect from 'store/connect'
 
@@ -14,7 +14,9 @@ class SignupModalContainer extends React.Component {
     this.props.actions.showModal(false)
   }
 
-  handleHide() { this.props.actions.showModal(false) }
+  handleHide() {
+    this.props.actions.showModal(false)
+  }
 
   render() {
     return (
@@ -27,6 +29,6 @@ class SignupModalContainer extends React.Component {
 }
 
 export default connect({
-  selector: signupModalSelector,
+  selector: modalSelector,
   actions: { showModal }
 })(SignupModalContainer)

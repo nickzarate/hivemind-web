@@ -1,10 +1,5 @@
-import { createSelector } from 'reselect'
+import { createStructuredSelector } from 'reselect'
 
-const rangesSelector = (state) => state.forms.ranges
-
-export default createSelector(
-  rangesSelector,
-  (ranges) => ({
-    ranges
-  })
-)
+export default createStructuredSelector({
+  ranges: (state) => state.forms.ranges
+})

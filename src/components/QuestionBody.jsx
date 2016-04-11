@@ -1,61 +1,63 @@
 import React from 'react'
-import Bins from 'containers/Bins'
-import EstimateForm from './Forms/EstimateForm'
-import Tooltip from 'components/Lib/Tooltip'
 import { Form } from 'react-redux-form'
-import RadioField from 'components/RadioField'
+import EstimateField from './EstimateField'
+import RadioField from './RadioField'
+import Tooltip from './Lib/Tooltip'
 import { Button } from 'components/Lib/Buttons'
 
 export default class QuestionBody extends React.Component {
-  renderOutcome(outcomeName, index) {
-    const { outcomeDataTypes } = this.props
-    switch(outcomeDataTypes[index].type) {
+  renderOutcome(outcome) {
+    switch(outcome.valueType) {
     case 'continuous':
       return (
-        <EstimateForm
-          outcomeName={ outcomeName }
+        <EstimateField
+          variableName={ outcome.variableName }
+          displayName={ outcome.displayName }
           estimates={ this.props.estimates }
-          ref={ (ref) => this[outcomeName] = ref }
+          ref={ (ref) => this[outcome.variableName] = ref }
         />
       )
     default:
       return (
-        <Form model="forms.estimates" ref={ (ref) => this[outcomeName] = ref }>
-          <RadioField
-            labels={ outcomeDataTypes[index].labels }
-            values={ outcomeDataTypes[index].values }
-            model={ `forms.estimates.${ outcomeName }` }
-            variableName={ outcomeName }
-          />
-        </Form>
+        <RadioField
+          labels={ outcome.labels }
+          values={ outcome.values }
+          model={ `forms.estimates.${ outcome.variableName }` }
+          displayName={ outcome.displayName }
+          ref={ (ref) => this[outcome.variableName] = ref }
+        />
       )
     }
   }
 
   render() {
-    const { tooltipTarget } = this.props
+    const { tooltip } = this.props
     return (
       <div>
         <Tooltip
           onHide={ this.props.onHide }
-          message={ this.props.tooltipMessage }
-          target={ this[tooltipTarget] ? this[tooltipTarget].form : this[tooltipTarget] }
+          message={ tooltip.message }
+          target={ this[tooltip.target] ? this[tooltip.target].form : this[tooltip.target] }
           placement="right"
         />
         <ul>
-          { this.props.outcomeNames.map(
-            (outcomeName, index) => (
-              <li key={ index }>
-                <p>{ this.props.questionInstructions[index] }</p>
-                { this.renderOutcome(outcomeName, index) }
-                <Bins
-                  binsIndex={ index }
-                />
-              </li>
-            )
-          ) }
+          { this.props.outcomes.map((outcome, index) => (
+            <li key={ index }>
+              <p>{ outcome.instructions }</p>
+              <Form model="forms.estimates">
+                { this.renderOutcome(outcome) }
+              </Form>
+              <p>{ 'Tokens: ' }{ this.props.answers[index].tokens }</p>
+              <p>{ 'Points: ' }{ this.props.answers[index].points }</p>
+              { this.props.answers[index].binText.map((text, i) => (
+                <Button key={ i } onClick={ () => this.props.onBinClick(index, i) }>
+                  { text + ': ' + this.props.answers[index].binValues[i] }
+                </Button>
+              )) }
+            </li>
+          )) }
         </ul>
-        <Button onClick={ this.props.onClick }>{ 'Change Ranges' }</Button>
+        <Button onClick={ this.props.onShowRange }>{ 'Change Ranges' }</Button>
       </div>
     )
   }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { asyncHandleCategoryChoice, asyncGetCategoryNames } from 'actions/home'
+import { fetchCategories, fetchCategory } from 'actions/home'
 import categoriesSelector from 'selectors/categories'
 import Categories from 'components/Categories'
 import connect from 'store/connect'
@@ -11,16 +11,18 @@ class CategoriesContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.actions.asyncGetCategoryNames()
+    this.props.actions.fetchCategories()
   }
 
-  handleClick(categoryName) { this.props.actions.asyncHandleCategoryChoice(categoryName) }
+  handleClick(categoryName) {
+    this.props.actions.fetchCategory(categoryName)
+  }
 
   render() {
     return (
       <Categories
         onClick={ this.handleClick }
-        categoryNames={ this.props.categoryNames }
+        categories={ this.props.categories }
       />
     )
   }
@@ -28,5 +30,5 @@ class CategoriesContainer extends React.Component {
 
 export default connect({
   selector: categoriesSelector,
-  actions: { asyncHandleCategoryChoice, asyncGetCategoryNames }
+  actions: { fetchCategories, fetchCategory }
 })(CategoriesContainer)

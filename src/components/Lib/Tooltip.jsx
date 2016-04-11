@@ -1,6 +1,8 @@
 import { Overlay, Tooltip as TooltipBS } from 'react-bootstrap'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import connect from 'store/connect'
+import { resetTooltip } from 'reducers/tooltip'
 
 export default class Tooltip extends React.Component {
   constructor() {
@@ -8,18 +10,27 @@ export default class Tooltip extends React.Component {
     this.handleHide = this.handleHide.bind(this)
     this.getTarget = this.getTarget.bind(this)
   }
-  handleHide() { this.props.onHide() }
-  getTarget() { ReactDOM.findDOMNode(this.props.target) }
+
+  componentWillUnmount() {
+    this.props.actions.resetTooltip()
+  }
+
+  handleHide() {
+    this.props.onHide()
+  }
+
+  getTarget() {
+    ReactDOM.findDOMNode(this.props.target)
+  }
 
   renderTooltip() {
-    let rootClose = this.props.onHide ? true : false
     return (
       <Overlay
         onHide={ this.handleHide }
         placement={ this.props.placement }
-        rootClose={ rootClose }
-        show
+        rootClose={ this.props.onHide ? true : false }
         target={ this.getTarget }
+        show
       >
         <TooltipBS id={ this.props.message }>
           { this.props.message }
@@ -29,15 +40,7 @@ export default class Tooltip extends React.Component {
   }
 
   render() {
-    if (this.props.message) {
-      return (
-        <div>
-          { this.renderTooltip() }
-        </div>
-      )
-    } else {
-      return null
-    }
+    return this.props.message ? this.renderTooltip() : null
   }
 }
 
@@ -45,3 +48,7 @@ Tooltip.defaultProps = {
   placement: 'top',
   onHide: null
 }
+
+export default connect({
+  actions: { resetTooltip }
+})(Tooltip)

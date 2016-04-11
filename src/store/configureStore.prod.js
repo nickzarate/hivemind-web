@@ -11,7 +11,7 @@ export default function configureStore(initialState) {
   )(rootReducer)
 
   const storage = compose(
-    filter(['answer', 'category', 'question', 'forms.survey'])
+    filter(['answers', 'category', 'question', 'forms.survey'])
   )(adapter(window.localStorage))
 
   return createStore(

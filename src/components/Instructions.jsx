@@ -1,23 +1,17 @@
 import React from 'react'
 
 export default class Instructions extends React.Component {
-  renderCovariates() {
-    return this.props.covariateValues.map(
-      (covariate, index) => (
-        <li key={ index }>
-          <p>{ this.props.covariateNames[index] }{ ': ' }{ covariate }</p>
-        </li>
-      )
-    )
-  }
-
   render() {
     return (
-      <div>
-        <ul>
-          { this.renderCovariates() }
-        </ul>
-      </div>
+      <ul>
+        { this.props.covariates.map(
+          (covariate, index) => (
+            <li key={ index }>
+              <p>{ covariate.displayName }{ ': ' }{ covariate.value }</p>
+            </li>
+          )
+        ) }
+      </ul>
     )
   }
 }

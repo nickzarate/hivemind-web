@@ -12,8 +12,13 @@ class SurveyPage4Container extends React.Component {
     this.handleCheckChange = this.handleCheckChange.bind(this)
   }
 
-  handleSubmit() { this.props.actions.submitSurvey() }
-  handleCheckChange(val) { this.props.actions.change(`forms.survey.${ val }`, !this.props.survey[val]) }
+  handleSubmit() {
+    this.props.actions.submitSurvey()
+  }
+
+  handleCheckChange(val) {
+    this.props.actions.change(`forms.survey.${ val }`, !this.props.survey[val])
+  }
 
   render() {
     return (
