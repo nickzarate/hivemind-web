@@ -18,12 +18,12 @@ export function fetchCategories() {
         // Check to see if the user has unlocked the category, if so, set it as being unlocked
         // let unlocked = false
         // for (let name of Parse.User.current().get('unlockedCategories')) {
-        //   if (name === category.get('tempName')) {
+        //   if (name === category.get('name')) {
         //     unlocked = true
         //   }
         // }
         trimmedCategories.push({
-          name: category.get('tempName'),
+          name: category.get('name'),
           unlocked: true
         })
       }
@@ -35,7 +35,7 @@ export function fetchCategories() {
 export function fetchCategory(categoryName) {
   return (dispatch) => {
     var query = new Parse.Query('Categories')
-    query.equalTo('tempName', categoryName)
+    query.equalTo('name', categoryName)
     query.first().then(function(category) {
       // Select only the covariates and the outcomes that the 'client' desires.
       let covariates = [], outcomes = []
@@ -52,7 +52,7 @@ export function fetchCategory(categoryName) {
         categorySurveyInstructions: category.get('categorySurveyInstructions'),
         covariates,
         index: category.get('index'),
-        name: category.get('tempName'),
+        name: category.get('name'),
         numObservations: category.get('numObservations'),
         outcomes,
         questionsPerRound: category.get('questionsPerRound'),
