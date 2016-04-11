@@ -50,9 +50,9 @@ export default class QuestionBody extends React.Component {
               <p>{ 'Tokens: ' }{ this.props.answers[index].tokens }</p>
               <p>{ 'Points: ' }{ this.props.answers[index].points }</p>
               { this.props.answers[index].binText.map((text, i) => (
-                <button key={ i } onClick={ () => this.props.onBinClick(index, i) }>
+                <Button key={ i } onClick={ () => this.props.onBinClick(index, i) }>
                   { text + ': ' + this.props.answers[index].binValues[i] }
-                </button>
+                </Button>
               )) }
             </li>
           )) }

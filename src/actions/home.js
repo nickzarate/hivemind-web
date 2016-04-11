@@ -16,15 +16,15 @@ export function fetchCategories() {
     query.find().then(function(categories) {
       for (const category of categories) {
         // Check to see if the user has unlocked the category, if so, set it as being unlocked
-        let unlocked = false
-        for (let name of Parse.User.current().get('unlockedCategories')) {
-          if (name === category.get('tempName')) {
-            unlocked = true
-          }
-        }
+        // let unlocked = false
+        // for (let name of Parse.User.current().get('unlockedCategories')) {
+        //   if (name === category.get('tempName')) {
+        //     unlocked = true
+        //   }
+        // }
         trimmedCategories.push({
           name: category.get('tempName'),
-          unlocked: unlocked
+          unlocked: true
         })
       }
       dispatch(setCategories(trimmedCategories))
